@@ -1,0 +1,3793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>🎓 EGyan Skill Development | Admission</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+    <script src="../../Script/loginadmin.js" data-auto-init="true"></script>
+    <script src="../../Script/footer-loader.js" data-footer="true" data-footer-path="footer.html"></script>
+
+    <style>
+    /* ======================== CSS VARIABLES ======================== */
+    :root {
+        --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --bg-secondary: #ffffff;
+        --bg-body: #f4f7fc;
+        --card-bg: rgba(255, 255, 255, 0.98);
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #5b6e8c;
+        --text-light: #94a3b8;
+        --border-color: #e2e8f0;
+        --border-light: #e2e8f0;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+        --primary: #3b82f6;
+        --primary-dark: #2563eb;
+        --primary-light: #60a5fa;
+        --secondary: #f59e0b;
+        --secondary-dark: #d97706;
+        --success: #10b981;
+        --danger: #ef4444;
+        --danger-light: rgba(239, 68, 68, 0.1);
+        --warning: #fbbf24;
+        --info: #06b6d4;
+        --accent: #2563eb;
+        --accent-soft: rgba(37, 99, 235, 0.08);
+        --accent-glow: rgba(37, 99, 235, 0.15);
+
+        --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --gradient-warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        --gradient-accent: linear-gradient(135deg, #2563eb, #7c3aed);
+
+        --table-header-bg: #f8fafc;
+        --table-row-hover: #f1f5f9;
+        --table-border: #e2e8f0;
+
+        --transition-fast: 150ms ease;
+        --transition-normal: 300ms ease;
+        --transition-slow: 500ms ease;
+    }
+
+    [data-theme="dark"] {
+        --bg-primary: linear-gradient(135deg, #1e1e2e 0%, #2d1b4e 100%);
+        --bg-secondary: #1e1e2e;
+        --bg-body: #0a0f1c;
+        --card-bg: rgba(30, 30, 46, 0.98);
+        --text-primary: #e2e8f0;
+        --text-secondary: #94a3b8;
+        --text-muted: #9ca3af;
+        --text-light: #64748b;
+        --border-color: #334155;
+        --border-light: #1f2a3e;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
+        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4);
+
+        --table-header-bg: #1e293b;
+        --table-row-hover: #334155;
+        --table-border: #334155;
+        --danger-light: rgba(239, 68, 68, 0.2);
+        --accent-soft: rgba(59, 130, 246, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+        background: var(--bg-body);
+        min-height: 100vh;
+        padding: 20px 16px;
+        color: var(--text-primary);
+        transition: background var(--transition-normal), color var(--transition-normal);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* ======================== AUTH LOADING ======================== */
+    #authLoading {
+        position: fixed; inset: 0;
+        display: flex; align-items: center; justify-content: center;
+        background: var(--bg-body); z-index: 9999;
+        flex-direction: column; gap: 1.5rem;
+    }
+    #authLoading.hidden { display: none !important; }
+    #authLoading .spinner {
+        width: 50px; height: 50px;
+        border: 4px solid var(--border-light);
+        border-top: 4px solid var(--accent);
+        border-radius: 50%; animation: spin 0.8s linear infinite;
+    }
+    #authLoading p { color: var(--text-muted); font-weight: 500; font-size: 0.9rem; }
+
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    /* ======================== APP CONTAINER ======================== */
+    .app-container {
+        max-width: 1400px; margin: 0 auto;
+        animation: fadeIn 0.5s ease-out; flex: 1;
+        display: flex; flex-direction: column;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    .page { display: none; animation: fadeSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .page.active-page { display: block; }
+    @keyframes fadeSlide {
+        from { opacity: 0; transform: translateY(20px) scale(0.98); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ======================== CARD ======================== */
+    .soft-card {
+        background: var(--card-bg);
+        border-radius: 2rem;
+        box-shadow: var(--shadow-xl);
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 24px;
+    }
+    .soft-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-xl); }
+
+    /* ======================== CARD HEADER ======================== */
+    .card-header {
+        padding: 1.5rem 2rem;
+        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+        display: flex; justify-content: space-between; align-items: center;
+        flex-wrap: nowrap; gap: 14px;
+    }
+    [data-theme="dark"] .card-header {
+        background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+    }
+    .card-header .brand-wrap {
+        display: flex; align-items: center; gap: 12px;
+        flex: 1; min-width: 0;
+    }
+    .card-header .brand-logo {
+        width: 42px; height: 42px; border-radius: 10px;
+        object-fit: contain; background: #fff;
+        padding: 3px; box-shadow: var(--shadow-sm);
+        flex-shrink: 0;
+    }
+    .card-header h2 {
+        font-size: 1.5rem; font-weight: 800;
+        background: var(--gradient-accent);
+        -webkit-background-clip: text; background-clip: text;
+        color: transparent; letter-spacing: -0.02em;
+        flex: 1; min-width: 0; white-space: nowrap;
+        overflow: hidden; text-overflow: ellipsis;
+    }
+    .card-header .header-badge {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: var(--accent-soft); color: var(--accent);
+        padding: 4px 14px; border-radius: 30px;
+        font-size: 0.7rem; font-weight: 600;
+        border: 1px solid var(--border-color); flex-shrink: 0;
+    }
+
+    /* ======================== SEARCH ======================== */
+    .search-section {
+        padding: 1.5rem 2rem;
+        background: var(--card-bg);
+        border-bottom: 1px solid var(--border-color);
+    }
+    .search-wrapper { width: 100%; }
+    .search-wrapper input {
+        width: 100%; padding: 14px 20px;
+        border: 2px solid var(--border-color); border-radius: 60px;
+        background: var(--bg-secondary); color: var(--text-primary);
+        font-size: 0.95rem; font-family: inherit;
+        transition: all var(--transition-fast); box-shadow: var(--shadow-sm);
+    }
+    .search-wrapper input::placeholder { color: var(--text-light); }
+    .search-wrapper input:focus {
+        outline: none; border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        transform: translateY(-1px);
+    }
+
+    /* ======================== BUTTONS ======================== */
+    .btn {
+        border: none; padding: 10px 24px; border-radius: 60px;
+        font-weight: 600; font-size: 0.875rem; cursor: pointer;
+        transition: all var(--transition-fast);
+        display: inline-flex; align-items: center; gap: 8px;
+        position: relative; overflow: hidden;
+    }
+    .btn::before {
+        content: ''; position: absolute; top: 50%; left: 50%;
+        width: 0; height: 0; border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+    .btn:active::before { width: 300px; height: 300px; }
+
+    .btn-primary { background: var(--gradient-accent); color: white; box-shadow: var(--shadow-sm); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); filter: brightness(1.05); }
+    .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: white; transform: translateY(-2px); }
+    .btn-danger { background: linear-gradient(135deg, var(--danger), #dc2626); color: white; }
+    .btn-danger:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-success { background: linear-gradient(135deg, var(--success), #059669); color: white; }
+    .btn-success:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-info { background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; }
+    .btn-info:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-sm { padding: 6px 16px; font-size: 0.75rem; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    /* ======================== TABLE ======================== */
+    .table-wrapper { overflow-x: auto; overflow-y: visible; scrollbar-width: thin; padding: 0; }
+    .table-wrapper::-webkit-scrollbar { height: 6px; background: transparent; }
+    .table-wrapper::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+    .data-table {
+        width: 100%; border-collapse: separate;
+        border-spacing: 0; font-size: 0.875rem;
+    }
+    .data-table th {
+        text-align: left; padding: 16px 20px;
+        background: var(--table-header-bg); color: var(--primary);
+        font-weight: 800; font-size: 0.85rem;
+        text-transform: uppercase; letter-spacing: 0.8px;
+        border-bottom: 3px solid var(--primary); position: relative;
+    }
+    .data-table th:first-child { border-top-left-radius: 12px; }
+    .data-table th:last-child { border-top-right-radius: 12px; }
+    .data-table td {
+        padding: 16px 20px; border-bottom: 1px solid var(--table-border);
+        color: var(--text-primary); transition: background var(--transition-fast);
+        font-size: 0.9rem;
+    }
+    .data-table tr:hover td { background: var(--table-row-hover); }
+
+    .view-action-btn {
+        background: var(--gradient-accent); color: white; border: none;
+        padding: 6px 16px; border-radius: 30px;
+        font-size: 0.75rem; font-weight: 600; cursor: pointer;
+        transition: all var(--transition-fast);
+        display: inline-flex; align-items: center; gap: 6px;
+    }
+    .view-action-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); filter: brightness(1.05); }
+
+    /* ======================== DETAIL VIEW ======================== */
+    .details-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem; padding: 2rem;
+    }
+    @media (max-width: 640px) {
+        .details-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; padding: 1rem; }
+    }
+    .detail-card {
+        background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.05));
+        border-radius: 1.2rem; padding: 1rem 1.2rem;
+        transition: all var(--transition-fast);
+        border: 1px solid var(--border-color); cursor: pointer;
+    }
+    .detail-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+    .detail-label {
+        font-size: 0.65rem; text-transform: uppercase;
+        letter-spacing: 0.5px; color: var(--secondary); font-weight: 700;
+    }
+    .detail-value {
+        font-weight: 700; font-size: 0.95rem;
+        margin-top: 6px; color: var(--text-primary); word-break: break-word;
+    }
+
+    .action-row {
+        padding: 1rem 2rem 2rem;
+        display: flex; gap: 14px; justify-content: flex-end; flex-wrap: wrap;
+    }
+
+    .profile-wrapper {
+        display: flex; align-items: center; gap: 28px;
+        padding: 2rem 2rem 0; flex-wrap: wrap;
+    }
+    .profile-img {
+        width: 120px; height: 120px; border-radius: 1.2rem;
+        object-fit: cover; border: 4px solid var(--primary);
+        box-shadow: var(--shadow-lg); background: var(--table-header-bg);
+    }
+    .profile-info h3 { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .profile-info p { color: var(--text-secondary); font-size: 0.95rem; }
+
+    /* ======================== MODALS ======================== */
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(12px);
+        display: none; align-items: center; justify-content: center;
+        z-index: 2000; visibility: hidden; opacity: 0;
+        transition: all var(--transition-normal);
+    }
+    .modal-overlay.active { display: flex; visibility: visible; opacity: 1; }
+
+    .modal-box {
+        background: var(--card-bg); width: 92%; max-width: 900px;
+        max-height: 85vh; border-radius: 2rem; overflow-y: auto;
+        box-shadow: var(--shadow-xl);
+        animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    @keyframes modalPop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    .modal-header {
+        background: var(--gradient-accent); padding: 1.2rem 1.5rem;
+        display: flex; justify-content: space-between; align-items: center;
+        position: sticky; top: 0; z-index: 10; color: white;
+    }
+    .modal-header h3 { font-size: 1.3rem; font-weight: 700; }
+    .close-modal {
+        background: none; border: none; font-size: 2rem;
+        cursor: pointer; color: white;
+        transition: transform var(--transition-fast); line-height: 1;
+    }
+    .close-modal:hover { transform: rotate(90deg); }
+
+    .modal-body { padding: 1.5rem; overflow-y: auto; max-height: calc(85vh - 70px); }
+
+    /* ======================== FORMS ======================== */
+    .form-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.2rem;
+    }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label {
+        font-size: 0.7rem; font-weight: 800;
+        text-transform: uppercase; letter-spacing: 0.5px;
+        color: var(--secondary);
+    }
+    .field input, .field select, .field textarea {
+        padding: 12px 16px; border-radius: 16px;
+        border: 2px solid var(--border-color);
+        background: var(--bg-secondary); color: var(--text-primary);
+        font-size: 0.9rem; transition: all var(--transition-fast);
+        font-family: inherit;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+        outline: none; border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    }
+    .field input:disabled { background: var(--text-light); cursor: not-allowed; }
+    .fullwidth { grid-column: 1 / -1; }
+
+    /* Aadhar monospace feel */
+    #fAadhar { font-family: 'Courier New', monospace; letter-spacing: 1px; }
+
+    /* ======================== AUTOCOMPLETE (from yashtransport.html) ======================== */
+    .autocomplete-wrap { position: relative; }
+    .autocomplete-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--card-bg);
+        border-radius: 16px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 9999;
+        display: none;
+        box-shadow: var(--shadow-lg);
+        margin-top: 6px;
+        border: 1px solid var(--border-color);
+        scrollbar-width: none;
+    }
+    .autocomplete-list::-webkit-scrollbar { display: none; }
+    .autocomplete-item {
+        padding: 12px 16px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        color: var(--text-primary);
+        transition: background var(--transition-fast), color var(--transition-fast);
+    }
+    .autocomplete-item:hover { background: var(--primary); color: #fff; }
+
+    /* Field hint + refresh link */
+    .field-hint {
+        font-size: 0.68rem; color: var(--text-light);
+        margin-top: 2px; font-style: italic;
+        display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+    }
+    .dd-retry {
+        color: var(--primary); text-decoration: underline;
+        cursor: pointer; font-size: 0.72rem; margin-left: 4px;
+    }
+
+    /* ======================== IMAGE UPLOAD SECTIONS ======================== */
+    .image-section {
+        border: 2px dashed var(--border-color);
+        padding: 20px; border-radius: 1.2rem;
+        text-align: center; margin: 20px 0;
+        background: var(--table-header-bg);
+        transition: all var(--transition-fast);
+    }
+    .image-section:hover { border-color: var(--primary); }
+    .image-section label { cursor: pointer; color: var(--primary); font-weight: 700; font-size: 1rem; }
+    .image-section + .image-section { margin-top: 12px; }
+
+    #preview-container, #bg-preview-container {
+        max-width: 400px; margin: 15px auto; display: none;
+    }
+    #image-to-crop, #bg-image-to-crop { max-width: 100%; display: block; }
+    .crop-controls { margin-top: 10px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .btn-tool {
+        background: var(--table-header-bg); border: 1px solid var(--border-color);
+        padding: 8px 16px; border-radius: 30px;
+        font-size: 0.8rem; font-weight: 600; cursor: pointer;
+        transition: all var(--transition-fast); color: var(--text-primary);
+    }
+    .btn-tool:hover { background: var(--primary); color: white; transform: translateY(-2px); }
+    #image-status, #bg-image-status { margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary); }
+
+    /* ======================== SPINNER ======================== */
+    .spinner {
+        display: inline-block; width: 18px; height: 18px;
+        border: 3px solid var(--border-color);
+        border-top: 3px solid var(--primary);
+        border-radius: 50%; animation: spin 0.6s linear infinite;
+    }
+
+    /* ======================== STATUS MESSAGE ======================== */
+    .status-message {
+        padding: 12px 20px; border-radius: 16px;
+        margin-top: 20px; display: none;
+        text-align: center; font-weight: 600;
+    }
+    .status-success { background: var(--success); color: white; }
+    .status-error { background: var(--danger); color: white; }
+
+    /* ======================== FAB ======================== */
+    .fab {
+        position: fixed; bottom: 30px; right: 30px;
+        width: 60px; height: 60px;
+        background: var(--gradient-accent); color: white;
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 999; text-decoration: none; border: none; font-size: 2rem;
+    }
+    .fab:hover { transform: scale(1.1) rotate(90deg); background: var(--primary-dark); box-shadow: 0 15px 30px rgba(79, 70, 229, 0.5); }
+
+    /* ======================== ALERT POPUP ======================== */
+    .alert-popup {
+        position: fixed; bottom: 100px; right: 30px;
+        background: var(--card-bg); border-left: 5px solid var(--primary);
+        padding: 16px 24px; box-shadow: var(--shadow-xl);
+        border-radius: 0 16px 16px 0; font-weight: 600;
+        font-size: 0.95rem; z-index: 1000; display: none;
+        animation: slideIn 0.3s ease-out;
+        color: var(--text-primary); max-width: 400px;
+    }
+    @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    .alert-popup.success { border-left-color: var(--success); }
+    .alert-popup.error { border-left-color: var(--danger); }
+    .alert-popup.info { border-left-color: var(--info); }
+    .alert-popup.warning { border-left-color: var(--warning); }
+
+    /* ======================== LOADING / ERROR / EMPTY ======================== */
+    .loading-container {
+        display: flex; flex-direction: column; align-items: center;
+        justify-content: center; padding: 60px 20px; gap: 16px;
+    }
+    .loading-spinner {
+        width: 48px; height: 48px;
+        border: 4px solid var(--border-color);
+        border-top: 4px solid var(--primary);
+        border-radius: 50%; animation: spin 0.8s linear infinite;
+    }
+    .loading-message { font-weight: 600; font-size: 1.1rem; color: var(--text-primary); }
+    .loading-submessage { font-size: 0.85rem; color: var(--text-light); }
+
+    .error-container { text-align: center; padding: 40px 20px; }
+    .error-icon { font-size: 2.5rem; color: var(--danger); display: block; margin-bottom: 12px; }
+    .error-title { font-weight: 600; color: var(--danger); font-size: 1.1rem; }
+    .error-message { margin-top: 4px; font-size: 0.85rem; color: var(--text-secondary); }
+    .error-actions { display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+
+    .empty-container { text-align: center; padding: 40px 20px; }
+    .empty-icon { font-size: 2.5rem; color: var(--text-light); display: block; margin-bottom: 12px; }
+    .empty-title { font-weight: 600; color: var(--text-secondary); font-size: 1.1rem; }
+    .empty-subtitle { margin-top: 4px; font-size: 0.85rem; color: var(--text-light); }
+
+    /* ======================== ADMIN BADGE ======================== */
+    .admin-badge {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: rgba(245, 158, 11, 0.15); color: var(--warning);
+        padding: 4px 14px; border-radius: 30px;
+        font-size: 0.7rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.3px;
+        border: 1px solid var(--warning);
+        white-space: nowrap; flex-shrink: 0;
+    }
+    .admin-badge i { font-size: 0.7rem; }
+    .admin-badge span { max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .admin-badge .session-indicator {
+        font-size: 0.45rem; padding: 1px 6px;
+        border-radius: 20px; background: rgba(255,255,255,0.15); margin-left: 2px;
+    }
+
+    /* ======================== FIELD ERRORS ======================== */
+    .field-error {
+        display: none; color: var(--danger);
+        font-size: 0.72rem; font-weight: 600;
+        margin-top: 4px; padding-left: 4px;
+        line-height: 1.3; animation: errorFade 0.2s ease-out;
+    }
+    .field-error.show { display: block; }
+    @keyframes errorFade {
+        from { opacity: 0; transform: translateY(-4px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .field input.field-invalid, .field select.field-invalid, .field textarea.field-invalid {
+        border-color: var(--danger) !important;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+    }
+    .field input.field-valid { border-color: var(--success) !important; }
+
+    .field input#fMiddleName[readonly] {
+        background: var(--table-header-bg);
+        color: var(--text-secondary);
+        cursor: not-allowed;
+        font-style: italic;
+    }
+    .field input#fMiddleName[readonly]::placeholder {
+        color: var(--text-light);
+        font-style: italic;
+    }
+
+    /* ======================== SKELETON LOADER ======================== */
+    .loading-skeleton {
+        background: linear-gradient(90deg, var(--border-color) 25%, var(--table-header-bg) 50%, var(--border-color) 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+    }
+    @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    /* ======================== SCROLLBARS ======================== */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--table-header-bg); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+
+    .table-wrapper::-webkit-scrollbar, .modal-box::-webkit-scrollbar {
+        width: 0px; height: 0px; background: transparent; display: none;
+    }
+    .table-wrapper, .modal-box { scrollbar-width: none; -ms-overflow-style: none; }
+
+    /* ======================== MOBILE BUTTONS ======================== */
+    .mobile-buttons { display: none; gap: 12px; margin-top: 12px; width: 100%; }
+    .mobile-buttons .btn {
+        border: none; padding: 12px 16px; border-radius: 60px;
+        font-weight: 600; font-size: 0.85rem; cursor: pointer;
+        transition: all var(--transition-fast);
+        display: inline-flex; align-items: center; justify-content: center;
+        gap: 8px; position: relative; overflow: hidden; width: 100%;
+    }
+    .mobile-buttons .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+    .mobile-buttons .btn-primary { background: var(--gradient-accent); color: white; box-shadow: var(--shadow-sm); }
+    .mobile-buttons .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    /* ======================== RESPONSIVE ======================== */
+    @media (max-width: 768px) {
+        body { padding: 12px; }
+        .card-header { padding: 1rem 1.2rem; flex-direction: row; align-items: flex-start; gap: 8px; flex-wrap: wrap; }
+        .card-header .brand-wrap { width: 100%; }
+        .card-header h2 { font-size: 1rem; width: 100%; }
+        .card-header .brand-logo { width: 32px; height: 32px; }
+        .desktop-buttons { display: none; }
+        .mobile-buttons {
+            display: grid !important; grid-template-columns: 1fr 1fr;
+            gap: 12px; margin-top: 12px; width: 100%;
+        }
+        .mobile-buttons .btn {
+            width: 100%; justify-content: center;
+            padding: 12px 16px; font-size: 0.85rem; border-radius: 60px;
+        }
+        .search-section { padding: 1rem 1.2rem; }
+        .search-wrapper { width: 100%; }
+        .search-wrapper input { padding: 14px 20px; font-size: 0.95rem; border-radius: 60px; }
+        .data-table th, .data-table td { padding: 12px 12px; font-size: 0.7rem; }
+        .btn { padding: 8px 18px; font-size: 0.8rem; }
+        .modal-box { width: 95%; border-radius: 1.5rem; }
+        .form-grid { grid-template-columns: 1fr; gap: 1rem; }
+        .profile-wrapper { padding: 1rem; flex-direction: column; text-align: center; }
+        .details-grid { grid-template-columns: 1fr 1fr; }
+        .action-row { padding: 1rem; justify-content: center; }
+        .action-row .btn {
+            flex: 1; min-width: 120px; justify-content: center;
+            font-size: 0.75rem; padding: 10px 12px;
+        }
+        .autocomplete-list { max-height: 160px; }
+    }
+    @media (min-width: 769px) { .mobile-buttons { display: none !important; } }
+
+    /* ======================== ACCESSIBILITY ======================== */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+</style>
+</head>
+<body>
+
+    <!-- ==================== AUTH LOADING OVERLAY ==================== -->
+    <div id="authLoading">
+        <div class="spinner"></div>
+        <p><i class="fas fa-shield-alt"></i> Verifying admin access...</p>
+    </div>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <div id="mainContent" style="display:none; flex: 1;">
+        <div class="app-container">
+
+            <!-- ==========================================================
+                 PAGE 1 — LIST VIEW
+                 ========================================================== -->
+            <div id="page1" class="page active-page">
+                <div class="soft-card">
+                    <div class="card-header">
+                        <div class="brand-wrap">
+                            <img class="brand-logo"
+                                 src="https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL"
+                                 alt="EGyan Logo">
+                            <h2>🎓 EGyan Skill Development — Admission</h2>
+                        </div>
+                        <div class="desktop-buttons">
+                            <span class="admin-badge" id="adminBadge">
+                                <i class="fas fa-user-shield"></i>
+                                <span id="adminNameDisplay">Admin</span>
+                                <span class="session-indicator" id="sessionIndicator">Session</span>
+                            </span>
+                            <button id="refreshBtn" class="btn btn-outline">
+                                <span>⟳</span> Refresh
+                            </button>
+                            <button id="addNewBtn" class="btn btn-primary">
+                                <span>+</span> Add Admission
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="search-section">
+                        <div class="search-wrapper">
+                            <input type="text" id="searchInput"
+                                   placeholder="🔍 Search by Name, Mobile, Adm In, or Study In..."
+                                   autocomplete="off" inputmode="search">
+                        </div>
+
+                        <div class="mobile-buttons">
+                            <button id="mobileRefreshBtn" class="btn btn-outline">
+                                <span>⟳</span> Refresh
+                            </button>
+                            <button id="mobileAddBtn" class="btn btn-primary">
+                                <span>+</span> Add Admission
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                              <tr>
+                                  <th>Sr. No</th>
+                                  <th>Student Name</th>
+                                  <th>Mobile</th>
+                                  <th>Adm In</th>
+                                  <th>Action</th>
+                              </tr>
+                          </thead>
+                            <tbody id="tableBody">
+                                <tr>
+                                    <td colspan="6" style="text-align:center;">
+                                        <div class="loading-container">
+                                            <div class="loading-spinner"></div>
+                                            <div class="loading-message">Loading students...</div>
+                                            <div class="loading-submessage">Please wait while we fetch your data...</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================================
+                 PAGE 2 — DETAIL VIEW
+                 ========================================================== -->
+            <div id="page2" class="page">
+                <div class="soft-card">
+                    <div class="card-header">
+                        <div class="brand-wrap">
+                            <img class="brand-logo"
+                                 src="https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL"
+                                 alt="EGyan Logo">
+                            <h2>👤 Student Profile</h2>
+                        </div>
+                        <button id="backToPage1Btn" class="btn btn-outline">← Back</button>
+                    </div>
+
+                    <div class="profile-wrapper">
+                        <img id="profileImage" src="" class="profile-img" alt="Student Photo">
+                        <div class="profile-info">
+                            <h3 id="profileName">Student Name</h3>
+                            <p>Adm In: <span id="profileAdmIn"></span></p>
+                            <p>Study In: <span id="profileStudyIn"></span></p>
+                            <p>Academic Year: <span id="profileAcademic"></span></p>
+                        </div>
+                    </div>
+
+                    <div id="detailsContainer" class="details-grid"></div>
+
+                    <div class="action-row">
+                        <button id="editFromDetailBtn" class="btn btn-primary">✏️ Edit</button>
+                        <button id="printFromDetailBtn" class="btn btn-success">🖨️ Print Form</button>
+                        <button id="downloadPdfBtn" class="btn btn-info">📥 Download PDF</button>
+                        <button id="deleteFromDetailBtn" class="btn btn-danger">🗑 Delete</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================================
+                 GLOBAL MODAL (Confirm / Notice)
+                 ========================================================== -->
+            <div id="globalModal" class="modal-overlay">
+                <div class="modal-box" style="max-width: 450px;">
+                    <div class="modal-header">
+                        <h3 id="modalTitle">Notice</h3>
+                        <button class="close-modal" id="closeGlobalModal" aria-label="Close">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modalMsg" style="font-size: 1rem; line-height: 1.5;"></p>
+                        <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+                            <button id="confirmModalBtn" class="btn btn-primary">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================================
+                 FORM MODAL (Add / Edit Admission)
+                 Body is populated at runtime by buildFormHtml().
+                 ========================================================== -->
+            <div id="formModal" class="modal-overlay">
+                <div class="modal-box">
+                    <div class="modal-header">
+                        <h3 id="formModalTitle">Add New Admission</h3>
+                        <button class="close-modal" id="closeFormModalBtn" aria-label="Close">×</button>
+                    </div>
+                    <div class="modal-body" id="formModalBody"></div>
+                </div>
+            </div>
+
+            <!-- ==========================================================
+                 TOAST / ALERT POPUP
+                 ========================================================== -->
+            <div id="alertBox" class="alert-popup">Message...</div>
+
+        </div>
+    </div>
+
+<script>
+/* =====================================================================
+   EGyan Skill Development — Admission (1st STD) — Full Script
+   v1.3 — 5-column table, no background image, autosave preserved
+   ===================================================================== */
+
+/* =====================================================================
+   SECTION 1 — ADMIN AUTHENTICATION GUARD
+   ===================================================================== */
+
+function readMyAccountSession(key) {
+    try {
+        const rawLocal = localStorage.getItem(key);
+        if (rawLocal) {
+            const parsed = JSON.parse(rawLocal);
+            if (parsed && typeof parsed === 'object' && 'value' in parsed) {
+                if (parsed.expiry && Date.now() >= parsed.expiry) {
+                    localStorage.removeItem(key);
+                    return null;
+                }
+                return parsed.value;
+            }
+            return parsed;
+        }
+    } catch (e) {}
+    try {
+        const rawSession = sessionStorage.getItem(key);
+        if (rawSession) return JSON.parse(rawSession);
+    } catch (e) {}
+    return null;
+}
+
+function checkAdminAuth() {
+    const userType = readMyAccountSession('EGyan_user_type');
+    const user     = readMyAccountSession('EGyan_user');
+    const userData = readMyAccountSession('EGyan_user_data');
+    const expiry   = readMyAccountSession('EGyan_session_expiry');
+
+    if (!userType || !user) return { ok: false, reason: 'no-session' };
+    if (userType !== 'admin') return { ok: false, reason: 'not-admin', userType };
+    if (expiry && typeof expiry === 'number' && Date.now() >= expiry) {
+        ['EGyan_user', 'EGyan_user_data', 'EGyan_user_type',
+         'EGyan_remember_me', 'EGyan_session_expiry'].forEach(k => {
+            localStorage.removeItem(k);
+            sessionStorage.removeItem(k);
+        });
+        return { ok: false, reason: 'expired' };
+    }
+    return { ok: true, userType, user, userData, expiry };
+}
+
+function redirectToMyAccount(reason) {
+    console.warn('🔒 Admin auth failed:', reason);
+    try {
+        if (window.top && window.top !== window) {
+            window.top.location.href = '../../Study Material/My Account/myaccount.html';
+        } else {
+            window.location.href = '../../Study Material/My Account/myaccount.html';
+        }
+    } catch (e) {
+        window.location.href = '../../Study Material/My Account/myaccount.html';
+    }
+}
+
+function revealMainContent() {
+    const loading = document.getElementById('authLoading');
+    const main = document.getElementById('mainContent');
+    if (loading) loading.classList.add('hidden');
+    if (main) main.style.display = 'block';
+}
+
+function showAccessDeniedAndRedirect(reason) {
+    const loading = document.getElementById('authLoading');
+    if (loading) {
+        loading.innerHTML = `
+            <div style="text-align:center; padding: 2rem;">
+                <div style="font-size: 3rem; color: var(--danger); margin-bottom: 1rem;">🔒</div>
+                <h2 style="color: var(--text-main); margin-bottom: 0.5rem;">Admin Access Required</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                    ${reason === 'not-admin'
+                        ? 'You are logged in as a student. Please login as admin.'
+                        : reason === 'expired'
+                        ? 'Your session has expired. Please login again.'
+                        : 'Please login as admin to access this page.'}
+                </p>
+                <div class="spinner" style="margin: 0 auto;"></div>
+                <p style="color: var(--text-light); font-size: 0.8rem; margin-top: 1rem;">
+                    Redirecting to My Account...
+                </p>
+            </div>
+        `;
+    }
+    setTimeout(() => redirectToMyAccount(reason), 1500);
+}
+
+function gateAdminAccess(onAuthorized) {
+    const mainEl = document.getElementById('mainContent');
+    const loadingEl = document.getElementById('authLoading');
+    const alreadyRevealed = mainEl && mainEl.style.display !== 'none' && mainEl.style.display !== '';
+    const loadingHidden = loadingEl && loadingEl.classList.contains('hidden');
+
+    if (alreadyRevealed || loadingHidden) {
+        console.log('✅ loginadmin.js already authorized this session');
+        onAuthorized();
+        return;
+    }
+
+    const auth = checkAdminAuth();
+    if (auth.ok) {
+        console.log('✅ Admin auth verified via session keys:', auth.user);
+        revealMainContent();
+        onAuthorized();
+    } else {
+        showAccessDeniedAndRedirect(auth.reason);
+    }
+}
+
+/* =====================================================================
+   SECTION 2 — DARK MODE SYNC
+   ===================================================================== */
+
+function syncThemeWithParent() {
+    const localTheme = localStorage.getItem('user-theme-preference');
+    if (localTheme) {
+        document.body.setAttribute('data-theme', localTheme);
+        document.documentElement.setAttribute('data-theme', localTheme);
+    } else {
+        try {
+            if (window.parent && window.parent.document.body) {
+                const parentTheme = window.parent.document.body.getAttribute('data-theme');
+                if (parentTheme) {
+                    document.body.setAttribute('data-theme', parentTheme);
+                    document.documentElement.setAttribute('data-theme', parentTheme);
+                }
+            }
+        } catch (e) {}
+    }
+}
+window.addEventListener('DOMContentLoaded', syncThemeWithParent);
+window.addEventListener('storage', syncThemeWithParent);
+window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'themeChange') {
+        const newTheme = event.data.theme;
+        if (newTheme) {
+            document.body.setAttribute('data-theme', newTheme);
+            document.documentElement.setAttribute('data-theme', newTheme);
+        }
+    }
+});
+
+/* =====================================================================
+   SECTION 3 — ADMIN BADGE
+   ===================================================================== */
+
+function updateAdminBadge() {
+    const user = readMyAccountSession('EGyan_user');
+    const userData = readMyAccountSession('EGyan_user_data');
+    const expiry = readMyAccountSession('EGyan_session_expiry');
+
+    const nameDisplay = document.getElementById('adminNameDisplay');
+    const indicator = document.getElementById('sessionIndicator');
+
+    let displayName = 'Admin';
+    if (userData) {
+        if (userData['User Name']) displayName = userData['User Name'];
+        else if (userData['Full Name']) displayName = userData['Full Name'];
+        else if (userData['First Name']) {
+            displayName = (userData['First Name'] + ' ' + (userData['Last Name'] || '')).trim();
+        }
+    } else if (user) displayName = user;
+
+    if (nameDisplay) nameDisplay.textContent = displayName;
+
+    if (indicator) {
+        const isRememberMe = !!expiry && (expiry - Date.now()) > 60000;
+        if (isRememberMe) {
+            const remaining = expiry - Date.now();
+            const days = Math.floor(remaining / (24 * 60 * 60 * 1000));
+            const hours = Math.floor((remaining % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+            indicator.textContent = days > 0 ? `🔒 ${days}d ${hours}h` : `🔒 ${hours}h`;
+            indicator.style.background = 'rgba(16,185,129,0.3)';
+            indicator.style.color = '#34d399';
+        } else {
+            indicator.textContent = 'Session';
+            indicator.style.background = 'rgba(255,255,255,0.15)';
+            indicator.style.color = '';
+        }
+    }
+}
+
+/* =====================================================================
+   SECTION 4 — CONFIGURATION
+   ===================================================================== */
+
+const SCRIPT_URL       = "https://script.google.com/macros/s/AKfycbwzEbd10tAnSKJSsg01LOXr8MAgKTFO4cp2sjq9moatjN3_IWZ8ZWF9uViTXE-991Nq/exec";
+const SPREADSHEET_ID   = "14DSh6jSYukltWrm72rZewxWjQpMcUFuvnR5sqrm9pDg";
+const SHEET_NAME       = "Adm_Details";
+const DRIVE_FOLDER_ID  = "1GQAAuWjJDOxBt5QJpnPzQ25eoCNXO8Sc";
+const IMAGE_COLUMN_NAME = "Image";
+// ❌ REMOVED: const BACKGROUND_COLUMN_NAME = "Background Image";
+
+// Dropdown source
+const DROPDOWN_SHEET_ID   = "14DSh6jSYukltWrm72rZewxWjQpMcUFuvnR5sqrm9pDg";
+const DROPDOWN_SHEET_NAME = "Dropdown";
+const DD_CACHE_KEY  = "dropdowns_cache_egyan_v1";
+const DD_CACHE_TTL  = 5 * 60 * 1000;
+
+// Drafts sheet
+const DRAFTS_SHEET_NAME = "Drafts";
+const DRAFT_DEBOUNCE_MS = 1200;
+const DRAFT_RESTORE_TTL_MS = 30 * 60 * 1000;
+const DRAFT_LS_KEY = "egyan_form_draft_v1";
+
+// Logo
+const LOGO_URL = "https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL";
+
+// Main students cache
+const CACHE_KEY             = "admissions_cache_EGYAN_Adm_Details";
+const CACHE_TTL             = 5 * 60 * 1000;
+const CACHE_VERSION_KEY     = "admissions_cache_version_EGYAN_Adm_Details";
+const CURRENT_CACHE_VERSION = "1.3";  // 🔼 bumped
+
+/* =====================================================================
+   SECTION 5 — GLOBAL STATE
+   ===================================================================== */
+
+let allStudents          = [];
+let currentViewStudent   = null;
+let currentEditStudent   = null;
+let selectedRowIndex     = 2;
+let selectedAdmIn        = null;
+let selectedSrNo         = null;
+let searchDebounceTimer  = null;
+let saveInProgress       = false;
+let cropperMain          = null;
+// ❌ REMOVED: let cropperBg = null;
+let croppedImageData     = null;
+// ❌ REMOVED: let croppedBgImageData = null;
+let isLoading            = false;
+let dataLoaded           = false;
+let renderRafHandle      = null;
+let pendingRenderFilter  = "";
+let initDone             = false;
+
+let admInOptions     = [];
+let studyInOptions   = [];
+let dropdownsLoaded  = false;
+
+/* Draft autosave state */
+let draftDebounceTimer     = null;
+let draftSaveInFlight      = false;
+let lastDraftPayloadHash   = null;
+let currentDraftRowIndex   = null;
+let currentDraftId         = null;
+let autosaveEnabled        = true;
+
+// Backwards-compat alias
+Object.defineProperty(window, 'cropper', {
+    get() { return cropperMain; },
+    set(v) { cropperMain = v; }
+});
+
+/* =====================================================================
+   SECTION 6 — DOM REFS
+   ===================================================================== */
+
+const dom = {};
+function cacheDomElements() {
+    dom.page1 = document.getElementById('page1');
+    dom.page2 = document.getElementById('page2');
+    dom.tableBody = document.getElementById('tableBody');
+    dom.searchInput = document.getElementById('searchInput');
+    dom.refreshBtn = document.getElementById('refreshBtn');
+    dom.addNewBtn = document.getElementById('addNewBtn');
+    dom.backBtn = document.getElementById('backToPage1Btn');
+    dom.editBtn = document.getElementById('editFromDetailBtn');
+    dom.deleteBtn = document.getElementById('deleteFromDetailBtn');
+    dom.printBtn = document.getElementById('printFromDetailBtn');
+    dom.downloadBtn = document.getElementById('downloadPdfBtn');
+    dom.detailsContainer = document.getElementById('detailsContainer');
+    dom.profileImage = document.getElementById('profileImage');
+    dom.profileName = document.getElementById('profileName');
+    dom.profileAdmIn = document.getElementById('profileAdmIn');
+    dom.profileStudyIn = document.getElementById('profileStudyIn');
+    dom.profileAcademic = document.getElementById('profileAcademic');
+    dom.globalModal = document.getElementById('globalModal');
+    dom.formModal = document.getElementById('formModal');
+    dom.modalTitle = document.getElementById('modalTitle');
+    dom.modalMsg = document.getElementById('modalMsg');
+    dom.formModalTitle = document.getElementById('formModalTitle');
+    dom.formModalBody = document.getElementById('formModalBody');
+    dom.alertBox = document.getElementById('alertBox');
+}
+
+/* =====================================================================
+   SECTION 7 — UTILITIES
+   ===================================================================== */
+
+function debounce(fn, wait = 250) {
+    let t;
+    return function(...args) {
+        clearTimeout(t);
+        t = setTimeout(() => fn.apply(this, args), wait);
+    };
+}
+
+function formatToDDMMYYYY(dateInput) {
+    if (!dateInput || dateInput === '') return '—';
+    try {
+        if (typeof dateInput === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(dateInput)) {
+            const [year, month, day] = dateInput.split('-');
+            return `${day}/${month}/${year}`;
+        }
+        if (typeof dateInput === 'string' && /^\d{2}\/\d{2}\/\d{4}$/.test(dateInput)) return dateInput;
+        const dateObj = new Date(dateInput);
+        if (!isNaN(dateObj.getTime())) {
+            const year = dateObj.getFullYear();
+            const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const day = String(dateObj.getDate()).padStart(2, '0');
+            return `${day}/${month}/${year}`;
+        }
+        return '—';
+    } catch (e) { return '—'; }
+}
+function formatToYYYYMMDD(dateString) {
+    if (!dateString || dateString === '') return '';
+    try {
+        if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) return dateString;
+        if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateString)) {
+            const [day, month, year] = dateString.split('/');
+            const testDate = new Date(year, month - 1, day);
+            if (!isNaN(testDate.getTime())) return `${year}-${month}-${day}`;
+            return '';
+        }
+        return '';
+    } catch (e) { return ''; }
+}
+function formatDateForDisplay(dateInput) { return formatToDDMMYYYY(dateInput); }
+
+function validateAndFormatDate(dateStr, fieldName = 'Date') {
+    if (!dateStr) return { isValid: false, formattedDate: '', error: `${fieldName} is required.` };
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+        return { isValid: false, formattedDate: '', error: `Invalid ${fieldName} format. Please select a valid date.` };
+    }
+    const [year, month, day] = dateStr.split('-');
+    const testDate = new Date(year, month - 1, day);
+    if (isNaN(testDate.getTime()) || testDate.getFullYear() != year ||
+        testDate.getMonth() + 1 != month || testDate.getDate() != day) {
+        return { isValid: false, formattedDate: '', error: `Invalid ${fieldName}. Please select a valid date.` };
+    }
+    return { isValid: true, formattedDate: dateStr, error: '' };
+}
+function getAcademicYear() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    return month >= 4 ? `${year}-${year + 1}` : `${year - 1}-${year}`;
+}
+function combineFullName(firstName, middleName, lastName) {
+    const parts = [];
+    if (firstName && firstName.trim()) parts.push(firstName.trim());
+    if (middleName && middleName.trim()) parts.push(middleName.trim());
+    if (lastName && lastName.trim()) parts.push(lastName.trim());
+    return parts.join(' ');
+}
+function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+}
+function extractFileId(driveUrl) {
+    if (!driveUrl) return null;
+    const match = String(driveUrl).match(/[-\w]{25,}/);
+    return match ? match[0] : null;
+}
+function getThumbnailUrl(driveUrl, width = 400) {
+    const fileId = extractFileId(driveUrl);
+    if (fileId) return `https://drive.google.com/thumbnail?id=${fileId}&sz=w${width}`;
+    return driveUrl;
+}
+function quickHash(str) {
+    let h = 0;
+    for (let i = 0; i < str.length; i++) {
+        h = ((h << 5) - h) + str.charCodeAt(i);
+        h |= 0;
+    }
+    return String(h);
+}
+
+/* ===== Aadhar helpers ===== */
+function formatAadhar(value) {
+    const digits = String(value || '').replace(/\D/g, '').slice(0, 12);
+    return digits.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+}
+function unformatAadhar(value) {
+    return String(value || '').replace(/\D/g, '');
+}
+function validateAadhar(value) {
+    const digits = unformatAadhar(value);
+    if (!digits) return { valid: false, message: 'Aadhar Card No is required.' };
+    if (digits.length !== 12) return { valid: false, message: 'Aadhar must be exactly 12 digits.' };
+    if (/^[01]/.test(digits)) return { valid: false, message: 'Aadhar cannot start with 0 or 1.' };
+    if (/^(\d)\1{11}$/.test(digits)) return { valid: false, message: 'Aadhar cannot be all identical digits.' };
+    return { valid: true, message: '' };
+}
+function isAadharDuplicate(digits, currentSrNo = null) {
+    if (!digits) return false;
+    return allStudents.some(s => {
+        const existing = unformatAadhar(s['Aadhar Card No'] || '');
+        if (!existing || existing !== digits) return false;
+        if (currentSrNo !== null && String(s['Sr. No']) === String(currentSrNo)) return false;
+        return true;
+    });
+}
+
+/* =====================================================================
+   SECTION 8 — TOAST / MODAL / SPINNER
+   ===================================================================== */
+
+function showToast(msg, type = 'info') {
+    const box = dom.alertBox;
+    if (!box) return;
+    box.textContent = msg;
+    box.className = `alert-popup ${type}`;
+    box.style.display = 'block';
+    clearTimeout(box._timeout);
+    box._timeout = setTimeout(() => { box.style.display = 'none'; }, 3500);
+}
+function showModal(msg, title = "Message", isConfirm = false, onConfirm = null, autoClose = 0) {
+    if (!dom.globalModal) return;
+    dom.modalTitle.innerText = title;
+    dom.modalMsg.innerHTML = msg;
+    const confirmBtn = document.getElementById('confirmModalBtn');
+    if (confirmBtn) {
+        confirmBtn.onclick = () => {
+            dom.globalModal.classList.remove('active');
+            if (isConfirm && onConfirm) onConfirm();
+        };
+    }
+    dom.globalModal.classList.add('active');
+    if (autoClose > 0) setTimeout(() => dom.globalModal.classList.remove('active'), autoClose);
+}
+function showSpinner(element, show, customHtml = null) {
+    if (!element) return;
+    if (show) {
+        element.disabled = true;
+        if (!element.hasAttribute('data-original-text')) {
+            element.setAttribute('data-original-text', element.innerHTML);
+        }
+        element.innerHTML = customHtml || '<span class="spinner"></span> Loading...';
+    } else {
+        element.disabled = false;
+        const original = element.getAttribute('data-original-text');
+        if (original) {
+            element.innerHTML = original;
+            element.removeAttribute('data-original-text');
+        }
+    }
+}
+
+/* =====================================================================
+   SECTION 9 — CACHE MANAGEMENT
+   ===================================================================== */
+
+function clearAllCaches() {
+    try {
+        localStorage.removeItem(CACHE_KEY);
+        localStorage.removeItem(CACHE_VERSION_KEY);
+        return true;
+    } catch (e) { return false; }
+}
+function invalidateStudentCache() {
+    try {
+        allStudents = [];
+        dataLoaded = false;
+        localStorage.removeItem(CACHE_KEY);
+        localStorage.removeItem(CACHE_VERSION_KEY);
+    } catch (e) {}
+}
+function getCache() {
+    try {
+        const cachedVersion = localStorage.getItem(CACHE_VERSION_KEY);
+        if (cachedVersion !== CURRENT_CACHE_VERSION) {
+            localStorage.removeItem(CACHE_KEY);
+            localStorage.setItem(CACHE_VERSION_KEY, CURRENT_CACHE_VERSION);
+            return null;
+        }
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+            const { data, timestamp, sheetName } = JSON.parse(cached);
+            if (sheetName !== SHEET_NAME) { localStorage.removeItem(CACHE_KEY); return null; }
+            if (Date.now() - timestamp < CACHE_TTL) return data;
+            localStorage.removeItem(CACHE_KEY);
+        }
+    } catch (e) { localStorage.removeItem(CACHE_KEY); }
+    return null;
+}
+function setCache(data) {
+    try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({
+            data, timestamp: Date.now(), sheetName: SHEET_NAME
+        }));
+        localStorage.setItem(CACHE_VERSION_KEY, CURRENT_CACHE_VERSION);
+    } catch (e) {}
+}
+
+/* =====================================================================
+   SECTION 10 — DROPDOWN SOURCE (Course Name / Study In)
+   ===================================================================== */
+
+function getDropdownCache() {
+    try {
+        const raw = localStorage.getItem(DD_CACHE_KEY);
+        if (!raw) return null;
+        const { data, ts } = JSON.parse(raw);
+        if (Date.now() - ts > DD_CACHE_TTL) { localStorage.removeItem(DD_CACHE_KEY); return null; }
+        return data;
+    } catch (e) { return null; }
+}
+function setDropdownCache(data) {
+    try { localStorage.setItem(DD_CACHE_KEY, JSON.stringify({ data, ts: Date.now() })); } catch (e) {}
+}
+function invalidateDropdownCache() {
+    try { localStorage.removeItem(DD_CACHE_KEY); } catch (e) {}
+}
+
+async function fetchExistingDropdownData(force = false) {
+    if (force) invalidateDropdownCache();
+    const url = `${SCRIPT_URL}?spreadsheetId=${DROPDOWN_SHEET_ID}` +
+                `&sheetName=${DROPDOWN_SHEET_NAME}&_=${Date.now()}`;
+    try {
+        const res = await fetch(url);
+        const json = await res.json();
+        if (json.status === 'success' && Array.isArray(json.data)) {
+            try {
+                localStorage.setItem(DD_CACHE_KEY, JSON.stringify({
+                    data: { raw: json.data }, ts: Date.now()
+                }));
+            } catch (e) {}
+            return json.data;
+        }
+    } catch (e) {
+        console.error('fetchExistingDropdownData failed:', e);
+    }
+    return [];
+}
+
+function updateDropdownOptionsFromData(data) {
+    const courses = new Set();
+    const studies = new Set();
+    (data || []).forEach(row => {
+        const c = String(row['Course Name'] || '').trim();
+        const s = String(row['Study In']    || '').trim();
+        if (c) courses.add(c);
+        if (s) studies.add(s);
+    });
+    admInOptions.length = 0;
+    admInOptions.push(...Array.from(courses));
+    studyInOptions.length = 0;
+    studyInOptions.push(...Array.from(studies));
+}
+
+async function loadDropdowns(forceRefresh = false) {
+    if (!forceRefresh) {
+        const cached = getDropdownCache();
+        if (cached && cached.raw && cached.raw.length) {
+            updateDropdownOptionsFromData(cached.raw);
+            dropdownsLoaded = true;
+            return;
+        }
+    }
+    try {
+        const data = await fetchExistingDropdownData(forceRefresh);
+        updateDropdownOptionsFromData(data);
+        setDropdownCache({ raw: data });
+        dropdownsLoaded = true;
+    } catch (err) {
+        console.warn('Dropdown load failed:', err);
+        if (!dropdownsLoaded) { admInOptions.length = 0; studyInOptions.length = 0; }
+    }
+}
+
+async function addRowToDropdownSheet(srNo, courseName, studyIn) {
+    try {
+        const params = new URLSearchParams({
+            action: 'insert',
+            spreadsheetId: DROPDOWN_SHEET_ID,
+            sheetName: DROPDOWN_SHEET_NAME,
+            'Sr. No': String(srNo),
+            'Course Name': courseName || '',
+            'Study In': studyIn || ''
+        });
+        const res = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        });
+        const json = await res.json();
+        return json.status === 'success';
+    } catch (e) {
+        console.warn('addRowToDropdownSheet failed:', e);
+        return false;
+    }
+}
+
+async function updateDropdownRow(rowIndex, srNo, courseName, studyIn) {
+    try {
+        const params = new URLSearchParams({
+            action: 'update',
+            spreadsheetId: DROPDOWN_SHEET_ID,
+            sheetName: DROPDOWN_SHEET_NAME,
+            rowIndex: String(rowIndex),
+            'Sr. No': String(srNo),
+            'Course Name': courseName || '',
+            'Study In': studyIn || ''
+        });
+        const res = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        });
+        const json = await res.json();
+        return json.status === 'success';
+    } catch (e) {
+        console.warn('updateDropdownRow failed:', e);
+        return false;
+    }
+}
+
+async function smartSaveToDropdownSheet(courseName, studyIn, existingData) {
+    const addedItems = [];
+    let dataModified = false;
+
+    const normCourse = courseName ? String(courseName).trim() : '';
+    const normStudy  = studyIn    ? String(studyIn).trim()    : '';
+
+    if (!normCourse && !normStudy) return { addedItems, dataModified };
+
+    const data = JSON.parse(JSON.stringify(existingData || []));
+
+    const courseExists = normCourse && data.some(r => String(r['Course Name'] || '').trim() === normCourse);
+    const studyExists  = normStudy  && data.some(r => String(r['Study In']    || '').trim() === normStudy);
+
+    const isEmptyBoth    = r => (!r['Course Name'] || String(r['Course Name']).trim() === '') &&
+                                (!r['Study In']    || String(r['Study In']).trim()    === '');
+    const isEmptyCourse  = r => (!r['Course Name'] || String(r['Course Name']).trim() === '');
+    const isEmptyStudy   = r => (!r['Study In']    || String(r['Study In']).trim()    === '');
+
+    const maxSr = () => data.reduce((m, r) => Math.max(m, parseInt(r['Sr. No']) || 0), 0);
+
+    if (normCourse && normStudy && !courseExists && !studyExists) {
+        const idx = data.findIndex(isEmptyBoth);
+        if (idx !== -1) {
+            const srNo = data[idx]['Sr. No'];
+            const rowIndex = parseInt(srNo) + 1;
+            const ok = await updateDropdownRow(rowIndex, srNo, normCourse, normStudy);
+            if (ok) {
+                addedItems.push(`Added "${normCourse}" + "${normStudy}" to existing empty row (Sr. No ${srNo})`);
+                data[idx]['Course Name'] = normCourse;
+                data[idx]['Study In']    = normStudy;
+                dataModified = true;
+            }
+        } else {
+            const newSr = maxSr() + 1;
+            const ok = await addRowToDropdownSheet(newSr, normCourse, normStudy);
+            if (ok) {
+                addedItems.push(`Created new entry: "${normCourse}" + "${normStudy}" (Sr. No ${newSr})`);
+                data.push({ 'Sr. No': String(newSr), 'Course Name': normCourse, 'Study In': normStudy });
+                dataModified = true;
+            }
+        }
+    } else if (normCourse && !courseExists) {
+        let idx = -1;
+        if (normStudy) idx = data.findIndex(r => isEmptyCourse(r) && String(r['Study In'] || '').trim() === normStudy);
+        if (idx === -1) idx = data.findIndex(isEmptyCourse);
+        if (idx !== -1) {
+            const srNo = data[idx]['Sr. No'];
+            const rowIndex = parseInt(srNo) + 1;
+            const exStudy = data[idx]['Study In'] || '';
+            const ok = await updateDropdownRow(rowIndex, srNo, normCourse, exStudy);
+            if (ok) {
+                addedItems.push(`Added Course Name "${normCourse}" to existing row (Sr. No ${srNo})`);
+                data[idx]['Course Name'] = normCourse;
+                dataModified = true;
+            }
+        } else {
+            const newSr = maxSr() + 1;
+            const ok = await addRowToDropdownSheet(newSr, normCourse, normStudy || '');
+            if (ok) {
+                addedItems.push(`Created new Course Name entry: "${normCourse}" (Sr. No ${newSr})`);
+                data.push({ 'Sr. No': String(newSr), 'Course Name': normCourse, 'Study In': normStudy || '' });
+                dataModified = true;
+            }
+        }
+    } else if (normStudy && !studyExists) {
+        let idx = -1;
+        if (normCourse) idx = data.findIndex(r => isEmptyStudy(r) && String(r['Course Name'] || '').trim() === normCourse);
+        if (idx === -1) idx = data.findIndex(isEmptyStudy);
+        if (idx !== -1) {
+            const srNo = data[idx]['Sr. No'];
+            const rowIndex = parseInt(srNo) + 1;
+            const exCourse = data[idx]['Course Name'] || '';
+            const ok = await updateDropdownRow(rowIndex, srNo, exCourse, normStudy);
+            if (ok) {
+                addedItems.push(`Added Study In "${normStudy}" to existing row (Sr. No ${srNo})`);
+                data[idx]['Study In'] = normStudy;
+                dataModified = true;
+            }
+        } else {
+            const newSr = maxSr() + 1;
+            const ok = await addRowToDropdownSheet(newSr, normCourse || '', normStudy);
+            if (ok) {
+                addedItems.push(`Created new Study In entry: "${normStudy}" (Sr. No ${newSr})`);
+                data.push({ 'Sr. No': String(newSr), 'Course Name': normCourse || '', 'Study In': normStudy });
+                dataModified = true;
+            }
+        }
+    }
+
+    if (dataModified) {
+        try {
+            localStorage.setItem(DD_CACHE_KEY, JSON.stringify({
+                data: { raw: data }, ts: Date.now()
+            }));
+        } catch (e) {}
+        updateDropdownOptionsFromData(data);
+    }
+    return { addedItems, dataModified };
+}
+
+/* =====================================================================
+   SECTION 10.5 — DRAFT AUTOSAVE (Background, Sheet-backed)
+   Only main image tracked now (background image removed).
+   ===================================================================== */
+
+function readFormSnapshot() {
+    const form = document.getElementById('studentForm');
+    if (!form) return null;
+
+    const get = (id) => (document.getElementById(id)?.value || '').trim();
+
+    return {
+        "Academic Year": get('fAcademicYear'),
+        "Date of Adm": get('fDateOfAdm'),
+        "First Name": get('fFirstName'),
+        "Middle Name": get('fMiddleName'),
+        "Last Name": get('fLastName'),
+        "Father Name": get('fFatherName'),
+        "Mother Name": get('fMotherName'),
+        "Father Occupation": get('fFatherOccupation'),
+        "Aadhar Card No": formatAadhar(get('fAadhar')),
+        "Adm In": get('fAdmIn'),
+        "Study In": get('fStudyIn'),
+        "Birth Date": get('fBirthDate'),
+        "Gender": get('fGender'),
+        "Email Id": get('fEmail'),
+        "Personal Mob No": get('fPersonalMobile'),
+        "Parent Mob No": get('fParentMobile'),
+        "Last School Name": get('fLastSchool'),
+        "Address": get('fAddress'),
+        "Note": get('fNote')
+    };
+}
+
+async function pushDraftToSheet(payloadObj, hasMainImg) {
+    if (!autosaveEnabled) return;
+    if (draftSaveInFlight) return;
+
+    const payloadStr = JSON.stringify(payloadObj);
+    const hash = quickHash(payloadStr + '|' + hasMainImg);
+    if (hash === lastDraftPayloadHash) return;
+    lastDraftPayloadHash = hash;
+
+    draftSaveInFlight = true;
+    try {
+        const params = new URLSearchParams();
+        params.append('spreadsheetId', SPREADSHEET_ID);
+        params.append('sheetName', DRAFTS_SHEET_NAME);
+
+        if (currentDraftRowIndex && currentDraftId) {
+            params.append('action', 'update');
+            params.append('rowIndex', String(currentDraftRowIndex));
+            params.append('Draft ID', currentDraftId);
+        } else {
+            params.append('action', 'insert');
+            currentDraftId = 'D' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+            params.append('Draft ID', currentDraftId);
+        }
+
+        params.append('Timestamp', new Date().toISOString());
+        params.append('Payload JSON', payloadStr);
+        params.append('Has Main Image', hasMainImg ? 'TRUE' : 'FALSE');
+        params.append('Has Bg Image', 'FALSE'); // ❌ kept for schema compatibility
+        params.append('Session Key', getSessionKey());
+
+        const res = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString(),
+            keepalive: true
+        });
+        const json = await res.json();
+        if (json.status === 'success' && json.data && json.data.rowIndex) {
+            currentDraftRowIndex = Number(json.data.rowIndex);
+        }
+        updateDraftStatus('Saved ' + new Date().toLocaleTimeString());
+    } catch (err) {
+        console.warn('Draft autosave failed (non-blocking):', err);
+        updateDraftStatus('Save failed');
+    } finally {
+        draftSaveInFlight = false;
+    }
+}
+
+function scheduleDraftSave() {
+    if (!autosaveEnabled) return;
+    clearTimeout(draftDebounceTimer);
+    draftDebounceTimer = setTimeout(() => {
+        const snapshot = readFormSnapshot();
+        if (!snapshot) return;
+
+        const hasAnyData = Object.values(snapshot).some(v => v && String(v).trim() !== '')
+                        || !!croppedImageData;
+        if (!hasAnyData) return;
+
+        try {
+            if (croppedImageData) {
+                localStorage.setItem(DRAFT_LS_KEY + '_main', JSON.stringify(croppedImageData));
+            } else {
+                localStorage.removeItem(DRAFT_LS_KEY + '_main');
+            }
+            // ❌ REMOVED: bg image stash
+        } catch (e) {}
+
+        pushDraftToSheet(snapshot, !!croppedImageData);
+    }, DRAFT_DEBOUNCE_MS);
+}
+
+async function clearDraft() {
+    clearTimeout(draftDebounceTimer);
+    lastDraftPayloadHash = null;
+
+    if (currentDraftRowIndex) {
+        try {
+            const params = new URLSearchParams({
+                action: 'delete',
+                spreadsheetId: SPREADSHEET_ID,
+                sheetName: DRAFTS_SHEET_NAME,
+                rowIndex: String(currentDraftRowIndex)
+            });
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params.toString(),
+                keepalive: true
+            });
+        } catch (e) { /* ignore */ }
+    }
+
+    currentDraftRowIndex = null;
+    currentDraftId = null;
+
+    try {
+        localStorage.removeItem(DRAFT_LS_KEY + '_main');
+        localStorage.removeItem(DRAFT_LS_KEY + '_bg'); // cleanup old keys
+        localStorage.removeItem(DRAFT_LS_KEY + '_meta');
+    } catch (e) {}
+}
+
+function getSessionKey() {
+    let key = sessionStorage.getItem('egyan_session_key');
+    if (!key) {
+        key = 'S' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+        sessionStorage.setItem('egyan_session_key', key);
+    }
+    return key;
+}
+
+async function maybeRestoreDraft() {
+    try {
+        const cachedRaw = localStorage.getItem(DRAFT_LS_KEY + '_meta');
+        if (!cachedRaw) return;
+        const meta = JSON.parse(cachedRaw);
+        if (!meta || !meta.payload) return;
+        if (Date.now() - (meta.savedAt || 0) > DRAFT_RESTORE_TTL_MS) {
+            localStorage.removeItem(DRAFT_LS_KEY + '_meta');
+            return;
+        }
+
+        showModal(
+            `📝 A recent unsaved draft was found (saved ${Math.round((Date.now() - meta.savedAt) / 60000)} min ago).<br><br>Restore it?`,
+            'Restore Draft?',
+            true,
+            () => {
+                const form = document.getElementById('studentForm');
+                if (!form) return;
+                const p = meta.payload;
+                const setVal = (id, v) => {
+                    const el = document.getElementById(id);
+                    if (el) el.value = v || '';
+                };
+                setVal('fAcademicYear', p['Academic Year']);
+                setVal('fDateOfAdm', p['Date of Adm']);
+                setVal('fFirstName', p['First Name']);
+                setVal('fMiddleName', p['Middle Name']);
+                setVal('fLastName', p['Last Name']);
+                setVal('fFatherName', p['Father Name']);
+                setVal('fMotherName', p['Mother Name']);
+                setVal('fFatherOccupation', p['Father Occupation']);
+                setVal('fAadhar', formatAadhar(p['Aadhar Card No']));
+                setVal('fAdmIn', p['Adm In']);
+                setVal('fStudyIn', p['Study In']);
+                setVal('fBirthDate', p['Birth Date']);
+                setVal('fGender', p['Gender']);
+                setVal('fEmail', p['Email Id']);
+                setVal('fPersonalMobile', p['Personal Mob No']);
+                setVal('fParentMobile', p['Parent Mob No']);
+                setVal('fLastSchool', p['Last School Name']);
+                setVal('fAddress', p['Address']);
+                setVal('fNote', p['Note']);
+
+                try {
+                    const mainRaw = localStorage.getItem(DRAFT_LS_KEY + '_main');
+                    if (mainRaw) {
+                        croppedImageData = JSON.parse(mainRaw);
+                        const s = document.getElementById('image-status');
+                        if (s) {
+                            s.textContent = '✅ Restored draft image (pending upload)';
+                            s.style.color = 'var(--success)';
+                        }
+                    }
+                    // ❌ REMOVED: bg image restore
+                } catch (e) {}
+
+                currentDraftId = meta.draftId || null;
+                currentDraftRowIndex = meta.rowIndex || null;
+                showToast('✅ Draft restored', 'success');
+            }
+        );
+    } catch (e) { /* ignore */ }
+}
+
+/* =====================================================================
+   SECTION 11 — SKELETON LOADER
+   ===================================================================== */
+
+function buildSkeletonRows(count = 5) {
+    let html = '';
+    for (let i = 0; i < count; i++) {
+        html += `
+            <tr class="skeleton-row">
+                <td><div class="loading-skeleton" style="height:16px;width:60%;"></div></td>
+                <td><div class="loading-skeleton" style="height:16px;width:80%;"></div></td>
+                <td><div class="loading-skeleton" style="height:16px;width:70%;"></div></td>
+                <td><div class="loading-skeleton" style="height:16px;width:60%;"></div></td>
+                <td><div class="loading-skeleton" style="height:16px;width:50%;"></div></td>
+            </tr>
+        `;
+    }
+    return html;
+}
+
+/* =====================================================================
+   SECTION 12 — DATA LOADING
+   ===================================================================== */
+
+async function loadStudents(forceRefresh = false) {
+    const tableBody = dom.tableBody;
+    if (!tableBody) return [];
+
+    if (!forceRefresh && dataLoaded) { renderTable(); return allStudents; }
+
+    try {
+        if (!forceRefresh) {
+            const cached = getCache();
+            if (cached && Array.isArray(cached) && cached.length > 0) {
+                allStudents = cached;
+                dataLoaded = true;
+                renderTable();
+                showToast(`📦 Loaded ${allStudents.length} students from cache`, "info");
+                scheduleIdleRefresh();
+                isLoading = false;
+                return allStudents;
+            }
+        }
+
+        tableBody.innerHTML = buildSkeletonRows(5);  // 🆕 5 rows for 5 columns
+
+        const url = `${SCRIPT_URL}?spreadsheetId=${SPREADSHEET_ID}&sheetName=${SHEET_NAME}&_=${Date.now()}`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+
+        const result = await response.json();
+        if (result.status === "success" && Array.isArray(result.data)) {
+            allStudents = result.data.map((item, idx) => ({ ...item, _rowIndex: idx + 2 }));
+            setCache(allStudents);
+            dataLoaded = true;
+            renderTable();
+            showToast(`✅ Loaded ${allStudents.length} students`, "success");
+            isLoading = false;
+            return allStudents;
+        } else {
+            throw new Error(result.message || "Failed to load data");
+        }
+    } catch (err) {
+        console.error('❌ Load students error:', err);
+        try {
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (cached) {
+                const { data, sheetName } = JSON.parse(cached);
+                if (data && Array.isArray(data) && data.length > 0 && sheetName === SHEET_NAME) {
+                    allStudents = data;
+                    dataLoaded = true;
+                    renderTable();
+                    showToast("⚠️ Using cached data (offline mode)", "warning");
+                    isLoading = false;
+                    return allStudents;
+                }
+            }
+        } catch (e) {}
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    <div class="error-container">
+                        <span class="error-icon">⚠️</span>
+                        <p class="error-title">Failed to load data</p>
+                        <p class="error-message">${escapeHtml(err.message)}</p>
+                        <div class="error-actions">
+                            <button onclick="handleRetry()" class="btn btn-primary" style="padding: 10px 24px;">
+                                <span>⟳</span> Retry
+                            </button>
+                            <button onclick="handleClearCache()" class="btn btn-outline" style="padding: 10px 24px;">
+                                <span>🧹</span> Clear Cache & Retry
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        `;
+        isLoading = false;
+        return [];
+    }
+}
+function scheduleIdleRefresh() {
+    const run = () => refreshDataInBackground();
+    if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 4000 });
+    else setTimeout(run, 2000);
+}
+async function refreshDataInBackground() {
+    try {
+        const response = await fetch(
+            `${SCRIPT_URL}?spreadsheetId=${SPREADSHEET_ID}&sheetName=${SHEET_NAME}&_=${Date.now()}`
+        );
+        const result = await response.json();
+        if (result.status === "success" && Array.isArray(result.data)) {
+            const newData = result.data.map((item, idx) => ({ ...item, _rowIndex: idx + 2 }));
+            if (JSON.stringify(allStudents) !== JSON.stringify(newData)) {
+                allStudents = newData;
+                setCache(allStudents);
+                renderTable();
+            }
+        }
+    } catch (err) {}
+}
+async function refreshData() {
+    const refreshBtn = dom.refreshBtn;
+    const mobileRefreshBtn = document.getElementById('mobileRefreshBtn');
+    showSpinner(refreshBtn, true);
+    if (mobileRefreshBtn) {
+        mobileRefreshBtn.disabled = true;
+        mobileRefreshBtn.innerHTML = '<span class="spinner"></span> Loading...';
+    }
+    try {
+        clearAllCaches();
+        invalidateDropdownCache();
+        dataLoaded = false;
+        await Promise.all([loadStudents(true), loadDropdowns(true)]);
+        showToast("✅ Data refreshed successfully!", "success");
+    } catch (err) {
+        showToast("❌ Refresh failed: " + err.message, "error");
+    } finally {
+        showSpinner(refreshBtn, false);
+        if (mobileRefreshBtn) {
+            mobileRefreshBtn.disabled = false;
+            mobileRefreshBtn.innerHTML = '<span>⟳</span> Refresh';
+        }
+    }
+}
+window.handleRetry = function() {
+    dataLoaded = false;
+    clearAllCaches();
+    setTimeout(() => loadStudents(true), 300);
+};
+window.handleClearCache = function() {
+    clearAllCaches();
+    dataLoaded = false;
+    showToast("🧹 Cache cleared! Refreshing...", "success");
+    setTimeout(() => loadStudents(true), 300);
+};
+
+/* =====================================================================
+   SECTION 13 — TABLE RENDERING (5 columns: Sr. No, Name, Mobile, Adm In, Action)
+   ===================================================================== */
+
+function scheduleRender(filter = "") {
+    pendingRenderFilter = filter;
+    if (renderRafHandle) return;
+    renderRafHandle = requestAnimationFrame(() => {
+        renderRafHandle = null;
+        renderTable(pendingRenderFilter);
+    });
+}
+function renderTable(filter = "") {
+    if (!dom.tableBody) return;
+
+    if (!allStudents || allStudents.length === 0) {
+        dom.tableBody.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    <div class="empty-container">
+                        <span class="empty-icon">📚</span>
+                        <p class="empty-title">No students found</p>
+                        <p class="empty-subtitle">Click "Add Admission" to add your first student</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    const searchLower = filter.toLowerCase().trim();
+    let filtered = allStudents;
+    if (searchLower) {
+        filtered = allStudents.filter(s => {
+            const fullName = combineFullName(
+                s['First Name'] || '', s['Middle Name'] || '', s['Last Name'] || ''
+            ).toLowerCase();
+            const mobile  = String(s['Personal Mob No'] || '').toLowerCase();
+            const admIn   = String(s['Adm In'] || '').toLowerCase();
+            const studyIn = String(s['Study In'] || '').toLowerCase();
+            return fullName.includes(searchLower) || mobile.includes(searchLower)
+                || admIn.includes(searchLower) || studyIn.includes(searchLower);
+        });
+    }
+
+    if (!filtered.length) {
+        dom.tableBody.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    <div class="empty-container">
+                        <span class="empty-icon">🔍</span>
+                        <p class="empty-title">No matching students found</p>
+                        <p class="empty-subtitle">Try adjusting your search</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    /* ✅ NEWEST-FIRST: sort by Sr. No desc, then _rowIndex desc as tiebreaker */
+    const sorted = filtered.slice().sort((a, b) => {
+        const srA = parseInt(a['Sr. No']) || 0;
+        const srB = parseInt(b['Sr. No']) || 0;
+        if (srA !== srB) return srB - srA;
+        return (b._rowIndex || 0) - (a._rowIndex || 0);
+    });
+
+    let html = '';
+    for (let i = 0; i < sorted.length; i++) {
+        const s = sorted[i];
+        const fullName = combineFullName(
+            s['First Name'] || '', s['Middle Name'] || '', s['Last Name'] || ''
+        ) || '—';
+        const admIn = s['Adm In'] || '';
+        const srNo = s['Sr. No'] || '';
+        // Look up original index in allStudents so edit/delete/view still target the right sheet row
+        const actualIndex = allStudents.indexOf(s);
+
+        html += `
+            <tr>
+                <td><strong>${escapeHtml(String(srNo || (actualIndex + 2)))}</strong></td>
+                <td>${escapeHtml(fullName)}</td>
+                <td>${escapeHtml(s['Personal Mob No'] || '—')}</td>
+                <td>${escapeHtml(admIn || '—')}</td>
+                <td>
+                    <button class="view-action-btn"
+                            data-sr="${escapeHtml(srNo)}"
+                            data-adm="${escapeHtml(admIn)}"
+                            data-actual-index="${actualIndex}"
+                            data-full-name="${escapeHtml(fullName)}">
+                        👁️ View
+                    </button>
+                </td>
+            </tr>
+        `;
+    }
+    dom.tableBody.innerHTML = html;
+}
+
+/* =====================================================================
+   SECTION 14 — EVENT DELEGATION
+   ===================================================================== */
+
+function handleTableClick(e) {
+    const btn = e.target.closest('.view-action-btn');
+    if (!btn) return;
+    e.stopPropagation();
+
+    const srVal = btn.getAttribute('data-sr');
+    const admVal = btn.getAttribute('data-adm');
+    const actualIndex = parseInt(btn.getAttribute('data-actual-index'), 10);
+    const fullName = btn.getAttribute('data-full-name');
+
+    let found = null;
+    if (srVal) found = allStudents.find(s => String(s['Sr. No']) === String(srVal));
+    if (!found && !isNaN(actualIndex) && actualIndex >= 0 && actualIndex < allStudents.length) {
+        found = allStudents[actualIndex];
+    }
+    if (!found && admVal) found = allStudents.find(s => String(s['Adm In']) === String(admVal));
+    if (!found && fullName) {
+        found = allStudents.find(s => combineFullName(
+            s['First Name'] || '', s['Middle Name'] || '', s['Last Name'] || ''
+        ) === fullName);
+    }
+
+    if (found) {
+        currentViewStudent = found;
+        currentEditStudent = found;
+        selectedSrNo = found['Sr. No'];
+        selectedAdmIn = found['Adm In'];
+        selectedRowIndex = found._rowIndex || 2;
+        showDetailView(found);
+    } else {
+        showToast("❌ Student not found. Please refresh the page.", "error");
+    }
+}
+
+/* =====================================================================
+   SECTION 15 — DETAIL VIEW
+   ===================================================================== */
+
+function showDetailView(student) {
+    if (!student) { showToast("❌ No student data to display", "error"); return; }
+
+    selectedSrNo = student['Sr. No'];
+    selectedAdmIn = student['Adm In'];
+    selectedRowIndex = student._rowIndex || 2;
+    currentViewStudent = student;
+    currentEditStudent = student;
+
+    const fullName = combineFullName(
+        student['First Name'] || '', student['Middle Name'] || '', student['Last Name'] || ''
+    ) || 'Student';
+
+    dom.profileName.textContent = fullName;
+    dom.profileAdmIn.textContent = student['Adm In'] || 'N/A';
+    if (dom.profileStudyIn) dom.profileStudyIn.textContent = student['Study In'] || 'N/A';
+    dom.profileAcademic.textContent = student['Academic Year'] || 'N/A';
+
+    const imgUrl = getThumbnailUrl(student['Image'] || '', 400);
+    dom.profileImage.loading = 'lazy';
+    dom.profileImage.decoding = 'async';
+    dom.profileImage.src = imgUrl || 'https://via.placeholder.com/150?text=No+Photo';
+    dom.profileImage.alt = fullName;
+
+    const fields = [
+        { label: "Date of Admission", value: formatDateForDisplay(student['Date of Adm']) },
+        { label: "Academic Year", value: student['Academic Year'] || '—' },
+        { label: "Adm In", value: student['Adm In'] || '—' },
+        { label: "Study In", value: student['Study In'] || '—' },
+        { label: "First Name", value: student['First Name'] || '—' },
+        { label: "Middle Name", value: student['Middle Name'] || '—' },
+        { label: "Last Name", value: student['Last Name'] || '—' },
+        { label: "Full Name", value: fullName },
+        { label: "Father Name", value: student['Father Name'] || '—' },
+        { label: "Mother Name", value: student['Mother Name'] || '—' },
+        { label: "Father Occupation", value: student['Father Occupation'] || '—' },
+        { label: "Aadhar Card No", value: student['Aadhar Card No'] || '—' },
+        { label: "Birth Date", value: formatDateForDisplay(student['Birth Date']) },
+        { label: "Gender", value: student['Gender'] || '—' },
+        { label: "Email ID", value: student['Email Id'] || '—' },
+        { label: "Personal Mobile", value: student['Personal Mob No'] || '—' },
+        { label: "Parent Mobile", value: student['Parent Mob No'] || '—' },
+        { label: "Last School Name", value: student['Last School Name'] || '—' },
+        { label: "Address", value: student['Address'] || '—', full: true },
+        { label: "Note", value: student['Note'] || '—', full: true }
+    ];
+
+    let html = '';
+    for (const f of fields) {
+        html += `
+            <div class="detail-card${f.full ? ' fullwidth' : ''}">
+                <div class="detail-label">${escapeHtml(f.label)}</div>
+                <div class="detail-value">${escapeHtml(String(f.value || '—'))}</div>
+            </div>
+        `;
+    }
+    dom.detailsContainer.innerHTML = html;
+
+    dom.page1.classList.remove('active-page');
+    dom.page2.classList.add('active-page');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* =====================================================================
+   SECTION 16 — NAVIGATION
+   ===================================================================== */
+
+function goToListView() {
+    dom.page2.classList.remove('active-page');
+    dom.page1.classList.add('active-page');
+    if (!dataLoaded) loadStudents();
+}
+
+/* =====================================================================
+   SECTION 17 — ROW LOOKUP
+   ===================================================================== */
+
+function findRowIndexBySrNo(srNo) {
+    if (srNo === null || srNo === undefined || srNo === '') return null;
+    const idx = allStudents.findIndex(s => String(s['Sr. No']) === String(srNo));
+    return idx !== -1 ? idx + 2 : null;
+}
+function findRowIndexByAdmIn(admIn) {
+    if (!admIn) return null;
+    const idx = allStudents.findIndex(s => String(s['Adm In']) === String(admIn));
+    if (idx !== -1) return idx + 2;
+    return null;
+}
+
+/* =====================================================================
+   SECTION 18 — DELETE STUDENT
+   ===================================================================== */
+
+async function deleteStudent() {
+    const srNoToDelete = selectedSrNo ?? currentViewStudent?.['Sr. No'];
+    if (srNoToDelete === null || srNoToDelete === undefined || srNoToDelete === '') {
+        showToast('❌ No student Sr. No recorded. Please click View again.', 'error');
+        return;
+    }
+
+    const displayName = dom.profileName?.textContent || 'this student';
+
+    showModal(
+        `⚠️ Are you sure you want to delete <strong>${escapeHtml(displayName)}</strong> ` +
+        `(Sr. No: ${escapeHtml(String(srNoToDelete))})?<br><br>` +
+        `This action cannot be undone and will remove the student's record and all associated files.`,
+        'Confirm Delete',
+        true,
+        async () => {
+            showSpinner(dom.deleteBtn, true);
+            try {
+                clearAllCaches();
+                dataLoaded = false;
+
+                const freshUrl = `${SCRIPT_URL}?spreadsheetId=${SPREADSHEET_ID}` +
+                                 `&sheetName=${SHEET_NAME}&_=${Date.now()}`;
+                const freshRes = await fetch(freshUrl);
+                const freshResult = await freshRes.json();
+
+                if (freshResult.status !== 'success' || !Array.isArray(freshResult.data)) {
+                    throw new Error(freshResult.message || 'Failed to refresh data');
+                }
+
+                allStudents = freshResult.data.map((item, idx) => ({ ...item, _rowIndex: idx + 2 }));
+
+                const freshIdx = allStudents.findIndex(
+                    s => String(s['Sr. No']) === String(srNoToDelete)
+                );
+                if (freshIdx === -1) {
+                    throw new Error(`Student with Sr. No "${srNoToDelete}" not found on server.`);
+                }
+
+                const liveRowIndex = freshIdx + 2;
+
+                const params = new URLSearchParams();
+                params.append('action', 'delete');
+                params.append('spreadsheetId', SPREADSHEET_ID);
+                params.append('sheetName', SHEET_NAME);
+                params.append('rowIndex', liveRowIndex);
+                params.append('Sr. No', srNoToDelete);
+
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: params.toString()
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    currentViewStudent = null;
+                    currentEditStudent = null;
+                    selectedSrNo = null;
+                    selectedAdmIn = null;
+                    selectedRowIndex = null;
+                    invalidateStudentCache();
+                    showModal('✅ Deleted successfully! Sr. No reset.', 'Success', false, null, 1200);
+                    await loadStudents(true);
+                    goToListView();
+                } else {
+                    showModal('❌ Delete failed: ' + (result.message || 'Unknown error'), 'Error');
+                    invalidateStudentCache();
+                    await loadStudents(true);
+                }
+            } catch (err) {
+                showModal('❌ Error: ' + err.message, 'Error');
+            } finally {
+                showSpinner(dom.deleteBtn, false);
+            }
+        }
+    );
+}
+
+/* =====================================================================
+   SECTION 19 — PRINT HELPERS
+   ===================================================================== */
+
+function getPrintImageUrl(driveUrl) {
+    const fileId = extractFileId(driveUrl);
+    if (fileId) return `https://lh3.googleusercontent.com/d/${fileId}`;
+    if (driveUrl && String(driveUrl).startsWith('http')) return driveUrl;
+    return '';
+}
+async function urlToDataUri(url, timeoutMs = 8000) {
+    if (!url) return '';
+    try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeoutMs);
+        const response = await fetch(url, {
+            mode: 'cors', credentials: 'omit', cache: 'force-cache',
+            signal: controller.signal
+        });
+        clearTimeout(timer);
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const blob = await response.blob();
+        if (!blob || blob.size === 0) throw new Error('Empty blob');
+        return await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result || '');
+            reader.onerror = () => resolve('');
+            reader.readAsDataURL(blob);
+        });
+    } catch (err) { return ''; }
+}
+async function preloadPrintImages(student) {
+    const photoRaw = student && student['Image'] ? student['Image'] : '';
+    const photoLh3 = photoRaw ? getPrintImageUrl(photoRaw) : '';
+    const [photoDataUri, logoDataUri] = await Promise.all([
+        photoLh3 ? urlToDataUri(photoLh3) : Promise.resolve(''),
+        urlToDataUri(LOGO_URL)
+    ]);
+    return { photoDataUri, logoDataUri };
+}
+
+/* =====================================================================
+   SECTION 20 — PRINT HTML TEMPLATE
+   ===================================================================== */
+
+function generatePDFHTML(record, fullName, todayStr, imgUrl, logoDataUri = '', photoDataUri = '') {
+
+    const photoSrc = photoDataUri || imgUrl || '';
+    let photoHtml = '';
+    if (photoSrc) {
+        photoHtml = `<img src="${photoSrc}" alt="Student Photo" crossorigin="anonymous"
+            style="width:100%;height:100%;object-fit:cover;display:block;">`;
+    } else {
+        photoHtml = `
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;color:#9aa5b1;">
+                <svg viewBox="0 0 24 24" width="52" height="52" fill="#b9c2cc">
+                    <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+                </svg>
+                <span style="font-size:9px;margin-top:2px;">Passport Size Photo</span>
+            </div>`;
+    }
+
+    const logoSrc = logoDataUri || LOGO_URL;
+    const v = (val) => (val === undefined || val === null || val === '') ? '' : escapeHtml(String(val));
+
+    const dateOfAdm    = formatDateForDisplay(record['Date of Adm']);
+    const academicYear = v(record['Academic Year']);
+    const firstName    = v(record['First Name']);
+    const middleName   = v(record['Middle Name']);
+    const lastName     = v(record['Last Name']);
+    const fatherName   = v(record['Father Name']);
+    const motherName   = v(record['Mother Name']);
+    const fatherOcc    = v(record['Father Occupation']);
+    const admIn        = v(record['Adm In']);
+    const studyIn      = v(record['Study In']);
+    const aadharNo     = v(record['Aadhar Card No']);
+    const birthDate    = formatDateForDisplay(record['Birth Date']);
+    const gender       = v(record['Gender']);
+    const emailId      = v(record['Email Id']);
+    const personalMob  = v(record['Personal Mob No']);
+    const parentMob    = v(record['Parent Mob No']);
+    const lastSchool   = v(record['Last School Name']);
+    const address      = v(record['Address']);
+
+    return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admission Form - ${escapeHtml(fullName)}</title>
+<style>
+    @page { size: A4 portrait; margin: 0; }
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    html, body {
+        font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        background: #fff; color: #000;
+        overflow-x: hidden; overflow-y: auto;
+        scrollbar-width: none; -ms-overflow-style: none;
+        -webkit-overflow-scrolling: touch;
+        min-height: 100%;
+    }
+    html::-webkit-scrollbar, body::-webkit-scrollbar {
+        width: 0; height: 0; background: transparent; display: none;
+    }
+    .sheet {
+        position: relative;
+        width: 210mm; height: 297mm;
+        padding: 4mm 6mm 12mm 6mm;
+        display: flex; flex-direction: column;
+        margin: 0 auto; background: #fff;
+        box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    }
+    .corner-tl {
+        position: absolute; top:0; left:0;
+        width: 34mm; height: 20mm;
+        background: #0d2c54;
+        clip-path: polygon(0 0, 100% 0, 0 100%);
+        z-index: 1;
+    }
+    .corner-tr {
+        position: absolute; top:0; right:0;
+        width: 34mm; height: 20mm;
+        background: #0d2c54;
+        clip-path: polygon(0 0, 100% 0, 100% 100%);
+        z-index: 1;
+    }
+    .header {
+        display: grid;
+        grid-template-columns: 26mm 1fr 32mm;
+        align-items: center; gap: 3mm;
+        padding: 1mm 2mm 2mm;
+        position: relative; z-index: 2;
+    }
+    .logo-wrap {
+        width: 24mm; height: 24mm;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+    .title-wrap { text-align: center; }
+    .title-wrap h1 {
+        font-size: 16pt; font-weight: 900;
+        color: #0d2c54;
+        letter-spacing: 0.3px; line-height: 1.05;
+        font-family: 'Arial Black', 'Segoe UI', sans-serif;
+        text-transform: uppercase;
+    }
+    .title-pill {
+        display: inline-block;
+        background: #0d2c54; color: #fff;
+        font-size: 12pt; font-weight: 900;
+        letter-spacing: 1.2px;
+        padding: 1.2mm 9mm;
+        border-radius: 20px;
+        margin-top: 1.5mm;
+        font-family: 'Arial Black', 'Segoe UI', sans-serif;
+    }
+    .photo-box {
+        width: 30mm; height: 34mm;
+        border: 1.2pt solid #0d2c54;
+        border-radius: 1mm;
+        background: #eef2f7;
+        overflow: hidden;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .form-body {
+        position: relative;
+        flex: 1;
+        border: 1.6pt solid #0d2c54;
+        border-radius: 2mm;
+        padding: 4mm 4mm 3mm 4mm;
+        margin-top: 3mm;
+        background: #fff;
+        display: flex; flex-direction: column;
+        overflow: hidden;
+    }
+    @media print { .form-body { overflow: visible !important; } }
+    .watermark {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        margin: auto;
+        width: 135mm; height: 135mm;
+        opacity: 0.14;
+        pointer-events: none;
+        user-select: none;
+        z-index: 5;
+        display: flex; align-items: center; justify-content: center;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        transform: none !important;
+    }
+    .watermark img {
+        width: 100%; height: 100%;
+        display: block; object-fit: contain;
+        opacity: 1;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        transform: none !important;
+    }
+    .row, .declaration-wrap, .sign-row { position: relative; z-index: 1; }
+    .row { display: grid; gap: 3mm 4mm; margin-bottom: 2.6mm; }
+    .row.full   { grid-template-columns: 1fr; }
+    .row.three  { grid-template-columns: 1fr 1fr 1fr; }
+    .row.two    { grid-template-columns: 1fr 1fr; }
+    .field { display: flex; flex-direction: column; gap: 0.8mm; }
+    .field.inline { flex-direction: row; align-items: center; gap: 2mm; }
+    .field label { font-size: 9pt; font-weight: 700; color: #000; white-space: nowrap; }
+    .field.inline label { min-width: 26mm; text-align: right; }
+    .value-box {
+        border: 0.9pt solid #4a6fa5;
+        border-radius: 1.2mm;
+        min-height: 8mm;
+        padding: 1.2mm 2.5mm;
+        font-size: 10pt;
+        color: #0d2c54;
+        background: #fff;
+        display: flex; align-items: center;
+        font-weight: 600; word-break: break-word;
+    }
+    .value-box.tall { min-height: 16mm; align-items: flex-start; padding-top: 1.6mm; }
+    .declaration-wrap { margin-top: 3mm; position: relative; }
+    .declaration-tag {
+        display: inline-block;
+        background: #0d2c54; color: #fff;
+        font-size: 12pt; font-weight: 900;
+        padding: 1mm 6mm;
+        border-radius: 12px;
+        margin-left: 4mm;
+        margin-bottom: -2mm;
+        position: relative; z-index: 2;
+        font-family: 'Arial Black', 'Segoe UI', sans-serif;
+    }
+    .declaration-box {
+        border: 1.2pt solid #a5c0e7;
+        background: #f2f7fd;
+        border-radius: 2mm;
+        padding: 5mm 6mm 4mm 6mm;
+        font-size: 10.5pt;
+        line-height: 1.55;
+        color: #111;
+        font-weight: 500;
+    }
+    .sign-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 5mm;
+        margin-top: auto;
+        padding-top: 8mm;
+        padding-bottom: 2mm;
+    }
+    .sign-box {
+        border: 1pt solid #0d2c54;
+        border-radius: 2mm;
+        height: 16mm;
+        display: flex; align-items: flex-end; justify-content: center;
+        padding-bottom: 1.5mm;
+        font-size: 9.5pt; font-weight: 700; color: #000;
+        background: #fff;
+    }
+    .footer-bar {
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        height: 2mm;
+        background: #0d2c54;
+    }
+    @media print {
+        .form-body { overflow: visible !important; position: relative !important; isolation: auto !important; }
+        .watermark {
+            display: flex !important; visibility: visible !important;
+            opacity: 0.14 !important; z-index: 5 !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important; transform: none !important;
+        }
+        .watermark img {
+            display: block !important; visibility: visible !important;
+            opacity: 1 !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+        html, body { width: 210mm; height: 297mm; zoom: 1 !important; }
+    }
+    @media screen {
+        html, body { overflow-y: auto !important; overflow-x: hidden !important; scrollbar-width: none; -ms-overflow-style: none; }
+        html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0 !important; height: 0 !important; display: none !important; }
+        body { padding: 10mm 0; background: #eef1f5; }
+        .sheet { margin: 0 auto; box-shadow: 0 4px 24px rgba(0,0,0,0.10); }
+    }
+    @media print {
+        html, body {
+            overflow: visible !important;
+            width: 210mm; height: 297mm;
+            margin: 0; padding: 0;
+            background: #fff; zoom: 1 !important;
+        }
+        body { padding: 0 !important; background: #fff !important; }
+        .sheet { margin: 0 !important; box-shadow: none !important; width: 210mm !important; height: 297mm !important; }
+    }
+</style>
+</head>
+<body>
+<div class="sheet">
+    <div class="corner-tl"></div>
+    <div class="corner-tr"></div>
+
+    <div class="header">
+        <div class="logo-wrap">
+            <img src="${logoSrc}" alt="EGyan Logo" crossorigin="anonymous">
+        </div>
+        <div class="title-wrap">
+            <h1>EGyan Skill Development</h1>
+            <div class="title-pill">ADMISSION FORM</div>
+        </div>
+        <div class="photo-box">${photoHtml}</div>
+    </div>
+
+    <div class="form-body">
+        <div class="watermark" aria-hidden="true">
+            <img src="${logoSrc}" alt="" aria-hidden="true" crossorigin="anonymous">
+        </div>
+
+        <div class="row three">
+            <div class="field inline"><label>Date of Adm</label><div class="value-box">${dateOfAdm}</div></div>
+            <div class="field inline"><label>Academic Year</label><div class="value-box">${academicYear}</div></div>
+            <div class="field inline"><label>Study In</label><div class="value-box">${studyIn}</div></div>
+        </div>
+
+        <div class="row full">
+            <div class="field inline">
+                <label style="min-width:22mm;">Full Name</label>
+                <div class="value-box" style="flex:1;">${escapeHtml(fullName || '')}</div>
+            </div>
+        </div>
+
+        <div class="row three">
+            <div class="field"><label>First Name :</label><div class="value-box">${firstName}</div></div>
+            <div class="field"><label>Middle Name :</label><div class="value-box">${middleName}</div></div>
+            <div class="field"><label>Last Name :</label><div class="value-box">${lastName}</div></div>
+        </div>
+
+        <div class="row two">
+            <div class="field"><label>Father Name :</label><div class="value-box">${fatherName}</div></div>
+            <div class="field"><label>Mother Name :</label><div class="value-box">${motherName}</div></div>
+        </div>
+
+        <div class="row three">
+            <div class="field"><label>Adm In :</label><div class="value-box">${admIn}</div></div>
+            <div class="field"><label>Birth Date :</label><div class="value-box">${birthDate}</div></div>
+            <div class="field"><label>Gender :</label><div class="value-box">${gender}</div></div>
+        </div>
+
+        <div class="row three">
+            <div class="field"><label>Aadhar Card No :</label><div class="value-box">${aadharNo}</div></div>
+            <div class="field"><label>Father Occupation :</label><div class="value-box">${fatherOcc}</div></div>
+            <div class="field"><label>Last School Name :</label><div class="value-box">${lastSchool}</div></div>
+        </div>
+
+        <div class="row three">
+            <div class="field"><label>Email Id :</label><div class="value-box">${emailId}</div></div>
+            <div class="field"><label>Personal Mob No :</label><div class="value-box">${personalMob}</div></div>
+            <div class="field"><label>Parent Mob No :</label><div class="value-box">${parentMob}</div></div>
+        </div>
+
+        <div class="row full">
+            <div class="field">
+                <label>Address :</label>
+                <div class="value-box tall">${address}</div>
+            </div>
+        </div>
+
+        <div class="declaration-wrap">
+            <div class="declaration-tag">Declaration</div>
+            <div class="declaration-box">
+                I hereby declare that all the information given above is true, correct and complete
+                to the best of my knowledge and belief. I understand that in case any information
+                is found to be false, my admission is liable to be cancelled.
+            </div>
+        </div>
+
+        <div class="sign-row">
+            <div class="sign-box">Parent Sign</div>
+            <div class="sign-box">Student Sign</div>
+            <div class="sign-box">(For Office Use Only)</div>
+        </div>
+    </div>
+
+    <div class="footer-bar"></div>
+</div>
+</body>
+</html>`;
+}
+
+/* =====================================================================
+   SECTION 21 — PRINT DIALOG
+   ===================================================================== */
+
+async function printAdmissionForm() {
+    const record = currentViewStudent;
+    if (!record) { showToast("❌ No student data to print", "error"); return; }
+
+    const fullName = combineFullName(
+        record['First Name'] || '', record['Middle Name'] || '', record['Last Name'] || ''
+    ) || 'Student';
+    const todayStr = new Date().toLocaleDateString('en-GB');
+
+    showToast("📄 Preparing form for print...", "info");
+
+    let photoDataUri = '', logoDataUri = '';
+    try {
+        const pre = await preloadPrintImages(record);
+        photoDataUri = pre.photoDataUri;
+        logoDataUri = pre.logoDataUri;
+    } catch (e) {}
+
+    const imgUrl = getPrintImageUrl(record['Image'] || '');
+    const printHtml = generatePDFHTML(record, fullName, todayStr, imgUrl, logoDataUri, photoDataUri);
+
+    const printWindow = window.open('', '_blank',
+        'width=900,height=1200,toolbar=yes,scrollbars=yes,resizable=yes,menubar=no');
+    if (!printWindow) { showToast("❌ Please allow pop-ups to print", "error"); return; }
+
+    printWindow.document.write(printHtml);
+    printWindow.document.close();
+
+    printWindow.onload = function() {
+        setTimeout(() => { printWindow.focus(); printWindow.print(); }, 800);
+    };
+}
+
+/* =====================================================================
+   SECTION 22 — DOWNLOAD PDF
+   ===================================================================== */
+
+function downloadAdmissionPDF() {
+    const record = currentViewStudent;
+    if (!record) { showToast("❌ No student data to download", "error"); return; }
+
+    if (typeof html2canvas === 'undefined' || typeof jspdf === 'undefined') {
+        showToast("📥 Loading PDF libraries...", "info");
+        const loadHtml2Canvas = new Promise((resolve, reject) => {
+            if (typeof html2canvas !== 'undefined') { resolve(); return; }
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+            script.onload = resolve; script.onerror = reject;
+            document.head.appendChild(script);
+        });
+        const loadJsPDF = new Promise((resolve, reject) => {
+            if (typeof jspdf !== 'undefined') { resolve(); return; }
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+            script.onload = resolve; script.onerror = reject;
+            document.head.appendChild(script);
+        });
+        Promise.all([loadHtml2Canvas, loadJsPDF])
+            .then(() => { showToast("✅ Libraries loaded, generating PDF...", "success"); generatePDFWithCanvas(record); })
+            .catch((err) => { showToast("❌ Failed to load PDF libraries. Please try again.", "error"); });
+        return;
+    }
+    generatePDFWithCanvas(record);
+}
+
+async function generatePDFWithCanvas(record) {
+    const fullName = combineFullName(
+        record['First Name'] || '', record['Middle Name'] || '', record['Last Name'] || ''
+    ) || 'Student';
+    const todayStr = new Date().toLocaleDateString('en-GB');
+
+    showSpinner(dom.downloadBtn, true);
+    showToast("📄 Generating PDF, please wait...", "info");
+
+    let photoDataUri = '', logoDataUri = '';
+    try {
+        const pre = await preloadPrintImages(record);
+        photoDataUri = pre.photoDataUri;
+        logoDataUri = pre.logoDataUri;
+    } catch (e) {}
+
+    const imgUrl = getPrintImageUrl(record['Image'] || '');
+    const pdfHtml = generatePDFHTML(record, fullName, todayStr, imgUrl, logoDataUri, photoDataUri);
+
+    const container = document.createElement('div');
+    container.style.position = 'fixed';
+    container.style.left = '-9999px';
+    container.style.top = '0';
+    container.style.width = '794px';
+    container.style.height = '1123px';
+    container.style.background = 'white';
+    container.style.zIndex = '-1';
+    container.style.padding = '0';
+    container.style.margin = '0';
+    container.style.overflow = 'hidden';
+    container.innerHTML = pdfHtml;
+    document.body.appendChild(container);
+
+    const images = container.querySelectorAll('img');
+    const imagePromises = Array.from(images).map(img => {
+        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+        return new Promise(resolve => {
+            img.onload = resolve;
+            img.onerror = resolve;
+            setTimeout(resolve, 3000);
+        });
+    });
+
+    Promise.all(imagePromises).then(() => {
+        setTimeout(() => {
+            html2canvas(container, {
+                scale: 2, useCORS: true, allowTaint: false, logging: false,
+                backgroundColor: '#ffffff',
+                width: 794, height: 1123,
+                windowWidth: 794, windowHeight: 1123,
+                onclone: (clonedDoc) => {
+                    const wm = clonedDoc.querySelector('.watermark');
+                    if (wm) {
+                        wm.style.display = 'block';
+                        wm.style.visibility = 'visible';
+                        wm.style.opacity = '0.08';
+                    }
+                    const wmImg = clonedDoc.querySelector('.watermark img');
+                    if (wmImg) {
+                        wmImg.style.display = 'block';
+                        wmImg.style.visibility = 'visible';
+                        wmImg.style.opacity = '1';
+                    }
+                }
+            }).then(canvas => {
+                try {
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+                    const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                    pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+                    pdf.save(`Admission_Form_${fullName.replace(/\s/g, '_')}.pdf`);
+                    document.body.removeChild(container);
+                    showToast("✅ PDF downloaded successfully!", "success");
+                    if (dom.downloadBtn) showSpinner(dom.downloadBtn, false);
+                } catch (err) {
+                    document.body.removeChild(container);
+                    showToast("❌ Error generating PDF: " + err.message, "error");
+                    if (dom.downloadBtn) showSpinner(dom.downloadBtn, false);
+                }
+            }).catch(err => {
+                document.body.removeChild(container);
+                showToast("❌ Error rendering content: " + err.message, "error");
+                if (dom.downloadBtn) showSpinner(dom.downloadBtn, false);
+            });
+        }, 300);
+    });
+}
+
+/* =====================================================================
+   SECTION 23 — FORM BUILDER (no background image section)
+   ===================================================================== */
+
+function buildFormHtml(student = null, isEdit = false) {
+    const def = {
+        "Academic Year": "",
+        "Date of Adm": "",
+        "First Name": "",
+        "Middle Name": "",
+        "Last Name": "",
+        "Father Name": "",
+        "Mother Name": "",
+        "Father Occupation": "",
+        "Aadhar Card No": "",
+        "Adm In": "",
+        "Study In": "",
+        "Birth Date": "",
+        "Gender": "",
+        "Email Id": "",
+        "Personal Mob No": "",
+        "Parent Mob No": "",
+        "Last School Name": "",
+        "Address": "",
+        "Note": ""
+    };
+    if (student) {
+        Object.keys(def).forEach(k => {
+            if (student[k] !== undefined && student[k] !== null) def[k] = student[k];
+        });
+    }
+    def["Academic Year"] = def["Academic Year"] || getAcademicYear();
+    const dateValue      = formatToYYYYMMDD(def["Date of Adm"]);
+    const birthDateValue = formatToYYYYMMDD(def["Birth Date"]);
+    const aadharValue    = formatAadhar(def["Aadhar Card No"]);
+
+    return `
+        <form id="studentForm" novalidate autocomplete="off">
+            <!-- Draft autosave toggle -->
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:1rem; padding:10px 14px; background:var(--table-header-bg); border-radius:14px; border:1px solid var(--border-color);">
+                <label style="display:flex; align-items:center; gap:8px; font-size:0.78rem; font-weight:700; cursor:pointer; color:var(--text-secondary);">
+                    <input type="checkbox" id="fAutosave" ${autosaveEnabled ? 'checked' : ''}
+                           style="width:16px; height:16px; cursor:pointer;">
+                    💾 Auto-save drafts in background
+                </label>
+                <span id="draftStatus" style="font-size:0.72rem; color:var(--text-light); font-style:italic;">
+                    Idle
+                </span>
+            </div>
+
+            <div class="form-grid">
+                <div class="field">
+                    <label>Academic Year *</label>
+                    <input type="text" id="fAcademicYear" value="${escapeHtml(def['Academic Year'])}" readonly>
+                </div>
+                <div class="field">
+                    <label>Date of Admission *</label>
+                    <input type="date" id="fDateOfAdm" value="${dateValue}" required>
+                    <div class="field-error" id="err-fDateOfAdm"></div>
+                </div>
+
+                <div class="field">
+                    <label>First Name *</label>
+                    <input type="text" id="fFirstName" value="${escapeHtml(def['First Name'])}"
+                           placeholder="e.g. Vikas" autocomplete="off" required>
+                    <div class="field-error" id="err-fFirstName"></div>
+                </div>
+                <div class="field">
+                    <label>Middle Name (Auto = Father Name)</label>
+                    <input type="text" id="fMiddleName" value="${escapeHtml(def['Middle Name'])}"
+                           placeholder="Auto-filled from Father Name" readonly tabindex="-1">
+                    <div class="field-error" id="err-fMiddleName"></div>
+                </div>
+                <div class="field">
+                    <label>Last Name *</label>
+                    <input type="text" id="fLastName" value="${escapeHtml(def['Last Name'])}"
+                           placeholder="e.g. Verma" autocomplete="off" required>
+                    <div class="field-error" id="err-fLastName"></div>
+                </div>
+
+                <div class="field">
+                    <label>Father Name *</label>
+                    <input type="text" id="fFatherName" value="${escapeHtml(def['Father Name'])}"
+                           placeholder="e.g. Mukesh" autocomplete="off" required>
+                    <div class="field-error" id="err-fFatherName"></div>
+                </div>
+                <div class="field">
+                    <label>Mother Name *</label>
+                    <input type="text" id="fMotherName" value="${escapeHtml(def['Mother Name'])}"
+                           placeholder="e.g. Sunita" autocomplete="off" required>
+                    <div class="field-error" id="err-fMotherName"></div>
+                </div>
+                <div class="field">
+                    <label>Father Occupation</label>
+                    <input type="text" id="fFatherOccupation" value="${escapeHtml(def['Father Occupation'])}">
+                </div>
+
+                <div class="field">
+                    <label>Aadhar Card No *</label>
+                    <input type="text" id="fAadhar" value="${escapeHtml(aadharValue)}"
+                           placeholder="XXXX XXXX XXXX" maxlength="14"
+                           inputmode="numeric" autocomplete="off" required>
+                    <div class="field-error" id="err-fAadhar"></div>
+                </div>
+
+                <div class="field autocomplete-wrap">
+                    <label>Adm In *</label>
+                    <input type="text" id="fAdmIn"
+                           value="${escapeHtml(def['Adm In'])}"
+                           placeholder="Select or type to add new" autocomplete="off" required>
+                    <div id="admInAutoList" class="autocomplete-list"></div>
+                    <div class="field-hint">
+                        Pick from list or type a new value (auto-saved to Dropdown)
+                        <span class="dd-retry" onclick="reloadDropdowns()">↻</span>
+                    </div>
+                    <div class="field-error" id="err-fAdmIn"></div>
+                </div>
+
+                <div class="field autocomplete-wrap">
+                    <label>Study In *</label>
+                    <input type="text" id="fStudyIn"
+                           value="${escapeHtml(def['Study In'])}"
+                           placeholder="Select or type to add new" autocomplete="off" required>
+                    <div id="studyInAutoList" class="autocomplete-list"></div>
+                    <div class="field-hint">
+                        Pick from list or type a new value (auto-saved to Dropdown)
+                        <span class="dd-retry" onclick="reloadDropdowns()">↻</span>
+                    </div>
+                    <div class="field-error" id="err-fStudyIn"></div>
+                </div>
+
+                <div class="field">
+                    <label>Birth Date *</label>
+                    <input type="date" id="fBirthDate" value="${birthDateValue}" required>
+                    <div class="field-error" id="err-fBirthDate"></div>
+                </div>
+                <div class="field">
+                    <label>Gender *</label>
+                    <select id="fGender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male" ${def['Gender'] === 'Male' ? 'selected' : ''}>Male</option>
+                        <option value="Female" ${def['Gender'] === 'Female' ? 'selected' : ''}>Female</option>
+                    </select>
+                    <div class="field-error" id="err-fGender"></div>
+                </div>
+                <div class="field">
+                    <label>Email ID *</label>
+                    <input type="email" id="fEmail" value="${escapeHtml(def['Email Id'])}"
+                           placeholder="e.g. vikas@gmail.com" autocomplete="off" required>
+                    <div class="field-error" id="err-fEmail"></div>
+                </div>
+
+                <div class="field">
+                    <label>Personal Mobile *</label>
+                    <input type="tel" id="fPersonalMobile" pattern="[6-9][0-9]{9}" maxlength="10"
+                           value="${escapeHtml(def['Personal Mob No'])}" required>
+                    <div class="field-error" id="err-fPersonalMobile"></div>
+                </div>
+                <div class="field">
+                    <label>Parent Mobile *</label>
+                    <input type="tel" id="fParentMobile" pattern="[6-9][0-9]{9}" maxlength="10"
+                           value="${escapeHtml(def['Parent Mob No'])}" required>
+                    <div class="field-error" id="err-fParentMobile"></div>
+                </div>
+
+                <div class="field fullwidth">
+                    <label>Last School Name</label>
+                    <input type="text" id="fLastSchool" value="${escapeHtml(def['Last School Name'])}">
+                </div>
+
+                <div class="field fullwidth">
+                    <label>Address</label>
+                    <textarea id="fAddress" rows="3">${escapeHtml(def['Address'])}</textarea>
+                </div>
+
+                <div class="field fullwidth">
+                    <label>Note</label>
+                    <textarea id="fNote" rows="2">${escapeHtml(def['Note'])}</textarea>
+                </div>
+            </div>
+
+            <!-- ============ MAIN IMAGE (only image now) ============ -->
+            <div class="image-section">
+                <label style="cursor: pointer; color: var(--primary); font-weight: bold;">
+                    📷 Click to Upload Student Image
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                </label>
+                <div id="preview-container">
+                    <img id="image-to-crop" loading="lazy" decoding="async">
+                    <div class="crop-controls">
+                        <button type="button" class="btn-tool" onclick="rotateMain(-90)">↺ Rotate Left</button>
+                        <button type="button" class="btn-tool" onclick="rotateMain(90)">↻ Rotate Right</button>
+                        <button type="button" class="btn-tool" onclick="applyCropMain()">✓ Apply Crop</button>
+                    </div>
+                </div>
+                <div id="image-status" style="margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary);"></div>
+            </div>
+
+            <!-- ❌ REMOVED: Background image section -->
+
+            <div id="formStatus" class="status-message"></div>
+
+            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 1.5rem;">
+                <button type="button" id="cancelFormBtn" class="btn btn-outline">Cancel</button>
+                <button type="submit" id="saveFormBtn" class="btn btn-primary">${isEdit ? "💾 Update Student" : "💾 Save Student"}</button>
+            </div>
+        </form>
+    `;
+}
+
+/* =====================================================================
+   SECTION 24 — INLINE ERRORS
+   ===================================================================== */
+
+function setFieldError(fieldId, message) {
+    const errEl = document.getElementById('err-' + fieldId);
+    const inputEl = document.getElementById(fieldId);
+    if (errEl) {
+        if (message) { errEl.textContent = message; errEl.classList.add('show'); }
+        else { errEl.textContent = ''; errEl.classList.remove('show'); }
+    }
+    if (inputEl) {
+        inputEl.classList.toggle('field-invalid', !!message);
+        inputEl.classList.toggle('field-valid', !message && inputEl.value.trim() !== '');
+    }
+}
+function clearAllFieldErrors(fieldIds) {
+    fieldIds.forEach(id => setFieldError(id, ''));
+}
+
+/* =====================================================================
+   SECTION 25 — VALIDATORS
+   ===================================================================== */
+
+function validateSingleWordName(value, fieldLabel) {
+    const trimmed = (value || '').trim();
+    if (!trimmed) return { valid: false, message: `${fieldLabel} is required.` };
+    if (trimmed.length < 2) return { valid: false, message: `${fieldLabel} must be at least 2 characters.` };
+    if (trimmed.length > 30) return { valid: false, message: `${fieldLabel} must be under 30 characters.` };
+    if (/\s/.test(trimmed)) return { valid: false, message: `${fieldLabel} must be a single word (no spaces).` };
+    if (!/^[A-Za-z][A-Za-z.'-]*$/.test(trimmed)) return { valid: false, message: `${fieldLabel} can only contain letters, apostrophes, dots, and hyphens.` };
+    return { valid: true, message: '' };
+}
+function validateEmailFormat(email) {
+    const trimmed = (email || '').trim();
+    if (!trimmed) return { valid: false, message: 'Email ID is required.' };
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if (!emailRegex.test(trimmed)) return { valid: false, message: 'Please enter a valid email address (e.g. name@gmail.com).' };
+    if (trimmed.includes('..')) return { valid: false, message: 'Email cannot contain consecutive dots (..).' };
+    return { valid: true, message: '' };
+}
+function isEmailDuplicate(email, currentSrNo = null) {
+    const trimmed = (email || '').trim().toLowerCase();
+    if (!trimmed) return false;
+    return allStudents.some(s => {
+        const existingEmail = String(s['Email Id'] || '').trim().toLowerCase();
+        if (!existingEmail || existingEmail !== trimmed) return false;
+        if (currentSrNo !== null && String(s['Sr. No']) === String(currentSrNo)) return false;
+        return true;
+    });
+}
+
+/* =====================================================================
+   SECTION 26 — AUTOCOMPLETE
+   ===================================================================== */
+
+function setupAutocomplete(inputId, listId, optionsArray) {
+    const input  = document.getElementById(inputId);
+    const listEl = document.getElementById(listId);
+    if (!input || !listEl) return;
+
+    let debounceId = null;
+
+    function render(filterVal = '') {
+        const term = filterVal.toLowerCase();
+        const filtered = term
+            ? optionsArray.filter(o => o.toLowerCase().includes(term))
+            : optionsArray;
+
+        if (!filtered.length) { listEl.style.display = 'none'; return; }
+
+        listEl.innerHTML = filtered.map(opt =>
+            `<div class="autocomplete-item" data-value="${escapeHtml(opt)}">${escapeHtml(opt)}</div>`
+        ).join('');
+        listEl.style.display = 'block';
+    }
+
+    input.addEventListener('input', (e) => {
+        if (debounceId) clearTimeout(debounceId);
+        debounceId = setTimeout(() => render(e.target.value), 180);
+    });
+    input.addEventListener('focus', () => render(input.value));
+    input.addEventListener('blur',  () => setTimeout(() => {
+        listEl.style.display = 'none';
+    }, 180));
+
+    listEl.addEventListener('click', (e) => {
+        const item = e.target.closest('.autocomplete-item');
+        if (!item) return;
+        input.value = item.getAttribute('data-value');
+        listEl.style.display = 'none';
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!listEl.contains(e.target) && e.target !== input) listEl.style.display = 'none';
+    });
+}
+
+/* =====================================================================
+   SECTION 27 — CROPPER (main only)
+   ===================================================================== */
+
+function rotateMain(deg) { if (cropperMain) cropperMain.rotate(deg); }
+
+function applyCropMain() {
+    if (!cropperMain) {
+        document.getElementById('image-status').textContent = "❌ No image loaded to crop.";
+        return;
+    }
+    try {
+        const canvas = cropperMain.getCroppedCanvas({ width: 400, height: 400 });
+        if (!canvas) throw new Error('crop failed');
+        const base64 = canvas.toDataURL('image/jpeg', 0.9);
+        croppedImageData = {
+            base64Data: base64.split(',')[1],
+            fileName:   `student_photo_${Date.now()}.jpg`,
+            mimeType:   'image/jpeg'
+        };
+        const s = document.getElementById('image-status');
+        s.textContent = '✅ Image cropped and ready!';
+        s.style.color = 'var(--success)';
+        const old = document.getElementById('cropped-preview');
+        if (old) old.remove();
+        const preview = document.createElement('img');
+        preview.id = 'cropped-preview';
+        preview.src = base64;
+        preview.style.maxWidth = '100px';
+        preview.style.marginTop = '10px';
+        preview.style.borderRadius = '8px';
+        preview.style.border = '2px solid var(--primary)';
+        document.getElementById('preview-container').appendChild(preview);
+        scheduleDraftSave();
+    } catch (e) {
+        const s = document.getElementById('image-status');
+        s.textContent = '❌ Failed to crop image.';
+        s.style.color = 'var(--danger)';
+    }
+}
+
+// ❌ REMOVED: rotateBg, applyCropBg
+
+window.rotateLeft  = () => rotateMain(-90);
+window.rotateRight = () => rotateMain(90);
+window.applyCrop   = applyCropMain;
+window.rotateMain = rotateMain;
+window.applyCropMain = applyCropMain;
+
+/* =====================================================================
+   SECTION 28 — FORM EVENTS
+   ===================================================================== */
+
+function attachFormEvents(isEdit, rowIdx) {
+    const form = document.getElementById('studentForm');
+    if (!form) return;
+    form.onsubmit = (e) => handleFormSubmit(e, isEdit, rowIdx);
+
+    setupAutocomplete('fAdmIn',   'admInAutoList',   admInOptions);
+    setupAutocomplete('fStudyIn', 'studyInAutoList', studyInOptions);
+    if (!dropdownsLoaded) loadDropdowns();
+
+    const autosaveChk = document.getElementById('fAutosave');
+    if (autosaveChk) {
+        autosaveChk.checked = autosaveEnabled;
+        autosaveChk.addEventListener('change', (e) => {
+            autosaveEnabled = e.target.checked;
+            if (!autosaveEnabled) {
+                clearTimeout(draftDebounceTimer);
+                const st = document.getElementById('draftStatus');
+                if (st) st.textContent = 'Autosave off';
+            } else {
+                scheduleDraftSave();
+            }
+        });
+    }
+
+    const fatherNameInput = document.getElementById('fFatherName');
+    const middleNameInput = document.getElementById('fMiddleName');
+    if (fatherNameInput && middleNameInput) {
+        middleNameInput.readOnly = true;
+        middleNameInput.setAttribute('aria-readonly', 'true');
+        middleNameInput.title = 'Auto-filled from Father Name';
+        if (isEdit && fatherNameInput.value) middleNameInput.value = fatherNameInput.value.trim();
+        fatherNameInput.addEventListener('input', () => {
+            middleNameInput.value = fatherNameInput.value.trim();
+            setFieldError('fMiddleName', '');
+        });
+    }
+
+    const singleWordFields = [
+        { id: 'fFirstName', label: 'First Name' },
+        { id: 'fLastName',  label: 'Last Name'  },
+        { id: 'fFatherName', label: 'Father Name' },
+        { id: 'fMotherName', label: 'Mother Name' }
+    ];
+    singleWordFields.forEach(({ id, label }) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('blur', () => {
+            const result = validateSingleWordName(el.value, label);
+            setFieldError(id, result.valid ? '' : result.message);
+        });
+        el.addEventListener('input', () => {
+            if (el.classList.contains('field-invalid')) {
+                const result = validateSingleWordName(el.value, label);
+                setFieldError(id, result.valid ? '' : result.message);
+            }
+        });
+    });
+
+    const emailInput = document.getElementById('fEmail');
+    if (emailInput) {
+        const validateEmail = () => {
+            const emailVal = emailInput.value.trim();
+            const currentSrNo = isEdit ? (currentEditStudent?.['Sr. No'] ?? null) : null;
+            const formatResult = validateEmailFormat(emailVal);
+            if (!formatResult.valid) { setFieldError('fEmail', formatResult.message); return false; }
+            if (isEmailDuplicate(emailVal, currentSrNo)) {
+                setFieldError('fEmail', `This email "${emailVal}" is already registered.`);
+                return false;
+            }
+            setFieldError('fEmail', '');
+            return true;
+        };
+        emailInput.addEventListener('blur', validateEmail);
+        emailInput.addEventListener('input', () => {
+            if (emailInput.classList.contains('field-invalid')) validateEmail();
+        });
+    }
+
+    const aadharInput = document.getElementById('fAadhar');
+    if (aadharInput) {
+        aadharInput.addEventListener('input', (e) => {
+            const el = e.target;
+            const start = el.selectionStart;
+            const before = el.value.slice(0, start).replace(/\D/g, '').length;
+            el.value = formatAadhar(el.value);
+            let pos = 0, seen = 0;
+            while (pos < el.value.length && seen < before) {
+                if (/\d/.test(el.value[pos])) seen++;
+                pos++;
+            }
+            if (el.value[pos] === ' ') pos++;
+            try { el.setSelectionRange(pos, pos); } catch (err) {}
+        });
+        aadharInput.addEventListener('blur', () => {
+            const result = validateAadhar(aadharInput.value);
+            setFieldError('fAadhar', result.valid ? '' : result.message);
+        });
+    }
+
+    ['fAdmIn','fStudyIn'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('blur', () => {
+            const v = el.value.trim();
+            setFieldError(id, v ? '' : 'This field is required.');
+        });
+    });
+
+    document.getElementById('fDateOfAdm')?.addEventListener('blur', () => {
+        const v = document.getElementById('fDateOfAdm').value;
+        setFieldError('fDateOfAdm', v ? '' : 'Date of Admission is required.');
+    });
+    document.getElementById('fBirthDate')?.addEventListener('blur', () => {
+        const v = document.getElementById('fBirthDate').value;
+        setFieldError('fBirthDate', v ? '' : 'Birth Date is required.');
+    });
+    document.getElementById('fGender')?.addEventListener('change', () => {
+        const v = document.getElementById('fGender').value;
+        setFieldError('fGender', v ? '' : 'Gender is required.');
+    });
+    document.getElementById('fPersonalMobile')?.addEventListener('blur', () => {
+        const v = document.getElementById('fPersonalMobile').value.trim();
+        if (!v) { setFieldError('fPersonalMobile', 'Personal Mobile is required.'); return; }
+        if (!/^[6-9][0-9]{9}$/.test(v)) { setFieldError('fPersonalMobile', 'Enter a valid 10-digit mobile starting with 6-9.'); return; }
+        setFieldError('fPersonalMobile', '');
+    });
+    document.getElementById('fParentMobile')?.addEventListener('blur', () => {
+        const v = document.getElementById('fParentMobile').value.trim();
+        if (!v) { setFieldError('fParentMobile', 'Parent Mobile is required.'); return; }
+        if (!/^[6-9][0-9]{9}$/.test(v)) { setFieldError('fParentMobile', 'Enter a valid 10-digit mobile starting with 6-9.'); return; }
+        setFieldError('fParentMobile', '');
+    });
+
+    // ===== MAIN IMAGE ONLY =====
+    const imageInput = document.getElementById('imageInput');
+    const imageToCrop = document.getElementById('image-to-crop');
+    const previewContainer = document.getElementById('preview-container');
+    const imageStatus = document.getElementById('image-status');
+    if (imageInput) {
+        previewContainer.style.display = 'none';
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (file.size > 5 * 1024 * 1024) {
+                imageStatus.textContent = '❌ Image too large! Max 5MB.';
+                imageStatus.style.color = 'var(--danger)';
+                return;
+            }
+            if (!file.type.startsWith('image/')) {
+                imageStatus.textContent = '❌ Please select a valid image.';
+                imageStatus.style.color = 'var(--danger)';
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                imageToCrop.src = ev.target.result;
+                previewContainer.style.display = 'block';
+                if (cropperMain) cropperMain.destroy();
+                cropperMain = new Cropper(imageToCrop, {
+                    aspectRatio: 1, viewMode: 1, autoCropArea: 1, responsive: true
+                });
+                imageStatus.textContent = '✅ Image loaded. Crop if needed.';
+                imageStatus.style.color = 'var(--success)';
+                croppedImageData = null;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // ❌ REMOVED: background image input handler
+
+    form.addEventListener('input', scheduleDraftSave, { passive: true });
+    form.addEventListener('change', scheduleDraftSave, { passive: true });
+
+    document.getElementById('cancelFormBtn')?.addEventListener('click', async () => {
+        dom.formModal.classList.remove('active');
+        if (cropperMain) { cropperMain.destroy(); cropperMain = null; }
+    });
+}
+
+/* =====================================================================
+   SECTION 29 — FORM SUBMIT (Fast path)
+   ===================================================================== */
+
+async function handleFormSubmit(e, isEdit, rowIdx) {
+    e.preventDefault();
+    if (saveInProgress) return;
+    saveInProgress = true;
+
+    const saveBtn = document.getElementById('saveFormBtn');
+    showSpinner(saveBtn, true);
+    updateDraftStatus('Saving...');
+
+    const allErrorFields = [
+        'fFirstName', 'fLastName', 'fFatherName', 'fMotherName',
+        'fDateOfAdm', 'fBirthDate', 'fGender', 'fEmail',
+        'fPersonalMobile', 'fParentMobile', 'fAdmIn', 'fStudyIn',
+        'fAadhar'
+    ];
+    clearAllFieldErrors(allErrorFields);
+
+    const dateInput = document.getElementById('fDateOfAdm');
+    const birthDateInput = document.getElementById('fBirthDate');
+    if (dateInput) dateInput.blur();
+    if (birthDateInput) birthDateInput.blur();
+
+    const dateValue = dateInput?.value || "";
+    const birthDateValue = birthDateInput?.value || "";
+
+    let hasErrors = false;
+    const firstErrorField = { id: null };
+
+    const nameChecks = [
+        { id: 'fFirstName', label: 'First Name' },
+        { id: 'fLastName',  label: 'Last Name'  },
+        { id: 'fFatherName', label: 'Father Name' },
+        { id: 'fMotherName', label: 'Mother Name' }
+    ];
+    nameChecks.forEach(({ id, label }) => {
+        const el = document.getElementById(id);
+        const result = validateSingleWordName(el?.value || '', label);
+        if (!result.valid) {
+            setFieldError(id, result.message);
+            hasErrors = true;
+            if (!firstErrorField.id) firstErrorField.id = id;
+        }
+    });
+
+    const dateValidation = validateAndFormatDate(dateValue, 'Date of Admission');
+    if (!dateValidation.isValid) {
+        setFieldError('fDateOfAdm', dateValidation.error);
+        hasErrors = true;
+        if (!firstErrorField.id) firstErrorField.id = 'fDateOfAdm';
+    }
+    const birthValidation = validateAndFormatDate(birthDateValue, 'Birth Date');
+    if (!birthValidation.isValid) {
+        setFieldError('fBirthDate', birthValidation.error);
+        hasErrors = true;
+        if (!firstErrorField.id) firstErrorField.id = 'fBirthDate';
+    }
+
+    const emailVal = document.getElementById('fEmail')?.value.trim() || "";
+    const emailFormat = validateEmailFormat(emailVal);
+    if (!emailFormat.valid) {
+        setFieldError('fEmail', emailFormat.message);
+        hasErrors = true;
+        if (!firstErrorField.id) firstErrorField.id = 'fEmail';
+    } else {
+        const currentSrNo = isEdit ? (currentEditStudent?.['Sr. No'] ?? null) : null;
+        if (isEmailDuplicate(emailVal, currentSrNo)) {
+            setFieldError('fEmail', `This email "${emailVal}" is already registered.`);
+            hasErrors = true;
+            if (!firstErrorField.id) firstErrorField.id = 'fEmail';
+        }
+    }
+
+    const personalMob = document.getElementById('fPersonalMobile')?.value.trim() || "";
+    if (!personalMob) {
+        setFieldError('fPersonalMobile', 'Personal Mobile is required.');
+        hasErrors = true;
+        if (!firstErrorField.id) firstErrorField.id = 'fPersonalMobile';
+    } else if (!/^[6-9][0-9]{9}$/.test(personalMob)) {
+        setFieldError('fPersonalMobile', 'Enter a valid 10-digit mobile starting with 6-9.');
+        hasErrors = true;
+        if (!firstErrorField.id) firstErrorField.id = 'fPersonalMobile';
+    }
+
+    const parentMob = document.getElementById('fParentMobile')?.value.trim() || "";
+    if (!parentMob) {
+        setFieldError('fParentMobile', 'Parent Mobile is required.');
+        hasErrors = true;
+        if (!firstErrorField.id) firstErrorField.id = 'fParentMobile';
+    } else if (!/^[6-9][0-9]{9}$/.test(parentMob)) {
+        setFieldError('fParentMobile', 'Enter a valid 10-digit mobile starting with 6-9.');
+        hasErrors = true;
+        if (!firstErrorField.id) firstErrorField.id = 'fParentMobile';
+    }
+
+    const genderVal = document.getElementById('fGender')?.value || "";
+    if (!genderVal) {
+        setFieldError('fGender', 'Gender is required.');
+        hasErrors = true;
+        if (!firstErrorField.id) firstErrorField.id = 'fGender';
+    }
+
+    const admInVal = document.getElementById('fAdmIn')?.value.trim() || "";
+    if (!admInVal) {
+        setFieldError('fAdmIn', 'Adm In is required.');
+        hasErrors = true;
+        if (!firstErrorField.id) firstErrorField.id = 'fAdmIn';
+    }
+
+    const studyInVal = document.getElementById('fStudyIn')?.value.trim() || "";
+    if (!studyInVal) {
+        setFieldError('fStudyIn', 'Study In is required.');
+        hasErrors = true;
+        if (!firstErrorField.id) firstErrorField.id = 'fStudyIn';
+    }
+
+    const aadharRaw = document.getElementById('fAadhar')?.value || '';
+    const aadharDigits = unformatAadhar(aadharRaw);
+    const aadharResult = validateAadhar(aadharRaw);
+    if (!aadharResult.valid) {
+        setFieldError('fAadhar', aadharResult.message);
+        hasErrors = true;
+        if (!firstErrorField.id) firstErrorField.id = 'fAadhar';
+    } else {
+        const currentSrNo = isEdit ? (currentEditStudent?.['Sr. No'] ?? null) : null;
+        if (isAadharDuplicate(aadharDigits, currentSrNo)) {
+            setFieldError('fAadhar', `Aadhar "${formatAadhar(aadharDigits)}" is already registered.`);
+            hasErrors = true;
+            if (!firstErrorField.id) firstErrorField.id = 'fAadhar';
+        }
+    }
+
+    if (hasErrors) {
+        saveInProgress = false;
+        showSpinner(saveBtn, false);
+        updateDraftStatus('Errors — not saved');
+        showToast('❌ Please fix the highlighted errors before saving.', 'error');
+        if (firstErrorField.id) {
+            const el = document.getElementById(firstErrorField.id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => el.focus(), 300);
+            }
+        }
+        return;
+    }
+
+    const firstName = document.getElementById('fFirstName')?.value.trim() || "";
+    const middleName = document.getElementById('fMiddleName')?.value.trim() || "";
+    const lastName = document.getElementById('fLastName')?.value.trim() || "";
+    const fullName = combineFullName(firstName, middleName, lastName);
+
+    const formData = {
+        "Academic Year": document.getElementById('fAcademicYear')?.value || "",
+        "Date of Adm": dateValue,
+        "First Name": firstName,
+        "Middle Name": middleName,
+        "Last Name": lastName,
+        "Full Name": fullName,
+        "Father Name": document.getElementById('fFatherName')?.value.trim() || "",
+        "Mother Name": document.getElementById('fMotherName')?.value.trim() || "",
+        "Father Occupation": document.getElementById('fFatherOccupation')?.value || "",
+        "Aadhar Card No": formatAadhar(aadharDigits),
+        "Adm In": admInVal,
+        "Study In": studyInVal,
+        "Birth Date": birthDateValue,
+        "Gender": genderVal,
+        "Email Id": emailVal,
+        "Personal Mob No": personalMob,
+        "Parent Mob No": parentMob,
+        "Last School Name": document.getElementById('fLastSchool')?.value || "",
+        "Address": document.getElementById('fAddress')?.value || "",
+        "Note": document.getElementById('fNote')?.value || ""
+    };
+
+    const params = new URLSearchParams();
+    params.append("action", isEdit ? "update" : "insert");
+    params.append("spreadsheetId", SPREADSHEET_ID);
+    params.append("sheetName", SHEET_NAME);
+
+    if (isEdit) {
+        let finalRowIdx = null;
+        if (rowIdx) finalRowIdx = rowIdx;
+        else if (currentEditStudent && currentEditStudent._rowIndex) finalRowIdx = currentEditStudent._rowIndex;
+        else if (currentViewStudent && currentViewStudent._rowIndex) finalRowIdx = currentViewStudent._rowIndex;
+        else if (formData['Adm In']) {
+            const found = allStudents.find(s => String(s['Adm In']) === String(formData['Adm In']));
+            if (found && found._rowIndex) finalRowIdx = found._rowIndex;
+        }
+        if (!finalRowIdx) {
+            showModal("❌ Error: Could not determine which row to update. Please refresh and try again.", "Error");
+            saveInProgress = false;
+            showSpinner(saveBtn, false);
+            updateDraftStatus('Save failed');
+            return;
+        }
+        params.append("rowIndex", finalRowIdx);
+    }
+
+    if (DRIVE_FOLDER_ID) params.append("driveFolderId", DRIVE_FOLDER_ID);
+
+    for (const [key, value] of Object.entries(formData)) {
+        if (key === "Full Name") {
+            if (value && value.trim()) params.append(key, value);
+        } else {
+            params.append(key, value);
+        }
+    }
+
+    // ❌ REMOVED: background image fileCount branch
+    let fileCount = 0;
+    if (croppedImageData && croppedImageData.base64Data) {
+        fileCount++;
+        params.append(`fileData${fileCount}`,   croppedImageData.base64Data);
+        params.append(`fileName${fileCount}`,   croppedImageData.fileName);
+        params.append(`fileType${fileCount}`,   croppedImageData.mimeType);
+        params.append(`fileColumn${fileCount}`, IMAGE_COLUMN_NAME);
+    }
+    if (fileCount > 0) params.append("fileCount", String(fileCount));
+
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 45000);
+
+        const response = await fetch(SCRIPT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: params.toString(),
+            signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        const result = await response.json();
+
+        if (result.status === "success") {
+            updateDraftStatus('Saved ✅');
+
+            (async () => {
+                try {
+                    const fresh = await fetchExistingDropdownData(true);
+                    await smartSaveToDropdownSheet(admInVal, studyInVal, fresh);
+                } catch (e) { /* silent */ }
+            })();
+
+            clearDraft();
+
+            showModal(`${isEdit ? "✅ Student updated" : "✅ Student saved"} successfully!`, "Success", false, null, 2000);
+            await new Promise(resolve => setTimeout(resolve, 400));
+            dom.formModal?.classList.remove('active');
+
+            invalidateStudentCache();
+            await loadStudents(true);
+            goToListView();
+        } else {
+            updateDraftStatus('Save failed');
+            showModal("❌ Error: " + (result.message || "Unknown error"), "Error");
+        }
+    } catch (err) {
+        updateDraftStatus('Save failed');
+        if (err.name === 'AbortError') {
+            showModal("❌ Request timeout. Please check your internet connection and try again.", "Error");
+        } else {
+            showModal("❌ Error: " + err.message, "Error");
+        }
+    } finally {
+        saveInProgress = false;
+        showSpinner(saveBtn, false);
+    }
+}
+
+function updateDraftStatus(text) {
+    const el = document.getElementById('draftStatus');
+    if (el) el.textContent = text;
+}
+
+/* =====================================================================
+   SECTION 30 — MODAL OPEN
+   ===================================================================== */
+
+async function openAddModal() {
+    if (!dom.formModalBody) return;
+    dom.formModalBody.innerHTML = '<div style="text-align:center;padding:40px;"><div class="spinner"></div><p style="margin-top:12px;">Loading form...</p></div>';
+    dom.formModal.classList.add('active');
+    dom.formModalTitle.textContent = "➕ Add New Admission";
+    dom.formModalBody.innerHTML = buildFormHtml(null, false);
+    setTimeout(() => {
+        attachFormEvents(false, null);
+        maybeRestoreDraft();
+    }, 50);
+}
+
+async function openEditModal() {
+    let studentToEdit = currentEditStudent || currentViewStudent;
+    if (!studentToEdit) { showToast("❌ No student selected to edit", "error"); return; }
+
+    let rowIdx = studentToEdit._rowIndex;
+    if (!rowIdx && selectedSrNo) rowIdx = findRowIndexBySrNo(selectedSrNo);
+    if (!rowIdx) {
+        const admIn = studentToEdit['Adm In'];
+        if (admIn) rowIdx = findRowIndexByAdmIn(admIn);
+    }
+    if (!rowIdx) {
+        showModal("❌ Could not find the row for this student. Please refresh and try again.", "Error");
+        return;
+    }
+
+    currentEditStudent = studentToEdit;
+    dom.formModalBody.innerHTML = '<div style="text-align:center;padding:40px;"><div class="spinner"></div><p style="margin-top:12px;">Loading edit form...</p></div>';
+    dom.formModal.classList.add('active');
+    dom.formModalTitle.textContent = `✏️ Edit ${studentToEdit['First Name']} ${studentToEdit['Last Name']}`;
+    dom.formModalBody.innerHTML = buildFormHtml(studentToEdit, true);
+    setTimeout(() => attachFormEvents(true, rowIdx), 50);
+}
+
+/* =====================================================================
+   SECTION 31 — MOBILE BUTTONS
+   ===================================================================== */
+
+function setupMobileButtons() {
+    const mobileRefreshBtn = document.getElementById('mobileRefreshBtn');
+    const mobileAddBtn = document.getElementById('mobileAddBtn');
+    if (mobileRefreshBtn) {
+        mobileRefreshBtn.addEventListener('click', () => {
+            if (dom.refreshBtn) dom.refreshBtn.click();
+            else refreshData();
+        });
+    }
+    if (mobileAddBtn) {
+        mobileAddBtn.addEventListener('click', () => {
+            if (dom.addNewBtn) dom.addNewBtn.click();
+            else openAddModal();
+        });
+    }
+}
+
+/* =====================================================================
+   SECTION 32 — INITIALIZATION
+   ===================================================================== */
+
+function initApp() {
+    if (initDone) return;
+    initDone = true;
+
+    console.log('🚀 initApp() started (EGyan v1.3 — 5-col table, no bg image)');
+
+    cacheDomElements();
+    setupMobileButtons();
+    updateAdminBadge();
+
+    dataLoaded = false;
+    loadStudents().catch(err => console.error('Initial load failed:', err));
+    loadDropdowns().catch(() => {});
+
+    dom.searchInput?.addEventListener('input', debounce((e) => {
+        scheduleRender(e.target.value);
+    }, 250));
+
+    dom.refreshBtn?.addEventListener('click', refreshData);
+    dom.addNewBtn?.addEventListener('click', openAddModal);
+    dom.backBtn?.addEventListener('click', goToListView);
+    dom.editBtn?.addEventListener('click', openEditModal);
+    dom.deleteBtn?.addEventListener('click', deleteStudent);
+    dom.printBtn?.addEventListener('click', printAdmissionForm);
+    dom.downloadBtn?.addEventListener('click', downloadAdmissionPDF);
+
+    dom.tableBody?.addEventListener('click', handleTableClick);
+
+    document.getElementById('closeGlobalModal')?.addEventListener('click', () => dom.globalModal.classList.remove('active'));
+    document.getElementById('closeFormModalBtn')?.addEventListener('click', () => {
+        dom.formModal.classList.remove('active');
+        if (cropperMain) { cropperMain.destroy(); cropperMain = null; }
+    });
+
+    window.onclick = (e) => {
+        if (e.target.classList?.contains('modal-overlay')) {
+            e.target.classList.remove('active');
+            if (cropperMain) { cropperMain.destroy(); cropperMain = null; }
+        }
+    };
+
+    window.addEventListener('beforeunload', () => {
+        if (draftDebounceTimer) {
+            clearTimeout(draftDebounceTimer);
+            const snap = readFormSnapshot();
+            if (snap) {
+                try {
+                    localStorage.setItem(DRAFT_LS_KEY + '_meta', JSON.stringify({
+                        payload: snap,
+                        savedAt: Date.now(),
+                        draftId: currentDraftId,
+                        rowIndex: currentDraftRowIndex
+                    }));
+                } catch (e) {}
+            }
+        }
+    });
+
+    setInterval(() => {
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => refreshDataInBackground(), { timeout: 3000 });
+        } else {
+            refreshDataInBackground();
+        }
+    }, 5 * 60 * 1000);
+
+    setInterval(() => {
+        const check = () => {
+            const cachedVersion = localStorage.getItem(CACHE_VERSION_KEY);
+            if (cachedVersion !== CURRENT_CACHE_VERSION) {
+                dataLoaded = false;
+                loadStudents(true);
+            }
+        };
+        if ('requestIdleCallback' in window) requestIdleCallback(check, { timeout: 2000 });
+        else check();
+    }, 60000);
+
+    window.addEventListener('storage', (e) => {
+        if (e.key && e.key.startsWith('EGyan_')) updateAdminBadge();
+    });
+
+    console.log(`✅ EGyan Admission loaded | Sheet: ${SHEET_NAME}`);
+}
+
+/* =====================================================================
+   SECTION 33 — BOOTSTRAP
+   ===================================================================== */
+
+(function bootstrap() {
+    const startWhenReady = () => {
+        setTimeout(() => {
+            gateAdminAccess(() => { initApp(); });
+        }, 800);
+    };
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startWhenReady);
+    } else {
+        startWhenReady();
+    }
+
+    setTimeout(() => {
+        const mainEl = document.getElementById('mainContent');
+        const stillHidden = !mainEl || mainEl.style.display === 'none';
+        if (stillHidden && !initDone) {
+            const auth = checkAdminAuth();
+            if (!auth.ok) {
+                console.warn('⏰ Safety net: auth not verified after 5s, redirecting');
+                redirectToMyAccount(auth.reason);
+            }
+        }
+    }, 5000);
+})();
+
+/* =====================================================================
+   SECTION 34 — WINDOW EXPORTS
+   ===================================================================== */
+
+window.manualClearCache = function() {
+    clearAllCaches();
+    dataLoaded = false;
+    showToast("🧹 Cache cleared! Refreshing...", "success");
+    setTimeout(() => loadStudents(true), 300);
+};
+window.forceRefreshData = function() {
+    dataLoaded = false;
+    clearAllCaches();
+    showToast("🔄 Forcing data refresh...", "info");
+    setTimeout(() => loadStudents(true), 300);
+};
+window.rotateLeft = () => rotateMain(-90);
+window.rotateRight = () => rotateMain(90);
+window.rotateMain = rotateMain;
+window.applyCropMain = applyCropMain;
+window.applyCrop = applyCropMain;
+window.handleRetry = handleRetry;
+window.handleClearCache = handleClearCache;
+window.updateAdminBadge = updateAdminBadge;
+window.deleteStudent = deleteStudent;
+window.findRowIndexBySrNo = findRowIndexBySrNo;
+window.findRowIndexByAdmIn = findRowIndexByAdmIn;
+window.invalidateStudentCache = invalidateStudentCache;
+window.loadStudents = loadStudents;
+window.checkAdminAuth = checkAdminAuth;
+window.formatAadhar = formatAadhar;
+window.unformatAadhar = unformatAadhar;
+window.reloadDropdowns = function() {
+    invalidateDropdownCache();
+    return loadDropdowns(true).then(() => {
+        setupAutocomplete('fAdmIn',   'admInAutoList',   admInOptions);
+        setupAutocomplete('fStudyIn', 'studyInAutoList', studyInOptions);
+        showToast('✅ Dropdowns refreshed', 'success');
+    });
+};
+window.clearDraft = clearDraft;
+
+console.log('✅ EGyan Adm script initialized (v1.3 — 5-col table, no bg image)');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>🎓 Exam Fees | EGyan Skill Development</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="../../Script/loginadmin.js" data-auto-init="true"></script>
+
+    <style>
+        /* ======================== THEME TOKENS ======================== */
+        :root {
+            --bg-body: #f4f7fc;
+            --card-bg: rgba(255, 255, 255, 0.98);
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-light: #94a3b8;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --primary-light: #60a5fa;
+            --secondary: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #fbbf24;
+            --info: #06b6d4;
+            --accent: #2563eb;
+            --accent-soft: rgba(37, 99, 235, 0.08);
+            --gradient-accent: linear-gradient(135deg, #2563eb, #7c3aed);
+
+            --table-header-bg: #f8fafc;
+            --table-row-hover: #f1f5f9;
+            --table-border: #e2e8f0;
+
+            --transition-fast: 150ms ease;
+            --transition-normal: 300ms ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0a0f1c;
+            --card-bg: rgba(30, 30, 46, 0.98);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-light: #64748b;
+            --border-color: #334155;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4);
+            --table-header-bg: #1e293b;
+            --table-row-hover: #334155;
+            --table-border: #334155;
+            --accent-soft: rgba(59, 130, 246, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: var(--bg-body);
+            min-height: 100vh;
+            padding: 20px 16px;
+            color: var(--text-primary);
+            transition: background var(--transition-normal), color var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ======================== AUTH LOADING ======================== */
+        #authLoading {
+            position: fixed; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--bg-body); z-index: 9999;
+            flex-direction: column; gap: 1.5rem;
+        }
+        #authLoading.hidden { display: none !important; }
+        #authLoading .spinner {
+            width: 50px; height: 50px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--accent);
+            border-radius: 50%; animation: spin 0.8s linear infinite;
+        }
+        #authLoading p { color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .app-container {
+            max-width: 1400px; margin: 0 auto;
+            animation: fadeIn 0.5s ease-out; flex: 1;
+            display: flex; flex-direction: column;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .page { display: none; animation: fadeSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .page.active-page { display: block; }
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ======================== CARD ======================== */
+        .soft-card {
+            background: var(--card-bg);
+            border-radius: 2rem;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 24px;
+        }
+        .card-header {
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 14px; flex-wrap: wrap;
+        }
+        [data-theme="dark"] .card-header {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+        }
+        .card-header .brand-wrap {
+            display: flex; align-items: center; gap: 12px;
+            flex: 1; min-width: 0;
+        }
+        .card-header .brand-logo {
+            width: 42px; height: 42px; border-radius: 10px;
+            object-fit: contain; background: #fff;
+            padding: 3px; box-shadow: var(--shadow-sm); flex-shrink: 0;
+        }
+        .card-header h2 {
+            font-size: 1.5rem; font-weight: 800;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text; background-clip: text;
+            color: transparent; letter-spacing: -0.02em;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .desktop-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .mobile-buttons { display: none; gap: 12px; margin-top: 12px; width: 100%; }
+
+        /* ======================== BUTTONS ======================== */
+        .btn {
+            border: none; padding: 10px 24px; border-radius: 60px;
+            font-weight: 600; font-size: 0.875rem; cursor: pointer;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary { background: var(--gradient-accent); color: #fff; box-shadow: var(--shadow-sm); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); filter: brightness(1.05); }
+        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
+        .btn-danger { background: linear-gradient(135deg, var(--danger), #dc2626); color: #fff; }
+        .btn-danger:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-success { background: linear-gradient(135deg, var(--success), #059669); color: #fff; }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-info { background: linear-gradient(135deg, #06b6d4, #0891b2); color: #fff; }
+        .btn-info:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-sm { padding: 6px 16px; font-size: 0.75rem; }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        /* ======================== SEARCH ======================== */
+        .search-section {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .search-wrapper input {
+            width: 100%; padding: 14px 20px;
+            border: 2px solid var(--border-color); border-radius: 60px;
+            background: var(--card-bg); color: var(--text-primary);
+            font-size: 0.95rem; font-family: inherit;
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+        .search-wrapper input::placeholder { color: var(--text-light); }
+        .search-wrapper input:focus {
+            outline: none; border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        /* ======================== TABLE ======================== */
+        .table-wrapper { overflow-x: auto; scrollbar-width: thin; padding: 0; }
+        .table-wrapper::-webkit-scrollbar { height: 6px; }
+        .table-wrapper::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        .data-table {
+            width: 100%; border-collapse: separate;
+            border-spacing: 0; font-size: 0.875rem;
+        }
+        .data-table th {
+            text-align: left; padding: 16px 20px;
+            background: var(--table-header-bg); color: var(--primary);
+            font-weight: 800; font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 0.8px;
+            border-bottom: 3px solid var(--primary);
+        }
+        .data-table th:first-child { border-top-left-radius: 12px; }
+        .data-table th:last-child { border-top-right-radius: 12px; }
+        .data-table td {
+            padding: 16px 20px; border-bottom: 1px solid var(--table-border);
+            color: var(--text-primary);
+            transition: background var(--transition-fast);
+            font-size: 0.9rem;
+        }
+        .data-table tr:hover td { background: var(--table-row-hover); }
+
+        .total-badge {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: #fff; font-weight: 700; padding: 6px 14px;
+            border-radius: 40px; display: inline-block;
+            font-size: 0.8rem; box-shadow: var(--shadow-sm);
+            min-width: 85px; text-align: center;
+        }
+        .view-action-btn {
+            background: var(--gradient-accent); color: #fff; border: none;
+            padding: 6px 16px; border-radius: 30px;
+            font-size: 0.75rem; font-weight: 600; cursor: pointer;
+            transition: all var(--transition-fast);
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .view-action-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); filter: brightness(1.05); }
+
+        /* ======================== VIEW PAGE ======================== */
+        .profile-wrapper {
+            display: flex; align-items: center; gap: 28px;
+            padding: 2rem 2rem 0; flex-wrap: wrap;
+        }
+        .profile-avatar {
+            width: 110px; height: 110px; border-radius: 1.2rem;
+            background: var(--gradient-accent);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 2.8rem; font-weight: 800;
+            box-shadow: var(--shadow-lg); flex-shrink: 0;
+        }
+        .profile-info h3 { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+        .profile-info p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 2px; }
+        .profile-info .profile-amount {
+            display: inline-block; margin-top: 8px;
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: #fff; font-weight: 800; font-size: 1.05rem;
+            padding: 6px 18px; border-radius: 30px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem; padding: 2rem;
+        }
+        @media (max-width: 640px) {
+            .details-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; padding: 1rem; }
+        }
+        .detail-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.05));
+            border-radius: 1.2rem; padding: 1rem 1.2rem;
+            transition: all var(--transition-fast);
+            border: 1px solid var(--border-color);
+        }
+        .detail-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+        .detail-label {
+            font-size: 0.65rem; text-transform: uppercase;
+            letter-spacing: 0.5px; color: var(--secondary); font-weight: 700;
+        }
+        .detail-value {
+            font-weight: 700; font-size: 0.95rem;
+            margin-top: 6px; color: var(--text-primary); word-break: break-word;
+        }
+        .detail-card.fullwidth { grid-column: 1 / -1; }
+
+        .action-row {
+            padding: 1rem 2rem 2rem;
+            display: flex; gap: 14px; justify-content: flex-end; flex-wrap: wrap;
+        }
+
+        /* ======================== MODALS ======================== */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(12px);
+            display: none; align-items: center; justify-content: center;
+            z-index: 2000; visibility: hidden; opacity: 0;
+            transition: opacity var(--transition-normal), visibility var(--transition-normal);
+        }
+        .modal-overlay.active { display: flex; visibility: visible; opacity: 1; }
+        .modal-box {
+            background: var(--card-bg); width: 92%; max-width: 900px;
+            max-height: 85vh; border-radius: 2rem; overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes modalPop {
+            from { transform: scale(0.94); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+        .modal-header {
+            background: var(--gradient-accent); padding: 1.2rem 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 10; color: #fff;
+        }
+        .modal-header h3 { font-size: 1.3rem; font-weight: 700; }
+        .close-modal {
+            background: none; border: none; font-size: 2rem;
+            cursor: pointer; color: #fff; line-height: 1;
+            transition: transform var(--transition-fast);
+        }
+        .close-modal:hover { transform: rotate(90deg); }
+        .modal-body { padding: 1.5rem; }
+
+        /* ======================== FORM ======================== */
+        .form-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.2rem;
+        }
+        .field { display: flex; flex-direction: column; gap: 6px; }
+        .field label {
+            font-size: 0.7rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            color: var(--secondary);
+        }
+        .field input, .field select, .field textarea {
+            padding: 12px 16px; border-radius: 16px;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg); color: var(--text-primary);
+            font-size: 0.9rem; transition: all var(--transition-fast);
+            font-family: inherit; width: 100%;
+        }
+        .field input:focus, .field select:focus, .field textarea:focus {
+            outline: none; border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+        .field input:disabled, .field input[readonly] {
+            background: var(--table-header-bg); cursor: not-allowed;
+        }
+        .fullwidth { grid-column: 1 / -1; }
+
+        /* ======================== AUTOCOMPLETE ======================== */
+        .autocomplete-wrap { position: relative; }
+        .autocomplete-list {
+            position: absolute; top: 100%; left: 0; right: 0;
+            background: var(--card-bg); border-radius: 16px;
+            max-height: 200px; overflow-y: auto;
+            z-index: 9999; display: none;
+            box-shadow: var(--shadow-lg); margin-top: 6px;
+            border: 1px solid var(--border-color);
+        }
+        .autocomplete-item {
+            padding: 12px 16px; cursor: pointer;
+            font-size: 0.85rem; color: var(--text-primary);
+            transition: background var(--transition-fast), color var(--transition-fast);
+        }
+        .autocomplete-item:hover { background: var(--primary); color: #fff; }
+
+        /* ======================== STUDENT PICKER ======================== */
+        .student-list-item {
+            width: 100%; padding: 10px 16px;
+            border: none; background: transparent;
+            color: var(--text-primary); cursor: pointer;
+            text-align: left; border-radius: 8px;
+            display: flex; align-items: center; gap: 12px;
+            transition: background var(--transition-fast);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .student-list-item:hover { background: var(--table-row-hover); }
+        .student-list-item .avatar {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--primary); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.75rem; flex-shrink: 0;
+        }
+        .student-list-item .student-name { flex: 1; font-weight: 500; }
+        .student-list-item .sr-badge {
+            font-size: 0.65rem; padding: 2px 8px;
+            border-radius: 12px; background: var(--table-header-bg);
+            color: var(--text-secondary); font-weight: 700;
+        }
+
+        .student-name-btn {
+            width: 100%; padding: 12px 16px;
+            border-radius: 16px; border: 2px solid var(--border-color);
+            background: var(--card-bg); color: var(--text-primary);
+            font-size: 0.9rem; cursor: pointer;
+            text-align: left; display: flex; justify-content: space-between;
+            align-items: center; transition: all var(--transition-fast);
+        }
+        .student-name-btn:hover { border-color: var(--primary); background: var(--table-header-bg); }
+        .student-name-btn .placeholder { color: var(--text-light); }
+
+        /* ======================== KPI ======================== */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem; padding: 1.5rem 2rem;
+            background: var(--table-header-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .kpi-card {
+            background: var(--card-bg); border-radius: 1rem;
+            padding: 1rem 1.2rem; border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .kpi-label {
+            font-size: 0.65rem; text-transform: uppercase;
+            font-weight: 700; color: var(--text-secondary);
+            letter-spacing: 0.5px;
+        }
+        .kpi-value {
+            font-size: 1.4rem; font-weight: 800;
+            margin-top: 4px; color: var(--text-primary);
+        }
+        .kpi-value.primary { color: var(--primary); }
+        .kpi-value.success { color: var(--success); }
+
+        /* ======================== SPINNER / TOAST ======================== */
+        .spinner {
+            display: inline-block; width: 18px; height: 18px;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%; animation: spin 0.6s linear infinite;
+        }
+        .alert-popup {
+            position: fixed; bottom: 100px; right: 30px;
+            background: var(--card-bg); border-left: 5px solid var(--primary);
+            padding: 16px 24px; box-shadow: var(--shadow-xl);
+            border-radius: 0 16px 16px 0; font-weight: 600;
+            font-size: 0.95rem; z-index: 1000; display: none;
+            animation: slideIn 0.3s ease-out;
+            color: var(--text-primary); max-width: 400px;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(120%); opacity: 0; }
+            to   { transform: translateX(0); opacity: 1; }
+        }
+        .alert-popup.success { border-left-color: var(--success); }
+        .alert-popup.error   { border-left-color: var(--danger); }
+        .alert-popup.info    { border-left-color: var(--info); }
+        .alert-popup.warning { border-left-color: var(--warning); }
+
+        .loading-container {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 60px 20px; gap: 16px;
+        }
+        .loading-spinner {
+            width: 48px; height: 48px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%; animation: spin 0.8s linear infinite;
+        }
+        .loading-message { font-weight: 600; font-size: 1.1rem; color: var(--text-primary); }
+        .empty-container { text-align: center; padding: 40px 20px; }
+        .empty-icon { font-size: 2.5rem; color: var(--text-light); display: block; margin-bottom: 12px; }
+        .empty-title { font-weight: 600; color: var(--text-secondary); font-size: 1.1rem; }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--table-header-bg); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        .table-wrapper::-webkit-scrollbar, .modal-box::-webkit-scrollbar { width: 0; height: 0; display: none; }
+        .table-wrapper, .modal-box { scrollbar-width: none; -ms-overflow-style: none; }
+
+        /* ======================== RESPONSIVE ======================== */
+        @media (max-width: 768px) {
+            body { padding: 12px; }
+            .card-header { padding: 1rem 1.2rem; }
+            .card-header h2 { font-size: 1.05rem; }
+            .desktop-buttons { display: none; }
+            .mobile-buttons { display: grid !important; grid-template-columns: 1fr 1fr; }
+            .mobile-buttons .btn { width: 100%; justify-content: center; }
+            .search-section { padding: 1rem 1.2rem; }
+            .data-table th, .data-table td { padding: 12px; font-size: 0.72rem; }
+            .modal-box { width: 95%; border-radius: 1.5rem; }
+            .form-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .kpi-grid { padding: 1rem; grid-template-columns: 1fr 1fr; }
+            .profile-wrapper { padding: 1rem; flex-direction: column; text-align: center; }
+            .profile-avatar { width: 80px; height: 80px; font-size: 2rem; }
+            .profile-info h3 { font-size: 1.3rem; }
+            .details-grid { grid-template-columns: 1fr 1fr; }
+            .action-row {
+                padding: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .action-row .btn {
+                flex: 1 1 45%;
+                min-width: 130px;
+                justify-content: center;
+                font-size: 0.75rem;
+                padding: 10px 12px;
+            }
+        }
+        @media (min-width: 769px) { .mobile-buttons { display: none !important; } }
+    </style>
+</head>
+<body>
+
+    <div id="authLoading">
+        <div class="spinner"></div>
+        <p><i class="fas fa-shield-alt"></i> Verifying admin access...</p>
+    </div>
+
+    <div id="mainContent" style="display:none; flex: 1;">
+        <div class="app-container">
+
+            <!-- ========= PAGE 1 — LIST ========= -->
+            <div id="page1" class="page active-page">
+                <div class="soft-card">
+                    <div class="card-header">
+                        <div class="brand-wrap">
+                            <img class="brand-logo"
+                                 src="https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL"
+                                 alt="EGyan Logo">
+                            <h2>🎓 Exam Fees Management</h2>
+                        </div>
+                        <div class="desktop-buttons">
+                            <button id="refreshBtn" class="btn btn-outline"><span>⟳</span> Refresh</button>
+                            <button id="addNewBtn" class="btn btn-primary"><span>+</span> Add Exam Fee</button>
+                        </div>
+                    </div>
+
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-label">Total Records</div>
+                            <div class="kpi-value primary" id="kpiTotalRecords">0</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Total Amount Collected</div>
+                            <div class="kpi-value success" id="kpiTotalAmount">₹0</div>
+                        </div>
+                    </div>
+
+                    <div class="search-section">
+                        <div class="search-wrapper">
+                            <input type="text" id="searchInput" placeholder="🔍 Search by Student Name or Course..." autocomplete="off">
+                        </div>
+                        <div class="mobile-buttons">
+                            <button id="mobileRefreshBtn" class="btn btn-outline"><span>⟳</span> Refresh</button>
+                            <button id="mobileAddBtn" class="btn btn-primary"><span>+</span> Add Fee</button>
+                        </div>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Sr. No</th>
+                                    <th>Student Name</th>
+                                    <th>Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="loading-container">
+                                            <div class="loading-spinner"></div>
+                                            <div class="loading-message">Loading exam fees...</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========= PAGE 3 — VIEW DETAILS ========= -->
+            <div id="page3" class="page">
+                <div class="soft-card">
+                    <div class="card-header">
+                        <div class="brand-wrap">
+                            <img class="brand-logo"
+                                 src="https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL"
+                                 alt="EGyan Logo">
+                            <h2>📋 Exam Fee Details</h2>
+                        </div>
+                        <button id="backToPage1FromViewBtn" class="btn btn-outline">← Back</button>
+                    </div>
+
+                    <div class="profile-wrapper">
+                        <div class="profile-avatar" id="viewProfileAvatar">S</div>
+                        <div class="profile-info">
+                            <h3 id="viewProfileName">Student Name</h3>
+                            <p>Sr. No: <span id="viewProfileSrNo">—</span></p>
+                            <p>Course: <span id="viewProfileCourse">—</span> · Batch: <span id="viewProfileBatch">—</span></p>
+                            <span class="profile-amount" id="viewProfileAmount">₹0</span>
+                        </div>
+                    </div>
+
+                    <div id="viewDetailsContainer" class="details-grid"></div>
+
+                    <div class="action-row">
+                        <button id="editFromViewBtn" class="btn btn-primary">✏️ Edit</button>
+                        <button id="printFromViewBtn" class="btn btn-success">🖨️ Print</button>
+                        <button id="downloadPdfBtn" class="btn btn-info">📥 Download PDF</button>
+                        <button id="deleteFromViewBtn" class="btn btn-danger">🗑 Delete</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========= PAGE 2 — ADD / EDIT FORM ========= -->
+            <div id="page2" class="page">
+                <div class="soft-card">
+                    <div class="card-header">
+                        <div class="brand-wrap">
+                            <img class="brand-logo"
+                                 src="https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL"
+                                 alt="EGyan Logo">
+                            <h2 id="formPageTitle">➕ Add Exam Fee</h2>
+                        </div>
+                        <button id="backToPage1Btn" class="btn btn-outline">← Back</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="examForm" novalidate autocomplete="off">
+                            <div class="form-grid">
+
+                                <div class="field">
+                                    <label>Sr. No</label>
+                                    <input type="text" id="fSrNo" readonly placeholder="Auto-generated">
+                                </div>
+
+                                <div class="field autocomplete-wrap">
+                                    <label>Course Name *</label>
+                                    <input type="text" id="fCourseName" required
+                                           placeholder="Select or type to add new" autocomplete="off">
+                                    <div id="courseAutoList" class="autocomplete-list"></div>
+                                </div>
+
+                                <div class="field">
+                                    <label>Batch</label>
+                                    <input type="text" id="fBatch" readonly>
+                                </div>
+
+                                <div class="field">
+                                    <label>Student Name *</label>
+                                    <button type="button" id="studentPickerBtn" class="student-name-btn">
+                                        <span id="studentPickerLabel" class="placeholder">Select a student...</span>
+                                        <i class="fas fa-chevron-down" style="color: var(--text-secondary);"></i>
+                                    </button>
+                                </div>
+
+                                <div class="field">
+                                    <label>Father Name</label>
+                                    <input type="text" id="fFatherName" readonly>
+                                </div>
+                                <div class="field">
+                                    <label>DOB</label>
+                                    <input type="text" id="fDOB" readonly>
+                                </div>
+                                <div class="field">
+                                    <label>Gender</label>
+                                    <input type="text" id="fGender" readonly>
+                                </div>
+                                <div class="field">
+                                    <label>Qualification</label>
+                                    <input type="text" id="fQualification" readonly>
+                                </div>
+
+                                <div class="field">
+                                    <label>Caste</label>
+                                    <input type="text" id="fCaste" value="Open">
+                                </div>
+
+                                <div class="field">
+                                    <label>Mobile No</label>
+                                    <input type="tel" id="fMobile" readonly>
+                                </div>
+                                <div class="field">
+                                    <label>Email Id</label>
+                                    <input type="email" id="fEmail" readonly>
+                                </div>
+                                <div class="field">
+                                    <label>Aadhar Card No</label>
+                                    <input type="text" id="fAadhar" readonly>
+                                </div>
+
+                                <div class="field fullwidth">
+                                    <label>Address</label>
+                                    <textarea id="fAddress" rows="2" readonly></textarea>
+                                </div>
+
+                                <div class="field">
+                                    <label>City</label>
+                                    <input type="text" id="fCity" value="Bhiwandi">
+                                </div>
+                                <div class="field">
+                                    <label>PinCode</label>
+                                    <input type="text" id="fPinCode" value="421302" maxlength="6">
+                                </div>
+                                <div class="field">
+                                    <label>Amount (₹) *</label>
+                                    <input type="number" id="fAmount" min="0" step="0.01" required placeholder="0.00">
+                                </div>
+
+                            </div>
+
+                            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                                <button type="button" id="cancelFormBtn" class="btn btn-outline">Cancel</button>
+                                <button type="submit" id="saveBtn" class="btn btn-primary">
+                                    <i class="fas fa-cloud-upload-alt"></i> <span id="saveBtnText">Save Exam Fee</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========= STUDENT PICKER MODAL ========= -->
+            <div id="studentPickerModal" class="modal-overlay">
+                <div class="modal-box" style="max-width: 520px;">
+                    <div class="modal-header">
+                        <h3>👤 Select Student</h3>
+                        <button class="close-modal" id="closeStudentPickerBtn">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="search-wrapper" style="margin-bottom: 1rem;">
+                            <input type="text" id="studentSearchInput" placeholder="🔍 Search student by name...">
+                        </div>
+                        <div id="studentListContainer" style="max-height: 420px; overflow-y: auto;">
+                            <div style="text-align: center; padding: 20px; color: var(--text-secondary);">
+                                <div class="spinner"></div> Loading students...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========= GLOBAL MODAL ========= -->
+            <div id="globalModal" class="modal-overlay">
+                <div class="modal-box" style="max-width: 450px;">
+                    <div class="modal-header">
+                        <h3 id="modalTitle">Notice</h3>
+                        <button class="close-modal" id="closeGlobalModal">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modalMsg" style="font-size: 1rem; line-height: 1.5;"></p>
+                        <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+                            <button id="confirmModalBtn" class="btn btn-primary">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========= DELETE CONFIRM MODAL ========= -->
+            <div id="deleteModal" class="modal-overlay">
+                <div class="modal-box" style="max-width: 450px;">
+                    <div class="modal-header" style="background: linear-gradient(135deg, var(--danger), #dc2626);">
+                        <h3>⚠️ Confirm Delete</h3>
+                        <button class="close-modal" id="closeDeleteModalBtn">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="font-size: 1rem; line-height: 1.5; margin-bottom: 1rem;">
+                            Are you sure you want to delete the exam fee record for
+                            <strong id="deleteTargetName"></strong>?
+                        </p>
+                        <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                            <button id="cancelDeleteBtn" class="btn btn-outline">Cancel</button>
+                            <button id="confirmDeleteBtn" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========= TOAST ========= -->
+            <div id="alertBox" class="alert-popup">Message...</div>
+
+        </div>
+    </div>
+
+      <script>
+/* =====================================================================
+   Exam_Fees.html — Full Script
+   v1.3 — Batch as plain text + Profile image from Adm_Details
+   ===================================================================== */
+
+/* =====================================================================
+   SECTION 1 — ADMIN AUTH GUARD
+   ===================================================================== */
+
+function readMyAccountSession(key) {
+    try {
+        const rawLocal = localStorage.getItem(key);
+        if (rawLocal) {
+            const parsed = JSON.parse(rawLocal);
+            if (parsed && typeof parsed === 'object' && 'value' in parsed) {
+                if (parsed.expiry && Date.now() >= parsed.expiry) {
+                    localStorage.removeItem(key);
+                    return null;
+                }
+                return parsed.value;
+            }
+            return parsed;
+        }
+    } catch (e) {}
+    try {
+        const rawSession = sessionStorage.getItem(key);
+        if (rawSession) return JSON.parse(rawSession);
+    } catch (e) {}
+    return null;
+}
+
+function checkAdminAuth() {
+    const userType = readMyAccountSession('Universal_user_type')
+                  || readMyAccountSession('EGyan_user_type');
+    const user = readMyAccountSession('Universal_user')
+              || readMyAccountSession('EGyan_user');
+    const expiry = readMyAccountSession('Universal_session_expiry')
+                || readMyAccountSession('EGyan_session_expiry');
+
+    if (!userType || !user) return { ok: false, reason: 'no-session' };
+    if (userType !== 'admin') return { ok: false, reason: 'not-admin', userType };
+    if (expiry && typeof expiry === 'number' && Date.now() >= expiry) {
+        ['Universal_user','Universal_user_data','Universal_user_type',
+         'Universal_remember_me','Universal_session_expiry',
+         'EGyan_user','EGyan_user_data','EGyan_user_type',
+         'EGyan_remember_me','EGyan_session_expiry'].forEach(k => {
+            localStorage.removeItem(k);
+            sessionStorage.removeItem(k);
+        });
+        return { ok: false, reason: 'expired' };
+    }
+    return { ok: true, userType, user };
+}
+
+function redirectToMyAccount(reason) {
+    console.warn('🔒 Admin auth failed:', reason);
+    try {
+        if (window.top && window.top !== window) {
+            window.top.location.href = '../../Study Material/My Account/myaccount.html';
+        } else {
+            window.location.href = '../../Study Material/My Account/myaccount.html';
+        }
+    } catch (e) {
+        window.location.href = '../../Study Material/My Account/myaccount.html';
+    }
+}
+
+function revealMainContent() {
+    const loading = document.getElementById('authLoading');
+    const main = document.getElementById('mainContent');
+    if (loading) loading.classList.add('hidden');
+    if (main) main.style.display = 'block';
+}
+
+function showAccessDeniedAndRedirect(reason) {
+    const loading = document.getElementById('authLoading');
+    if (loading) {
+        loading.innerHTML = `
+            <div style="text-align:center; padding: 2rem;">
+                <div style="font-size: 3rem; color: #ef4444; margin-bottom: 1rem;">🔒</div>
+                <h2 style="margin-bottom: 0.5rem;">Admin Access Required</h2>
+                <p style="opacity: 0.7; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                    ${reason === 'not-admin'
+                        ? 'You are logged in as a student. Please login as admin.'
+                        : reason === 'expired'
+                        ? 'Your session has expired. Please login again.'
+                        : 'Please login as admin to access this page.'}
+                </p>
+                <div class="spinner" style="margin: 0 auto;"></div>
+                <p style="opacity: 0.6; font-size: 0.8rem; margin-top: 1rem;">Redirecting to My Account...</p>
+            </div>`;
+    }
+    setTimeout(() => redirectToMyAccount(reason), 1500);
+}
+
+function gateAdminAccess(onAuthorized) {
+    const mainEl = document.getElementById('mainContent');
+    const loadingEl = document.getElementById('authLoading');
+    const alreadyRevealed = mainEl && mainEl.style.display === 'block';
+    const loadingHidden = loadingEl && loadingEl.classList.contains('hidden');
+
+    if (alreadyRevealed || loadingHidden) {
+        console.log('✅ loginadmin.js already authorized');
+        onAuthorized();
+        return;
+    }
+    const auth = checkAdminAuth();
+    if (auth.ok) {
+        console.log('✅ Admin auth verified:', auth.user);
+        revealMainContent();
+        onAuthorized();
+    } else {
+        showAccessDeniedAndRedirect(auth.reason);
+    }
+}
+
+
+/* =====================================================================
+   SECTION 2 — DARK MODE SYNC
+   ===================================================================== */
+
+function syncThemeWithParent() {
+    const localTheme = localStorage.getItem('user-theme-preference');
+    if (localTheme) {
+        document.body.setAttribute('data-theme', localTheme);
+        document.documentElement.setAttribute('data-theme', localTheme);
+    } else {
+        try {
+            if (window.parent && window.parent.document.body) {
+                const pt = window.parent.document.body.getAttribute('data-theme');
+                if (pt) {
+                    document.body.setAttribute('data-theme', pt);
+                    document.documentElement.setAttribute('data-theme', pt);
+                }
+            }
+        } catch (e) {}
+    }
+}
+window.addEventListener('DOMContentLoaded', syncThemeWithParent);
+window.addEventListener('storage', (e) => {
+    if (e.key === 'user-theme-preference') syncThemeWithParent();
+});
+window.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'themeChange') {
+        const t = event.data.theme;
+        if (t) {
+            document.body.setAttribute('data-theme', t);
+            document.documentElement.setAttribute('data-theme', t);
+        }
+    }
+});
+
+
+/* =====================================================================
+   SECTION 3 — CONFIGURATION
+   ===================================================================== */
+
+const SCRIPT_URL        = "https://script.google.com/macros/s/AKfycbwzEbd10tAnSKJSsg01LOXr8MAgKTFO4cp2sjq9moatjN3_IWZ8ZWF9uViTXE-991Nq/exec";
+const SPREADSHEET_ID    = "14DSh6jSYukltWrm72rZewxWjQpMcUFuvnR5sqrm9pDg";
+const EXAM_SHEET        = "Exam_Fees";
+const DROPDOWN_SHEET    = "Dropdown";
+const ADM_SHEET         = "Adm_Details";
+
+const CACHE_KEY_DATA      = "exam_fees_data_v1";
+const CACHE_KEY_DROPDOWN  = "exam_fees_dropdown_v1";
+const CACHE_KEY_ROSTER    = "exam_fees_roster_v1";
+const CACHE_TTL           = 5 * 60 * 1000;
+
+const EXAM_HEADERS = [
+    "Sr. No", "Course Name", "Batch", "Student Name",
+    "Father Name", "DOB", "Gender", "Qualification", "Caste",
+    "Mobile No", "Email Id", "Aadhar Card No", "Address",
+    "City", "PinCode", "Amount"
+];
+
+const PRINT_LOGO_URL    = "https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL";
+const PRINT_SCHOOL_NAME = "EGyan Skill Development";
+const PRINT_SCHOOL_SUB  = "Exam Fee Receipt";
+
+
+/* =====================================================================
+   SECTION 4 — GLOBAL STATE
+   ===================================================================== */
+
+let allExamFees        = [];
+let allRoster          = [];
+let courseOptions      = [];
+let dropdownsLoaded    = false;
+let rosterLoaded       = false;
+let dataLoaded         = false;
+let currentSelectedStudent = null;
+let editingRowIndex    = null;
+let deleteTargetIndex  = null;
+let viewingRowIndex    = null;
+let saveInProgress     = false;
+let searchDebounceTimer = null;
+
+const dom = {};
+
+
+/* =====================================================================
+   SECTION 5 — DOM REFS
+   ===================================================================== */
+
+function cacheDomElements() {
+    dom.page1 = document.getElementById('page1');
+    dom.page2 = document.getElementById('page2');
+    dom.page3 = document.getElementById('page3');
+
+    dom.tableBody        = document.getElementById('tableBody');
+    dom.searchInput      = document.getElementById('searchInput');
+    dom.refreshBtn       = document.getElementById('refreshBtn');
+    dom.addNewBtn        = document.getElementById('addNewBtn');
+    dom.mobileRefreshBtn = document.getElementById('mobileRefreshBtn');
+    dom.mobileAddBtn     = document.getElementById('mobileAddBtn');
+    dom.backBtn          = document.getElementById('backToPage1Btn');
+    dom.backToPage1FromViewBtn = document.getElementById('backToPage1FromViewBtn');
+
+    dom.formPageTitle    = document.getElementById('formPageTitle');
+    dom.examForm         = document.getElementById('examForm');
+    dom.saveBtn          = document.getElementById('saveBtn');
+    dom.saveBtnText      = document.getElementById('saveBtnText');
+    dom.cancelFormBtn    = document.getElementById('cancelFormBtn');
+
+    dom.kpiTotalRecords  = document.getElementById('kpiTotalRecords');
+    dom.kpiTotalAmount   = document.getElementById('kpiTotalAmount');
+
+    dom.studentPickerBtn     = document.getElementById('studentPickerBtn');
+    dom.studentPickerLabel   = document.getElementById('studentPickerLabel');
+    dom.studentPickerModal   = document.getElementById('studentPickerModal');
+    dom.closeStudentPicker   = document.getElementById('closeStudentPickerBtn');
+    dom.studentSearchInput   = document.getElementById('studentSearchInput');
+    dom.studentListContainer = document.getElementById('studentListContainer');
+
+    dom.viewProfileAvatar  = document.getElementById('viewProfileAvatar');
+    dom.viewProfileName    = document.getElementById('viewProfileName');
+    dom.viewProfileSrNo    = document.getElementById('viewProfileSrNo');
+    dom.viewProfileCourse  = document.getElementById('viewProfileCourse');
+    dom.viewProfileBatch   = document.getElementById('viewProfileBatch');
+    dom.viewProfileAmount  = document.getElementById('viewProfileAmount');
+    dom.viewDetailsContainer = document.getElementById('viewDetailsContainer');
+    dom.editFromViewBtn    = document.getElementById('editFromViewBtn');
+    dom.printFromViewBtn   = document.getElementById('printFromViewBtn');
+    dom.downloadPdfBtn     = document.getElementById('downloadPdfBtn');
+    dom.deleteFromViewBtn  = document.getElementById('deleteFromViewBtn');
+
+    dom.deleteModal        = document.getElementById('deleteModal');
+    dom.deleteTargetName   = document.getElementById('deleteTargetName');
+    dom.confirmDeleteBtn   = document.getElementById('confirmDeleteBtn');
+    dom.cancelDeleteBtn    = document.getElementById('cancelDeleteBtn');
+    dom.closeDeleteModalBtn= document.getElementById('closeDeleteModalBtn');
+
+    dom.globalModal      = document.getElementById('globalModal');
+    dom.modalTitle       = document.getElementById('modalTitle');
+    dom.modalMsg         = document.getElementById('modalMsg');
+    dom.confirmModalBtn  = document.getElementById('confirmModalBtn');
+    dom.closeGlobalModal = document.getElementById('closeGlobalModal');
+
+    dom.alertBox = document.getElementById('alertBox');
+}
+
+
+/* =====================================================================
+   SECTION 6 — UTILITIES
+   ===================================================================== */
+
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+}
+
+function showToast(msg, type = 'info') {
+    const box = dom.alertBox;
+    if (!box) return;
+    box.textContent = msg;
+    box.className = `alert-popup ${type}`;
+    box.style.display = 'block';
+    clearTimeout(box._t);
+    box._t = setTimeout(() => { box.style.display = 'none'; }, 4000);
+}
+
+function showModal(msg, title = "Notice", isConfirm = false, onConfirm = null) {
+    dom.modalTitle.innerText = title;
+    dom.modalMsg.innerHTML = msg;
+    dom.confirmModalBtn.onclick = () => {
+        dom.globalModal.classList.remove('active');
+        if (isConfirm && onConfirm) onConfirm();
+    };
+    dom.globalModal.classList.add('active');
+}
+
+function showSpinner(el, show) {
+    if (!el) return;
+    if (show) {
+        el.disabled = true;
+        if (!el.hasAttribute('data-original')) {
+            el.setAttribute('data-original', el.innerHTML);
+        }
+        el.innerHTML = '<span class="spinner"></span> Loading...';
+    } else {
+        el.disabled = false;
+        const o = el.getAttribute('data-original');
+        if (o) { el.innerHTML = o; el.removeAttribute('data-original'); }
+    }
+}
+
+function getCurrentBatch() {
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const now = new Date();
+    return `${months[now.getMonth()]}-${now.getFullYear()}`;
+}
+
+function getCached(key) {
+    try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return null;
+        const { data, ts } = JSON.parse(raw);
+        if (Date.now() - ts > CACHE_TTL) { localStorage.removeItem(key); return null; }
+        return data;
+    } catch (e) { return null; }
+}
+function setCached(key, data) {
+    try { localStorage.setItem(key, JSON.stringify({ data, ts: Date.now() })); } catch (e) {}
+}
+
+/* =====================================================================
+   ✅ NEW: Image helpers (Drive URL → thumbnail) + Batch plain renderer
+   ===================================================================== */
+
+function extractDriveFileId(url) {
+    if (!url) return null;
+    const match = String(url).match(/[-\w]{25,}/);
+    return match ? match[0] : null;
+}
+
+function getImageThumbnailUrl(rawUrl, width = 400) {
+    if (!rawUrl) return '';
+    const fileId = extractDriveFileId(rawUrl);
+    if (fileId) return `https://drive.google.com/thumbnail?id=${fileId}&sz=w${width}`;
+    if (/^https?:\/\//i.test(rawUrl)) return rawUrl;
+    return '';
+}
+
+function renderProfileImage(container, fullName, imageUrl) {
+    if (!container) return;
+    const thumb = getImageThumbnailUrl(imageUrl, 400);
+    const initial = (fullName || 'S').trim().charAt(0).toUpperCase() || 'S';
+
+    if (thumb) {
+        container.innerHTML = `
+            <img src="${escapeHtml(thumb)}" alt="${escapeHtml(fullName)}"
+                 loading="lazy" decoding="async"
+                 style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;">
+        `;
+        const img = container.querySelector('img');
+        if (img) {
+            img.addEventListener('error', () => {
+                container.innerHTML = initial;
+            });
+        }
+    } else {
+        container.textContent = initial;
+    }
+}
+
+function renderBatchValue(rawValue) {
+    if (rawValue === undefined || rawValue === null || rawValue === '') return '—';
+    return String(rawValue).trim();
+}
+
+
+/* =====================================================================
+   SECTION 7 — DATA LOADING
+   ===================================================================== */
+
+async function fetchSheet(sheetName, cacheKey, forceRefresh = false) {
+    if (!forceRefresh) {
+        const cached = getCached(cacheKey);
+        if (cached) return cached;
+    }
+    try {
+        const url = `${SCRIPT_URL}?spreadsheetId=${SPREADSHEET_ID}` +
+                    `&sheetName=${encodeURIComponent(sheetName)}&_=${Date.now()}`;
+        const res = await fetch(url);
+        const json = await res.json();
+        if (json.status === 'success' && Array.isArray(json.data)) {
+            setCached(cacheKey, json.data);
+            return json.data;
+        }
+        return [];
+    } catch (err) {
+        console.warn(`Fetch ${sheetName} failed:`, err);
+        return getCached(cacheKey) || [];
+    }
+}
+
+async function loadAllData(forceRefresh = false) {
+    const [examData, dropdownData, admData] = await Promise.all([
+        fetchSheet(EXAM_SHEET,     CACHE_KEY_DATA,     forceRefresh),
+        fetchSheet(DROPDOWN_SHEET, CACHE_KEY_DROPDOWN, forceRefresh),
+        fetchSheet(ADM_SHEET,      CACHE_KEY_ROSTER,   forceRefresh)
+    ]);
+
+    allExamFees = examData.map((row, idx) => ({ ...row, _rowIndex: idx + 2 }));
+    dataLoaded = true;
+
+    courseOptions = [...new Set(
+        dropdownData
+            .map(row => String(row['Course Name'] || '').trim())
+            .filter(Boolean)
+    )];
+    dropdownsLoaded = true;
+
+    allRoster = admData
+        .map((row, idx) => ({
+            _rowIndex: idx + 2,
+            srNo: row['Sr. No'] || (idx + 1),
+            fullName: String(row['Full Name'] || row['FullName'] || '').trim(),
+            fatherName: String(row['Father Name'] || '').trim(),
+            dob: row['Birth Date'] || '',
+            gender: String(row['Gender'] || '').trim(),
+            studyIn: String(row['Study In'] || '').trim(),
+            mobile: String(row['Personal Mob No'] || '').trim(),
+            email: String(row['Email Id'] || '').trim(),
+            aadhar: String(row['Aadhar Card No'] || '').trim(),
+            address: String(row['Address'] || '').trim(),
+            image: String(row['Image'] || '').trim()   // ✅ NEW
+        }))
+        .filter(r => r.fullName);
+    rosterLoaded = true;
+
+    renderTable();
+    renderStudentList(allRoster);
+    updateKpis();
+}
+
+
+/* =====================================================================
+   SECTION 8 — KPIS + TABLE RENDER (newest-first)
+   ===================================================================== */
+
+function updateKpis() {
+    const total = allExamFees.length;
+    const sum = allExamFees.reduce((a, b) => a + (parseFloat(b['Amount']) || 0), 0);
+    dom.kpiTotalRecords.textContent = total;
+    dom.kpiTotalAmount.textContent = `₹${sum.toLocaleString('en-IN')}`;
+}
+
+function renderTable(filter = "") {
+    const tb = dom.tableBody;
+    if (!tb) return;
+
+    if (!allExamFees.length) {
+        tb.innerHTML = `
+            <tr><td colspan="4">
+                <div class="empty-container">
+                    <span class="empty-icon">📝</span>
+                    <p class="empty-title">No exam fee records yet</p>
+                </div>
+            </td></tr>`;
+        return;
+    }
+
+    const q = filter.toLowerCase().trim();
+    let filtered = q
+        ? allExamFees.filter(row => {
+            const name = String(row['Student Name'] || '').toLowerCase();
+            const course = String(row['Course Name'] || '').toLowerCase();
+            return name.includes(q) || course.includes(q);
+        })
+        : allExamFees.slice();
+
+    // Newest-first: sort by Sr. No desc, then _rowIndex desc as tiebreaker
+    filtered.sort((a, b) => {
+        const srA = parseInt(a['Sr. No']) || 0;
+        const srB = parseInt(b['Sr. No']) || 0;
+        if (srA !== srB) return srB - srA;
+        return (b._rowIndex || 0) - (a._rowIndex || 0);
+    });
+
+    if (!filtered.length) {
+        tb.innerHTML = `
+            <tr><td colspan="4">
+                <div class="empty-container">
+                    <span class="empty-icon">🔍</span>
+                    <p class="empty-title">No matching records</p>
+                </div>
+            </td></tr>`;
+        return;
+    }
+
+    tb.innerHTML = filtered.map((row) => {
+        const originalIdx = allExamFees.indexOf(row);
+        const srNo = row['Sr. No'] || (originalIdx + 1);
+        return `
+            <tr>
+                <td><strong>${escapeHtml(srNo)}</strong></td>
+                <td>${escapeHtml(row['Student Name'] || '—')}</td>
+                <td><span class="total-badge">₹${parseFloat(row['Amount'] || 0).toLocaleString('en-IN')}</span></td>
+                <td>
+                    <button class="view-action-btn" data-action="view" data-idx="${originalIdx}">
+                        <i class="fas fa-eye"></i> View
+                    </button>
+                </td>
+            </tr>`;
+    }).join('');
+
+    tb.querySelectorAll('.view-action-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const idx = parseInt(btn.getAttribute('data-idx'), 10);
+            openViewPage(idx);
+        });
+    });
+}
+
+function filterTable(q) {
+    clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(() => renderTable(q), 250);
+}
+
+
+/* =====================================================================
+   SECTION 9 — VIEW PAGE (Batch plain + Profile Image)
+   ===================================================================== */
+
+function openViewPage(idx) {
+    const row = allExamFees[idx];
+    if (!row) return;
+    viewingRowIndex = idx;
+
+    const fullName = row['Student Name'] || '—';
+
+    /* ✅ 1. Profile image: live-fetched from Adm_Details via roster map */
+    const rosterMatch = allRoster.find(s => s.fullName === fullName);
+    const imageUrl = rosterMatch ? rosterMatch.image : '';
+    renderProfileImage(dom.viewProfileAvatar, fullName, imageUrl);
+
+    /* ✅ 2. Batch: force plain text — no date parsing */
+    const batchValue = renderBatchValue(row['Batch']);
+
+    dom.viewProfileName.textContent   = fullName;
+    dom.viewProfileSrNo.textContent   = row['Sr. No'] || '—';
+    dom.viewProfileCourse.textContent = row['Course Name'] || '—';
+    dom.viewProfileBatch.textContent  = batchValue;
+    dom.viewProfileAmount.textContent = `₹${parseFloat(row['Amount'] || 0).toLocaleString('en-IN')}`;
+
+    const fields = [
+        { label: "Sr. No",           value: row['Sr. No'] },
+        { label: "Course Name",      value: row['Course Name'] },
+        { label: "Batch",            value: batchValue },
+        { label: "Student Name",     value: row['Student Name'] },
+        { label: "Father Name",      value: row['Father Name'] },
+        { label: "DOB",              value: row['DOB'] },
+        { label: "Gender",           value: row['Gender'] },
+        { label: "Qualification",    value: row['Qualification'] },
+        { label: "Caste",            value: row['Caste'] },
+        { label: "Mobile No",        value: row['Mobile No'] },
+        { label: "Email Id",         value: row['Email Id'] },
+        { label: "Aadhar Card No",   value: row['Aadhar Card No'] },
+        { label: "City",             value: row['City'] },
+        { label: "PinCode",          value: row['PinCode'] },
+        { label: "Amount",           value: '₹' + parseFloat(row['Amount'] || 0).toLocaleString('en-IN') },
+        { label: "Address",          value: row['Address'], full: true }
+    ];
+
+    dom.viewDetailsContainer.innerHTML = fields.map(f => {
+        const safe = escapeHtml(
+            String(f.value === undefined || f.value === null || f.value === '' ? '—' : f.value)
+        );
+        return `
+            <div class="detail-card${f.full ? ' fullwidth' : ''}">
+                <div class="detail-label">${escapeHtml(f.label)}</div>
+                <div class="detail-value">${safe}</div>
+            </div>
+        `;
+    }).join('');
+
+    navigateToPage(3);
+}
+
+
+/* =====================================================================
+   SECTION 10 — PRINT / PDF
+   ===================================================================== */
+
+async function printExamFee() {
+    if (viewingRowIndex === null) return;
+    const row = allExamFees[viewingRowIndex];
+    if (!row) return;
+
+    showToast('📄 Preparing form for print...', 'info');
+
+    let logoDataUri = '';
+    try { logoDataUri = await urlToDataUri(PRINT_LOGO_URL); } catch (e) {}
+
+    const html = generatePrintHTML(row, logoDataUri);
+    const win = window.open('', '_blank',
+        'width=900,height=1200,toolbar=yes,scrollbars=yes,resizable=yes,menubar=no');
+    if (!win) { showToast('❌ Please allow pop-ups to print.', 'error'); return; }
+
+    win.document.write(html);
+    win.document.close();
+    win.onload = () => setTimeout(() => { win.focus(); win.print(); }, 800);
+}
+
+async function downloadExamFeePDF() {
+    if (viewingRowIndex === null) return;
+    const row = allExamFees[viewingRowIndex];
+    if (!row) return;
+
+    if (typeof html2canvas === 'undefined' || typeof jspdf === 'undefined') {
+        showToast('📥 Loading PDF libraries...', 'info');
+        await Promise.all([
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'),
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')
+        ]).catch(() => {});
+        if (typeof html2canvas === 'undefined' || typeof jspdf === 'undefined') {
+            showToast('❌ Failed to load PDF libraries.', 'error');
+            return;
+        }
+    }
+
+    showSpinner(dom.downloadPdfBtn, true);
+    showToast('📄 Generating PDF...', 'info');
+
+    let logoDataUri = '';
+    try { logoDataUri = await urlToDataUri(PRINT_LOGO_URL); } catch (e) {}
+
+    const html = generatePrintHTML(row, logoDataUri);
+
+    const container = document.createElement('div');
+    container.style.position = 'fixed';
+    container.style.left = '-9999px';
+    container.style.top = '0';
+    container.style.width = '794px';
+    container.style.height = '1123px';
+    container.style.background = 'white';
+    container.style.overflow = 'hidden';
+    container.innerHTML = html;
+    document.body.appendChild(container);
+
+    const imgs = container.querySelectorAll('img');
+    const imgPromises = Array.from(imgs).map(img => {
+        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+        return new Promise(res => {
+            img.onload = res; img.onerror = res;
+            setTimeout(res, 3000);
+        });
+    });
+
+    try {
+        await Promise.all(imgPromises);
+        await new Promise(r => setTimeout(r, 300));
+        const canvas = await html2canvas(container, {
+            scale: 2, useCORS: true, allowTaint: false, logging: false,
+            backgroundColor: '#ffffff',
+            width: 794, height: 1123,
+            windowWidth: 794, windowHeight: 1123
+        });
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+        pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+        pdf.save(`Exam_Fee_${String(row['Student Name'] || 'student').replace(/\s/g, '_')}.pdf`);
+        showToast('✅ PDF downloaded successfully!', 'success');
+    } catch (err) {
+        showToast('❌ PDF error: ' + err.message, 'error');
+    } finally {
+        document.body.removeChild(container);
+        showSpinner(dom.downloadPdfBtn, false);
+    }
+}
+
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        if (document.querySelector(`script[src="${src}"]`)) { resolve(); return; }
+        const s = document.createElement('script');
+        s.src = src; s.onload = resolve; s.onerror = reject;
+        document.head.appendChild(s);
+    });
+}
+
+async function urlToDataUri(url, timeoutMs = 8000) {
+    if (!url) return '';
+    try {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+        const res = await fetch(url, { mode: 'cors', credentials: 'omit', cache: 'force-cache', signal: ctrl.signal });
+        clearTimeout(timer);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const blob = await res.blob();
+        return await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result || '');
+            reader.onerror = () => resolve('');
+            reader.readAsDataURL(blob);
+        });
+    } catch (e) { return ''; }
+}
+
+function generatePrintHTML(row, logoDataUri) {
+    const logoSrc = logoDataUri || PRINT_LOGO_URL;
+    const v = (val) => (val === undefined || val === null || val === '') ? '' : escapeHtml(String(val));
+
+    const srNo           = v(row['Sr. No']);
+    const courseName     = v(row['Course Name']);
+    const batch          = renderBatchValue(row['Batch']);
+    const studentName    = v(row['Student Name']);
+    const fatherName     = v(row['Father Name']);
+    const dob            = v(row['DOB']);
+    const gender         = v(row['Gender']);
+    const qualification  = v(row['Qualification']);
+    const caste          = v(row['Caste']);
+    const mobileNo       = v(row['Mobile No']);
+    const emailId        = v(row['Email Id']);
+    const aadharNo       = v(row['Aadhar Card No']);
+    const address        = v(row['Address']);
+    const city           = v(row['City']);
+    const pinCode        = v(row['PinCode']);
+    const amount         = parseFloat(row['Amount'] || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 });
+    const printDate      = new Date().toLocaleDateString('en-GB');
+    const printTime      = new Date().toLocaleString('en-GB', { hour12: true });
+
+    return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Exam Fee Receipt - ${studentName}</title>
+<style>
+    @page { size: A4 portrait; margin: 0; }
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    html, body { font-family: 'Segoe UI', 'Roboto', Arial, sans-serif; background: #fff; color: #000; overflow-x: hidden; }
+    .sheet {
+        position: relative; width: 210mm; height: 297mm;
+        padding: 4mm 6mm 12mm 6mm;
+        display: flex; flex-direction: column;
+        margin: 0 auto; background: #fff;
+        box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    }
+    .corner-tl { position: absolute; top:0; left:0; width: 34mm; height: 20mm; background: #0d2c54; clip-path: polygon(0 0, 100% 0, 0 100%); z-index: 1; }
+    .corner-tr { position: absolute; top:0; right:0; width: 34mm; height: 20mm; background: #0d2c54; clip-path: polygon(0 0, 100% 0, 100% 100%); z-index: 1; }
+    .header { display: grid; grid-template-columns: 26mm 1fr 32mm; align-items: center; gap: 3mm; padding: 1mm 2mm 2mm; position: relative; z-index: 2; }
+    .logo-wrap { width: 24mm; height: 24mm; display: flex; align-items: center; justify-content: center; }
+    .logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+    .title-wrap { text-align: center; }
+    .title-wrap h1 { font-size: 16pt; font-weight: 900; color: #0d2c54; letter-spacing: 0.3px; line-height: 1.05; font-family: 'Arial Black', 'Segoe UI', sans-serif; text-transform: uppercase; }
+    .title-pill { display: inline-block; background: #0d2c54; color: #fff; font-size: 12pt; font-weight: 900; letter-spacing: 1.2px; padding: 1.2mm 9mm; border-radius: 20px; margin-top: 1.5mm; font-family: 'Arial Black', 'Segoe UI', sans-serif; }
+    .meta-box { text-align: right; font-size: 8pt; color: #0d2c54; font-weight: 700; line-height: 1.4; }
+    .meta-box .meta-label { font-size: 7pt; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+    .meta-box .meta-value { font-size: 9pt; color: #0d2c54; font-weight: 800; }
+    .form-body { position: relative; flex: 1; border: 1.6pt solid #0d2c54; border-radius: 2mm; padding: 4mm 4mm 3mm 4mm; margin-top: 3mm; background: #fff; display: flex; flex-direction: column; overflow: hidden; }
+    .watermark { position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; width: 135mm; height: 135mm; opacity: 0.14; pointer-events: none; z-index: 5; display: flex; align-items: center; justify-content: center; }
+    .watermark img { width: 100%; height: 100%; object-fit: contain; }
+    .row, .declaration-wrap, .sign-row, .amount-banner { position: relative; z-index: 1; }
+    .row { display: grid; gap: 3mm 4mm; margin-bottom: 2.6mm; }
+    .row.full { grid-template-columns: 1fr; }
+    .row.three { grid-template-columns: 1fr 1fr 1fr; }
+    .row.two { grid-template-columns: 1fr 1fr; }
+    .field { display: flex; flex-direction: column; gap: 0.8mm; }
+    .field.inline { flex-direction: row; align-items: center; gap: 2mm; }
+    .field label { font-size: 9pt; font-weight: 700; color: #000; white-space: nowrap; }
+    .field.inline label { min-width: 26mm; text-align: right; }
+    .value-box { border: 0.9pt solid #4a6fa5; border-radius: 1.2mm; min-height: 8mm; padding: 1.2mm 2.5mm; font-size: 10pt; color: #0d2c54; background: #fff; display: flex; align-items: center; font-weight: 600; word-break: break-word; }
+    .value-box.tall { min-height: 16mm; align-items: flex-start; padding-top: 1.6mm; }
+    .amount-banner { margin-top: 4mm; padding: 3mm 5mm; background: linear-gradient(135deg, #0d2c54, #2563eb); color: #fff; border-radius: 3mm; display: flex; justify-content: space-between; align-items: center; }
+    .amount-banner .ab-label { font-size: 11pt; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .amount-banner .ab-value { font-size: 18pt; font-weight: 900; letter-spacing: 0.5px; }
+    .declaration-wrap { margin-top: 4mm; position: relative; }
+    .declaration-tag { display: inline-block; background: #0d2c54; color: #fff; font-size: 11pt; font-weight: 900; padding: 1mm 6mm; border-radius: 12px; margin-left: 4mm; margin-bottom: -2mm; position: relative; z-index: 2; font-family: 'Arial Black', 'Segoe UI', sans-serif; }
+    .declaration-box { border: 1.2pt solid #a5c0e7; background: #f2f7fd; border-radius: 2mm; padding: 4mm 5mm 3mm 5mm; font-size: 9.5pt; line-height: 1.5; color: #111; font-weight: 500; }
+    .sign-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5mm; margin-top: auto; padding-top: 10mm; padding-bottom: 2mm; }
+    .sign-box { border: 1pt solid #0d2c54; border-radius: 2mm; height: 16mm; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 1.5mm; font-size: 9pt; font-weight: 700; color: #000; background: #fff; }
+    .footer-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2mm; background: #0d2c54; }
+    @media print {
+        .form-body { overflow: visible !important; }
+        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        html, body { width: 210mm; height: 297mm; }
+        .sheet { margin: 0 !important; box-shadow: none !important; width: 210mm !important; height: 297mm !important; }
+    }
+    @media screen {
+        body { padding: 10mm 0; background: #eef1f5; }
+        .sheet { box-shadow: 0 4px 24px rgba(0,0,0,0.10); }
+    }
+</style>
+</head>
+<body>
+<div class="sheet">
+    <div class="corner-tl"></div>
+    <div class="corner-tr"></div>
+
+    <div class="header">
+        <div class="logo-wrap">
+            <img src="${logoSrc}" alt="EGyan Logo" crossorigin="anonymous">
+        </div>
+        <div class="title-wrap">
+            <h1>${escapeHtml(PRINT_SCHOOL_NAME)}</h1>
+            <div class="title-pill">EXAM FEE RECEIPT</div>
+        </div>
+        <div class="meta-box">
+            <div class="meta-label">Receipt No</div>
+            <div class="meta-value">${srNo || '—'}</div>
+            <div class="meta-label" style="margin-top:1.5mm;">Batch</div>
+            <div class="meta-value">${batch || '—'}</div>
+            <div class="meta-label" style="margin-top:1.5mm;">Date</div>
+            <div class="meta-value">${printDate}</div>
+        </div>
+    </div>
+
+    <div class="form-body">
+        <div class="watermark" aria-hidden="true">
+            <img src="${logoSrc}" alt="" aria-hidden="true" crossorigin="anonymous">
+        </div>
+
+        <div class="row two">
+            <div class="field"><label>Student Name :</label><div class="value-box">${studentName}</div></div>
+            <div class="field"><label>Course Name :</label><div class="value-box">${courseName}</div></div>
+        </div>
+
+        <div class="row two">
+            <div class="field"><label>Father Name :</label><div class="value-box">${fatherName}</div></div>
+            <div class="field"><label>DOB :</label><div class="value-box">${dob}</div></div>
+        </div>
+
+        <div class="row three">
+            <div class="field"><label>Gender :</label><div class="value-box">${gender}</div></div>
+            <div class="field"><label>Qualification :</label><div class="value-box">${qualification}</div></div>
+            <div class="field"><label>Caste :</label><div class="value-box">${caste}</div></div>
+        </div>
+
+        <div class="row two">
+            <div class="field"><label>Mobile No :</label><div class="value-box">${mobileNo}</div></div>
+            <div class="field"><label>Email Id :</label><div class="value-box">${emailId}</div></div>
+        </div>
+
+        <div class="row two">
+            <div class="field"><label>Aadhar Card No :</label><div class="value-box">${aadharNo}</div></div>
+            <div class="field"><label>PinCode :</label><div class="value-box">${pinCode}</div></div>
+        </div>
+
+        <div class="row two">
+            <div class="field"><label>City :</label><div class="value-box">${city}</div></div>
+            <div class="field"><label>Batch :</label><div class="value-box">${batch}</div></div>
+        </div>
+
+        <div class="row full">
+            <div class="field">
+                <label>Address :</label>
+                <div class="value-box tall">${address}</div>
+            </div>
+        </div>
+
+        <div class="amount-banner">
+            <span class="ab-label">Exam Fee Amount</span>
+            <span class="ab-value">₹ ${amount}</span>
+        </div>
+
+        <div class="declaration-wrap">
+            <div class="declaration-tag">Declaration</div>
+            <div class="declaration-box">
+                This is a computer-generated exam fee receipt. The fee has been received against the
+                above-mentioned student for the specified course and batch. This receipt is valid
+                only when the payment is successfully recorded in the official records. Please retain
+                this receipt for future reference. Any discrepancy must be reported to the accounts
+                department within 7 days from the date of issue.
+            </div>
+        </div>
+
+        <div class="sign-row">
+            <div class="sign-box">Parent / Student Sign</div>
+            <div class="sign-box">Authorized Signatory</div>
+            <div class="sign-box">(For Office Use Only)</div>
+        </div>
+    </div>
+
+    <div class="footer-bar"></div>
+</div>
+</body>
+</html>`;
+}
+
+
+/* =====================================================================
+   SECTION 11 — STUDENT PICKER
+   ===================================================================== */
+
+function openStudentPicker() {
+    dom.studentPickerModal.classList.add('active');
+    dom.studentSearchInput.value = '';
+    renderStudentList(allRoster);
+    setTimeout(() => dom.studentSearchInput.focus(), 100);
+}
+
+function closeStudentPicker() {
+    dom.studentPickerModal.classList.remove('active');
+}
+
+function renderStudentList(list) {
+    if (!list.length) {
+        dom.studentListContainer.innerHTML = `
+            <div style="text-align: center; padding: 20px; color: var(--text-secondary);">
+                No students found.
+            </div>`;
+        return;
+    }
+    dom.studentListContainer.innerHTML = list.map((s) => `
+        <button type="button" class="student-list-item" data-name="${escapeHtml(s.fullName)}">
+            <div class="avatar">${escapeHtml(s.fullName.charAt(0).toUpperCase())}</div>
+            <span class="student-name">${escapeHtml(s.fullName)}</span>
+            <span class="sr-badge">#${escapeHtml(String(s.srNo))}</span>
+        </button>
+    `).join('');
+
+    dom.studentListContainer.querySelectorAll('.student-list-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const name = btn.getAttribute('data-name');
+            const student = allRoster.find(s => s.fullName === name);
+            if (student) selectStudent(student);
+        });
+    });
+}
+
+function filterStudentList(q) {
+    const keyword = q.toLowerCase().trim();
+    const filtered = !keyword
+        ? allRoster
+        : allRoster.filter(s => s.fullName.toLowerCase().includes(keyword));
+    renderStudentList(filtered);
+}
+
+function selectStudent(student) {
+    currentSelectedStudent = student;
+    dom.studentPickerLabel.textContent = student.fullName;
+    dom.studentPickerLabel.classList.remove('placeholder');
+
+    document.getElementById('fFatherName').value    = student.fatherName || '';
+    document.getElementById('fDOB').value           = student.dob || '';
+    document.getElementById('fGender').value        = student.gender || '';
+    document.getElementById('fQualification').value = student.studyIn || '';
+    document.getElementById('fMobile').value        = student.mobile || '';
+    document.getElementById('fEmail').value         = student.email || '';
+    document.getElementById('fAadhar').value        = student.aadhar || '';
+    document.getElementById('fAddress').value       = student.address || '';
+
+    closeStudentPicker();
+    showToast(`✅ Selected: ${student.fullName}`, 'success');
+}
+
+
+/* =====================================================================
+   SECTION 12 — AUTOCOMPLETE (commit-flag behavior)
+   ===================================================================== */
+
+function setupCourseAutocomplete() {
+    const input = document.getElementById('fCourseName');
+    const list  = document.getElementById('courseAutoList');
+    if (!input || !list) return;
+
+    let debounceId = null;
+    let committedValue = '';
+
+    function render(term) {
+        const t = term.toLowerCase();
+        const filtered = !t
+            ? courseOptions
+            : courseOptions.filter(o => o.toLowerCase().includes(t));
+
+        if (!filtered.length) { list.style.display = 'none'; return; }
+
+        list.innerHTML = filtered.map(opt =>
+            `<div class="autocomplete-item" data-value="${escapeHtml(opt)}">${escapeHtml(opt)}</div>`
+        ).join('');
+        list.style.display = 'block';
+    }
+
+    function hideList() { list.style.display = 'none'; }
+
+    input.addEventListener('input', (e) => {
+        committedValue = '';
+        if (debounceId) clearTimeout(debounceId);
+        debounceId = setTimeout(() => render(e.target.value), 160);
+    });
+
+    input.addEventListener('focus', () => {
+        if (committedValue && input.value.trim() === committedValue) {
+            hideList();
+            return;
+        }
+        render(input.value);
+    });
+
+    input.addEventListener('blur', () => setTimeout(hideList, 160));
+
+    list.addEventListener('click', (e) => {
+        const item = e.target.closest('.autocomplete-item');
+        if (!item) return;
+        const picked = item.getAttribute('data-value');
+        input.value = picked;
+        committedValue = picked;
+        hideList();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!list.contains(e.target) && e.target !== input) hideList();
+    });
+}
+
+
+/* =====================================================================
+   SECTION 13 — FORM (ADD / EDIT)
+   ===================================================================== */
+
+function navigateToPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+    document.getElementById(`page${pageId}`).classList.add('active-page');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetFormForAdd() {
+    editingRowIndex = null;
+    currentSelectedStudent = null;
+
+    document.getElementById('fSrNo').value = computeNextSrNo();
+    document.getElementById('fCourseName').value = '';
+    document.getElementById('fBatch').value = getCurrentBatch();
+
+    dom.studentPickerLabel.textContent = 'Select a student...';
+    dom.studentPickerLabel.classList.add('placeholder');
+
+    ['fFatherName','fDOB','fGender','fQualification','fMobile','fEmail','fAadhar','fAddress','fAmount']
+        .forEach(id => document.getElementById(id).value = '');
+
+    document.getElementById('fCaste').value = 'Open';
+    document.getElementById('fCity').value = 'Bhiwandi';
+    document.getElementById('fPinCode').value = '421302';
+
+    dom.formPageTitle.textContent = '➕ Add Exam Fee';
+    dom.saveBtnText.textContent = 'Save Exam Fee';
+}
+
+function openEditMode(idx) {
+    const row = allExamFees[idx];
+    if (!row) return;
+    editingRowIndex = idx;
+
+    document.getElementById('fSrNo').value           = row['Sr. No'] || '';
+    document.getElementById('fCourseName').value     = row['Course Name'] || '';
+    document.getElementById('fBatch').value          = row['Batch'] || getCurrentBatch();
+    document.getElementById('fFatherName').value     = row['Father Name'] || '';
+    document.getElementById('fDOB').value            = row['DOB'] || '';
+    document.getElementById('fGender').value         = row['Gender'] || '';
+    document.getElementById('fQualification').value  = row['Qualification'] || '';
+    document.getElementById('fCaste').value          = row['Caste'] || 'Open';
+    document.getElementById('fMobile').value         = row['Mobile No'] || '';
+    document.getElementById('fEmail').value          = row['Email Id'] || '';
+    document.getElementById('fAadhar').value         = row['Aadhar Card No'] || '';
+    document.getElementById('fAddress').value        = row['Address'] || '';
+    document.getElementById('fCity').value           = row['City'] || 'Bhiwandi';
+    document.getElementById('fPinCode').value        = row['PinCode'] || '421302';
+    document.getElementById('fAmount').value         = row['Amount'] || '';
+
+    dom.studentPickerLabel.textContent = row['Student Name'] || 'Select a student...';
+    dom.studentPickerLabel.classList.toggle('placeholder', !row['Student Name']);
+
+    currentSelectedStudent = allRoster.find(s => s.fullName === row['Student Name']) || null;
+
+    dom.formPageTitle.textContent = '✏️ Edit Exam Fee';
+    dom.saveBtnText.textContent = 'Update Exam Fee';
+
+    navigateToPage(2);
+}
+
+function computeNextSrNo() {
+    if (!allExamFees.length) return 1;
+    const max = allExamFees.reduce((m, row) => Math.max(m, parseInt(row['Sr. No']) || 0), 0);
+    return max + 1;
+}
+
+
+/* =====================================================================
+   SECTION 14 — FORM SUBMIT
+   ===================================================================== */
+
+async function handleFormSubmit(e) {
+    e.preventDefault();
+    if (saveInProgress) return;
+
+    const studentName = dom.studentPickerLabel.textContent.trim();
+    const isPlaceholder = dom.studentPickerLabel.classList.contains('placeholder');
+    const courseName = document.getElementById('fCourseName').value.trim();
+    const amount = parseFloat(document.getElementById('fAmount').value) || 0;
+
+    if (isPlaceholder || !studentName || studentName === 'Select a student...') {
+        showToast('❌ Please select a Student Name.', 'error');
+        dom.studentPickerBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+    }
+    if (!courseName) {
+        showToast('❌ Course Name is required.', 'error');
+        document.getElementById('fCourseName').focus();
+        return;
+    }
+    if (amount <= 0) {
+        showToast('❌ Amount must be greater than 0.', 'error');
+        document.getElementById('fAmount').focus();
+        return;
+    }
+
+    saveInProgress = true;
+    showSpinner(dom.saveBtn, true);
+
+    const rowData = {
+        "Sr. No":          document.getElementById('fSrNo').value,
+        "Course Name":     courseName,
+        "Batch":           document.getElementById('fBatch').value,
+        "Student Name":    studentName,
+        "Father Name":     document.getElementById('fFatherName').value,
+        "DOB":             document.getElementById('fDOB').value,
+        "Gender":          document.getElementById('fGender').value,
+        "Qualification":   document.getElementById('fQualification').value,
+        "Caste":           document.getElementById('fCaste').value,
+        "Mobile No":       document.getElementById('fMobile').value,
+        "Email Id":        document.getElementById('fEmail').value,
+        "Aadhar Card No":  document.getElementById('fAadhar').value,
+        "Address":         document.getElementById('fAddress').value,
+        "City":            document.getElementById('fCity').value,
+        "PinCode":         document.getElementById('fPinCode').value,
+        "Amount":          amount
+    };
+
+    const params = new URLSearchParams();
+    if (editingRowIndex !== null) {
+        params.append('action', 'update');
+        params.append('rowIndex', String(editingRowIndex + 2));
+    } else {
+        params.append('action', 'insert');
+    }
+    params.append('spreadsheetId', SPREADSHEET_ID);
+    params.append('sheetName', EXAM_SHEET);
+    Object.entries(rowData).forEach(([k, v]) => params.append(k, v));
+
+    try {
+        const res = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        });
+        const json = await res.json();
+
+        if (json.status === 'success') {
+            if (!courseOptions.some(c => c.toLowerCase() === courseName.toLowerCase())) {
+                appendCourseToDropdown(courseName);
+            }
+            showToast(`✅ Exam fee ${editingRowIndex !== null ? 'updated' : 'saved'} successfully!`, 'success');
+            localStorage.removeItem(CACHE_KEY_DATA);
+            await loadAllData(true);
+            navigateToPage(1);
+        } else {
+            showToast('❌ Save failed: ' + (json.message || 'Unknown error'), 'error');
+        }
+    } catch (err) {
+        showToast('❌ Network error: ' + err.message, 'error');
+    } finally {
+        saveInProgress = false;
+        showSpinner(dom.saveBtn, false);
+    }
+}
+
+async function appendCourseToDropdown(courseName) {
+    try {
+        const params = new URLSearchParams();
+        params.append('action', 'insert');
+        params.append('spreadsheetId', SPREADSHEET_ID);
+        params.append('sheetName', DROPDOWN_SHEET);
+        params.append('Course Name', courseName);
+        params.append('Sr. No', '');
+        const res = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        });
+        const json = await res.json();
+        if (json.status === 'success') {
+            courseOptions.push(courseName);
+            localStorage.removeItem(CACHE_KEY_DROPDOWN);
+        }
+    } catch (e) {
+        console.warn('appendCourseToDropdown failed:', e);
+    }
+}
+
+
+/* =====================================================================
+   SECTION 15 — DELETE
+   ===================================================================== */
+
+function openDeleteModal(idx) {
+    deleteTargetIndex = idx;
+    const row = allExamFees[idx];
+    dom.deleteTargetName.textContent = row ? (row['Student Name'] || 'this student') : 'this record';
+    dom.deleteModal.classList.add('active');
+}
+
+function closeDeleteModal() {
+    dom.deleteModal.classList.remove('active');
+    deleteTargetIndex = null;
+}
+
+async function confirmDelete() {
+    if (deleteTargetIndex === null) return;
+    const btn = dom.confirmDeleteBtn;
+    showSpinner(btn, true);
+    try {
+        const params = new URLSearchParams();
+        params.append('action', 'delete');
+        params.append('spreadsheetId', SPREADSHEET_ID);
+        params.append('sheetName', EXAM_SHEET);
+        params.append('rowIndex', String(deleteTargetIndex + 2));
+        const res = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        });
+        const json = await res.json();
+        if (json.status === 'success') {
+            showToast('✅ Deleted successfully!', 'success');
+            localStorage.removeItem(CACHE_KEY_DATA);
+            closeDeleteModal();
+            viewingRowIndex = null;
+            await loadAllData(true);
+            navigateToPage(1);
+        } else {
+            showToast('❌ Delete failed: ' + (json.message || 'Unknown error'), 'error');
+        }
+    } catch (err) {
+        showToast('❌ Error: ' + err.message, 'error');
+    } finally {
+        showSpinner(btn, false);
+    }
+}
+
+
+/* =====================================================================
+   SECTION 16 — REFRESH
+   ===================================================================== */
+
+async function refreshAllData() {
+    showSpinner(dom.refreshBtn, true);
+    if (dom.mobileRefreshBtn) showSpinner(dom.mobileRefreshBtn, true);
+    try {
+        localStorage.removeItem(CACHE_KEY_DATA);
+        localStorage.removeItem(CACHE_KEY_DROPDOWN);
+        localStorage.removeItem(CACHE_KEY_ROSTER);
+        await loadAllData(true);
+        showToast('✅ Data refreshed successfully!', 'success');
+    } catch (err) {
+        showToast('❌ Refresh failed: ' + err.message, 'error');
+    } finally {
+        showSpinner(dom.refreshBtn, false);
+        if (dom.mobileRefreshBtn) showSpinner(dom.mobileRefreshBtn, false);
+    }
+}
+
+
+/* =====================================================================
+   SECTION 17 — INITIALIZATION
+   ===================================================================== */
+
+function initApp() {
+    cacheDomElements();
+    syncThemeWithParent();
+
+    document.getElementById('fBatch').value = getCurrentBatch();
+    document.getElementById('fCaste').value = 'Open';
+    document.getElementById('fCity').value = 'Bhiwandi';
+    document.getElementById('fPinCode').value = '421302';
+
+    loadAllData().catch(err => console.error('Initial load failed:', err));
+
+    setupCourseAutocomplete();
+
+    dom.searchInput?.addEventListener('input', (e) => filterTable(e.target.value));
+    dom.refreshBtn?.addEventListener('click', refreshAllData);
+    dom.mobileRefreshBtn?.addEventListener('click', refreshAllData);
+    dom.addNewBtn?.addEventListener('click', () => { resetFormForAdd(); navigateToPage(2); });
+    dom.mobileAddBtn?.addEventListener('click', () => { resetFormForAdd(); navigateToPage(2); });
+    dom.backBtn?.addEventListener('click', () => navigateToPage(1));
+    dom.backToPage1FromViewBtn?.addEventListener('click', () => navigateToPage(1));
+    dom.cancelFormBtn?.addEventListener('click', () => navigateToPage(1));
+
+    dom.examForm?.addEventListener('submit', handleFormSubmit);
+
+    dom.studentPickerBtn?.addEventListener('click', openStudentPicker);
+    dom.closeStudentPicker?.addEventListener('click', closeStudentPicker);
+    dom.studentSearchInput?.addEventListener('input', (e) => filterStudentList(e.target.value));
+
+    dom.editFromViewBtn?.addEventListener('click', () => {
+        if (viewingRowIndex !== null) openEditMode(viewingRowIndex);
+    });
+    dom.printFromViewBtn?.addEventListener('click', printExamFee);
+    dom.downloadPdfBtn?.addEventListener('click', downloadExamFeePDF);
+    dom.deleteFromViewBtn?.addEventListener('click', () => {
+        if (viewingRowIndex !== null) openDeleteModal(viewingRowIndex);
+    });
+
+    dom.confirmDeleteBtn?.addEventListener('click', confirmDelete);
+    dom.cancelDeleteBtn?.addEventListener('click', closeDeleteModal);
+    dom.closeDeleteModalBtn?.addEventListener('click', closeDeleteModal);
+
+    dom.closeGlobalModal?.addEventListener('click', () => dom.globalModal.classList.remove('active'));
+
+    window.addEventListener('click', (e) => {
+        if (e.target.classList && e.target.classList.contains('modal-overlay')) {
+            e.target.classList.remove('active');
+        }
+    });
+
+    console.log('✅ Exam_Fees.html app initialized (v1.3)');
+}
+
+
+/* =====================================================================
+   SECTION 18 — BOOTSTRAP
+   ===================================================================== */
+
+(function bootstrap() {
+    syncThemeWithParent();
+    const start = () => {
+        setTimeout(() => gateAdminAccess(() => initApp()), 800);
+    };
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start);
+    } else {
+        start();
+    }
+    setTimeout(() => {
+        const mainEl = document.getElementById('mainContent');
+        const stillHidden = !mainEl || mainEl.style.display === 'none';
+        if (stillHidden) {
+            const auth = checkAdminAuth();
+            if (!auth.ok) {
+                console.warn('⏰ Safety net: redirecting');
+                redirectToMyAccount(auth.reason);
+            }
+        }
+    }, 5000);
+})();
+
+
+/* =====================================================================
+   SECTION 19 — WINDOW EXPORTS
+   ===================================================================== */
+
+window.checkAdminAuth       = checkAdminAuth;
+window.openStudentPicker    = openStudentPicker;
+window.selectStudent        = selectStudent;
+window.filterStudentList    = filterStudentList;
+window.openViewPage         = openViewPage;
+window.openEditMode         = openEditMode;
+window.openDeleteModal      = openDeleteModal;
+window.confirmDelete        = confirmDelete;
+window.closeDeleteModal     = closeDeleteModal;
+window.refreshAllData       = refreshAllData;
+window.printExamFee         = printExamFee;
+window.downloadExamFeePDF   = downloadExamFeePDF;
+window.renderBatchValue     = renderBatchValue;   // ✅ NEW: for debugging
+window.getImageThumbnailUrl = getImageThumbnailUrl; // ✅ NEW
+
+console.log('✅ Exam_Fees.html script initialised (v1.3 — batch plain + profile image)');
+</script>
+</body>
+</html>

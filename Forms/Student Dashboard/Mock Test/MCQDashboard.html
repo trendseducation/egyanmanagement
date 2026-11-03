@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="dns-prefetch" href="https://script.google.com">
+<link rel="dns-prefetch" href="https://lh3.googleusercontent.com">
+
+<title>EGyan Skill Development · MCQ Tests</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet" media="print" onload="this.media='all'">
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</noscript>
+
+<script>
+(function () {
+    try {
+        var t = localStorage.getItem('user-theme-preference') || 'light';
+        document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+    } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+})();
+</script>
+
+<style>
+/* ============================================================
+   THEME VARIABLES
+   ============================================================ */
+:root {
+    --bg-body: #eef2f9;
+    --bg-body-grad: radial-gradient(1400px 700px at 50% -10%, rgba(37,99,235,0.08), transparent 60%);
+    --bg-card: #ffffff;
+    --bg-elevated: #ffffff;
+    --bg-soft: #f8fafc;
+    --bg-softer: #f1f5f9;
+    --text-main: #0f172a;
+    --text-muted: #5b6e8c;
+    --text-light: #94a3b8;
+    --border-light: #e2e8f0;
+    --border-strong: #cbd5e1;
+
+    --shadow-xs: 0 2px 6px -2px rgba(15, 23, 42, 0.06);
+    --shadow-sm: 0 10px 30px -12px rgba(15, 23, 42, 0.12);
+    --shadow-md: 0 18px 40px -18px rgba(15, 23, 42, 0.18);
+    --shadow-lg: 0 26px 52px -22px rgba(15, 23, 42, 0.26);
+
+    --accent: #2563eb;
+    --accent-2: #7c3aed;
+    --accent-soft: rgba(37, 99, 235, 0.10);
+    --accent-glow: rgba(37, 99, 235, 0.35);
+
+    --success: #10b981;
+    --success-soft: rgba(16, 185, 129, 0.12);
+    --danger: #ef4444;
+    --danger-soft: rgba(239, 68, 68, 0.12);
+    --warning: #f59e0b;
+    --warning-soft: rgba(245, 158, 11, 0.12);
+    --purple: #8b5cf6;
+    --purple-soft: rgba(139, 92, 246, 0.12);
+
+    --input-bg: #f8fafc;
+    --backdrop: rgba(15, 23, 42, 0.55);
+    --chip-bg: rgba(37, 99, 235, 0.08);
+
+    --grad-hero: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    --grad-basic: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    --grad-tally: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+    --grad-excel: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-top: env(safe-area-inset-top, 0px);
+}
+[data-theme="dark"] {
+    --bg-body: #060b18;
+    --bg-body-grad: radial-gradient(1400px 700px at 50% -10%, rgba(59,130,246,0.10), transparent 60%);
+    --bg-card: #0f172a;
+    --bg-elevated: #16213a;
+    --bg-soft: #0d1526;
+    --bg-softer: #101a30;
+    --text-main: #f1f5f9;
+    --text-muted: #9ca3af;
+    --text-light: #64748b;
+    --border-light: #1e2a44;
+    --border-strong: #2b3a58;
+
+    --shadow-xs: 0 2px 6px -2px rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 10px 30px -12px rgba(0, 0, 0, 0.65);
+    --shadow-md: 0 18px 40px -18px rgba(0, 0, 0, 0.8);
+    --shadow-lg: 0 26px 52px -22px rgba(0, 0, 0, 0.9);
+
+    --accent: #3b82f6;
+    --accent-2: #a78bfa;
+    --accent-soft: rgba(59, 130, 246, 0.18);
+    --accent-glow: rgba(59, 130, 246, 0.5);
+
+    --success: #22c55e;
+    --success-soft: rgba(34, 197, 94, 0.18);
+    --danger: #f87171;
+    --danger-soft: rgba(248, 113, 113, 0.18);
+    --warning: #fbbf24;
+    --warning-soft: rgba(251, 191, 36, 0.18);
+    --purple: #a78bfa;
+    --purple-soft: rgba(167, 139, 250, 0.18);
+
+    --input-bg: #16213a;
+    --backdrop: rgba(0, 0, 0, 0.78);
+    --chip-bg: rgba(59, 130, 246, 0.15);
+
+    --grad-hero: linear-gradient(135deg, #1e40af 0%, #6d28d9 100%);
+    --grad-basic: linear-gradient(135deg, #1e40af 0%, #4338ca 100%);
+    --grad-tally: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+    --grad-excel: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-body-grad), var(--bg-body);
+    color: var(--text-main);
+    transition: background 400ms ease, color 300ms ease;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+::-webkit-scrollbar-track { background: transparent; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes shimmer { 0% { background-position: -500px 0; } 100% { background-position: 500px 0; } }
+@keyframes softPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+@keyframes scaleIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes splashSpin { to { transform: rotate(360deg); } }
+@keyframes splashLogoIn { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes splashTextIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes splashBounce {
+    0%, 80%, 100% { transform: scale(0.7); opacity: 0.55; }
+    40% { transform: scale(1.1); opacity: 1; }
+}
+
+.spinner {
+    display: inline-block;
+    width: 18px; height: 18px;
+    border: 3px solid rgba(255,255,255,0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    will-change: transform;
+}
+.spinner-accent {
+    border: 3px solid var(--border-light);
+    border-top-color: var(--accent);
+}
+
+/* ============================================================
+   SPLASH
+   ============================================================ */
+.splash {
+    position: fixed;
+    inset: 0;
+    background: var(--grad-hero);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.4rem;
+    padding: 1.5rem;
+    text-align: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 450ms ease, visibility 450ms ease;
+    overflow: hidden;
+}
+.splash.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+.splash::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18), transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.12), transparent 50%);
+    pointer-events: none;
+}
+.splash::after {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.08) 90deg, transparent 180deg, rgba(255,255,255,0.08) 270deg, transparent 360deg);
+    animation: splashSpin 8s linear infinite;
+    pointer-events: none;
+}
+.splash-logo-wrap {
+    width: clamp(90px, 20vw, 130px);
+    height: clamp(90px, 20vw, 130px);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-shadow: 0 0 0 8px rgba(255,255,255,0.08), 0 20px 50px -15px rgba(0,0,0,0.4);
+    animation: splashLogoIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    position: relative;
+    z-index: 2;
+}
+.splash-logo { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2)); }
+.splash-title {
+    font-size: clamp(1.15rem, 3.2vw, 1.65rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    position: relative;
+    z-index: 2;
+    animation: splashTextIn 0.6s ease 0.15s both;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    max-width: 90vw;
+}
+.splash-subtitle {
+    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+    margin-top: -0.7rem;
+    animation: splashTextIn 0.6s ease 0.25s both;
+}
+.splash-loader {
+    display: flex;
+    gap: 6px;
+    margin-top: 0.5rem;
+    position: relative;
+    z-index: 2;
+    animation: splashTextIn 0.6s ease 0.35s both;
+}
+.splash-loader span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    animation: splashBounce 1.3s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(255,255,255,0.5);
+}
+.splash-loader span:nth-child(2) { animation-delay: 0.15s; }
+.splash-loader span:nth-child(3) { animation-delay: 0.3s; }
+.splash-hint {
+    font-size: clamp(0.68rem, 1.1vw, 0.78rem);
+    color: rgba(255,255,255,0.72);
+    font-weight: 600;
+    margin-top: 0.4rem;
+    position: relative;
+    z-index: 2;
+    animation: splashTextIn 0.6s ease 0.45s both;
+}
+
+/* ============================================================
+   APP SHELL
+   ============================================================ */
+.app-shell {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(0.75rem, 2vw, 1.5rem);
+    padding-top: calc(clamp(0.75rem, 2vw, 1.5rem) + var(--safe-top));
+    padding-bottom: calc(clamp(0.75rem, 2vw, 1.5rem) + var(--safe-bottom));
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.85rem, 2vw, 1.3rem);
+}
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--bg-card);
+    border-radius: 999px;
+    padding: 0.55rem clamp(0.85rem, 2vw, 1.3rem);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: calc(var(--safe-top) + 6px);
+    z-index: 50;
+    contain: layout paint;
+}
+.topbar-left { display: flex; align-items: center; gap: 0.7rem; min-width: 0; flex: 1; }
+.topbar-logo {
+    width: clamp(32px, 3.5vw, 40px);
+    height: clamp(32px, 3.5vw, 40px);
+    border-radius: 10px;
+    object-fit: cover;
+    background: var(--bg-soft);
+    flex-shrink: 0;
+}
+.topbar-title {
+    font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.btn-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    border-radius: 999px;
+    padding: 0.42rem 0.9rem;
+    font-weight: 700;
+    font-size: clamp(0.72rem, 1vw, 0.82rem);
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: background 220ms ease, color 220ms ease, transform 220ms ease;
+}
+.btn-back:hover { background: var(--accent); color: #fff; transform: translateY(-2px); }
+.btn-back:active { transform: scale(0.97); }
+.btn-back i { transition: transform 260ms ease; }
+.btn-back:hover i { transform: translateX(-3px); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero-card {
+    background: var(--grad-hero);
+    border-radius: clamp(18px, 3vw, 26px);
+    padding: clamp(1.4rem, 3vw, 2rem) clamp(1.2rem, 2.5vw, 1.8rem);
+    color: #fff;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: clamp(0.9rem, 2vw, 1.4rem);
+    flex-wrap: wrap;
+}
+.hero-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 85% 20%, rgba(255,255,255,0.18), transparent 55%);
+    pointer-events: none;
+}
+.hero-avatar {
+    width: clamp(56px, 9vw, 76px);
+    height: clamp(56px, 9vw, 76px);
+    border-radius: 50%;
+    object-fit: cover;
+    background: rgba(255,255,255,0.15);
+    border: 3px solid rgba(255,255,255,0.35);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 8px 24px -8px rgba(0,0,0,0.3);
+}
+.hero-meta { flex: 1; min-width: 0; position: relative; z-index: 1; }
+.hero-greeting {
+    font-size: clamp(0.68rem, 1vw, 0.78rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 3px;
+}
+.hero-name {
+    font-size: clamp(1.1rem, 2.4vw, 1.55rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 5px;
+    word-break: break-word;
+}
+.hero-course-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    padding: 0.28rem 0.75rem;
+    font-size: clamp(0.68rem, 0.95vw, 0.76rem);
+    font-weight: 700;
+    backdrop-filter: blur(6px);
+}
+.hero-course-chip i { font-size: 0.85em; }
+
+/* ============================================================
+   SECTION
+   ============================================================ */
+.section { display: flex; flex-direction: column; gap: clamp(0.7rem, 1.6vw, 1rem); }
+.section-head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.2rem 0.4rem;
+}
+.section-ico {
+    width: clamp(34px, 4vw, 42px);
+    height: clamp(34px, 4vw, 42px);
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+    flex-shrink: 0;
+    box-shadow: 0 6px 16px -6px rgba(0,0,0,0.25);
+}
+.section-ico.basic { background: var(--grad-basic); }
+.section-ico.tally { background: var(--grad-tally); }
+.section-ico.excel { background: var(--grad-excel); }
+.section-title {
+    font-size: clamp(1rem, 1.7vw, 1.18rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    flex: 1;
+    min-width: 0;
+}
+.section-count {
+    font-size: clamp(0.66rem, 0.95vw, 0.76rem);
+    font-weight: 800;
+    background: var(--chip-bg);
+    color: var(--text-muted);
+    padding: 3px 10px;
+    border-radius: 999px;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   TEST GRID
+   ============================================================ */
+.tests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: clamp(0.7rem, 1.6vw, 1rem);
+}
+
+.test-tile {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: clamp(16px, 2.2vw, 20px);
+    padding: clamp(1rem, 2vw, 1.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--text-main);
+    box-shadow: var(--shadow-xs);
+    position: relative;
+    overflow: hidden;
+    transition: transform 260ms cubic-bezier(0.2,0.9,0.3,1.1),
+                box-shadow 260ms ease,
+                border-color 260ms ease;
+    min-height: 148px;
+    isolation: isolate;
+}
+.test-tile::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    opacity: 0;
+    transition: opacity 260ms ease;
+}
+.test-tile.basic::before { background: var(--grad-basic); }
+.test-tile.tally::before { background: var(--grad-tally); }
+.test-tile.excel::before { background: var(--grad-excel); }
+.test-tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, var(--accent-soft) 100%);
+    opacity: 0;
+    transition: opacity 320ms ease;
+    pointer-events: none;
+    z-index: -1;
+}
+.test-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-soft);
+}
+.test-tile:hover::before { opacity: 1; }
+.test-tile:hover::after { opacity: 1; }
+.test-tile:active { transform: scale(0.98); }
+
+.tile-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+.tile-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.22rem 0.6rem;
+    border-radius: 999px;
+    font-size: clamp(0.6rem, 0.85vw, 0.68rem);
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+.tile-badge.basic { background: var(--accent-soft); color: var(--accent); }
+.tile-badge.tally { background: var(--success-soft); color: var(--success); }
+.tile-badge.excel { background: var(--warning-soft); color: var(--warning); }
+.tile-badge i { font-size: 0.85em; }
+
+.tile-num {
+    font-size: clamp(0.65rem, 0.9vw, 0.72rem);
+    color: var(--text-light);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+.tile-icon {
+    width: clamp(38px, 5vw, 46px);
+    height: clamp(38px, 5vw, 46px);
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+    transition: transform 260ms ease;
+}
+.test-tile.basic .tile-icon { background: var(--grad-basic); }
+.test-tile.tally .tile-icon { background: var(--grad-tally); }
+.test-tile.excel .tile-icon { background: var(--grad-excel); }
+.test-tile:hover .tile-icon { transform: scale(1.08) rotate(-5deg); }
+
+.tile-title {
+    font-size: clamp(0.88rem, 1.25vw, 0.98rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    color: var(--text-main);
+}
+.tile-sub {
+    font-size: clamp(0.7rem, 0.95vw, 0.78rem);
+    color: var(--text-muted);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.tile-sub i { color: var(--accent); font-size: 0.85em; }
+
+.tile-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: clamp(0.72rem, 1vw, 0.8rem);
+    font-weight: 800;
+    color: var(--accent);
+    margin-top: auto;
+    padding-top: 0.4rem;
+    border-top: 1px dashed var(--border-light);
+}
+.tile-cta i { transition: transform 260ms ease; }
+.test-tile:hover .tile-cta i { transform: translateX(4px); }
+
+/* ============================================================
+   EMPTY
+   ============================================================ */
+.empty-card {
+    background: var(--bg-card);
+    border-radius: clamp(16px, 2.2vw, 22px);
+    padding: clamp(2rem, 5vw, 3.5rem) 1.5rem;
+    text-align: center;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-xs);
+}
+.empty-ico {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--warning);
+    margin-bottom: 1rem;
+    animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.empty-card h3 { font-size: clamp(1rem, 2vw, 1.15rem); margin-bottom: 0.4rem; font-weight: 800; }
+.empty-card p {
+    color: var(--text-muted);
+    font-size: clamp(0.82rem, 1.4vw, 0.9rem);
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ============================================================
+   ERROR / SKELETON
+   ============================================================ */
+.state-box {
+    background: var(--bg-card);
+    border-radius: clamp(16px, 2.2vw, 22px);
+    padding: clamp(2rem, 5vw, 3.5rem) 1.5rem;
+    text-align: center;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-xs);
+    display: none;
+}
+.state-box.show { display: block; animation: fadeUp 0.4s ease; }
+.state-box .state-ico {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--accent);
+    margin-bottom: 1rem;
+    animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.state-box h3 { font-size: clamp(1rem, 2vw, 1.15rem); margin-bottom: 0.4rem; font-weight: 700; }
+.state-box p {
+    color: var(--text-muted);
+    font-size: clamp(0.82rem, 1.4vw, 0.9rem);
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+.skeleton {
+    background: linear-gradient(90deg, var(--bg-soft) 0%, var(--border-light) 50%, var(--bg-soft) 100%);
+    background-size: 500px 100%;
+    animation: shimmer 1.4s infinite linear;
+    border-radius: 8px;
+    will-change: background-position;
+}
+.skeleton-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: clamp(14px, 2vw, 20px);
+    overflow: hidden;
+    box-shadow: var(--shadow-xs);
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast-host {
+    position: fixed;
+    bottom: calc(20px + var(--safe-bottom));
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 2000;
+    pointer-events: none;
+    max-width: min(92vw, 340px);
+}
+.toast {
+    background: var(--bg-card);
+    border-left: 5px solid var(--accent);
+    padding: 0.8rem 1rem;
+    border-radius: 0 14px 14px 0;
+    box-shadow: var(--shadow-lg);
+    font-weight: 600;
+    font-size: 0.86rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    pointer-events: auto;
+    animation: fadeUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    transition: opacity 250ms ease, transform 250ms ease;
+}
+.toast.success { border-left-color: var(--success); }
+.toast.error   { border-left-color: var(--danger); }
+.toast.warning { border-left-color: var(--warning); }
+.toast.info    { border-left-color: var(--accent); }
+.toast i { font-size: 1rem; }
+.toast.success i { color: var(--success); }
+.toast.error i   { color: var(--danger); }
+.toast.warning i { color: var(--warning); }
+.toast.info i    { color: var(--accent); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer-note {
+    text-align: center;
+    padding: 0.5rem 0.5rem 0.2rem;
+    font-size: clamp(0.68rem, 0.95vw, 0.76rem);
+    color: var(--text-light);
+    font-weight: 600;
+}
+.footer-note i { color: var(--accent); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 640px) {
+    body { font-size: 14px; }
+    .app-shell {
+        padding: 0.65rem 0.75rem;
+        padding-top: calc(0.65rem + var(--safe-top));
+        padding-bottom: calc(0.9rem + var(--safe-bottom));
+        gap: 0.85rem;
+    }
+        .topbar { border-radius: 20px; padding: 0.5rem 0.75rem; top: calc(var(--safe-top) + 4px); }
+    .topbar-title { font-size: 0.9rem; }
+    .btn-back { padding: 0.4rem 0.75rem; font-size: 0.74rem; }
+
+    .hero-card { border-radius: 20px; padding: 1.2rem 1.1rem; gap: 0.9rem; }
+    .hero-avatar { width: 56px; height: 56px; }
+    .hero-name { font-size: 1.08rem; }
+    .hero-course-chip { font-size: 0.68rem; padding: 0.24rem 0.65rem; }
+
+    .tests-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
+    .test-tile {
+        padding: 0.85rem 0.75rem;
+        min-height: 140px;
+        border-radius: 16px;
+        gap: 0.5rem;
+    }
+    .tile-icon { width: 36px; height: 36px; font-size: 0.9rem; border-radius: 10px; }
+    .tile-title { font-size: 0.82rem; }
+    .tile-sub { font-size: 0.66rem; }
+    .tile-cta { font-size: 0.7rem; }
+    .tile-badge { font-size: 0.58rem; padding: 0.18rem 0.5rem; }
+    .tile-num { font-size: 0.6rem; }
+
+    .test-tile:hover { transform: none; box-shadow: var(--shadow-xs); border-color: var(--border-light); }
+    .test-tile:hover::before, .test-tile:hover::after { opacity: 0; }
+    .test-tile:hover .tile-icon { transform: none; }
+    .test-tile:active { transform: scale(0.96); border-color: var(--accent); }
+
+    .section-head { gap: 0.6rem; padding: 0.2rem 0.2rem; }
+    .section-ico { width: 32px; height: 32px; font-size: 0.85rem; border-radius: 10px; }
+    .section-title { font-size: 0.94rem; }
+    .section-count { font-size: 0.62rem; padding: 2px 8px; }
+
+    .toast-host {
+        left: 12px;
+        right: 12px;
+        bottom: calc(12px + var(--safe-bottom));
+        max-width: none;
+    }
+    .toast { border-radius: 14px; border-left: none; border-top: 4px solid var(--accent); padding: 0.75rem 0.95rem; }
+    .toast.success { border-top-color: var(--success); border-left-color: transparent; }
+    .toast.error   { border-top-color: var(--danger);  border-left-color: transparent; }
+    .toast.warning { border-top-color: var(--warning); border-left-color: transparent; }
+}
+
+@media (max-width: 400px) {
+    .tests-grid { grid-template-columns: 1fr; }
+    .test-tile { min-height: 128px; }
+    .hero-name { font-size: 1rem; }
+    .topbar-title { font-size: 0.82rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .splash::after,
+    .splash-logo-wrap,
+    .splash-title,
+    .splash-subtitle,
+    .splash-loader,
+    .splash-loader span,
+    .splash-hint {
+        animation: none !important;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SPLASH SCREEN
+     ══════════════════════════════════════════════════════════════ -->
+<div class="splash" id="splashScreen" role="status" aria-live="polite" aria-label="Loading MCQ Tests">
+    <div class="splash-logo-wrap">
+        <img class="splash-logo"
+             src="https://lh3.googleusercontent.com/d/1cRWU-0cLUEkHpW8C6rRV9XX2OkRgKnrb=w200"
+             alt="EGyan Skill Development" width="130" height="130"
+             decoding="async" fetchpriority="high">
+    </div>
+    <div>
+        <h1 class="splash-title">MCQ Tests</h1>
+        <p class="splash-subtitle">Loading your tests…</p>
+    </div>
+    <div class="splash-loader" aria-hidden="true">
+        <span></span><span></span><span></span>
+    </div>
+    <p class="splash-hint">Just a moment…</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     APP SHELL
+     ══════════════════════════════════════════════════════════════ -->
+<div class="app-shell">
+
+    <!-- ─────────── TOPBAR ─────────── -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <img class="topbar-logo" id="topbarLogo"
+                 src="https://lh3.googleusercontent.com/d/1cRWU-0cLUEkHpW8C6rRV9XX2OkRgKnrb=w80"
+                 alt="EGyan" width="40" height="40"
+                 decoding="async" loading="lazy">
+            <span class="topbar-title">MCQ Tests</span>
+        </div>
+        <button class="btn-back" id="btnBack" type="button" aria-label="Back to dashboard">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+    </header>
+
+    <!-- ─────────── SKELETON ─────────── -->
+    <div id="skeleton" style="display:none;">
+        <div class="skeleton-card skeleton" style="height: 130px; margin-bottom: 1rem;"></div>
+        <div class="skeleton-card skeleton" style="height: 160px;"></div>
+    </div>
+
+    <!-- ─────────── ERROR STATE ─────────── -->
+    <div class="state-box" id="errorState" role="alert">
+        <div class="state-ico" style="color: var(--danger);">
+            <i class="fas fa-circle-exclamation"></i>
+        </div>
+        <h3 id="errorTitle">Something went wrong</h3>
+        <p id="errorMsg">Please try again or contact your academy.</p>
+    </div>
+
+    <!-- ─────────── MAIN CONTENT ─────────── -->
+    <main id="mainContent" style="display:none; display: flex; flex-direction: column; gap: clamp(0.85rem, 2vw, 1.3rem);">
+
+        <!-- ─────────── HERO ─────────── -->
+        <section class="hero-card" aria-label="Student info">
+            <img class="hero-avatar" id="heroAvatar"
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%232563eb'/%3E%3Ccircle cx='60' cy='48' r='21' fill='%23fff' opacity='0.9'/%3E%3Cellipse cx='60' cy='100' rx='35' ry='28' fill='%23fff' opacity='0.9'/%3E%3C/svg%3E"
+                 alt="Student" width="76" height="76" decoding="async">
+            <div class="hero-meta">
+                <div class="hero-greeting">Welcome back</div>
+                <h1 class="hero-name" id="heroName">—</h1>
+                <span class="hero-course-chip">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span id="heroCourse">—</span>
+                </span>
+            </div>
+        </section>
+
+        <!-- ─────────── DYNAMIC SECTIONS ─────────── -->
+        <div id="sectionsWrap"></div>
+
+        <!-- ─────────── FOOTER NOTE ─────────── -->
+        <p class="footer-note">
+            <i class="fas fa-info-circle"></i>
+            Tap any test to begin · Attempts are saved to your record
+        </p>
+
+    </main>
+
+</div><!-- /.app-shell -->
+
+<!-- ══════════════════════════════════════════════════════════════
+     TOAST HOST
+     ══════════════════════════════════════════════════════════════ -->
+<div class="toast-host" id="toastHost" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+(function () {
+
+/* ============================================================
+   CONFIG — MUST MATCH StudentDashboard.html
+   ============================================================ */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwzEbd10tAnSKJSsg01LOXr8MAgKTFO4cp2sjq9moatjN3_IWZ8ZWF9uViTXE-991Nq/exec";
+
+const SPREADSHEET_ID     = "14DSh6jSYukltWrm72rZewxWjQpMcUFuvnR5sqrm9pDg";
+const STUDENT_SHEETS     = ['Adm_Details'];
+
+const COL = {
+    EMAIL:     'Email Id',
+    FULL_NAME: 'Full Name',
+    STD:       'Adm In',
+    IMAGE:     'Image'
+};
+
+const EMAIL_HEADER_ALIASES = [
+    'email id', 'email', 'emailid', 'e-mail', 'email address', 'emailaddress'
+];
+const NAME_HEADER_ALIASES = [
+    'full name','fullname','name','student name','studentname',
+    'student','full_name','full-name','student_name','student-name',
+    'name of student','nameofstudent'
+];
+const STD_HEADER_ALIASES = [
+    'adm in','adm_in','adm-in','admission in','standard','std','class','grade'
+];
+
+/* Session + cache keys */
+const SESSION_KEYS       = { USER: 'EGyan_user', USER_TYPE: 'EGyan_user_type' };
+const PROFILE_KEY_PREFIX = 'EGyan_dash_v2_profile_';
+const SHEET_KEY_PREFIX   = 'EGyan_dash_v2_sheet_';
+const THEME_KEY          = 'user-theme-preference';
+
+const PROFILE_CACHE_TTL = 24 * 60 * 60 * 1000;
+const SHEET_CACHE_TTL   = 5 * 60 * 1000;
+
+/* ============================================================
+   TEST CATALOG
+   ============================================================ */
+const TEST_CATEGORIES = {
+    basic: {
+        id:    'basic',
+        title: 'Basic Test Series',
+        icon:  'fa-laptop-code',
+        color: 'basic',
+        tests: [
+            { title: 'Basic Test 1', file: 'BasicP1.html', desc: 'Fundamentals · 50 Qs' },
+            { title: 'Basic Test 2', file: 'BasicP2.html', desc: 'Practice · 50 Qs' },
+            { title: 'Basic Test 3', file: 'BasicP3.html', desc: 'Intermediate · 50 Qs' },
+            { title: 'Basic Test 4', file: 'BasicP4.html', desc: 'Advanced · 50 Qs' },
+            { title: 'Basic Test 5', file: 'BasicP5.html', desc: 'Challenge · 50 Qs' },
+            { title: 'Basic Test 6', file: 'BasicP6.html', desc: 'Final · 50 Qs' }
+        ]
+    },
+    tally: {
+        id:    'tally',
+        title: 'Tally (GST) Test Series',
+        icon:  'fa-calculator',
+        color: 'tally',
+        tests: [
+            { title: 'Tally (GST) Test 1', file: 'TallyP1.html', desc: 'GST Basics · 50 Qs' },
+            { title: 'Tally (GST) Test 2', file: 'TallyP2.html', desc: 'Entries · 50 Qs' },
+            { title: 'Tally (GST) Test 3', file: 'TallyP3.html', desc: 'Reports · 50 Qs' },
+            { title: 'Tally (GST) Test 4', file: 'TallyP4.html', desc: 'Returns · 50 Qs' },
+            { title: 'Tally (GST) Test 5', file: 'TallyP5.html', desc: 'Final · 50 Qs' }
+        ]
+    },
+    excel: {
+        id:    'excel',
+        title: 'Advance Excel Test Series',
+        icon:  'fa-file-excel',
+        color: 'excel',
+        tests: [
+            { title: 'Advance Excel Test 1', file: 'AdvExcelP1.html', desc: 'Formulas · 50 Qs' },
+            { title: 'Advance Excel Test 2', file: 'AdvExcelP2.html', desc: 'Functions · 50 Qs' },
+            { title: 'Advance Excel Test 3', file: 'AdvExcelP3.html', desc: 'Charts · 50 Qs' },
+            { title: 'Advance Excel Test 4', file: 'AdvExcelP4.html', desc: 'Pivot Tables · 50 Qs' },
+            { title: 'Advance Excel Test 5', file: 'AdvExcelP5.html', desc: 'Final · 50 Qs' }
+        ]
+    }
+};
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let student = {
+    email:  '',
+    name:   '',
+    std:    '',
+    avatar: ''
+};
+let visibleCategories = [];
+
+/* ============================================================
+   DOM
+   ============================================================ */
+const $ = (id) => document.getElementById(id);
+const dom = {};
+function cacheDom() {
+    dom.topbarLogo     = $('topbarLogo');
+    dom.btnBack        = $('btnBack');
+    dom.skeleton       = $('skeleton');
+    dom.errorState     = $('errorState');
+    dom.errorTitle     = $('errorTitle');
+    dom.errorMsg       = $('errorMsg');
+    dom.mainContent    = $('mainContent');
+    dom.heroAvatar     = $('heroAvatar');
+    dom.heroName       = $('heroName');
+    dom.heroCourse     = $('heroCourse');
+    dom.sectionsWrap   = $('sectionsWrap');
+    dom.toastHost      = $('toastHost');
+}
+
+/* ============================================================
+   SPLASH
+   ============================================================ */
+let splashHidden = false;
+function hideSplash() {
+    if (splashHidden) return;
+    splashHidden = true;
+    const el = document.getElementById('splashScreen');
+    if (!el) return;
+    el.classList.add('hide');
+    setTimeout(() => { try { el.remove(); } catch (e) {} }, 500);
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+function escapeHtml(v) {
+    return (v == null ? '' : v.toString())
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function normalizeEmail(v) { return (v || '').toString().trim().toLowerCase(); }
+function getFileId(url) {
+    if (!url) return '';
+    const m = url.toString().match(/\/d\/([-\w]{25,})|id=([-\w]{25,})/);
+    if (m) return m[1] || m[2] || '';
+    const bare = url.toString().match(/^([-\w]{25,})$/);
+    return bare ? bare[1] : '';
+}
+function lsGet(key) {
+    try { const r = localStorage.getItem(key); return r ? JSON.parse(r) : null; }
+    catch (e) { return null; }
+}
+function lsSet(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+    catch (e) { return false; }
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+const TOAST_ICONS = {
+    success: 'fa-circle-check',
+    error:   'fa-circle-xmark',
+    warning: 'fa-triangle-exclamation',
+    info:    'fa-circle-info'
+};
+function showToast(msg, type = 'info', ms = 3200) {
+    if (!dom.toastHost) return;
+    const el = document.createElement('div');
+    el.className = `toast ${type}`;
+    el.innerHTML = `<i class="fas ${TOAST_ICONS[type] || TOAST_ICONS.info}"></i><span>${escapeHtml(msg)}</span>`;
+    dom.toastHost.appendChild(el);
+    setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(10px)';
+        setTimeout(() => el.remove(), 250);
+    }, ms);
+}
+
+/* ============================================================
+   THEME
+   ============================================================ */
+function initThemeSync() {
+    const applyTheme = (t) => {
+        if (t) document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+    };
+    applyTheme(localStorage.getItem(THEME_KEY) || 'light');
+    window.addEventListener('storage', (e) => {
+        if (e.key === THEME_KEY && e.newValue) applyTheme(e.newValue);
+    });
+    window.addEventListener('message', (e) => {
+        if (e.data && e.data.type === 'themeChange' && e.data.theme) applyTheme(e.data.theme);
+    });
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) applyTheme(localStorage.getItem(THEME_KEY) || 'light');
+    });
+}
+
+/* ============================================================
+   SESSION
+   ============================================================ */
+function readSessionValue(key) {
+    const localRaw = localStorage.getItem(key);
+    if (localRaw) {
+        try {
+            const parsed = JSON.parse(localRaw);
+            if (parsed && typeof parsed === 'object' && 'value' in parsed) {
+                if (parsed.expiry && Date.now() >= parsed.expiry) {
+                    localStorage.removeItem(key); return null;
+                }
+                return parsed.value;
+            }
+            return parsed;
+        } catch (e) { return localRaw; }
+    }
+    const s = sessionStorage.getItem(key);
+    if (s) { try { return JSON.parse(s); } catch (e) { return s; } }
+    return null;
+}
+function getLoggedInEmail() {
+    const userType = readSessionValue(SESSION_KEYS.USER_TYPE);
+    if (userType !== 'student') return null;
+    const email = readSessionValue(SESSION_KEYS.USER);
+    return email ? normalizeEmail(email) : null;
+}
+
+/* ============================================================
+   ROW READERS (alias-aware)
+   ============================================================ */
+function getRowByAliases(row, directKey, aliases) {
+    if (!row) return '';
+    const direct = row[directKey];
+    if (direct != null && direct.toString().trim() !== '') return direct.toString().trim();
+    for (const key of Object.keys(row)) {
+        const norm = key.toString().trim().toLowerCase();
+        if (aliases.includes(norm)) {
+            const v = row[key];
+            if (v != null && v.toString().trim() !== '') return v.toString().trim();
+        }
+    }
+    return '';
+}
+function getRowName(row)  { return getRowByAliases(row, COL.FULL_NAME, NAME_HEADER_ALIASES); }
+function getRowEmail(row) { return getRowByAliases(row, COL.EMAIL,     EMAIL_HEADER_ALIASES); }
+function getRowStd(row)   { return getRowByAliases(row, COL.STD,       STD_HEADER_ALIASES); }
+
+/* ============================================================
+   CACHE
+   ============================================================ */
+function getCachedProfile(email) {
+    if (!email) return null;
+    try {
+        const key = PROFILE_KEY_PREFIX + normalizeEmail(email);
+        const raw = localStorage.getItem(key);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || !parsed.row) return null;
+        return parsed;
+    } catch (e) { return null; }
+}
+function setCachedProfile(email, payload) {
+    if (!email) return;
+    try {
+        const key = PROFILE_KEY_PREFIX + normalizeEmail(email);
+        localStorage.setItem(key, JSON.stringify({ ts: Date.now(), ...payload }));
+    } catch (e) {}
+}
+function getCachedSheet(spreadsheetId, sheetName, { allowStale = false } = {}) {
+    const key = `${SHEET_KEY_PREFIX}${spreadsheetId}::${sheetName}`;
+    const stored = lsGet(key);
+    if (stored && Array.isArray(stored.rows)) {
+        if (allowStale || (Date.now() - stored.ts) < SHEET_CACHE_TTL) return stored.rows;
+    }
+    return null;
+}
+function setCachedSheet(spreadsheetId, sheetName, rows) {
+    const key = `${SHEET_KEY_PREFIX}${spreadsheetId}::${sheetName}`;
+    lsSet(key, { ts: Date.now(), rows });
+}
+
+/* ============================================================
+   NETWORK
+   ============================================================ */
+async function fetchSheetFromNetwork(spreadsheetId, sheetName) {
+    const url = `${SCRIPT_URL}?spreadsheetId=${spreadsheetId}&sheetName=${encodeURIComponent(sheetName)}&action=getData&_=${Date.now()}`;
+    const resp = await fetch(url, { cache: 'no-store' });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const json = await resp.json();
+    if (json.status !== 'success' || !Array.isArray(json.data)) {
+        throw new Error(json.message || 'Invalid response');
+    }
+    setCachedSheet(spreadsheetId, sheetName, json.data);
+    return json.data;
+}
+async function fetchSheet(spreadsheetId, sheetName, { allowStale = false, force = false } = {}) {
+    if (!force) {
+        const cached = getCachedSheet(spreadsheetId, sheetName, { allowStale });
+        if (cached) return cached;
+    }
+    return fetchSheetFromNetwork(spreadsheetId, sheetName);
+}
+
+/* ============================================================
+   FIND STUDENT
+   ============================================================ */
+async function findStudentByEmail(email) {
+    const target = normalizeEmail(email);
+    for (const sheet of STUDENT_SHEETS) {
+        try {
+            const rows = await fetchSheet(SPREADSHEET_ID, sheet, { allowStale: true });
+            const idx = rows.findIndex(r => normalizeEmail(getRowEmail(r)) === target);
+            if (idx !== -1) return { sheet, row: rows[idx], rowIndex: idx + 2 };
+        } catch (e) {}
+    }
+    return null;
+}
+
+/* ============================================================
+   COURSE → CATEGORY MATCHER
+   ============================================================ */
+function parseCourse(stdRaw) {
+    const s = (stdRaw || '').toString().toLowerCase();
+
+    /* Detect keywords (order matters — check most specific first) */
+    const hasBasic = /\bbasic\b/.test(s);
+    const hasTally = /\btally\b|\bgst\b/.test(s);
+    const hasExcel = /\bexcel\b|\badvance\s*excel\b|\badvanced\s*excel\b|\badv\.?\s*excel\b/.test(s);
+
+    const categories = [];
+    if (hasBasic) categories.push('basic');
+    if (hasTally) categories.push('tally');
+    if (hasExcel) categories.push('excel');
+
+    /* Safety: if nothing detected but course text contains something else,
+       default to showing all three? No — better to show nothing so we don't
+       confuse the user. Admin should fix the sheet.
+    */
+    return categories;
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function renderHero() {
+    dom.heroName.textContent   = student.name || 'Student';
+    dom.heroCourse.textContent = student.std  || '—';
+
+    if (student.avatar) {
+        const id = getFileId(student.avatar);
+        if (id) {
+            dom.heroAvatar.src = `https://lh3.googleusercontent.com/d/${id}=w160`;
+            dom.topbarLogo.src = `https://lh3.googleusercontent.com/d/${id}=w80`;
+        }
+    }
+}
+
+function renderCategory(category) {
+    const tests = category.tests.map((t, i) => `
+        <a href="${escapeHtml(t.file)}" class="test-tile ${category.color}" aria-label="${escapeHtml(t.title)}">
+            <div class="tile-top">
+                <span class="tile-badge ${category.color}">
+                    <i class="fas ${category.icon}"></i>
+                    ${category.color === 'basic' ? 'Basic' : category.color === 'tally' ? 'Tally' : 'Excel'}
+                </span>
+                <span class="tile-num">#${String(i + 1).padStart(2, '0')}</span>
+            </div>
+            <div class="tile-icon"><i class="fas ${category.icon}"></i></div>
+            <div class="tile-title">${escapeHtml(t.title)}</div>
+            <div class="tile-sub">
+                <i class="fas fa-list-ol"></i>
+                ${escapeHtml(t.desc || '')}
+            </div>
+            <div class="tile-cta">
+                Start Test <i class="fas fa-arrow-right"></i>
+            </div>
+        </a>
+    `).join('');
+
+    return `
+        <section class="section" data-cat="${category.id}">
+            <div class="section-head">
+                <div class="section-ico ${category.color}">
+                    <i class="fas ${category.icon}"></i>
+                </div>
+                <h2 class="section-title">${escapeHtml(category.title)}</h2>
+                <span class="section-count">${category.tests.length} Tests</span>
+            </div>
+            <div class="tests-grid">${tests}</div>
+        </section>
+    `;
+}
+
+function renderSections() {
+    if (!visibleCategories.length) {
+        dom.sectionsWrap.innerHTML = `
+            <div class="empty-card">
+                <div class="empty-ico"><i class="fas fa-inbox"></i></div>
+                <h3>No tests assigned yet</h3>
+                <p>Your course <strong>${escapeHtml(student.std || '')}</strong> doesn't match any test category. Please contact your academy to update your course.</p>
+            </div>
+        `;
+        return;
+    }
+    dom.sectionsWrap.innerHTML = visibleCategories
+        .map(id => renderCategory(TEST_CATEGORIES[id]))
+        .join('');
+}
+
+function showMain() {
+    dom.skeleton.style.display   = 'none';
+    dom.errorState.classList.remove('show');
+    dom.mainContent.style.display = 'flex';
+    renderHero();
+    renderSections();
+}
+
+function showError(title, msg) {
+    dom.skeleton.style.display = 'none';
+    dom.mainContent.style.display = 'none';
+    dom.errorTitle.textContent = title;
+    dom.errorMsg.textContent   = msg;
+    dom.errorState.classList.add('show');
+}
+
+/* ============================================================
+   BIND
+   ============================================================ */
+function bindEvents() {
+    dom.btnBack.addEventListener('click', () => {
+        if (history.length > 1) history.back();
+        else window.location.href = '../StudentDashboard.html';
+    });
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+async function init() {
+    cacheDom();
+    initThemeSync();
+    bindEvents();
+
+    const splashSafety = setTimeout(() => {
+        console.warn('[splash] safety timeout — forcing hide');
+        hideSplash();
+    }, 6000);
+
+    const email = getLoggedInEmail();
+    if (!email) {
+        clearTimeout(splashSafety);
+        hideSplash();
+        showError('Please log in', 'You need to be logged in as a student to view your tests.');
+        return;
+    }
+    student.email = email;
+
+    /* ── Try cached profile first ── */
+    const cached = getCachedProfile(email);
+    if (cached && cached.row) {
+        student.name   = getRowName(cached.row) || cached.fullName || 'Student';
+        student.std    = getRowStd(cached.row)  || '—';
+        student.avatar = cached.row[COL.IMAGE]  || '';
+
+        visibleCategories = parseCourse(student.std);
+
+        clearTimeout(splashSafety);
+        hideSplash();
+        showMain();
+        return;
+    }
+
+    /* ── Cold path: fetch from Adm_Details ── */
+    dom.skeleton.style.display = 'block';
+    try {
+        const found = await findStudentByEmail(email);
+        if (!found) {
+            clearTimeout(splashSafety);
+            hideSplash();
+            showError('Student record not found',
+                `We couldn't find any record for ${email}. Please contact the academy.`);
+            return;
+        }
+
+        student.name   = getRowName(found.row) || 'Student';
+        student.std    = getRowStd(found.row)  || '—';
+        student.avatar = found.row[COL.IMAGE]  || '';
+
+        setCachedProfile(email, {
+            row:       found.row,
+            sheetName: found.sheet,
+            rowIndex:  found.rowIndex,
+            fullName:  student.name
+        });
+
+        visibleCategories = parseCourse(student.std);
+
+        clearTimeout(splashSafety);
+        hideSplash();
+        showMain();
+    } catch (err) {
+        clearTimeout(splashSafety);
+        hideSplash();
+        console.error('[init]', err);
+        showError('Failed to load', err.message || 'Something went wrong.');
+    }
+}
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+function scheduleInit() {
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => init(), { timeout: 1200 });
+    } else {
+        setTimeout(init, 0);
+    }
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleInit, { once: true });
+} else {
+    scheduleInit();
+}
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,2930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#f59e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+<title>Google Drive · Basic Computer · EGyan</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- FOUC prevention -->
+<script>
+(function () {
+  try {
+    var stored = localStorage.getItem('user-theme-preference');
+    var theme = stored;
+    if (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      theme = 'dark';
+    }
+    document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
+<style>
+/* ============================================================
+   THEME VARIABLES
+   ============================================================ */
+:root {
+  --bg-body:        #fffdf5;
+  --bg-card:        #ffffff;
+  --bg-header:      #ffffff;
+  --bg-soft:        #fff9e6;
+  --bg-code:        #fef9ef;
+
+  --text-main:      #1f2937;
+  --text-muted:     #6b7280;
+  --text-light:     #9ca3af;
+  --border-light:   #f0e8d0;
+
+  --shadow-sm:      0 10px 28px -12px rgba(245, 158, 11, 0.18);
+  --shadow-hover:   0 22px 44px -18px rgba(245, 158, 11, 0.32);
+  --shadow-card:    0 8px 30px -10px rgba(245, 158, 11, 0.15);
+
+  --gold:           #f59e0b;
+  --gold-2:         #fbbf24;
+  --gold-soft:      rgba(245, 158, 11, 0.12);
+  --gold-glow:      rgba(245, 158, 11, 0.4);
+
+  --accent:         #0d9488;
+  --accent-2:       #14b8a6;
+  --accent-soft:    rgba(13, 148, 136, 0.10);
+  --accent-glow:    rgba(13, 148, 136, 0.35);
+
+  --drive-blue:     #4285f4;
+  --drive-green:    #34a853;
+  --drive-yellow:   #fbbc05;
+  --drive-red:      #ea4335;
+
+  --success:        #10b981;
+  --danger:         #ef4444;
+  --warning:        #f59e0b;
+  --info:           #3b82f6;
+
+  --teacher-teal:   #0d9488;
+  --admin-gold:     #f59e0b;
+
+  --hl-bg:          linear-gradient(180deg, transparent 60%, rgba(245, 158, 11, 0.35) 60%);
+  --hl-teal-bg:     linear-gradient(180deg, transparent 60%, rgba(13, 148, 136, 0.28) 60%);
+  --hl-blue-bg:     linear-gradient(180deg, transparent 60%, rgba(66, 133, 244, 0.28) 60%);
+
+  --kbd-bg:         linear-gradient(180deg, #ffffff 0%, #f5f1e5 100%);
+  --kbd-border:     #d1c7a8;
+  --kbd-shadow:     inset 0 -2px 0 #d1c7a8, 0 2px 0 rgba(0,0,0,0.08);
+  --kbd-text:       #1f2937;
+
+  --card-border:    1px solid rgba(245, 158, 11, 0.12);
+  --overlay-bg:     rgba(15, 23, 42, 0.45);
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+}
+
+[data-theme="dark"] {
+  --bg-body:        #0b0e0d;
+  --bg-card:        #16201e;
+  --bg-header:      #0f1a18;
+  --bg-soft:        #131d1b;
+  --bg-code:        #0f1a18;
+
+  --text-main:      #f1f5f9;
+  --text-muted:     #9ca3af;
+  --text-light:     #64748b;
+  --border-light:   #1f2b28;
+
+  --shadow-sm:      0 10px 30px -12px rgba(0, 0, 0, 0.65);
+  --shadow-hover:   0 22px 44px -18px rgba(0, 0, 0, 0.85);
+  --shadow-card:    0 8px 32px -10px rgba(0, 0, 0, 0.55);
+
+  --gold:           #fbbf24;
+  --gold-2:         #fcd34d;
+  --gold-soft:      rgba(251, 191, 36, 0.18);
+  --gold-glow:      rgba(251, 191, 36, 0.5);
+
+  --accent:         #14b8a6;
+  --accent-2:       #2dd4bf;
+  --accent-soft:    rgba(20, 184, 166, 0.18);
+  --accent-glow:    rgba(20, 184, 166, 0.45);
+
+  --drive-blue:     #60a5fa;
+  --drive-green:    #4ade80;
+  --drive-yellow:   #fcd34d;
+  --drive-red:      #f87171;
+
+  --success:        #34d399;
+  --danger:         #f87171;
+  --warning:        #fbbf24;
+  --info:           #60a5fa;
+
+  --teacher-teal:   #14b8a6;
+  --admin-gold:     #fbbf24;
+
+  --hl-bg:          linear-gradient(180deg, transparent 60%, rgba(251, 191, 36, 0.28) 60%);
+  --hl-teal-bg:     linear-gradient(180deg, transparent 60%, rgba(20, 184, 166, 0.28) 60%);
+  --hl-blue-bg:     linear-gradient(180deg, transparent 60%, rgba(96, 165, 250, 0.3) 60%);
+
+  --kbd-bg:         linear-gradient(180deg, #2a3735 0%, #1f2b28 100%);
+  --kbd-border:     #3a4a47;
+  --kbd-shadow:     inset 0 -2px 0 #0a1210, 0 2px 0 rgba(0,0,0,0.4);
+  --kbd-text:       #f1f5f9;
+
+  --card-border:    1px solid rgba(251, 191, 36, 0.12);
+  --overlay-bg:     rgba(0, 0, 0, 0.75);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg-body);
+  scroll-padding-top: 90px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-body);
+  color: var(--text-main);
+  transition: background var(--transition-normal), color var(--transition-normal);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1.7;
+}
+
+body.sidebar-lock { overflow: hidden; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes modalPop {
+  from { transform: scale(0.9) translateY(20px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ============================================================
+   AUTH SKELETON
+   ============================================================ */
+#authSkeleton {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-body);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.2rem;
+  transition: opacity 0.35s ease;
+}
+#authSkeleton.hidden { opacity: 0; pointer-events: none; }
+.skeleton-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--border-light);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+.skeleton-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+/* ============================================================
+   APP WRAPPER
+   ============================================================ */
+.app-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.2rem 1.8rem 3rem;
+  padding-left: max(1.8rem, env(safe-area-inset-left));
+  padding-right: max(1.8rem, env(safe-area-inset-right));
+  width: 100%;
+  visibility: hidden;
+}
+.app-wrapper.revealed { visibility: visible; }
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 0.7rem 1.5rem;
+  background: var(--bg-header);
+  padding: 0.6rem 1.5rem;
+  border-radius: 60px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.8rem;
+  transition: background var(--transition-normal), box-shadow var(--transition-normal);
+  position: sticky;
+  top: 8px;
+  z-index: 100;
+}
+
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.hamburger-btn {
+  display: none;
+  background: var(--gold-soft);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.hamburger-btn:hover { background: var(--gold); color: #1f2937; }
+.hamburger-btn:active { transform: scale(0.92); }
+
+.brand-logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: none;
+}
+[data-theme="dark"] .brand-logo { filter: brightness(0) invert(1); }
+
+.brand-text {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.right-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.role-badge {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 0.35rem 0.9rem;
+  border-radius: 40px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.role-badge.student { color: #2563eb; background: rgba(37, 99, 235, 0.12); }
+.role-badge.teacher { color: var(--teacher-teal); background: rgba(13, 148, 136, 0.12); }
+.role-badge.admin   { color: var(--admin-gold); background: rgba(245, 158, 11, 0.15); }
+
+[data-theme="dark"] .role-badge.student { color: #60a5fa; background: rgba(59, 130, 246, 0.2); }
+[data-theme="dark"] .role-badge.teacher { color: #14b8a6; background: rgba(20, 184, 166, 0.2); }
+[data-theme="dark"] .role-badge.admin   { color: #fbbf24; background: rgba(245, 158, 11, 0.2); }
+
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.45rem 1.1rem;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  background: var(--gold-soft);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.back-home:hover {
+  background: var(--gold);
+  color: #1f2937;
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -10px var(--gold-glow);
+}
+
+/* ============================================================
+   MOBILE SIDEBAR
+   ============================================================ */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.sidebar-backdrop.active { opacity: 1; visibility: visible; }
+
+.mobile-sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: min(85vw, 320px);
+  background: var(--bg-card);
+  border-right: 1px solid var(--border-light);
+  box-shadow: 8px 0 40px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.mobile-sidebar.open { transform: translateX(0); }
+
+.sidebar-header {
+  padding: 1.3rem 1.2rem 1.1rem;
+  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft));
+  position: relative;
+}
+
+.sidebar-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+[data-theme="dark"] .sidebar-close { background: rgba(0,0,0,0.4); }
+.sidebar-close:hover { background: var(--gold); color: #1f2937; }
+.sidebar-close:active { transform: scale(0.9); }
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  box-shadow: 0 6px 14px -6px var(--gold-glow);
+}
+
+.sidebar-user-info { min-width: 0; flex: 1; }
+.sidebar-user-name {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+.sidebar-user-role {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.sidebar-user-role.student { color: #2563eb; }
+.sidebar-user-role.teacher { color: var(--teacher-teal); }
+.sidebar-user-role.admin   { color: var(--admin-gold); }
+[data-theme="dark"] .sidebar-user-role.student { color: #60a5fa; }
+[data-theme="dark"] .sidebar-user-role.teacher { color: #14b8a6; }
+[data-theme="dark"] .sidebar-user-role.admin   { color: #fbbf24; }
+
+.sidebar-toc-heading {
+  padding: 1rem 1.2rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sidebar-toc-heading i { color: var(--gold); }
+
+.sidebar-toc-list {
+  list-style: none;
+  padding: 0 0.7rem 1rem;
+  flex: 1;
+}
+.sidebar-toc-list li { margin-bottom: 0.2rem; }
+.sidebar-toc-list a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all var(--transition-fast);
+  line-height: 1.3;
+}
+.sidebar-toc-list a:hover { background: var(--gold-soft); transform: translateX(3px); }
+.sidebar-toc-list a:active { transform: scale(0.98); }
+.sidebar-toc-list a.active {
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  box-shadow: 0 6px 16px -8px var(--gold-glow);
+}
+.sidebar-toc-list a .num {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: var(--gold-soft);
+  color: var(--gold);
+  font-size: 0.68rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.sidebar-toc-list a.active .num { background: rgba(255,255,255,0.85); color: var(--gold); }
+
+.sidebar-footer {
+  padding: 0.9rem 1.2rem 1.4rem;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.page-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem 2.2rem;
+  background: var(--bg-card);
+  border-radius: 32px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-2), var(--accent-2));
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  right: -100px; top: -100px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, var(--gold-soft), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-text { position: relative; z-index: 1; }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--gold);
+  background: var(--gold-soft);
+  padding: 0.35rem 0.9rem;
+  border-radius: 40px;
+  border: 1px solid var(--border-light);
+  margin-bottom: 0.9rem;
+}
+.hero-text h1 {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+  margin-bottom: 0.6rem;
+}
+.hero-text h1 .accent { color: var(--gold); }
+.hero-text p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 560px;
+}
+.hero-art {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  z-index: 1;
+  animation: float 5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+.search-wrap {
+  position: relative;
+  margin-bottom: 1.6rem;
+  max-width: 560px;
+}
+.search-input {
+  width: 100%;
+  padding: 0.85rem 1rem 0.85rem 3rem;
+  border-radius: 40px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-size: 0.92rem;
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  outline: none;
+}
+.search-input::placeholder { color: var(--text-light); }
+.search-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px var(--gold-soft);
+}
+.search-icon {
+  position: absolute;
+  left: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+.search-clear {
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: var(--gold-soft);
+  color: var(--gold);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: all var(--transition-fast);
+}
+.search-clear.visible { display: flex; }
+.search-clear:hover { background: var(--gold); color: #1f2937; }
+
+.search-results-info {
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding-left: 0.3rem;
+}
+.search-results-info strong { color: var(--gold); }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.content-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.toc {
+  position: sticky;
+  top: 90px;
+  background: var(--bg-card);
+  border: var(--card-border);
+  border-radius: 20px;
+  padding: 1.2rem 1rem;
+  box-shadow: var(--shadow-sm);
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+  display: block;
+}
+.toc h3 {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  margin-bottom: 0.8rem;
+  padding-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.toc h3 i { color: var(--gold); }
+.toc ul { list-style: none; }
+.toc li { margin-bottom: 0.15rem; }
+.toc a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.5rem 0.7rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+  line-height: 1.3;
+}
+.toc a:hover { background: var(--gold-soft); color: var(--text-main); }
+.toc a.active {
+  background: var(--gold-soft);
+  color: var(--gold);
+  border-left: 3px solid var(--gold);
+  padding-left: 0.55rem;
+}
+.toc a .num {
+  font-size: 0.62rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--gold-soft);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.toc a.active .num { background: var(--gold); color: #fff; }
+
+.content { min-width: 0; }
+
+/* ============================================================
+   SECTION CARDS
+   ============================================================ */
+.section-card {
+  background: var(--bg-card);
+  border: var(--card-border);
+  border-radius: 24px;
+  padding: 2rem 2.2rem;
+  margin-bottom: 1.8rem;
+  box-shadow: var(--shadow-card);
+  scroll-margin-top: 90px;
+  transition: all var(--transition-normal);
+  animation: fadeInUp 0.5s ease both;
+}
+.section-card:nth-child(1) { animation-delay: 0.05s; }
+.section-card:nth-child(2) { animation-delay: 0.10s; }
+.section-card:nth-child(3) { animation-delay: 0.15s; }
+.section-card:nth-child(4) { animation-delay: 0.20s; }
+.section-card:nth-child(5) { animation-delay: 0.25s; }
+.section-card:nth-child(6) { animation-delay: 0.30s; }
+.section-card:nth-child(7) { animation-delay: 0.35s; }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 1.2rem;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+.section-title .icon-pill {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft));
+  border: 1px solid var(--border-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+.section-card p {
+  color: var(--text-main);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.section-card p:last-child { margin-bottom: 0; }
+.section-card p strong { color: var(--text-main); font-weight: 700; }
+
+.hl {
+  background: var(--hl-bg);
+  padding: 0 0.2em;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: 2px;
+}
+.hl-teal {
+  background: var(--hl-teal-bg);
+  padding: 0 0.2em;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: 2px;
+}
+.hl-blue {
+  background: var(--hl-blue-bg);
+  padding: 0 0.2em;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: 2px;
+}
+mark {
+  background: var(--gold-soft);
+  color: var(--gold);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.figure {
+  margin: 1.4rem 0 1.6rem;
+  padding: 1.4rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  text-align: center;
+}
+.figure svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+.figure-caption {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.5;
+}
+.figure-caption strong { color: var(--text-main); font-style: normal; font-weight: 700; }
+
+.callout {
+  display: flex;
+  gap: 12px;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  border-left: 4px solid;
+}
+.callout i { flex-shrink: 0; margin-top: 2px; font-size: 1rem; }
+.callout.info    { background: rgba(59,130,246,0.08); border-color: var(--info); color: var(--text-main); }
+.callout.info    i { color: var(--info); }
+.callout.tip     { background: var(--gold-soft); border-color: var(--gold); color: var(--text-main); }
+.callout.tip     i { color: var(--gold); }
+.callout.warning { background: rgba(239,68,68,0.08); border-color: var(--danger); color: var(--text-main); }
+.callout.warning i { color: var(--danger); }
+.callout.success { background: rgba(16,185,129,0.08); border-color: var(--success); color: var(--text-main); }
+.callout.success i { color: var(--success); }
+
+/* ============================================================
+   TOOL CARDS
+   ============================================================ */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1.2rem 0;
+}
+.tool-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 1.1rem 1rem;
+  transition: all var(--transition-fast);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.tool-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+  box-shadow: var(--shadow-sm);
+}
+.tool-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  border: 1px solid var(--border-light);
+}
+.tool-card h4 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+.tool-card p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+.tool-card code, .inline-code {
+  font-family: 'Consolas', 'Monaco', monospace;
+  background: var(--bg-code);
+  color: var(--drive-blue);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  border: 1px solid var(--border-light);
+  font-weight: 600;
+}
+
+/* ============================================================
+   GOOGLE SUITE CARDS
+   ============================================================ */
+.suite-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.9rem;
+  margin: 1.2rem 0;
+}
+.suite-card {
+  background: var(--bg-soft);
+  border: 2px solid var(--border-light);
+  border-radius: 16px;
+  padding: 1rem 0.8rem;
+  text-align: center;
+  transition: all var(--transition-fast);
+  cursor: default;
+}
+.suite-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+.suite-card[data-suite="docs"]:hover { border-color: var(--drive-blue); }
+.suite-card[data-suite="sheets"]:hover { border-color: var(--drive-green); }
+.suite-card[data-suite="slides"]:hover { border-color: var(--drive-yellow); }
+.suite-card[data-suite="forms"]:hover { border-color: #673ab7; }
+.suite-card[data-suite="photos"]:hover { border-color: var(--drive-red); }
+.suite-card[data-suite="gmail"]:hover { border-color: var(--drive-red); }
+.suite-card[data-suite="meet"]:hover { border-color: var(--drive-green); }
+.suite-card[data-suite="keep"]:hover { border-color: var(--drive-yellow); }
+
+.suite-card .suite-icon {
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.2rem;
+}
+.suite-card[data-suite="docs"] .suite-icon { background: linear-gradient(135deg, #4285f4, #1a73e8); }
+.suite-card[data-suite="sheets"] .suite-icon { background: linear-gradient(135deg, #34a853, #1e8e3e); }
+.suite-card[data-suite="slides"] .suite-icon { background: linear-gradient(135deg, #fbbc05, #f29900); }
+.suite-card[data-suite="forms"] .suite-icon { background: linear-gradient(135deg, #673ab7, #512da8); }
+.suite-card[data-suite="photos"] .suite-icon { background: linear-gradient(135deg, #ea4335, #cc2b1a); }
+.suite-card[data-suite="gmail"] .suite-icon { background: linear-gradient(135deg, #ea4335, #c5221f); }
+.suite-card[data-suite="meet"] .suite-icon { background: linear-gradient(135deg, #34a853, #0f9d58); }
+.suite-card[data-suite="keep"] .suite-icon { background: linear-gradient(135deg, #fbbc05, #ea8600); }
+
+.suite-card .suite-name {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+.suite-card .suite-desc {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* ============================================================
+   STORAGE PLANS
+   ============================================================ */
+.plans-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.9rem;
+  margin: 1.2rem 0;
+}
+.plan-card {
+  background: var(--bg-soft);
+  border: 2px solid var(--border-light);
+  border-radius: 16px;
+  padding: 1.2rem 1rem;
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+.plan-card:hover {
+  border-color: var(--drive-blue);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+.plan-card.featured {
+  border-color: var(--drive-blue);
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.08), rgba(66, 133, 244, 0.03));
+}
+.plan-card .plan-size {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--drive-blue);
+  letter-spacing: -0.5px;
+  margin-bottom: 2px;
+}
+.plan-card .plan-name {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+.plan-card .plan-price {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+.plan-card .plan-price small {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ============================================================
+   SHORTCUT LIST
+   ============================================================ */
+.shortcut-group-title {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 1.4rem 0 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.shortcut-group-title i {
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  background: var(--gold-soft);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.shortcut-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.95rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  transition: all var(--transition-fast);
+}
+.shortcut-row:hover {
+  background: var(--bg-card);
+  border-color: var(--gold);
+  transform: translateX(3px);
+  box-shadow: var(--shadow-sm);
+}
+.shortcut-desc {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+.shortcut-desc i {
+  color: var(--gold);
+  font-size: 0.9rem;
+  width: 20px;
+  flex-shrink: 0;
+  text-align: center;
+}
+.shortcut-desc span {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+.shortcut-keys {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+kbd, .kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 0.5rem;
+  border-radius: 7px;
+  background: var(--kbd-bg);
+  border: 1px solid var(--kbd-border);
+  box-shadow: var(--kbd-shadow);
+  color: var(--kbd-text);
+  font-family: 'Inter', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+  white-space: nowrap;
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+[data-theme="dark"] kbd, [data-theme="dark"] .kbd {
+  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+}
+.shortcut-row:hover kbd {
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  border-color: var(--gold);
+}
+.key-sep {
+  color: var(--text-light);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0 2px;
+}
+
+/* ============================================================
+   NO RESULTS
+   ============================================================ */
+.no-results {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-light);
+  border-radius: 20px;
+  margin: 1rem 0;
+}
+.no-results.visible { display: flex; }
+.no-results i {
+  font-size: 2.5rem;
+  color: var(--text-light);
+  margin-bottom: 0.8rem;
+}
+.no-results h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.3rem;
+}
+.no-results p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   FOOTER + BACK TO TOP
+   ============================================================ */
+.footer-note {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-light);
+  padding-top: 1.5rem;
+}
+.footer-note i { opacity: 0.5; margin-right: 6px; }
+
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #1f2937;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 12px 28px -8px var(--gold-glow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all var(--transition-normal);
+  z-index: 500;
+}
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover { background: var(--gold-2); transform: translateY(-3px); }
+
+/* ============================================================
+   LOGIN OVERLAY
+   ============================================================ */
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.login-overlay.active {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
+.login-box {
+  background: var(--bg-card);
+  border-radius: 40px;
+  padding: 2.5rem 2.8rem;
+  max-width: 440px;
+  width: 100%;
+  border: var(--card-border);
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.4);
+  text-align: center;
+  animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.login-box .icon {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold-soft);
+  border-radius: 28px;
+  font-size: 2.2rem;
+  color: var(--gold);
+}
+.login-box h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.login-box p {
+  color: var(--text-muted);
+  margin-bottom: 1.6rem;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+.login-box p strong { color: var(--text-main); }
+.login-box .login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 160px;
+  padding: 0.8rem 1.6rem;
+  border-radius: 40px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  letter-spacing: 0.3px;
+  border: none;
+  cursor: pointer;
+}
+.login-box .login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -10px var(--gold-glow);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .content-layout { grid-template-columns: 1fr; }
+  .toc { display: none; }
+}
+
+@media (max-width: 900px) {
+  .hamburger-btn { display: inline-flex; }
+
+  .app-wrapper { padding: 0.8rem 1rem 2.5rem; }
+  .top-bar {
+    border-radius: 32px;
+    padding: 0.5rem 1rem;
+    top: 6px;
+    gap: 0.5rem;
+  }
+  .brand-area { gap: 8px; }
+  .brand-text { font-size: 1rem; }
+  .brand-logo { height: 36px; }
+
+  .role-badge { display: none !important; }
+  .back-home { padding: 0.4rem 0.75rem; }
+  .back-home span { display: inline; font-size: 0.78rem; }
+  .back-home i { font-size: 0.85rem; }
+
+  .page-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 1.5rem 1.2rem;
+    gap: 1rem;
+  }
+  .hero-text h1 { font-size: 1.7rem; }
+  .hero-text p { font-size: 0.92rem; margin: 0 auto; }
+  .hero-art { width: 140px; height: 140px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 0.65rem; }
+
+  .section-card { padding: 1.5rem 1.2rem; border-radius: 20px; }
+  .section-title { font-size: 1.3rem; gap: 10px; }
+  .section-title .icon-pill { width: 38px; height: 38px; font-size: 1rem; border-radius: 12px; }
+  .section-card p { font-size: 0.94rem; }
+
+  .figure { padding: 1rem; border-radius: 16px; }
+  .tools-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.8rem; }
+  .suite-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+  .plans-row { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+}
+
+@media (max-width: 480px) {
+  .app-wrapper { padding: 0.6rem 0.8rem 2rem; }
+  .top-bar { padding: 0.4rem 0.8rem; border-radius: 26px; gap: 0.4rem; }
+  .brand-text { font-size: 0.88rem; letter-spacing: -0.2px; }
+  .brand-logo { height: 30px; }
+  .hamburger-btn { width: 34px; height: 34px; font-size: 0.95rem; }
+  .back-home { font-size: 0.72rem; padding: 0.32rem 0.65rem; }
+  .right-actions { gap: 0.4rem; }
+
+  .page-header { padding: 1.2rem 1rem; border-radius: 22px; }
+  .hero-text h1 { font-size: 1.4rem; }
+  .hero-text p { font-size: 0.85rem; }
+  .hero-art { width: 110px; height: 110px; }
+  .hero-eyebrow { font-size: 0.58rem; padding: 0.28rem 0.7rem; letter-spacing: 0.9px; }
+
+  .section-card { padding: 1.2rem 1rem; border-radius: 16px; margin-bottom: 1.2rem; }
+  .section-title { font-size: 1.05rem; gap: 8px; flex-wrap: wrap; }
+  .section-title .icon-pill { width: 32px; height: 32px; font-size: 0.85rem; border-radius: 10px; }
+  .section-card p { font-size: 0.88rem; line-height: 1.65; }
+
+  .figure { padding: 0.8rem; border-radius: 14px; margin: 1rem 0 1.2rem; }
+  .figure-caption { font-size: 0.7rem; }
+
+  .callout { padding: 0.8rem 0.9rem; font-size: 0.83rem; border-radius: 12px; gap: 8px; }
+
+  .tools-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+  .tool-card { padding: 0.8rem 0.7rem; border-radius: 12px; gap: 8px; }
+  .tool-icon { width: 34px; height: 34px; font-size: 0.9rem; border-radius: 9px; }
+  .tool-card h4 { font-size: 0.78rem; }
+  .tool-card p { font-size: 0.68rem; line-height: 1.4; }
+
+  .suite-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .suite-card { padding: 0.7rem 0.5rem; border-radius: 10px; }
+  .suite-card .suite-icon { width: 36px; height: 36px; font-size: 0.95rem; border-radius: 9px; margin-bottom: 5px; }
+  .suite-card .suite-name { font-size: 0.7rem; }
+  .suite-card .suite-desc { font-size: 0.6rem; }
+
+  .plans-row { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .plan-card { padding: 0.9rem 0.6rem; border-radius: 12px; }
+  .plan-card .plan-size { font-size: 1.1rem; }
+  .plan-card .plan-name { font-size: 0.6rem; }
+  .plan-card .plan-price { font-size: 0.72rem; }
+
+  .shortcut-list { gap: 0.4rem; }
+  .shortcut-row {
+    padding: 0.55rem 0.65rem;
+    gap: 0.5rem;
+    border-radius: 10px;
+  }
+  .shortcut-desc { gap: 6px; }
+  .shortcut-desc i { font-size: 0.72rem; width: 14px; }
+  .shortcut-desc span { font-size: 0.72rem; line-height: 1.3; }
+  .shortcut-keys { gap: 4px; }
+
+  kbd, .kbd {
+    min-width: 24px;
+    height: 24px;
+    padding: 0 0.4rem;
+    font-size: 0.65rem;
+    border-radius: 6px;
+  }
+  .key-sep { font-size: 0.6rem; }
+
+  .shortcut-group-title { font-size: 0.92rem; margin: 1rem 0 0.5rem; }
+  .shortcut-group-title i { width: 22px; height: 22px; font-size: 0.7rem; }
+
+  .search-input { font-size: 0.85rem; padding: 0.75rem 1rem 0.75rem 2.6rem; }
+  .search-icon { left: 0.9rem; font-size: 0.85rem; }
+  .search-results-info { font-size: 0.75rem; }
+
+  .back-to-top { width: 42px; height: 42px; bottom: 16px; right: 16px; font-size: 0.95rem; }
+
+  .login-box { padding: 1.8rem 1.4rem; border-radius: 28px; }
+  .login-box .icon { width: 68px; height: 68px; font-size: 1.8rem; border-radius: 22px; margin-bottom: 1rem; }
+  .login-box h2 { font-size: 1.15rem; }
+  .login-box p { font-size: 0.8rem; margin-bottom: 1.2rem; }
+}
+
+@media (max-width: 360px) {
+  .hero-text h1 { font-size: 1.2rem; }
+  .section-title { font-size: 0.95rem; }
+  .section-card p { font-size: 0.82rem; }
+  .tools-grid { gap: 0.5rem; }
+  .tool-card h4 { font-size: 0.72rem; }
+  .tool-card p { font-size: 0.62rem; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .tool-card:hover,
+  .suite-card:hover,
+  .plan-card:hover,
+  .shortcut-row:hover { transform: none; box-shadow: none; background: var(--bg-soft); border-color: var(--border-light); }
+  .shortcut-row:hover kbd { background: var(--kbd-bg); color: var(--kbd-text); border-color: var(--kbd-border); }
+  .back-to-top:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+  .hero-art { animation: none; }
+  .section-card { opacity: 1; transform: none; }
+  .mobile-sidebar { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- AUTH SKELETON -->
+<div id="authSkeleton" role="status" aria-live="polite">
+  <div class="skeleton-spinner"></div>
+  <div class="skeleton-text">Verifying your session…</div>
+</div>
+
+<!-- LOGIN OVERLAY -->
+<div class="login-overlay" id="loginOverlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="login-box">
+    <div class="icon"><i class="fas fa-lock"></i></div>
+    <h2 id="loginTitle">Please Login!</h2>
+    <p>You need to be logged in as a <strong>Student</strong>, <strong>Teacher</strong>, or <strong>Admin</strong> to access Google Drive lessons.</p>
+    <a href="../My Account/myaccount.html" class="login-btn" id="loginBtn">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </a>
+  </div>
+</div>
+
+<!-- MOBILE SIDEBAR BACKDROP -->
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<!-- MOBILE SIDEBAR -->
+<aside class="mobile-sidebar" id="mobileSidebar" aria-label="Navigation sidebar">
+  <div class="sidebar-header">
+    <button class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div class="sidebar-user">
+      <div class="sidebar-avatar" id="sidebarAvatar">S</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" id="sidebarUserName">Student</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">Student</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-toc-heading">
+    <i class="fas fa-list-ul"></i> On this page
+  </div>
+
+  <ul class="sidebar-toc-list" id="sidebarTocList">
+    <li><a href="#intro" data-toc="intro"><span class="num">1</span> What is Google Drive?</a></li>
+    <li><a href="#features" data-toc="features"><span class="num">2</span> Core Features</a></li>
+    <li><a href="#suite" data-toc="suite"><span class="num">3</span> Google Suite Apps</a></li>
+    <li><a href="#storage" data-toc="storage"><span class="num">4</span> Storage Plans</a></li>
+    <li><a href="#power" data-toc="power"><span class="num">5</span> The Power of Drive</a></li>
+    <li><a href="#shortcuts" data-toc="shortcuts"><span class="num">6</span> Shortcut Keys</a></li>
+    <li><a href="#tips" data-toc="tips"><span class="num">7</span> Tips &amp; Uses</a></li>
+  </ul>
+
+  <div class="sidebar-footer">
+    <i class="fas fa-graduation-cap"></i> EGyan Skill Development
+  </div>
+</aside>
+
+<!-- MAIN APP -->
+<div class="app-wrapper" id="appWrapper">
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open navigation" title="Open navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="brand-area">
+      <img class="brand-logo"
+           src="https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL"
+           alt="EGyan Skill Development logo"
+           onerror="this.style.display='none'">
+      <span class="brand-text">EGyan Skill Development</span>
+    </div>
+
+    <div class="right-actions">
+      <span class="role-badge" id="roleBadge" style="display: none;">
+        <i class="fas fa-user" id="roleBadgeIcon"></i>
+        <span id="roleBadgeText">User</span>
+      </span>
+
+      <a href="BasicDashboard.html" class="back-home" aria-label="Back to dashboard">
+        <i class="fas fa-arrow-left"></i> <span>Back</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="page-header">
+    <div class="hero-text">
+      <span class="hero-eyebrow"><i class="fab fa-google-drive"></i> Basic Computer · Module 12</span>
+      <h1>Google <span class="accent">Drive</span></h1>
+      <p>The cloud storage that changed everything — 15 GB free, access your files from anywhere, collaborate in real time, and never lose data again.</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Google Drive illustration">
+        <!-- Drive triangle logo -->
+        <defs>
+          <linearGradient id="driveTri" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4285f4"/>
+            <stop offset="100%" stop-color="#1a73e8"/>
+          </linearGradient>
+        </defs>
+        <!-- Blue side (left) -->
+        <path d="M 70 40 L 130 40 L 180 130 L 120 130 Z" fill="#4285f4"/>
+        <!-- Green side (bottom) -->
+        <path d="M 120 130 L 180 130 L 150 180 L 90 180 Z" fill="#34a853"/>
+        <!-- Yellow side (right angled) -->
+        <path d="M 70 40 L 20 130 L 50 180 L 100 90 Z" fill="#fbbc05"/>
+        <!-- Center white line -->
+        <path d="M 70 40 L 100 90 L 120 130 L 90 180 Z" fill="#ea4335" opacity="0.15"/>
+        <!-- Cloud overlay -->
+        <g transform="translate(120, 55)">
+          <ellipse cx="0" cy="0" rx="20" ry="14" fill="#ffffff" opacity="0.95"/>
+          <ellipse cx="14" cy="2" rx="14" ry="11" fill="#ffffff" opacity="0.95"/>
+          <ellipse cx="-14" cy="2" rx="14" ry="11" fill="#ffffff" opacity="0.95"/>
+          <rect x="-20" y="0" width="40" height="10" fill="#ffffff" opacity="0.95"/>
+          <text x="0" y="8" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="8" fill="#4285f4">15 GB</text>
+        </g>
+        <!-- Sparkles -->
+        <circle cx="30" cy="40" r="2" fill="#fbbf24"/>
+        <circle cx="180" cy="60" r="2.5" fill="#fbbf24"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search concepts or shortcuts… (e.g., sharing, offline, Ctrl+S)" aria-label="Search">
+    <button class="search-clear" id="searchClear" aria-label="Clear search">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="search-results-info" id="searchInfo" style="display:none;"></div>
+
+  <!-- CONTENT LAYOUT -->
+  <div class="content-layout">
+
+    <!-- Desktop TOC -->
+    <aside class="toc" aria-label="Table of contents">
+      <h3><i class="fas fa-list-ul"></i> On this page</h3>
+      <ul>
+        <li><a href="#intro" data-toc="intro"><span class="num">1</span> What is Google Drive?</a></li>
+        <li><a href="#features" data-toc="features"><span class="num">2</span> Core Features</a></li>
+        <li><a href="#suite" data-toc="suite"><span class="num">3</span> Google Suite Apps</a></li>
+        <li><a href="#storage" data-toc="storage"><span class="num">4</span> Storage Plans</a></li>
+        <li><a href="#power" data-toc="power"><span class="num">5</span> The Power of Drive</a></li>
+        <li><a href="#shortcuts" data-toc="shortcuts"><span class="num">6</span> Shortcut Keys</a></li>
+        <li><a href="#tips" data-toc="tips"><span class="num">7</span> Tips &amp; Uses</a></li>
+      </ul>
+    </aside>
+
+    <main class="content" id="mainContent">
+
+      <!-- 1. INTRO -->
+      <section class="section-card" id="intro" data-title="What is Google Drive">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fab fa-google-drive"></i></span>
+          1. What is Google Drive?
+        </h2>
+
+        <p><span class="hl">Google Drive</span> is Google's <strong>cloud storage and file synchronization service</strong>, launched on <mark>April 24, 2012</mark>. It lets you store files online, access them from any device, and collaborate in real time — all from your Google account.</p>
+
+        <p>Think of Drive as a <span class="hl-blue">magic USB drive</span> that lives in the cloud: it's always with you, works on every phone and computer, never runs out of space (if you pay), and can be shared with anyone in the world in one click.</p>
+
+        <p>Every Google account starts with <strong>15 GB of free storage</strong> — shared across Drive, Gmail, and Google Photos. In 2025, Google Drive serves over <strong>3 billion users</strong> and stores <mark>exabytes of data</mark>.</p>
+
+        <div class="callout info">
+          <i class="fas fa-circle-info"></i>
+          <div><strong>Fun fact:</strong> Google Drive is the <mark>world's most-used cloud storage service</mark> — its nearest competitor (Dropbox) has ~700 million users. Drive + Docs + Sheets + Slides together form the backbone of Google Workspace, used by 10+ million businesses.</div>
+        </div>
+
+        <div class="figure">
+          <svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Google Drive access diagram">
+            <!-- Central cloud -->
+            <g transform="translate(240, 90)">
+              <ellipse cx="0" cy="0" rx="55" ry="32" fill="#4285f4" opacity="0.9"/>
+              <ellipse cx="20" cy="4" rx="35" ry="26" fill="#4285f4" opacity="0.9"/>
+              <ellipse cx="-20" cy="4" rx="35" ry="26" fill="#4285f4" opacity="0.9"/>
+              <rect x="-55" y="-3" width="110" height="26" fill="#4285f4" opacity="0.9"/>
+              <text x="0" y="8" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="12" fill="#ffffff">DRIVE</text>
+            </g>
+
+            <!-- Device connections -->
+            <line x1="80" y1="60" x2="200" y2="80" stroke="#4285f4" stroke-width="2" stroke-dasharray="4 3" opacity="0.7"/>
+            <line x1="400" y1="60" x2="280" y2="80" stroke="#4285f4" stroke-width="2" stroke-dasharray="4 3" opacity="0.7"/>
+            <line x1="80" y1="150" x2="200" y2="120" stroke="#4285f4" stroke-width="2" stroke-dasharray="4 3" opacity="0.7"/>
+            <line x1="400" y1="150" x2="280" y2="120" stroke="#4285f4" stroke-width="2" stroke-dasharray="4 3" opacity="0.7"/>
+
+            <!-- Laptop -->
+            <g transform="translate(60, 55)">
+              <rect x="-24" y="-16" width="48" height="30" rx="3" fill="#374151"/>
+              <rect x="-21" y="-13" width="42" height="22" rx="1" fill="#4285f4" opacity="0.5"/>
+              <rect x="-30" y="14" width="60" height="4" rx="2" fill="#1f2937"/>
+              <text x="0" y="34" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="8" fill="#6b7280">Laptop</text>
+            </g>
+
+            <!-- Phone -->
+            <g transform="translate(420, 55)">
+              <rect x="-14" y="-22" width="28" height="44" rx="4" fill="#374151"/>
+              <rect x="-11" y="-19" width="22" height="34" rx="1" fill="#34a853" opacity="0.6"/>
+              <circle cx="0" cy="19" r="2" fill="#1f2937"/>
+              <text x="0" y="34" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="8" fill="#6b7280">Phone</text>
+            </g>
+
+            <!-- Tablet -->
+            <g transform="translate(60, 155)">
+              <rect x="-20" y="-16" width="40" height="30" rx="2" fill="#374151"/>
+              <rect x="-17" y="-13" width="34" height="24" rx="1" fill="#fbbc05" opacity="0.6"/>
+              <text x="0" y="34" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="8" fill="#6b7280">Tablet</text>
+            </g>
+
+            <!-- Desktop -->
+            <g transform="translate(420, 155)">
+              <rect x="-24" y="-16" width="48" height="30" rx="3" fill="#374151"/>
+              <rect x="-21" y="-13" width="42" height="22" rx="1" fill="#ea4335" opacity="0.5"/>
+              <rect x="-6" y="14" width="12" height="6" fill="#1f2937"/>
+              <rect x="-18" y="20" width="36" height="4" rx="2" fill="#1f2937"/>
+              <text x="0" y="34" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="8" fill="#6b7280">Desktop</text>
+            </g>
+
+            <!-- Bottom text -->
+            <text x="240" y="185" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="9" fill="#6b7280">Same files · Synced everywhere · In real time</text>
+          </svg>
+          <div class="figure-caption"><strong>One Drive, every device.</strong> Your files live in the cloud and sync to your laptop, phone, tablet, and desktop — always the latest version.</div>
+        </div>
+      </section>
+
+      <!-- 2. FEATURES -->
+      <section class="section-card" id="features" data-title="Google Drive core features">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-star"></i></span>
+          2. Core Features
+        </h2>
+
+        <p>Google Drive isn't just storage — it's a <span class="hl-blue">full productivity platform</span>. Here are the essential features:</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-cloud"></i></div>
+            <div>
+              <h4>Cloud Storage</h4>
+              <p><strong>15 GB free</strong>, shared across Drive, Gmail, and Photos. Store documents, photos, videos, music, PDFs, ZIPs — any file type. Upgrade to 100 GB, 200 GB, 2 TB, or more.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-sync-alt"></i></div>
+            <div>
+              <h4>Sync Across Devices</h4>
+              <p>Automatically syncs between your phone, tablet, laptop, and computer. Install <strong>Backup &amp; Sync</strong> (or Drive for Desktop) to mirror files on your PC.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-users"></i></div>
+            <div>
+              <h4>Real-Time Collaboration</h4>
+              <p>Share files with one person or 100. Multiple people can edit Docs, Sheets, and Slides <strong>simultaneously</strong> — you see live cursors and changes instantly.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-share-nodes"></i></div>
+            <div>
+              <h4>Sharing with Permissions</h4>
+              <p>Control exactly who can see or edit each file: <strong>Viewer</strong> (read-only), <strong>Commenter</strong> (can comment), or <strong>Editor</strong> (full access). Share with individuals or via link.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-magnifying-glass"></i></div>
+            <div>
+              <h4>Powerful Search</h4>
+              <p>Search inside documents, spreadsheets, images (via OCR), and PDFs. Filter by file type, date, owner, or shared status. Google's search AI finds anything in seconds.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-clock-rotate-left"></i></div>
+            <div>
+              <h4>Version History</h4>
+              <p>Every save is logged. Right-click any file → <strong>Manage Versions</strong> to restore any previous version. Never lose work again — even after 5 years.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-trash-arrow-up"></i></div>
+            <div>
+              <h4>Trash &amp; Recovery</h4>
+              <p>Deleted files stay in Trash for <strong>30 days</strong>. Google Workspace admins can recover data up to 25 days after that. Drive is nearly impossible to lose data on.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-wifi-slash"></i></div>
+            <div>
+              <h4>Offline Access</h4>
+              <p>Enable offline mode to edit Docs, Sheets, and Slides without Internet. Changes sync automatically when you reconnect. Perfect for flights and travel.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-mobile-screen"></i></div>
+            <div>
+              <h4>Mobile App</h4>
+              <p>Full Drive on Android and iOS. Scan documents with your camera, upload photos automatically, view Office files, and access everything offline.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-import"></i></div>
+            <div>
+              <h4>Open Office Files</h4>
+              <p>View and edit <code>.docx</code>, <code>.xlsx</code>, <code>.pptx</code> files directly in Google Docs, Sheets, and Slides — no Microsoft Office needed.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-lock"></i></div>
+            <div>
+              <h4>Encryption &amp; Security</h4>
+              <p>All files are <strong>encrypted in transit</strong> (TLS/HTTPS) and <strong>at rest</strong> (AES-256). 2-Step Verification adds an extra layer. Google's security is world-class.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-link"></i></div>
+            <div>
+              <h4>Public File Links</h4>
+              <p>Create shareable links (with or without expiry). Embed Drive images in blogs and websites. Publish documents as public webpages — all free.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. SUITE -->
+      <section class="section-card" id="suite" data-title="Google Suite apps">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-th"></i></span>
+          3. Google Suite Apps
+        </h2>
+
+        <p>Drive is the <span class="hl-blue">home base</span> for an entire ecosystem of productivity apps. Every document you create lives in Drive:</p>
+
+        <div class="suite-grid">
+          <div class="suite-card" data-suite="docs">
+            <div class="suite-icon"><i class="fas fa-file-word"></i></div>
+            <div class="suite-name">Google Docs</div>
+            <div class="suite-desc">Word processing</div>
+          </div>
+          <div class="suite-card" data-suite="sheets">
+            <div class="suite-icon"><i class="fas fa-file-excel"></i></div>
+            <div class="suite-name">Google Sheets</div>
+            <div class="suite-desc">Spreadsheets</div>
+          </div>
+          <div class="suite-card" data-suite="slides">
+            <div class="suite-icon"><i class="fas fa-file-powerpoint"></i></div>
+            <div class="suite-name">Google Slides</div>
+            <div class="suite-desc">Presentations</div>
+          </div>
+          <div class="suite-card" data-suite="forms">
+            <div class="suite-icon"><i class="fas fa-clipboard-list"></i></div>
+            <div class="suite-name">Google Forms</div>
+            <div class="suite-desc">Surveys &amp; quizzes</div>
+          </div>
+          <div class="suite-card" data-suite="photos">
+            <div class="suite-icon"><i class="fas fa-image"></i></div>
+            <div class="suite-name">Google Photos</div>
+            <div class="suite-desc">Photo storage + AI</div>
+          </div>
+          <div class="suite-card" data-suite="gmail">
+            <div class="suite-icon"><i class="fas fa-envelope"></i></div>
+            <div class="suite-name">Gmail</div>
+            <div class="suite-desc">Email + attachments</div>
+          </div>
+          <div class="suite-card" data-suite="meet">
+            <div class="suite-icon"><i class="fas fa-video"></i></div>
+            <div class="suite-name">Google Meet</div>
+            <div class="suite-desc">Video calls</div>
+          </div>
+          <div class="suite-card" data-suite="keep">
+            <div class="suite-icon"><i class="fas fa-note-sticky"></i></div>
+            <div class="suite-name">Google Keep</div>
+            <div class="suite-desc">Quick notes</div>
+          </div>
+        </div>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-word"></i></div>
+            <div>
+              <h4>Google Docs</h4>
+              <p>Free word processor — create, edit, and share documents. Auto-saves every keystroke. Supports real-time collaboration, comments, suggestions, and export to PDF/Word. Uses <code>.gdoc</code> files (or opens <code>.docx</code>).</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-excel"></i></div>
+            <div>
+              <h4>Google Sheets</h4>
+              <p>Free spreadsheet app. Formulas, charts, pivot tables, filters, data validation. Connects to external data (Google Finance, BigQuery). Uses <code>.gsheet</code> or opens <code>.xlsx</code>.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-powerpoint"></i></div>
+            <div>
+              <h4>Google Slides</h4>
+              <p>Free presentation app. Themes, animations, transitions, embedded videos. Present anywhere with a browser. Uses <code>.gslides</code> or opens <code>.pptx</code>.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-clipboard-list"></i></div>
+            <div>
+              <h4>Google Forms</h4>
+              <p>Free survey builder. Multiple question types, logic branching, auto-grading. Results flow into Sheets automatically. Perfect for quizzes and feedback.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-image"></i></div>
+            <div>
+              <h4>Google Photos</h4>
+              <p>Unlimited photo backup (compressed) or 15 GB original quality. AI-powered search by face, place, or object. Shared albums, animations, and collages.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <h4>Gmail</h4>
+              <p>Email with 15 GB shared storage. Attach Drive files (up to 25 GB via Drive links). Gmail's AI organizes spam, categories, and summaries.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Power move:</strong> Use Drive with the entire suite. Create a Google Doc, embed a Google Sheet, link to a Google Form, and present it via Google Slides — <mark>all in one workspace, all free</mark>. This is why Google Workspace dominates education and small business.</div>
+        </div>
+      </section>
+
+      <!-- 4. STORAGE -->
+      <section class="section-card" id="storage" data-title="Google Drive storage plans">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-hdd"></i></span>
+          4. Storage Plans
+        </h2>
+
+        <p>Every Google account starts with <span class="hl-blue">15 GB free</span>. Here are the upgrade options (2025 prices in India):</p>
+
+        <div class="plans-row">
+          <div class="plan-card">
+            <div class="plan-size">15 GB</div>
+            <div class="plan-name">Free</div>
+            <div class="plan-price">₹0 <small>/ month</small></div>
+          </div>
+          <div class="plan-card">
+            <div class="plan-size">100 GB</div>
+            <div class="plan-name">Google One Basic</div>
+            <div class="plan-price">₹130 <small>/ month</small></div>
+          </div>
+          <div class="plan-card featured">
+            <div class="plan-size">200 GB</div>
+            <div class="plan-name">Google One Premium</div>
+            <div class="plan-price">₹210 <small>/ month</small></div>
+          </div>
+          <div class="plan-card">
+            <div class="plan-size">2 TB</div>
+            <div class="plan-name">Google One Premium</div>
+            <div class="plan-price">₹650 <small>/ month</small></div>
+          </div>
+          <div class="plan-card">
+            <div class="plan-size">5 TB</div>
+            <div class="plan-name">Business</div>
+            <div class="plan-price">₹1,300 <small>/ month</small></div>
+          </div>
+          <div class="plan-card">
+            <div class="plan-size">30 TB</div>
+            <div class="plan-name">Business Plus</div>
+            <div class="plan-price">₹3,500 <small>/ month</small></div>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <i class="fas fa-circle-info"></i>
+          <div><strong>What uses your 15 GB?</strong> Files in Drive, attachments in Gmail, and photos in Google Photos all count against the same 15 GB. Docs, Sheets, and Slides don't count (unless they contain embedded media). If you're running out of space, check your Gmail attachments — they're often the culprit.</div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Student hack:</strong> Every school with Google Workspace for Education usually gives each student <mark>unlimited storage</mark> on their school account. Check with your admin!</div>
+        </div>
+      </section>
+
+      <!-- 5. POWER -->
+      <section class="section-card" id="power" data-title="The power of Google Drive">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-bolt"></i></span>
+          5. The Power of Google Drive
+        </h2>
+
+        <p>Beyond basic storage, Drive has <span class="hl-blue">advanced features</span> that make it a productivity powerhouse:</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-robot"></i></div>
+            <div>
+              <h4>AI-Powered Search</h4>
+              <p>Search inside scanned documents, PDFs, and images (via OCR). Google's AI finds text inside a photo of a handwritten note. Works in 100+ languages.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-language"></i></div>
+            <div>
+              <h4>Automatic Translation</h4>
+              <p>Open any document in Drive and translate it to 100+ languages instantly. Files in Google Docs have a "Translate document" option — perfect for global teams.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-rotate-left"></i></div>
+            <div>
+              <h4>Version History (Deep)</h4>
+              <p>Every change is stored — literally every keystroke in Docs. Restore a version from a minute ago or a year ago. Preview older versions before restoring.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-users-rectangle"></i></div>
+            <div>
+              <h4>Shared Drives</h4>
+              <p>For teams: files belong to the <strong>team</strong>, not an individual. When an employee leaves, files stay with the team. Great for schools, clubs, and companies.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-shield-halved"></i></div>
+            <div>
+              <h4>Approval Workflow</h4>
+              <p>Request approvals for documents. Perfect for contracts, school submissions, and team publications. Approvers can request changes or mark as approved.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-bell"></i></div>
+            <div>
+              <h4>Activity Tracking</h4>
+              <p>See who viewed, edited, or downloaded a file — and when. Activity dashboard shows all collaborators. Great for accountability.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-lock"></i></div>
+            <div>
+              <h4>Expiring Access</h4>
+              <p>Set a share link to <strong>expire after a date</strong>. Perfect for one-time submissions, temporary access, or shared event files. Automatic revocation — no manual cleanup.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-eye-slash"></i></div>
+            <div>
+              <h4>Information Rights Management</h4>
+              <p>In Workspace, disable download/print/copy on shared docs. Keep sensitive documents view-only, even for editors. Enterprise-grade security.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-code"></i></div>
+            <div>
+              <h4>Google Drive API</h4>
+              <p>Developers can automate Drive with code — upload files, create folders, manage permissions programmatically. Used by thousands of apps.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-link"></i></div>
+            <div>
+              <h4>Embed Anywhere</h4>
+              <p>Embed Drive images, PDFs, and Google Docs in any website. Get an iframe embed code from "Publish to web" — no server needed.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-import"></i></div>
+            <div>
+              <h4>Backup &amp; Sync Desktop</h4>
+              <p>Install on Windows or Mac. Choose which folders to sync to Drive. Automatic backup of Desktop, Documents, and Downloads. Recover files after a hard drive crash.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-mobile-screen"></i></div>
+            <div>
+              <h4>Scan Documents</h4>
+              <p>Use your phone's camera to scan paper documents into PDF — Drive auto-detects edges, straightens them, and applies OCR so you can search the text later. 100% free.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout success">
+          <i class="fas fa-star"></i>
+          <div><strong>Killer feature:</strong> <mark>Google Drive never loses data.</mark> Every edit is versioned, every delete stays in Trash for 30 days, and every file is replicated across multiple Google data centers. In 12+ years, Drive has never lost a single customer file due to hardware failure.</div>
+        </div>
+      </section>
+
+      <!-- 6. SHORTCUTS -->
+      <section class="section-card" id="shortcuts" data-title="Google Drive shortcut keys">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-keyboard"></i></span>
+          6. Shortcut Keys
+        </h2>
+
+        <p>These shortcuts work in <span class="hl-blue">Google Drive's web interface</span>. Master them and file management becomes lightning fast.</p>
+
+        <!-- Navigation & Selection -->
+        <h3 class="shortcut-group-title"><i class="fas fa-arrow-pointer"></i> Navigation &amp; Selection</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="new file upload create">
+            <div class="shortcut-desc"><i class="fas fa-plus"></i><span>New file / folder / upload</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>N</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="search drive">
+            <div class="shortcut-desc"><i class="fas fa-magnifying-glass"></i><span>Search your files</span></div>
+            <div class="shortcut-keys"><kbd>/</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="grid list view toggle">
+            <div class="shortcut-desc"><i class="fas fa-th-large"></i><span>Toggle grid / list view</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>V</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="select all files">
+            <div class="shortcut-desc"><i class="fas fa-object-group"></i><span>Select all files</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>A</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="deselect clear selection">
+            <div class="shortcut-desc"><i class="fas fa-xmark"></i><span>Deselect all</span></div>
+            <div class="shortcut-keys"><kbd>Esc</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="navigate next previous files">
+            <div class="shortcut-desc"><i class="fas fa-arrow-right"></i><span>Move through files</span></div>
+            <div class="shortcut-keys"><kbd>↑</kbd><span class="key-sep">↓</span><kbd>←</kbd><kbd>→</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="open file selected">
+            <div class="shortcut-desc"><i class="fas fa-arrow-right-to-bracket"></i><span>Open selected file</span></div>
+            <div class="shortcut-keys"><kbd>Enter</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="go back folder">
+            <div class="shortcut-desc"><i class="fas fa-arrow-left"></i><span>Go back to previous folder</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>←</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="go up folder">
+            <div class="shortcut-desc"><i class="fas fa-arrow-up"></i><span>Go up one folder level</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>↑</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="focus file list">
+            <div class="shortcut-desc"><i class="fas fa-list"></i><span>Move focus to file list</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Alt</kbd><span class="key-sep">+</span><kbd>G</kbd></div>
+          </div>
+        </div>
+
+        <!-- File Actions -->
+        <h3 class="shortcut-group-title"><i class="fas fa-file"></i> File Actions</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="rename file">
+            <div class="shortcut-desc"><i class="fas fa-i-cursor"></i><span>Rename selected file</span></div>
+            <div class="shortcut-keys"><kbd>N</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="download file">
+            <div class="shortcut-desc"><i class="fas fa-download"></i><span>Download selected file</span></div>
+            <div class="shortcut-keys"><kbd>D</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="share file">
+            <div class="shortcut-desc"><i class="fas fa-share-nodes"></i><span>Share selected file</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Alt</kbd><span class="key-sep">+</span><kbd>A</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="move file folder">
+            <div class="shortcut-desc"><i class="fas fa-folder-tree"></i><span>Move file to folder</span></div>
+            <div class="shortcut-keys"><kbd>Z</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="delete trash file">
+            <div class="shortcut-desc"><i class="fas fa-trash"></i><span>Move file to Trash</span></div>
+            <div class="shortcut-keys"><kbd>#</kbd><span class="key-sep">/</span><kbd>Del</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="star favorite file">
+            <div class="shortcut-desc"><i class="fas fa-star"></i><span>Star / unstar file</span></div>
+            <div class="shortcut-keys"><kbd>S</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="preview file">
+            <div class="shortcut-desc"><i class="fas fa-eye"></i><span>Preview selected file</span></div>
+            <div class="shortcut-keys"><kbd>P</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="copy file">
+            <div class="shortcut-desc"><i class="fas fa-copy"></i><span>Copy selected file</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>C</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="cut file">
+            <div class="shortcut-desc"><i class="fas fa-cut"></i><span>Cut selected file</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>X</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="paste file">
+            <div class="shortcut-desc"><i class="fas fa-paste"></i><span>Paste copied / cut file</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>V</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="open details panel info">
+            <div class="shortcut-desc"><i class="fas fa-circle-info"></i><span>Open / close Details panel</span></div>
+            <div class="shortcut-keys"><kbd>I</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="share dialog permissions">
+            <div class="shortcut-desc"><i class="fas fa-user-shield"></i><span>Open sharing permissions</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Alt</kbd><span class="key-sep">+</span><kbd>S</kbd></div>
+          </div>
+        </div>
+
+        <!-- Create New -->
+        <h3 class="shortcut-group-title"><i class="fas fa-plus"></i> Create New</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="new document docs">
+            <div class="shortcut-desc"><i class="fas fa-file-word"></i><span>New Google Doc</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>T</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="new spreadsheet sheets">
+            <div class="shortcut-desc"><i class="fas fa-file-excel"></i><span>New Google Sheet</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>S</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="new presentation slides">
+            <div class="shortcut-desc"><i class="fas fa-file-powerpoint"></i><span>New Google Slides</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>P</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="new folder create">
+            <div class="shortcut-desc"><i class="fas fa-folder-plus"></i><span>New folder</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>F</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="new form">
+            <div class="shortcut-desc"><i class="fas fa-clipboard-list"></i><span>New Google Form</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>O</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="upload file">
+            <div class="shortcut-desc"><i class="fas fa-upload"></i><span>Upload file</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>U</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="upload folder">
+            <div class="shortcut-desc"><i class="fas fa-folder-open"></i><span>Upload folder</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>I</kbd></div>
+          </div>
+        </div>
+
+        <!-- Views & Misc -->
+        <h3 class="shortcut-group-title"><i class="fas fa-eye"></i> Views &amp; Misc</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="keyboard shortcuts help list">
+            <div class="shortcut-desc"><i class="fas fa-circle-question"></i><span>Show all keyboard shortcuts</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>/</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="open settings panel">
+            <div class="shortcut-desc"><i class="fas fa-gear"></i><span>Open Drive settings</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Alt</kbd><span class="key-sep">+</span><kbd>H</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="keyboard shortcuts cheatsheet">
+            <div class="shortcut-desc"><i class="fas fa-list-check"></i><span>Show shortcut cheatsheet</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Z</kbd><span class="key-sep">→</span><kbd>?</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="refresh drive">
+            <div class="shortcut-desc"><i class="fas fa-rotate"></i><span>Refresh Drive</span></div>
+            <div class="shortcut-keys"><kbd>F5</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="open in new tab file">
+            <div class="shortcut-desc"><i class="fas fa-arrow-up-right-from-square"></i><span>Open file in new tab</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Enter</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="close panel details">
+            <div class="shortcut-desc"><i class="fas fa-xmark"></i><span>Close details / preview panel</span></div>
+            <div class="shortcut-keys"><kbd>Esc</kbd></div>
+          </div>
+        </div>
+
+        <div class="callout success">
+          <i class="fas fa-star"></i>
+          <div><strong>In-Drive cheat sheet:</strong> Press <kbd>Ctrl</kbd>+<kbd>/</kbd> anywhere in Google Drive to see the complete list of available shortcuts — including some not listed here. It updates as Google adds features.</div>
+        </div>
+      </section>
+
+      <!-- 7. TIPS -->
+      <section class="section-card" id="tips" data-title="Google Drive tips and uses">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-lightbulb"></i></span>
+          7. Tips &amp; Real-World Uses
+        </h2>
+
+        <p>Google Drive is used by students, teachers, families, freelancers, and Fortune 500 companies alike. Here are the tips that make the biggest difference:</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-folder-tree"></i></div>
+            <div>
+              <h4>Organize with Folders</h4>
+              <p>Create a top-level folder system: <code>Work</code>, <code>Personal</code>, <code>Studies</code>, <code>Projects</code>. Nest subfolders inside. Add color labels for quick scanning.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-star"></i></div>
+            <div>
+              <h4>Use "Star" for Favorites</h4>
+              <p>Press <kbd>S</kbd> on any file to star it. Starred files appear in a dedicated sidebar section — instant access to your most-used documents.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-link"></i></div>
+            <div>
+              <h4>Shortcuts Instead of Copies</h4>
+              <p>Right-click any file → <strong>Add shortcut to Drive</strong>. Link the same file in multiple folders without duplicating storage. Save GB of space.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-shield-halved"></i></div>
+            <div>
+              <h4>Enable 2-Step Verification</h4>
+              <p>Protect your entire Google account (and Drive) with 2FA. Even if someone gets your password, they can't log in without the second step.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <h4>Set Link Expiry</h4>
+              <p>When sharing via link, choose an expiry date. Perfect for one-time submissions or time-limited access. Auto-revokes after the date.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-zipper"></i></div>
+            <div>
+              <h4>Compress Big Folders</h4>
+              <p>Download large folders as ZIP files. Google auto-compresses before download. Or use Drive to ZIP files (right-click → Download).</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div>
+              <h4>Common Uses</h4>
+              <p>School assignments, team projects, family photo albums, tax records, freelance client files, backup of important documents, shared study notes, and portfolio storage.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-mobile-screen"></i></div>
+            <div>
+              <h4>Scan Documents with Phone</h4>
+              <p>Open Google Drive on Android/iOS → tap <strong>+</strong> → <strong>Scan</strong>. Point at any paper document. Drive auto-crops, enhances, and saves as searchable PDF. Free scanner!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div><strong>Security tip:</strong> Never share "Anyone with the link" for confidential files. By default, Google makes shared links <mark>searchable by Google</mark>. For sensitive files, share with specific email addresses only.</div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-graduation-cap"></i>
+          <div><strong>Practice plan:</strong> Day 1 — create folders and upload files. Day 2 — share a file and set permissions. Day 3 — collaborate in real time on a Google Doc. Day 4 — use version history and restore an old version. Day 5 — install Backup &amp; Sync and sync a folder to your PC.</div>
+        </div>
+      </section>
+
+      <!-- NO RESULTS -->
+      <div class="no-results" id="noResults">
+        <i class="fas fa-magnifying-glass"></i>
+        <h4>No results found</h4>
+        <p>Try a keyword like "sharing", "storage", "offline", or "Ctrl+S".</p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    <i class="fas fa-arrow-right"></i>
+    You've completed the Google Drive module. Your files are now safe, organized, and always accessible.
+  </div>
+</div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  const THEME_KEY = 'user-theme-preference';
+  const DEFAULT_THEME = 'light';
+  const LOGIN_REDIRECT = '../My Account/myaccount.html';
+
+  const AUTH_KEYS = {
+    USER:          'EGyan_user',
+    USER_DATA:     'EGyan_user_data',
+    USER_TYPE:     'EGyan_user_type',
+    REMEMBER_ME:   'EGyan_remember_me',
+    SESSION_EXPIRY:'EGyan_session_expiry'
+  };
+
+  const body = document.body;
+  const html = document.documentElement;
+
+  // THEME
+  function getStoredTheme() {
+    try {
+      const stored = localStorage.getItem(THEME_KEY);
+      if (stored) return stored;
+    } catch (e) {}
+    try {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+    } catch (e) {}
+    return DEFAULT_THEME;
+  }
+
+  function applyTheme(theme) {
+    const t = theme === 'dark' ? 'dark' : 'light';
+    html.setAttribute('data-theme', t);
+    body.setAttribute('data-theme', t);
+
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#0b0e0d' : '#f59e0b');
+
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'themeChange', theme: t }, '*');
+      }
+    } catch (e) {}
+  }
+
+  applyTheme(getStoredTheme());
+
+  try {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq && mq.addEventListener) {
+      mq.addEventListener('change', function (e) {
+        try {
+          const stored = localStorage.getItem(THEME_KEY);
+          if (!stored) applyTheme(e.matches ? 'dark' : 'light');
+        } catch (err) {}
+      });
+    }
+  } catch (e) {}
+
+  window.addEventListener('storage', function (e) {
+    if (e.key === THEME_KEY && e.newValue) applyTheme(e.newValue);
+    if (e.key === 'theme-change-trigger') {
+      try {
+        const latest = localStorage.getItem(THEME_KEY);
+        if (latest) applyTheme(latest);
+      } catch (err) {}
+    }
+  });
+
+  window.addEventListener('message', function (event) {
+    if (event.data && event.data.type === 'themeChange' && event.data.theme) {
+      applyTheme(event.data.theme);
+    }
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) {
+      try {
+        const latest = localStorage.getItem(THEME_KEY);
+        if (latest) applyTheme(latest);
+      } catch (e) {}
+    }
+  });
+
+  // AUTH
+  function parseStoredAuth(raw) {
+    if (!raw) return { value: null, expiry: null };
+    try {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object' && 'value' in parsed) {
+        return { value: parsed.value, expiry: parsed.expiry || null };
+      }
+      return { value: parsed, expiry: null };
+    } catch (e) {
+      return { value: raw, expiry: null };
+    }
+  }
+
+  function readAuthKey(key) {
+    let raw = null;
+    try { raw = localStorage.getItem(key); } catch (e) {}
+    if (raw) {
+      const parsed = parseStoredAuth(raw);
+      if (parsed.expiry && Date.now() >= parsed.expiry) {
+        try { localStorage.removeItem(key); } catch (e) {}
+      } else {
+        return parsed.value;
+      }
+    }
+    try { raw = sessionStorage.getItem(key); } catch (e) { raw = null; }
+    if (!raw) return null;
+    const parsed = parseStoredAuth(raw);
+    if (parsed.expiry && Date.now() >= parsed.expiry) {
+      try { sessionStorage.removeItem(key); } catch (e) {}
+      return null;
+    }
+    return parsed.value;
+  }
+
+  function checkAuthStatus() {
+    const user = readAuthKey(AUTH_KEYS.USER);
+    const userData = readAuthKey(AUTH_KEYS.USER_DATA);
+    const userTypeRaw = readAuthKey(AUTH_KEYS.USER_TYPE);
+
+    if (!user) return { loggedIn: false, role: null, user: null, data: null };
+
+    let role = 'student';
+    if (userTypeRaw) {
+      const t = String(userTypeRaw).toLowerCase().trim();
+      if (t === 'admin') role = 'admin';
+      else if (t === 'teacher') role = 'teacher';
+      else role = 'student';
+    }
+
+    if (!userData) return { loggedIn: false, role: null, user: null, data: null };
+
+    return { loggedIn: true, role: role, user: user, data: userData };
+  }
+
+  function checkLoginStatus() {
+    return checkAuthStatus().loggedIn;
+  }
+
+  // ROLE BADGE + SIDEBAR USER
+  function renderRoleBadge(auth) {
+    const badge = document.getElementById('roleBadge');
+    const icon = document.getElementById('roleBadgeIcon');
+    const text = document.getElementById('roleBadgeText');
+    if (!badge || !icon || !text) return;
+
+    let label = 'Student';
+    let iconClass = 'fas fa-user-graduate';
+    let cls = 'student';
+
+    if (auth.role === 'admin') {
+      label = 'Admin'; iconClass = 'fas fa-user-shield'; cls = 'admin';
+    } else if (auth.role === 'teacher') {
+      label = 'Teacher'; iconClass = 'fas fa-chalkboard-teacher'; cls = 'teacher';
+    }
+
+    const data = readAuthKey(AUTH_KEYS.USER_DATA) || {};
+    const firstName =
+      data['First Name'] || data['Name'] || data['Teacher Name'] || data['User Name'] || '';
+    const lastName = data['Last Name'] || '';
+    const fullName = (firstName + ' ' + lastName).trim();
+    const displayName = fullName || data['Email Id'] || auth.user || '';
+
+    text.textContent = displayName ? (label + ' · ' + displayName) : label;
+    icon.className = iconClass;
+
+    badge.classList.remove('student', 'teacher', 'admin');
+    badge.classList.add(cls);
+    badge.style.display = 'inline-flex';
+
+    renderSidebarUser(auth);
+  }
+
+  function renderSidebarUser(auth) {
+    const avatar = document.getElementById('sidebarAvatar');
+    const nameEl = document.getElementById('sidebarUserName');
+    const roleEl = document.getElementById('sidebarUserRole');
+    if (!avatar || !nameEl || !roleEl) return;
+
+    const data = readAuthKey(AUTH_KEYS.USER_DATA) || {};
+    const firstName =
+      data['First Name'] || data['Name'] || data['Teacher Name'] || data['User Name'] || '';
+    const lastName = data['Last Name'] || '';
+    const fullName = (firstName + ' ' + lastName).trim();
+    const displayName = fullName || data['Email Id'] || auth.user || 'User';
+
+    const initial = (displayName.charAt(0) || 'U').toUpperCase();
+    avatar.textContent = initial;
+    nameEl.textContent = displayName;
+
+    let roleLabel = 'Student';
+    let roleCls = 'student';
+    if (auth.role === 'admin') { roleLabel = 'Admin'; roleCls = 'admin'; }
+    else if (auth.role === 'teacher') { roleLabel = 'Teacher'; roleCls = 'teacher'; }
+
+    roleEl.textContent = roleLabel;
+    roleEl.classList.remove('student', 'teacher', 'admin');
+    roleEl.classList.add(roleCls);
+  }
+
+  function hideRoleBadge() {
+    const badge = document.getElementById('roleBadge');
+    if (badge) badge.style.display = 'none';
+  }
+
+  // UI HELPERS
+  function hideSkeleton() {
+    const sk = document.getElementById('authSkeleton');
+    if (sk) {
+      sk.classList.add('hidden');
+      setTimeout(function () { sk.style.display = 'none'; }, 400);
+    }
+  }
+
+  function revealApp() {
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) wrap.classList.add('revealed');
+  }
+
+  function showLoginRequired() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.classList.add('active');
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) {
+      wrap.style.display = 'none';
+      wrap.classList.remove('revealed');
+    }
+    hideRoleBadge();
+  }
+
+  function hideLoginRequired() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.classList.remove('active');
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) wrap.style.display = 'block';
+  }
+
+  // SIDEBAR
+  const sidebar = document.getElementById('mobileSidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  const hamburger = document.getElementById('hamburgerBtn');
+  const sidebarClose = document.getElementById('sidebarClose');
+
+  let sidebarOpen = false;
+
+  function openSidebar() {
+    if (!sidebar || sidebarOpen) return;
+    sidebar.classList.add('open');
+    if (backdrop) backdrop.classList.add('active');
+    body.classList.add('sidebar-lock');
+    sidebarOpen = true;
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeSidebar() {
+    if (!sidebar || !sidebarOpen) return;
+    sidebar.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('active');
+    body.classList.remove('sidebar-lock');
+    sidebarOpen = false;
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  if (hamburger) hamburger.addEventListener('click', openSidebar);
+  if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+  if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+  document.querySelectorAll('.sidebar-toc-list a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      setTimeout(closeSidebar, 150);
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sidebarOpen) closeSidebar();
+  });
+
+  // Swipe gestures
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  const SWIPE_MIN_DISTANCE = 60;
+  const SWIPE_MAX_VERTICAL = 80;
+  const SWIPE_MAX_TIME = 600;
+
+  document.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchStartTime = Date.now();
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    if (e.changedTouches.length !== 1) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+    const dt = Date.now() - touchStartTime;
+
+    if (dt > SWIPE_MAX_TIME) return;
+    if (Math.abs(dy) > SWIPE_MAX_VERTICAL) return;
+    if (Math.abs(dx) < SWIPE_MIN_DISTANCE) return;
+
+    if (dx > 0) {
+      if (!sidebarOpen) openSidebar();
+    } else if (dx < 0) {
+      if (sidebarOpen) closeSidebar();
+    }
+  }, { passive: true });
+
+  // BOOT
+  function boot() {
+    const auth = checkAuthStatus();
+
+    if (!auth.loggedIn) {
+      hideSkeleton();
+      showLoginRequired();
+      return;
+    }
+
+    hideLoginRequired();
+    renderRoleBadge(auth);
+    hideSkeleton();
+    revealApp();
+
+    console.log('✅ Access granted:', auth.role, '-', auth.user);
+  }
+
+  const loginBtn = document.getElementById('loginBtn');
+  if (loginBtn) loginBtn.setAttribute('href', LOGIN_REDIRECT);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(boot, 80);
+  });
+
+  window.addEventListener('storage', function (e) {
+    const isAuthKey = Object.keys(AUTH_KEYS).some(function (k) {
+      return AUTH_KEYS[k] === e.key;
+    });
+    if (isAuthKey) {
+      if (!checkLoginStatus()) showLoginRequired();
+      else {
+        const auth = checkAuthStatus();
+        if (auth.loggedIn) {
+          hideLoginRequired();
+          renderRoleBadge(auth);
+          revealApp();
+        }
+      }
+    }
+  });
+
+  setInterval(function () {
+    if (!checkLoginStatus()) {
+      const overlay = document.getElementById('loginOverlay');
+      if (overlay && !overlay.classList.contains('active')) showLoginRequired();
+    }
+  }, 15000);
+
+  // TOC SCROLL-SPY
+  const allTocLinks = document.querySelectorAll('[data-toc]');
+  const sections = document.querySelectorAll('section.section-card[id]');
+
+  function setActiveToc(id) {
+    allTocLinks.forEach(function (link) {
+      link.classList.toggle('active', link.getAttribute('data-toc') === id);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      const visible = entries
+        .filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return b.intersectionRatio - a.intersectionRatio; });
+      if (visible.length > 0) setActiveToc(visible[0].target.id);
+    }, {
+      rootMargin: '-90px 0px -55% 0px',
+      threshold: [0.1, 0.5, 0.9]
+    });
+    sections.forEach(function (s) { observer.observe(s); });
+  }
+
+  allTocLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      const id = link.getAttribute('data-toc');
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        setActiveToc(id);
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+  });
+
+  // SEARCH FILTER
+  const searchInput = document.getElementById('searchInput');
+  const searchClear = document.getElementById('searchClear');
+  const searchInfo = document.getElementById('searchInfo');
+  const noResults = document.getElementById('noResults');
+  const sectionCards = document.querySelectorAll('.section-card');
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+    });
+  }
+
+  function runFilter(query) {
+    const q = (query || '').toLowerCase().trim();
+    let visibleCount = 0;
+
+    if (searchClear) {
+      searchClear.classList.toggle('visible', q.length > 0);
+    }
+
+    sectionCards.forEach(function (section) {
+      let sectionVisible = 0;
+
+      const tools = section.querySelectorAll('.tool-card');
+      tools.forEach(function (tool) {
+        const h4 = (tool.querySelector('h4') || {}).textContent || '';
+        const p = (tool.querySelector('p') || {}).textContent || '';
+        const haystack = (h4 + ' ' + p).toLowerCase();
+        const match = !q || haystack.indexOf(q) !== -1;
+        tool.style.display = match ? '' : 'none';
+        if (match) { sectionVisible++; visibleCount++; }
+      });
+
+      const suites = section.querySelectorAll('.suite-card');
+      suites.forEach(function (suite) {
+        const txt = (suite.textContent || '').toLowerCase();
+        const match = !q || txt.indexOf(q) !== -1;
+        suite.style.display = match ? '' : 'none';
+        if (match) { sectionVisible++; visibleCount++; }
+      });
+
+      const plans = section.querySelectorAll('.plan-card');
+      plans.forEach(function (plan) {
+        const txt = (plan.textContent || '').toLowerCase();
+        const match = !q || txt.indexOf(q) !== -1;
+        plan.style.display = match ? '' : 'none';
+        if (match) { sectionVisible++; visibleCount++; }
+      });
+
+      const rows = section.querySelectorAll('.shortcut-row');
+      rows.forEach(function (row) {
+        const desc = (row.querySelector('.shortcut-desc span') || {}).textContent || '';
+        const keys = (row.querySelector('.shortcut-keys') || {}).textContent || '';
+        const searchMeta = row.getAttribute('data-search') || '';
+        const haystack = (desc + ' ' + keys + ' ' + searchMeta).toLowerCase();
+        const match = !q || haystack.indexOf(q) !== -1;
+        row.style.display = match ? '' : 'none';
+        if (match) { sectionVisible++; visibleCount++; }
+      });
+
+      if (sectionVisible === 0) {
+        section.style.display = 'none';
+      } else {
+        section.style.display = '';
+      }
+    });
+
+    if (noResults) {
+      noResults.classList.toggle('visible', visibleCount === 0 && q.length > 0);
+    }
+
+    if (searchInfo) {
+      if (q.length > 0) {
+        searchInfo.style.display = '';
+        searchInfo.innerHTML = 'Showing <strong>' + visibleCount + '</strong> ' +
+          (visibleCount === 1 ? 'result' : 'results') +
+          ' for "<strong>' + escapeHtml(q) + '</strong>"';
+      } else {
+        searchInfo.style.display = 'none';
+        searchInfo.innerHTML = '';
+      }
+    }
+  }
+
+  if (searchInput) {
+    let searchTimer = null;
+    searchInput.addEventListener('input', function (e) {
+      clearTimeout(searchTimer);
+      const val = e.target.value;
+      searchTimer = setTimeout(function () { runFilter(val); }, 120);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        const tag = (document.activeElement && document.activeElement.tagName) || '';
+        if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      }
+      if (e.key === 'Escape' && document.activeElement === searchInput) {
+        searchInput.value = '';
+        runFilter('');
+        searchInput.blur();
+      }
+    });
+  }
+
+  if (searchClear) {
+    searchClear.addEventListener('click', function () {
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+      }
+      runFilter('');
+    });
+  }
+
+  // BACK TO TOP
+  const backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    function updateBackToTop() {
+      if (window.pageYOffset > 400) backToTop.classList.add('visible');
+      else backToTop.classList.remove('visible');
+    }
+    window.addEventListener('scroll', updateBackToTop, { passive: true });
+    updateBackToTop();
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // KEY PRESS VISUAL FEEDBACK
+  document.addEventListener('keydown', function (e) {
+    const key = e.key;
+    if (!key || key.length > 3) return;
+    if (document.activeElement === searchInput) return;
+
+    const allKbds = document.querySelectorAll('kbd');
+    allKbds.forEach(function (kbd) {
+      const txt = (kbd.textContent || '').trim().toLowerCase();
+      const pressed = key.toLowerCase();
+
+      if (txt === pressed ||
+          (pressed === 'control' && txt === 'ctrl') ||
+          (pressed === 'escape' && txt === 'esc') ||
+          (pressed === 'delete' && txt === 'del') ||
+          (pressed === 'arrowup' && txt === '↑') ||
+          (pressed === 'arrowdown' && txt === '↓') ||
+          (pressed === 'arrowleft' && txt === '←') ||
+          (pressed === 'arrowright' && txt === '→') ||
+          (pressed === ' ' && txt === 'space')) {
+        kbd.style.transform = 'scale(0.9)';
+        kbd.style.background = 'linear-gradient(135deg, #f59e0b, #fbbf24)';
+        kbd.style.color = '#1f2937';
+        setTimeout(function () {
+          kbd.style.transform = '';
+          kbd.style.background = '';
+          kbd.style.color = '';
+        }, 200);
+      }
+    });
+  });
+
+  console.log('💾 Google Drive page ready — theme:', html.getAttribute('data-theme'));
+})();
+</script>
+</body>
+</html>

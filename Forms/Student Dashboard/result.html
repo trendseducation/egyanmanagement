@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="dns-prefetch" href="https://script.google.com">
+<link rel="dns-prefetch" href="https://lh3.googleusercontent.com">
+
+<title>EGyan Skill Development · My Results</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cinzel:wght@500;700;900&family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+(function () {
+    try {
+        var t = localStorage.getItem('user-theme-preference') || 'light';
+        document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+    } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+})();
+</script>
+
+<style>
+/* ============================================================
+   THEME VARIABLES
+   ============================================================ */
+:root {
+    --bg-body: #eef2f9; --bg-body-grad: radial-gradient(1400px 700px at 50% -10%, rgba(37,99,235,0.08), transparent 60%);
+    --bg-card: #ffffff; --bg-elevated: #ffffff; --bg-soft: #f8fafc;
+    --text-main: #0f172a; --text-muted: #5b6e8c; --text-light: #94a3b8;
+    --border-light: #e2e8f0; --border-strong: #cbd5e1;
+    --accent: #2563eb; --accent-2: #7c3aed; --accent-soft: rgba(37, 99, 235, 0.10);
+    --success: #10b981; --success-soft: rgba(16, 185, 129, 0.12);
+    --danger: #ef4444; --danger-soft: rgba(239, 68, 68, 0.12);
+    --warning: #f59e0b; --warning-soft: rgba(245, 158, 11, 0.12);
+    --backdrop: rgba(15, 23, 42, 0.55); --chip-bg: rgba(37, 99, 235, 0.08);
+    --shadow-xs: 0 2px 6px -2px rgba(15, 23, 42, 0.06); --shadow-sm: 0 10px 30px -12px rgba(15, 23, 42, 0.12);
+    --shadow-md: 0 18px 40px -18px rgba(15, 23, 42, 0.18); --shadow-lg: 0 26px 52px -22px rgba(15, 23, 42, 0.26);
+    --grad-hero: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); --grad-success: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+    --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+[data-theme="dark"] {
+    --bg-body: #060b18; --bg-body-grad: radial-gradient(1400px 700px at 50% -10%, rgba(59,130,246,0.10), transparent 60%);
+    --bg-card: #0f172a; --bg-elevated: #16213a; --bg-soft: #0d1526;
+    --text-main: #f1f5f9; --text-muted: #9ca3af; --text-light: #64748b; --border-light: #1e2a44; --border-strong: #2b3a58;
+    --accent: #3b82f6; --accent-2: #a78bfa; --accent-soft: rgba(59, 130, 246, 0.18);
+    --success: #22c55e; --success-soft: rgba(34, 197, 94, 0.18);
+    --danger: #f87171; --danger-soft: rgba(248, 113, 113, 0.18);
+    --warning: #fbbf24; --warning-soft: rgba(251, 191, 36, 0.18);
+    --backdrop: rgba(0, 0, 0, 0.78); --chip-bg: rgba(59, 130, 246, 0.15);
+    --shadow-xs: 0 2px 6px -2px rgba(0, 0, 0, 0.5); --shadow-sm: 0 10px 30px -12px rgba(0, 0, 0, 0.65);
+    --shadow-md: 0 18px 40px -18px rgba(0, 0, 0, 0.8); --shadow-lg: 0 26px 52px -22px rgba(0, 0, 0, 0.9);
+    --grad-hero: linear-gradient(135deg, #1e40af 0%, #6d28d9 100%); --grad-success: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: 'Inter', sans-serif; background: var(--bg-body-grad), var(--bg-body); color: var(--text-main); min-height: 100vh; font-size: 15px; line-height: 1.5; -webkit-tap-highlight-color: transparent; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 8px; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes shimmer { 0% { background-position: -500px 0; } 100% { background-position: 500px 0; } }
+@keyframes modalPop { from { transform: scale(0.92) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+@keyframes splashSpin { to { transform: rotate(360deg); } }
+@keyframes splashLogoIn { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes splashTextIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes splashBounce { 0%, 80%, 100% { transform: scale(0.7); opacity: 0.55; } 40% { transform: scale(1.1); opacity: 1; } }
+.spinner { display: inline-block; width: 18px; height: 18px; border: 3px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+
+/* SPLASH & APP SHELL */
+.splash { position: fixed; inset: 0; background: var(--grad-hero); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1.4rem; padding: 1.5rem; text-align: center; opacity: 1; visibility: visible; transition: opacity 450ms ease, visibility 450ms ease; overflow: hidden; }
+.splash.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+.splash::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18), transparent 45%); pointer-events: none; }
+.splash::after { content: ''; position: absolute; inset: -50%; background: conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.08) 90deg, transparent 180deg, rgba(255,255,255,0.08) 270deg, transparent 360deg); animation: splashSpin 8s linear infinite; pointer-events: none; }
+.splash-logo-wrap { width: 110px; height: 110px; border-radius: 50%; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.35); display: flex; align-items: center; justify-content: center; padding: 8px; animation: splashLogoIn 0.7s both; z-index: 2; }
+.splash-logo { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+.splash-title { font-size: 1.5rem; font-weight: 800; color: #fff; animation: splashTextIn 0.6s ease 0.15s both; z-index: 2; }
+.splash-subtitle { font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.85); letter-spacing: 0.06em; text-transform: uppercase; margin-top: -0.7rem; animation: splashTextIn 0.6s ease 0.25s both; z-index: 2; }
+.splash-loader { display: flex; gap: 6px; margin-top: 0.5rem; animation: splashTextIn 0.6s ease 0.35s both; z-index: 2; }
+.splash-loader span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.9); animation: splashBounce 1.3s ease-in-out infinite; }
+
+.app-shell { width: 100%; max-width: 1180px; margin: 0 auto; padding: 1.5rem; padding-top: calc(1.5rem + var(--safe-top)); padding-bottom: calc(1.5rem + var(--safe-bottom)); min-height: 100dvh; display: flex; flex-direction: column; gap: 1rem; }
+
+/* TOPBAR & HERO */
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--bg-card); border-radius: 999px; padding: 0.55rem 1.3rem; border: 1px solid var(--border-light); box-shadow: var(--shadow-sm); position: sticky; top: 6px; z-index: 50; }
+.topbar-left { display: flex; align-items: center; gap: 0.7rem; min-width: 0; flex: 1; }
+.topbar-logo { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; background: var(--bg-soft); flex-shrink: 0; }
+.topbar-title { font-size: 1.05rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; color: transparent; }
+.btn-back { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 2px solid var(--accent); color: var(--accent); border-radius: 999px; padding: 0.42rem 0.9rem; font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: all 220ms ease; }
+.btn-back:hover { background: var(--accent); color: #fff; transform: translateY(-2px); }
+
+.hero-card { background: var(--grad-hero); border-radius: 26px; padding: 2rem 1.8rem; color: #fff; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
+.hero-avatar { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; background: rgba(255,255,255,0.15); border: 3px solid rgba(255,255,255,0.35); flex-shrink: 0; }
+.hero-meta { flex: 1; min-width: 0; }
+.hero-greeting { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; margin-bottom: 3px; }
+.hero-name { font-size: 1.55rem; font-weight: 800; line-height: 1.2; margin-bottom: 6px; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.hero-chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; padding: 0.24rem 0.7rem; font-size: 0.74rem; font-weight: 700; }
+
+/* SEARCH & TABLE */
+.search-wrap { display: flex; align-items: center; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 999px; padding: 0.25rem 0.25rem 0.25rem 1rem; box-shadow: var(--shadow-xs); transition: all 220ms ease; }
+.search-wrap:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.search-input { flex: 1; border: none; outline: none; background: transparent; padding: 0.7rem 0.75rem; font-family: inherit; font-size: 0.92rem; font-weight: 600; color: var(--text-main); }
+.search-clear { background: var(--bg-soft); border: none; border-radius: 999px; padding: 0.5rem 0.9rem; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); cursor: pointer; display: none; }
+.search-clear.show { display: inline-flex; }
+
+.results-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 22px; box-shadow: var(--shadow-xs); overflow: hidden; }
+.results-card-head { display: flex; align-items: center; justify-content: space-between; padding: 1.15rem 1.3rem; border-bottom: 1px solid var(--border-light); background: linear-gradient(180deg, var(--bg-soft), transparent); }
+.results-card-head h2 { font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.results-count { font-size: 0.76rem; font-weight: 800; background: var(--chip-bg); color: var(--text-muted); padding: 3px 10px; border-radius: 999px; }
+
+.results-table-wrap { overflow-x: auto; }
+.results-table { width: 100%; border-collapse: collapse; min-width: 620px; }
+.results-table thead th { background: var(--bg-soft); color: var(--text-muted); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; text-align: left; padding: 0.85rem 0.9rem; border-bottom: 1px solid var(--border-light); }
+.results-table tbody tr { border-bottom: 1px solid var(--border-light); transition: background 200ms ease; }
+.results-table tbody tr:hover { background: var(--bg-soft); }
+.results-table tbody td { padding: 0.85rem 0.9rem; font-size: 0.88rem; font-weight: 600; vertical-align: middle; }
+.status-badge { display: inline-flex; align-items: center; gap: 5px; padding: 0.28rem 0.7rem; border-radius: 999px; font-size: 0.72rem; font-weight: 800; }
+.status-pass { background: var(--success-soft); color: var(--success); }
+.status-fail { background: var(--danger-soft); color: var(--danger); }
+.tbl-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.8rem; font-weight: 800; cursor: pointer; border: 2px solid var(--accent); color: var(--accent); background: transparent; transition: all 220ms ease; }
+.tbl-btn:hover { background: var(--accent); color: #fff; }
+.tbl-btn.primary { background: var(--grad-hero); border-color: transparent; color: #fff; }
+.tbl-btn.success { background: var(--grad-success); border-color: transparent; color: #fff; }
+
+/* FULL PAGE VIEW */
+#detailPage { display: none; width: 100%; animation: fadeUp 0.4s ease; flex-direction: column; gap: 1rem; }
+#detailPage.active { display: flex; }
+.detail-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 24px; padding: 2.5rem; box-shadow: var(--shadow-md); }
+.detail-header { text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px dashed var(--border-light); }
+.detail-big-score { font-size: 4rem; font-weight: 900; line-height: 1; margin-bottom: 8px; background: var(--grad-hero); -webkit-background-clip: text; color: transparent; }
+.detail-subtitle { font-size: 1.1rem; font-weight: 700; color: var(--text-muted); }
+.detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.detail-field { background: var(--bg-soft); border: 1px solid var(--border-light); border-radius: 14px; padding: 1rem; }
+.detail-lbl { font-size: 0.72rem; font-weight: 800; color: var(--text-light); text-transform: uppercase; margin-bottom: 4px; }
+.detail-val { font-size: 1.05rem; font-weight: 800; color: var(--text-main); }
+.detail-val.c-correct { color: var(--success); }
+.detail-val.c-wrong { color: var(--danger); }
+.detail-val.c-skip { color: var(--warning); }
+.detail-remark-box { background: var(--warning-soft); border-left: 4px solid var(--warning); padding: 1.2rem; border-radius: 0 12px 12px 0; font-weight: 600; line-height: 1.6; margin-bottom: 2rem; }
+.detail-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 1rem; }
+.detail-actions .tbl-btn { padding: 0.75rem 1.5rem; font-size: 0.95rem; }
+
+/* ============================================================
+   CERTIFICATE - DESIGN & PRINT FIX
+   ============================================================ */
+.cert-modal-box { 
+    max-width: 1000px; 
+    background: transparent !important; 
+    border: none !important; 
+    box-shadow: none !important; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+}
+.cert-wrapper { 
+    width: 100%; 
+    overflow-x: auto; 
+    padding: 10px; 
+    display: flex; 
+    justify-content: center; 
+}
+
+.certificate {
+    position: relative;
+    width: 1123px; /* A4 Landscape */
+    height: 794px;
+    background-color: #ffffff;
+    background-image: url('https://lh3.googleusercontent.com/d/1NaGpFwlmwu5c2QqF06699Vh7HNKFfBBv');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Inter', sans-serif;
+    color: #1a1a1a;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+}
+
+.cert-content {
+    position: absolute;
+    inset: 12% 12% 10% 12%; /* Balanced fit inside the border */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Brand & Logo */
+.cert-brand-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 15px; }
+.cert-logo { width: 65px; height: 65px; border-radius: 50%; object-fit: contain; margin-bottom: 8px; }
+.cert-brand-text h1 { font-family: 'Cinzel', serif; font-size: 24px; color: #0a1c5c; margin: 0; letter-spacing: 2px; text-transform: uppercase; font-weight: 900; }
+.cert-brand-text p { font-size: 10px; font-weight: 700; color: #d4af37; text-transform: uppercase; letter-spacing: 4px; margin: 4px 0 0; }
+
+/* Title */
+.cert-title { text-align: center; margin-bottom: 20px; }
+.cert-title h2 { font-family: 'Cinzel', serif; font-size: 40px; color: #0a1c5c; letter-spacing: 4px; margin: 0; line-height: 1; text-transform: uppercase; font-weight: 900; }
+.cert-title p { font-size: 12px; font-weight: 700; color: #d4af37; text-transform: uppercase; letter-spacing: 8px; margin-top: 8px; }
+
+/* Body (Photo + Text) */
+.cert-body-layout { display: flex; gap: 40px; width: 100%; justify-content: center; align-items: center; margin-bottom: 25px; }
+.cert-photo-col { width: 120px; flex-shrink: 0; text-align: center; }
+.cert-photo-box { width: 120px; height: 140px; border-radius: 8px; border: 3px solid #0a1c5c; padding: 4px; background: #fff; margin: 0 auto 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.cert-photo-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+.cert-photo-col span { font-size: 10px; font-weight: 800; color: #0a1c5c; text-transform: uppercase; letter-spacing: 2px; }
+
+.cert-text-col { flex: 1; text-align: left; max-width: 550px; }
+.cert-presented { font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px; }
+.cert-name { font-family: 'Great Vibes', cursive; font-size: 52px; color: #0a1c5c; line-height: 1; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px dashed rgba(10,28,92,0.2); }
+.cert-desc { font-size: 14px; color: #334155; line-height: 1.7; margin-bottom: 12px; }
+.cert-desc strong { color: #0a1c5c; font-weight: 800; }
+
+.cert-stats { display: flex; gap: 12px; }
+.cert-stat-item { flex: 1; background: rgba(10,28,92,0.04); border: 1px solid rgba(10,28,92,0.1); padding: 10px; border-radius: 8px; text-align: center; }
+.cert-stat-item h4 { font-size: 18px; color: #0a1c5c; margin: 0 0 3px; font-weight: 900; }
+.cert-stat-item p { font-size: 9px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin: 0; }
+
+/* Footer */
+.cert-footer { display: flex; align-items: flex-end; width: 100%; margin-top: 50px;; padding-top: 0px; margin-left: 90%;}
+.cert-sign { text-align: center; width: 180px; }
+.cert-sign-line { height: 2px; background: #0a1c5c; width: 130px; margin: 0 auto 8px; }
+.cert-sign h5 { font-family: 'Cinzel', serif; font-size: 13px; color: #0a1c5c; margin: 0 0 2px; letter-spacing: 1px; text-align: center;}
+.cert-sign p { font-size: 9px; font-weight: 700; color: #64748b; text-transform: uppercase; margin: 0; text-align: center;}
+
+/* ============================================================
+   ✅ PRINT CSS - EXACTLY ONE PAGE (LANDSCAPE)
+   ============================================================ */
+@media print {
+    @page { size: A4 landscape; margin: 0; }
+    
+    /* Hide everything else */
+    body * { visibility: hidden; }
+    
+    /* Show only the modal and certificate */
+    #certModal, #certModal * { visibility: visible; }
+    #certModal { 
+        position: absolute; 
+        left: 0; 
+        top: 0; 
+        width: 100vw; 
+        height: 100vh; 
+        background: white !important; 
+        padding: 0 !important; 
+        margin: 0 !important; 
+        display: block !important; 
+    }
+    #certModal .modal-box { 
+        width: 100% !important; 
+        max-width: 100% !important; 
+        height: 100% !important; 
+        display: block !important; 
+        padding: 0 !important; 
+        margin: 0 !important; 
+    }
+    
+    /* Hide toolbar/buttons */
+    .cert-toolbar { display: none !important; }
+    
+    .cert-wrapper { 
+        display: block !important; 
+        width: 100% !important; 
+        height: 100% !important; 
+        padding: 0 !important; 
+        margin: 0 !important; 
+        overflow: hidden !important; 
+    }
+    
+    /* Force exact A4 Landscape sizing, filling the page */
+    .certificate { 
+        width: 100vw !important;		
+        height: 100vh !important; 
+        max-width: 100vw !important; 
+        max-height: 100vh !important; 
+        box-shadow: none !important; 
+        border-radius: 0 !important; 
+        margin: 0 !important;
+        transform: none !important; 
+        page-break-inside: avoid !important;
+        page-break-after: avoid !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        background-size: 100% 100% !important;
+    }
+    
+    .cert-content { inset: 12% 12% 10% 12% !important; }
+}
+
+/* Modal overlays (Screen) */
+.modal-overlay { position: fixed; inset: 0; background: var(--backdrop); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1rem; opacity: 0; visibility: hidden; transition: all 260ms ease; backdrop-filter: blur(4px); }
+.modal-overlay.active { display: flex; opacity: 1; visibility: visible; }
+.modal-box { background: var(--bg-elevated); border-radius: 24px; max-width: 640px; width: 100%; max-height: 92vh; overflow-y: auto; border: 1px solid var(--border-light); box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.5); animation: modalPop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+/* Skeleton / Empty / Error */
+.empty-card { background: var(--bg-card); border-radius: 20px; padding: 3rem 1.5rem; text-align: center; border: 1px solid var(--border-light); box-shadow: var(--shadow-xs); }
+.empty-ico { font-size: 3rem; color: var(--accent); margin-bottom: 1rem; }
+.empty-card h3 { font-size: 1.15rem; margin-bottom: 0.4rem; font-weight: 800; }
+.empty-card p { color: var(--text-muted); font-size: 0.9rem; max-width: 420px; margin: 0 auto; line-height: 1.6; }
+.state-box { background: var(--bg-card); border-radius: 20px; padding: 3rem 1.5rem; text-align: center; border: 1px solid var(--border-light); box-shadow: var(--shadow-xs); display: none; }
+.state-box.show { display: block; animation: fadeUp 0.4s ease; }
+.state-box .state-ico { font-size: 3rem; color: var(--danger); margin-bottom: 1rem; }
+.state-box h3 { font-size: 1.15rem; margin-bottom: 0.4rem; font-weight: 700; }
+.state-box p { color: var(--text-muted); font-size: 0.9rem; max-width: 420px; margin: 0 auto; line-height: 1.6; }
+.skeleton { background: linear-gradient(90deg, var(--bg-soft) 0%, var(--border-light) 50%, var(--bg-soft) 100%); background-size: 500px 100%; animation: shimmer 1.4s infinite linear; border-radius: 8px; }
+.skeleton-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-xs); }
+
+@media (max-width: 900px) { .cert-wrapper { height: 500px; } .certificate { transform: scale(0.6); transform-origin: top left; } }
+@media (max-width: 640px) { 
+    .cert-wrapper { height: 350px; } .certificate { transform: scale(0.42); transform-origin: top left; }
+    .detail-grid { grid-template-columns: 1fr 1fr; } .detail-big-score { font-size: 3rem; } .detail-actions .tbl-btn { width: 100%; }
+    .detail-card { padding: 1.5rem 1rem; }
+}
+@media (max-width: 400px) { .cert-wrapper { height: 280px; } .certificate { transform: scale(0.33); transform-origin: top left; } .detail-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div class="splash" id="splashScreen">
+    <div class="splash-logo-wrap">
+        <img class="splash-logo" src="https://lh3.googleusercontent.com/d/1cRWU-0cLUEkHpW8C6rRV9XX2OkRgKnrb=w200" alt="EGyan">
+    </div>
+    <div>
+        <h1 class="splash-title">My Results</h1>
+        <p class="splash-subtitle">Loading your results…</p>
+    </div>
+    <div class="splash-loader"><span></span><span></span><span></span></div>
+</div>
+
+<div class="app-shell">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <img class="topbar-logo" id="topbarLogo" src="https://lh3.googleusercontent.com/d/1cRWU-0cLUEkHpW8C6rRV9XX2OkRgKnrb=w80" alt="EGyan">
+            <span class="topbar-title">My Results</span>
+        </div>
+        <button class="btn-back" id="btnBack"><i class="fas fa-arrow-left"></i> Back</button>
+    </header>
+
+    <div id="skeleton" style="display:none;">
+        <div class="skeleton-card skeleton" style="height: 130px; margin-bottom: 1rem;"></div>
+        <div class="skeleton-card skeleton" style="height: 300px;"></div>
+    </div>
+
+    <div class="state-box" id="errorState" role="alert">
+        <div class="state-ico"><i class="fas fa-circle-exclamation"></i></div>
+        <h3 id="errorTitle">Something went wrong</h3>
+                <p id="errorMsg">Please try again or contact your academy.</p>
+    </div>
+
+    <!-- MAIN LIST VIEW -->
+    <main id="mainContent" style="display:none; flex-direction: column; gap: 1rem;">
+        <section class="hero-card">
+            <img class="hero-avatar" id="heroAvatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%232563eb'/%3E%3Ccircle cx='60' cy='48' r='21' fill='%23fff' opacity='0.9'/%3E%3Cellipse cx='60' cy='100' rx='35' ry='28' fill='%23fff' opacity='0.9'/%3E%3C/svg%3E" alt="Student">
+            <div class="hero-meta">
+                <div class="hero-greeting">Results for</div>
+                <h1 class="hero-name" id="heroName">—</h1>
+                <div class="hero-chips">
+                    <span class="hero-chip"><i class="fas fa-graduation-cap"></i> <span id="heroCourse">—</span></span>
+                    <span class="hero-chip"><i class="fas fa-envelope"></i> <span id="heroEmail">—</span></span>
+                </div>
+            </div>
+        </section>
+
+        <div class="search-wrap">
+            <i class="fas fa-search" style="color:var(--text-muted)"></i>
+            <input class="search-input" id="searchInput" type="search" placeholder="Search by test topic or status…">
+            <button class="search-clear" id="searchClear" type="button">Clear</button>
+        </div>
+
+        <section class="results-card" id="resultsCard" style="display:none;">
+            <div class="results-card-head">
+                <h2><i class="fas fa-list-check"></i> Test Results</h2>
+                <span class="results-count" id="resultsCount">0 results</span>
+            </div>
+            <div class="results-table-wrap">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Date</th>
+                            <th>Test Topic</th>
+                            <th>Status</th>
+                            <th style="text-align:right;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="empty-card" id="emptyState" style="display:none;">
+            <div class="empty-ico"><i class="fas fa-inbox"></i></div>
+            <h3 id="emptyTitle">No results found</h3>
+            <p id="emptyMsg">You haven't attempted any tests yet.</p>
+        </div>
+    </main>
+
+    <!-- FULL PAGE DETAIL VIEW -->
+    <main id="detailPage">
+        <button class="btn-back" id="btnBackToResults" style="align-self:flex-start; margin-bottom: 0.5rem;">
+            <i class="fas fa-arrow-left"></i> Back to Results
+        </button>
+        <div class="detail-card" id="detailPageContent"></div>
+    </main>
+
+</div>
+
+<!-- CERTIFICATE MODAL -->
+<div class="modal-overlay" id="certModal">
+    <div class="modal-box cert-modal-box">
+        <div class="modal-body">
+            
+            <div class="cert-toolbar" style="display:flex; gap:10px; justify-content:center; margin-bottom: 1rem;">
+                <button class="tbl-btn" id="certCloseBtn" type="button" style="background:#fff; color:#0f172a; border-color:#fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2);"><i class="fas fa-xmark"></i> Close Preview</button>
+            </div>
+
+            <div class="cert-wrapper">
+                <!-- EXACT CERTIFICATE DESIGN -->
+                <div class="certificate" id="certificate">
+                    <div class="cert-content">
+                        
+                        <!-- Logo & Brand -->
+                        <div class="cert-brand-wrap">
+                            <img class="cert-logo" src="https://lh3.googleusercontent.com/d/1cRWU-0cLUEkHpW8C6rRV9XX2OkRgKnrb=w200" alt="Logo" crossorigin="anonymous">
+                            <div class="cert-brand-text">
+                                <h1>EGyan Skill Development</h1>
+                                <p>Empowering Skills &middot; Building Futures</p>
+                            </div>
+                        </div>
+
+                        <!-- Title -->
+                        <div class="cert-title">
+                            <h2>Certificate</h2>
+                            <p>Of Achievement</p>
+                        </div>
+
+                        <!-- Body (Photo + Text) -->
+                        <div class="cert-body-layout">
+                            <div class="cert-photo-col">
+                                <div class="cert-photo-box">
+                                    <img id="certPhoto" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='160'%3E%3Crect width='140' height='160' fill='%23f1f5f9'/%3E%3Ccircle cx='70' cy='60' r='26' fill='%23cbd5e1'/%3E%3Cellipse cx='70' cy='135' rx='42' ry='34' fill='%23cbd5e1'/%3E%3C/svg%3E" alt="Photo">
+                                </div>
+                                <span>Student</span>
+                            </div>
+                            
+                            <div class="cert-text-col">
+                                <div class="cert-presented">This certificate is proudly presented to</div>
+                                <div class="cert-name" id="certStudentName">Student Name</div>
+                                <div class="cert-desc">
+                                    For successfully completing the <strong id="certTestTopic">Test</strong> with a score of <strong id="certPercentage">0%</strong> in the <strong id="certCourse">Course</strong> program, demonstrating dedication, skill, and academic excellence.
+                                </div>
+                                
+                                <div class="cert-stats">
+                                    <div class="cert-stat-item">
+                                        <h4 id="certStatScore">0</h4>
+                                        <p>Correct</p>
+                                    </div>
+                                    <div class="cert-stat-item">
+                                        <h4 id="certStatTotal">0</h4>
+                                        <p>Total</p>
+                                    </div>
+                                    <div class="cert-stat-item">
+                                        <h4 id="certStatPct">0%</h4>
+                                        <p>Score</p>
+                                    </div>
+                                    <div class="cert-stat-item">
+                                        <h4 id="certStatStatus">PASS</h4>
+                                        <p>Status</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="cert-footer">
+                            <div class="cert-sign">
+                                <div class="cert-sign-line"></div>
+                                <h5>DIRECTOR</h5>
+                                <p>EGyan Skill Development</p>
+                            </div>
+                            
+                            <div style="width: 100px;"></div>
+
+                            <div class="cert-sign" style="text-align:right;">
+                                <div class="cert-sign-line" style="margin-left:auto;"></div>
+                                <h5 id="certDate">Date</h5>
+                                <p>Issued On</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="toast-host" id="toastHost" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+(function () {
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwzEbd10tAnSKJSsg01LOXr8MAgKTFO4cp2sjq9moatjN3_IWZ8ZWF9uViTXE-991Nq/exec";
+const RESULT_SPREADSHEET_ID = "1gxST-uKGcdS4khcdoI2TtrW7uIPGCPLuTMh0prugY3g";
+const RESULT_SHEET_NAME = "Result";
+const PROFILE_SPREADSHEET_ID = "14DSh6jSYukltWrm72rZewxWjQpMcUFuvnR5sqrm9pDg";
+const PROFILE_STUDENT_SHEETS = ['Adm_Details'];
+
+const COL = { EMAIL: 'Email Id', FULL_NAME: 'Full Name', STD: 'Adm In', IMAGE: 'Image' };
+const RES_COL = { SR_NO: 'Sr. No', STUDENT_NAME: 'Student Name', EMAIL_ID: 'Email Id', DATE: 'Date Submitted', TEST_TOPIC: 'Test Topic', CORRECT: 'Correct Answers', INCORRECT: 'Incorrect Answers', SKIPPED: 'Skipped Questions', TOTAL: 'Total Questions', PERCENTAGE: 'Percentage', STATUS: 'Status', TIME_TAKEN: 'Time Taken', REMARKS: 'Remarks' };
+
+const EMAIL_HEADER_ALIASES = ['email id','email','emailid','e-mail','email address','emailaddress'];
+const NAME_HEADER_ALIASES  = ['full name','fullname','name','student name','studentname','student','full_name','full-name','student_name','student-name','name of student','nameofstudent'];
+const STD_HEADER_ALIASES   = ['adm in','adm_in','adm-in','admission in','standard','std','class','grade'];
+const RES_NAME_ALIASES     = ['student name','studentname','student_name','name','full name','fullname'];
+const RES_DATE_ALIASES     = ['date submitted','date of submission','date','submitted on','test date'];
+const RES_TOPIC_ALIASES    = ['test topic','topic','test name','test','exam','subject'];
+const RES_STATUS_ALIASES   = ['status','result'];
+const RES_PCT_ALIASES      = ['percentage','percent','score percentage','pct'];
+const RES_CORRECT_ALIASES  = ['correct answers','correct','correct answer','right answers'];
+const RES_INCORRECT_ALIASES= ['incorrect answers','incorrect','wrong answers','wrong'];
+const RES_SKIPPED_ALIASES  = ['skipped questions','skipped','skip','unanswered'];
+const RES_TOTAL_ALIASES    = ['total questions','total','questions total'];
+const RES_TIME_ALIASES     = ['time taken','duration','time'];
+const RES_REMARK_ALIASES   = ['remarks','remark','comment','comments','feedback'];
+const RES_EMAIL_ALIASES    = ['email id','email','emailid','e-mail'];
+const RES_SR_ALIASES       = ['sr. no','sr no','srno','sr. no.','serial no','serial number','s.no','sno'];
+
+const SESSION_KEYS = { USER: 'EGyan_user', USER_TYPE: 'EGyan_user_type' };
+const THEME_KEY    = 'user-theme-preference';
+const PROFILE_KEY_PREFIX = 'EGyan_dash_v2_profile_';
+const SHEET_KEY_PREFIX   = 'EGyan_dash_v2_sheet_';
+const SHEET_CACHE_TTL   = 5 * 60 * 1000;
+
+let student = { email: '', name: '', std: '', avatar: '' };
+let allResults = [];
+let filteredRows = [];
+let currentCertData = null;
+
+const $ = (id) => document.getElementById(id);
+const dom = {};
+function cacheDom() {
+    dom.topbarLogo = $('topbarLogo'); dom.btnBack = $('btnBack');
+    dom.skeleton = $('skeleton'); dom.errorState = $('errorState');
+    dom.errorTitle = $('errorTitle'); dom.errorMsg = $('errorMsg');
+    dom.mainContent = $('mainContent'); dom.detailPage = $('detailPage');
+    dom.detailPageContent = $('detailPageContent'); dom.btnBackToResults = $('btnBackToResults');
+    dom.heroAvatar = $('heroAvatar'); dom.heroName = $('heroName'); dom.heroCourse = $('heroCourse'); dom.heroEmail = $('heroEmail');
+    dom.searchInput = $('searchInput'); dom.searchClear = $('searchClear');
+    dom.resultsCard = $('resultsCard'); dom.resultsCount = $('resultsCount'); dom.resultsTbody = $('resultsTbody');
+    dom.emptyState = $('emptyState'); dom.emptyTitle = $('emptyTitle'); dom.emptyMsg = $('emptyMsg');
+    
+    dom.certModal = $('certModal'); dom.certCloseBtn = $('certCloseBtn');
+    dom.certAcadYear = $('certAcadYear'); dom.certPhoto = $('certPhoto'); dom.certStudentName = $('certStudentName');
+    dom.certTestTopic = $('certTestTopic'); dom.certPercentage = $('certPercentage'); dom.certCourse = $('certCourse');
+    dom.certStatScore = $('certStatScore'); dom.certStatTotal = $('certStatTotal'); dom.certStatPct = $('certStatPct');
+    dom.certStatStatus = $('certStatStatus'); dom.certDate = $('certDate');
+    
+    dom.toastHost = $('toastHost');
+}
+
+let splashHidden = false;
+function hideSplash() {
+    if (splashHidden) return;
+    splashHidden = true;
+    const el = document.getElementById('splashScreen');
+    if (el) { el.classList.add('hide'); setTimeout(() => el.remove(), 500); }
+}
+
+function escapeHtml(v) { return (v == null ? '' : v.toString()).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+function normalizeEmail(v) { return (v || '').toString().trim().toLowerCase(); }
+function normalizeName(v)  { return (v || '').toString().trim().toLowerCase().replace(/\s+/g, ' '); }
+function getFileId(url) { if (!url) return ''; const m = url.toString().match(/\/d\/([-\w]{25,})|id=([-\w]{25,})/); return m ? (m[1] || m[2] || '') : ''; }
+function lsGet(key) { try { const r = localStorage.getItem(key); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
+function lsSet(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch (e) { return false; } }
+
+function showToast(msg, type = 'info', ms = 3200) {
+    if (!dom.toastHost) return;
+    const el = document.createElement('div');
+    el.className = `toast ${type}`;
+    el.innerHTML = `<i class="fas fa-${type === 'success' ? 'circle-check' : type === 'error' ? 'circle-xmark' : type === 'warning' ? 'triangle-exclamation' : 'circle-info'}"></i><span>${escapeHtml(msg)}</span>`;
+    dom.toastHost.appendChild(el);
+    setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateY(10px)'; setTimeout(() => el.remove(), 250); }, ms);
+}
+
+function initThemeSync() {
+    const applyTheme = (t) => { if (t) document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light'); };
+    applyTheme(localStorage.getItem(THEME_KEY) || 'light');
+    window.addEventListener('storage', (e) => { if (e.key === THEME_KEY && e.newValue) applyTheme(e.newValue); });
+}
+
+function readSessionValue(key) {
+    const localRaw = localStorage.getItem(key);
+    if (localRaw) {
+        try {
+            const parsed = JSON.parse(localRaw);
+            if (parsed && typeof parsed === 'object' && 'value' in parsed) {
+                if (parsed.expiry && Date.now() >= parsed.expiry) { localStorage.removeItem(key); return null; }
+                return parsed.value;
+            }
+            return parsed;
+        } catch (e) { return localRaw; }
+    }
+    const s = sessionStorage.getItem(key);
+    if (s) { try { return JSON.parse(s); } catch (e) { return s; } }
+    return null;
+}
+function getLoggedInEmail() {
+    if (readSessionValue(SESSION_KEYS.USER_TYPE) !== 'student') return null;
+    const email = readSessionValue(SESSION_KEYS.USER);
+    return email ? normalizeEmail(email) : null;
+}
+
+function getRowByAliases(row, directKey, aliases) {
+    if (!row) return '';
+    const direct = row[directKey];
+    if (direct != null && direct.toString().trim() !== '') return direct.toString().trim();
+    for (const key of Object.keys(row)) {
+        if (aliases.includes(key.toString().trim().toLowerCase())) {
+            const v = row[key];
+            if (v != null && v.toString().trim() !== '') return v.toString().trim();
+        }
+    }
+    return '';
+}
+function getRowName(row)  { return getRowByAliases(row, COL.FULL_NAME, NAME_HEADER_ALIASES); }
+function getRowEmail(row) { return getRowByAliases(row, COL.EMAIL, EMAIL_HEADER_ALIASES); }
+function getRowStd(row)   { return getRowByAliases(row, COL.STD, STD_HEADER_ALIASES); }
+function readResultField(row, directKey, aliases) { return getRowByAliases(row, directKey, aliases); }
+
+function getCachedProfile(email) {
+    if (!email) return null;
+    try { const raw = localStorage.getItem(PROFILE_KEY_PREFIX + normalizeEmail(email)); if (!raw) return null; const p = JSON.parse(raw); return p && p.row ? p : null; } catch (e) { return null; }
+}
+function setCachedProfile(email, payload) {
+    if (!email) return;
+    try { localStorage.setItem(PROFILE_KEY_PREFIX + normalizeEmail(email), JSON.stringify({ ts: Date.now(), ...payload })); } catch (e) {}
+}
+function getCachedSheet(id, name, { allowStale = false } = {}) {
+    const stored = lsGet(`${SHEET_KEY_PREFIX}${id}::${name}`);
+    if (stored && Array.isArray(stored.rows)) { if (allowStale || (Date.now() - stored.ts) < SHEET_CACHE_TTL) return stored.rows; }
+    return null;
+}
+function setCachedSheet(id, name, rows) { lsSet(`${SHEET_KEY_PREFIX}${id}::${name}`, { ts: Date.now(), rows }); }
+
+async function fetchSheetFromNetwork(id, name) {
+    const url = `${SCRIPT_URL}?spreadsheetId=${id}&sheetName=${encodeURIComponent(name)}&action=getData&_=${Date.now()}`;
+    const resp = await fetch(url, { cache: 'no-store' });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const json = await resp.json();
+    if (json.status !== 'success' || !Array.isArray(json.data)) throw new Error(json.message || 'Invalid response');
+    setCachedSheet(id, name, json.data);
+    return json.data;
+}
+async function fetchSheet(id, name, { allowStale = false, force = false } = {}) {
+    if (!force) { const c = getCachedSheet(id, name, { allowStale }); if (c) return c; }
+    return fetchSheetFromNetwork(id, name);
+}
+
+async function findStudentByEmail(email) {
+    const target = normalizeEmail(email);
+    for (const sheet of PROFILE_STUDENT_SHEETS) {
+        try {
+            const rows = await fetchSheet(PROFILE_SPREADSHEET_ID, sheet, { allowStale: true });
+            const idx = rows.findIndex(r => normalizeEmail(getRowEmail(r)) === target);
+            if (idx !== -1) return { sheet, row: rows[idx], rowIndex: idx + 2 };
+        } catch (e) {}
+    }
+    return null;
+}
+
+async function loadResultsForStudent(studentName) {
+    const rows = await fetchSheet(RESULT_SPREADSHEET_ID, RESULT_SHEET_NAME, { force: true });
+    if (!Array.isArray(rows) || !rows.length) return [];
+    const target = normalizeName(studentName);
+    if (!target) return [];
+    const matches = [];
+    for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        const rowName = readResultField(row, RES_COL.STUDENT_NAME, RES_NAME_ALIASES);
+        if (!rowName || normalizeName(rowName) !== target) continue;
+        matches.push({
+            _rowIndex: i,
+            srNo: readResultField(row, RES_COL.SR_NO, RES_SR_ALIASES) || String(i + 1),
+            studentName: rowName,
+            emailId: readResultField(row, RES_COL.EMAIL_ID, RES_EMAIL_ALIASES),
+            date: readResultField(row, RES_COL.DATE, RES_DATE_ALIASES),
+            testTopic: readResultField(row, RES_COL.TEST_TOPIC, RES_TOPIC_ALIASES),
+            correct: readResultField(row, RES_COL.CORRECT, RES_CORRECT_ALIASES),
+            incorrect: readResultField(row, RES_COL.INCORRECT, RES_INCORRECT_ALIASES),
+            skipped: readResultField(row, RES_COL.SKIPPED, RES_SKIPPED_ALIASES),
+            total: readResultField(row, RES_COL.TOTAL, RES_TOTAL_ALIASES),
+            percentage: readResultField(row, RES_COL.PERCENTAGE, RES_PCT_ALIASES),
+            status: readResultField(row, RES_COL.STATUS, RES_STATUS_ALIASES),
+            timeTaken: readResultField(row, RES_COL.TIME_TAKEN, RES_TIME_ALIASES),
+            remarks: readResultField(row, RES_COL.REMARKS, RES_REMARK_ALIASES)
+        });
+    }
+    return matches;
+}
+
+function parsePercent(v) {
+    if (v == null) return 0;
+    const s = v.toString().replace('%', '').trim();
+    let n = parseFloat(s);
+    if (isNaN(n)) return 0;
+    if (n > 0 && n <= 1) n = n * 100;
+    return Math.round(n * 100) / 100;
+}
+
+function isPassed(statusRaw) {
+    const s = (statusRaw || '').toString().trim().toLowerCase();
+    return s.includes('pass') || s.includes('qualif');
+}
+
+const RE_DMY = /^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})$/;
+function parseDateFlexible(input) {
+    if (!input) return null;
+    const s = input.toString().trim();
+    const m = s.match(RE_DMY);
+    if (m) {
+        let dd = +m[1], mm = +m[2], yy = +m[3];
+        if (yy < 100) yy += 2000;
+        const d = new Date(yy, mm - 1, dd);
+        if (!isNaN(d)) return d;
+    }
+    const d = new Date(s);
+    return isNaN(d) ? null : d;
+}
+function sortResultsByDateDesc(results) {
+    return results.slice().sort((a, b) => {
+        const da = parseDateFlexible(a.date); const db = parseDateFlexible(b.date);
+        return (da && db) ? db - da : (da ? -1 : (db ? 1 : 0));
+    });
+}
+
+function renderHero() {
+    dom.heroName.textContent   = student.name || 'Student';
+    dom.heroCourse.textContent = student.std  || '—';
+    dom.heroEmail.textContent  = student.email || '—';
+    if (student.avatar) {
+        const id = getFileId(student.avatar);
+        if (id) {
+            dom.heroAvatar.src = `https://lh3.googleusercontent.com/d/${id}=w160`;
+            dom.topbarLogo.src = `https://lh3.googleusercontent.com/d/${id}=w80`;
+        }
+    }
+}
+
+function renderTable(rows) {
+    if (!rows.length) {
+        dom.resultsCard.style.display = 'none';
+        dom.emptyState.style.display = 'block';
+        dom.emptyTitle.textContent = allResults.length ? 'No matches found' : 'No results yet';
+        dom.emptyMsg.textContent = allResults.length ? 'Try a different search term.' : 'You haven\'t attempted any tests yet.';
+        return;
+    }
+    dom.resultsCard.style.display = 'block';
+    dom.emptyState.style.display = 'none';
+    dom.resultsCount.textContent = `${rows.length} result${rows.length === 1 ? '' : 's'}`;
+
+    dom.resultsTbody.innerHTML = rows.map((r, i) => {
+        const passed = isPassed(r.status);
+        return `
+            <tr data-row='${encodeURIComponent(JSON.stringify(r))}'>
+                <td>${escapeHtml(r.srNo || (i + 1))}</td>
+                <td style="color:var(--text-muted);font-weight:700;">${escapeHtml(r.date || '—')}</td>
+                <td style="min-width:160px;">${escapeHtml(r.testTopic || '—')}</td>
+                <td><span class="status-badge ${passed ? 'status-pass' : 'status-fail'}"><i class="fas fa-${passed ? 'circle-check' : 'circle-xmark'}"></i> ${passed ? 'Pass' : 'Fail'}</span></td>
+                <td style="text-align:right;">
+                    <button class="tbl-btn primary" type="button" data-action="view"><i class="fas fa-eye"></i> View</button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+
+    dom.resultsTbody.querySelectorAll('tr').forEach(tr => {
+        try {
+            const rowData = JSON.parse(decodeURIComponent(tr.getAttribute('data-row')));
+            tr.querySelector('[data-action="view"]').addEventListener('click', (e) => {
+                e.stopPropagation();
+                openDetailPage(rowData);
+            });
+        } catch(e) {}
+    });
+}
+
+function applySearch(term) {
+    const q = (term || '').toString().trim().toLowerCase();
+    if (!q) filteredRows = allResults.slice();
+    else filteredRows = allResults.filter(r => (r.testTopic||'').toLowerCase().includes(q) || (r.status||'').toLowerCase().includes(q) || (r.date||'').toLowerCase().includes(q));
+    renderTable(filteredRows);
+    dom.searchClear.classList.toggle('show', !!q);
+}
+
+function openDetailPage(r) {
+    if (!r) return;
+    const passed = isPassed(r.status);
+    const pct = parsePercent(r.percentage);
+    currentCertData = r;
+
+    dom.detailPageContent.innerHTML = `
+        <div class="detail-header">
+            <div class="detail-big-score" style="background: ${passed ? 'var(--grad-success)' : 'var(--grad-hero)'}; -webkit-background-clip: text; color: transparent;">
+                ${pct}%
+            </div>
+            <div class="detail-subtitle">
+                ${passed ? 'Congratulations! You Passed.' : 'You need to work harder.'}
+            </div>
+        </div>
+
+        <div class="detail-grid">
+            <div class="detail-field">
+                <div class="detail-lbl">Test Topic</div>
+                <div class="detail-val">${escapeHtml(r.testTopic || '—')}</div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-lbl">Date Submitted</div>
+                <div class="detail-val">${escapeHtml(r.date || '—')}</div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-lbl">Status</div>
+                <div class="detail-val" style="color:${passed ? 'var(--success)' : 'var(--danger)'}">
+                    ${passed ? 'Pass' : 'Fail'}
+                </div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-lbl">Time Taken</div>
+                <div class="detail-val">${escapeHtml(r.timeTaken || '—')}</div>
+            </div>
+            
+            <div class="detail-field" style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; background: transparent; border: none; padding: 0;">
+                <div style="background: var(--success-soft); padding: 1rem; border-radius: 12px; text-align: center;">
+                    <div class="detail-lbl" style="color: var(--success);">Correct</div>
+                    <div class="detail-val c-correct" style="font-size: 1.5rem;">${escapeHtml(r.correct || '0')}</div>
+                </div>
+                <div style="background: var(--danger-soft); padding: 1rem; border-radius: 12px; text-align: center;">
+                    <div class="detail-lbl" style="color: var(--danger);">Incorrect</div>
+                    <div class="detail-val c-wrong" style="font-size: 1.5rem;">${escapeHtml(r.incorrect || '0')}</div>
+                </div>
+                <div style="background: var(--warning-soft); padding: 1rem; border-radius: 12px; text-align: center;">
+                    <div class="detail-lbl" style="color: var(--warning);">Skipped</div>
+                    <div class="detail-val c-skip" style="font-size: 1.5rem;">${escapeHtml(r.skipped || '0')}</div>
+                </div>
+                <div style="background: var(--bg-soft); padding: 1rem; border-radius: 12px; text-align: center;">
+                    <div class="detail-lbl">Total Qs</div>
+                    <div class="detail-val" style="font-size: 1.5rem;">${escapeHtml(r.total || '0')}</div>
+                </div>
+            </div>
+            
+            <div class="detail-field">
+                <div class="detail-lbl">Student Name</div>
+                <div class="detail-val">${escapeHtml(r.studentName || student.name)}</div>
+            </div>
+            <div class="detail-field">
+                <div class="detail-lbl">Email Id</div>
+                <div class="detail-val">${escapeHtml(r.emailId || student.email)}</div>
+            </div>
+        </div>
+
+        ${r.remarks ? `
+            <div class="detail-remark-box">
+                <i class="fas fa-comment-dots"></i> <strong>Remarks:</strong><br>
+                ${escapeHtml(r.remarks)}
+            </div>
+        ` : ''}
+
+        <div class="detail-actions">
+            <button class="tbl-btn" type="button" id="detailPageBackBtn">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            ${passed ? `
+                <button class="tbl-btn primary" type="button" id="detailPageCertBtn">
+                    <i class="fas fa-award"></i> View Certificate
+                </button>
+                <button class="tbl-btn" type="button" id="detailPageDownloadBtn">
+                    <i class="fas fa-download"></i> Download Image
+                </button>
+                <button class="tbl-btn success" type="button" id="detailPagePrintBtn">
+                    <i class="fas fa-print"></i> Print / PDF
+                </button>
+            ` : ''}
+        </div>
+    `;
+
+    dom.mainContent.style.display = 'none';
+    dom.detailPage.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    $('detailPageBackBtn').addEventListener('click', closeDetailPage);
+    
+    const certBtn = $('detailPageCertBtn');
+    if (certBtn) certBtn.addEventListener('click', () => openCertificate(r));
+
+    const downloadBtn = $('detailPageDownloadBtn');
+    if (downloadBtn) downloadBtn.addEventListener('click', () => downloadCertificateImage(r));
+
+    const printBtn = $('detailPagePrintBtn');
+    if (printBtn) printBtn.addEventListener('click', () => {
+        openCertificate(r);
+        setTimeout(() => { window.print(); }, 800);
+    });
+}
+
+function closeDetailPage() {
+    dom.detailPage.classList.remove('active');
+    dom.mainContent.style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openCertificate(r) {
+    if (!r) return;
+    currentCertData = r;
+
+    dom.certStudentName.textContent = student.name || r.studentName || 'Student';
+    dom.certTestTopic.textContent   = r.testTopic || '—';
+    dom.certPercentage.textContent  = parsePercent(r.percentage) + '%';
+    dom.certCourse.textContent      = student.std || '—';
+    dom.certStatScore.textContent   = r.correct || '0';
+    dom.certStatTotal.textContent   = r.total || '0';
+    dom.certStatPct.textContent     = parsePercent(r.percentage) + '%';
+    dom.certStatStatus.textContent  = isPassed(r.status) ? 'PASS' : 'FAIL';
+    dom.certDate.textContent        = r.date || 'Today';
+
+    if (student.avatar) {
+        const id = getFileId(student.avatar);
+        if (id) {
+            dom.certPhoto.src = `https://lh3.googleusercontent.com/d/${id}=w320`;
+            dom.certPhoto.crossOrigin = 'anonymous';
+        }
+    }
+
+    dom.certModal.classList.add('active');
+}
+
+function closeCertificate() {
+    dom.certModal.classList.remove('active');
+}
+
+async function downloadCertificateImage(r) {
+    if (!r) r = currentCertData;
+    if (!r) return;
+    
+    openCertificate(r);
+    
+    setTimeout(async () => {
+        const certEl = document.getElementById('certificate');
+        if (!certEl) return;
+        
+        try {
+            showToast('Generating image, please wait...', 'info', 2000);
+            
+            const originalTransform = certEl.style.transform;
+            certEl.style.transform = 'none';
+
+            const canvas = await html2canvas(certEl, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff',
+                logging: false
+            });
+
+            certEl.style.transform = originalTransform;
+
+            const link = document.createElement('a');
+            const fileName = `Certificate_${(r.studentName || student.name).replace(/\s+/g, '_')}_${(r.testTopic || 'Test').replace(/\s+/g, '_')}.png`;
+            link.download = fileName;
+            link.href = canvas.toDataURL('image/png');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            showToast('Certificate downloaded successfully!', 'success');
+            closeCertificate();
+            
+        } catch (err) {
+            console.error('Download failed:', err);
+            showToast('Failed to download. Please try printing instead.', 'error');
+                        const certEl = document.getElementById('certificate');
+            if (certEl) certEl.style.transform = '';
+        }
+    }, 600);
+}
+
+// ============================================================
+// INIT & BOOT
+// ============================================================
+function showMain() {
+    dom.skeleton.style.display = 'none';
+    dom.errorState.classList.remove('show');
+    dom.mainContent.style.display = 'flex';
+    renderHero();
+    applySearch('');
+}
+
+function showError(title, msg) {
+    dom.skeleton.style.display = 'none';
+    dom.mainContent.style.display = 'none';
+    dom.detailPage.classList.remove('active');
+    dom.errorTitle.textContent = title;
+    dom.errorMsg.textContent   = msg;
+    dom.errorState.classList.add('show');
+}
+
+function bindEvents() {
+    dom.btnBack.addEventListener('click', () => {
+        if (dom.detailPage.classList.contains('active')) closeDetailPage();
+        else if (history.length > 1) history.back();
+        else window.location.href = 'StudentDashboard.html';
+    });
+
+    dom.btnBackToResults.addEventListener('click', closeDetailPage);
+
+    dom.searchInput.addEventListener('input', (e) => applySearch(e.target.value));
+    dom.searchClear.addEventListener('click', () => {
+        dom.searchInput.value = '';
+        applySearch('');
+        dom.searchInput.focus();
+    });
+
+    dom.certCloseBtn.addEventListener('click', closeCertificate);
+    dom.certModal.addEventListener('click', (e) => {
+        if (e.target === dom.certModal) closeCertificate();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && dom.certModal.classList.contains('active')) closeCertificate();
+    });
+}
+
+async function init() {
+    cacheDom();
+    initThemeSync();
+    bindEvents();
+
+    const splashSafety = setTimeout(hideSplash, 6000);
+
+    const email = getLoggedInEmail();
+    if (!email) {
+        clearTimeout(splashSafety);
+        hideSplash();
+        showError('Please log in', 'You need to be logged in as a student to view your results.');
+        return;
+    }
+    student.email = email;
+
+    const cached = getCachedProfile(email);
+    if (cached && cached.row) {
+        student.name   = getRowName(cached.row) || cached.fullName || 'Student';
+        student.std    = getRowStd(cached.row)  || '—';
+        student.avatar = cached.row[COL.IMAGE]  || '';
+
+        try {
+            allResults = await loadResultsForStudent(student.name);
+            allResults = sortResultsByDateDesc(allResults);
+        } catch (e) {
+            console.warn('[results] load failed:', e.message);
+            allResults = [];
+        }
+
+        clearTimeout(splashSafety);
+        hideSplash();
+        showMain();
+        return;
+    }
+
+    dom.skeleton.style.display = 'block';
+    try {
+        const found = await findStudentByEmail(email);
+        if (!found) {
+            clearTimeout(splashSafety);
+            hideSplash();
+            showError('Student record not found', `We couldn't find any record for ${email}. Please contact the academy.`);
+            return;
+        }
+
+        student.name   = getRowName(found.row) || 'Student';
+        student.std    = getRowStd(found.row)  || '—';
+        student.avatar = found.row[COL.IMAGE]  || '';
+
+        setCachedProfile(email, {
+            row: found.row, sheetName: found.sheet, rowIndex: found.rowIndex, fullName: student.name
+        });
+
+        try {
+            allResults = await loadResultsForStudent(student.name);
+            allResults = sortResultsByDateDesc(allResults);
+        } catch (e) {
+            console.warn('[results] load failed:', e.message);
+            allResults = [];
+        }
+
+        clearTimeout(splashSafety);
+        hideSplash();
+        showMain();
+    } catch (err) {
+        clearTimeout(splashSafety);
+        hideSplash();
+        console.error('[init]', err);
+        showError('Failed to load', err.message || 'Something went wrong.');
+    }
+}
+
+function scheduleInit() {
+    if ('requestIdleCallback' in window) requestIdleCallback(() => init(), { timeout: 1200 });
+    else setTimeout(init, 0);
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', scheduleInit, { once: true });
+else scheduleInit();
+
+})();
+</script>
+</body>
+</html>
+           

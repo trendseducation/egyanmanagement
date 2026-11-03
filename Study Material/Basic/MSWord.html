@@ -1,0 +1,2903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#f59e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+<title>MS Word · Basic Computer · EGyan</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- FOUC prevention -->
+<script>
+(function () {
+  try {
+    var stored = localStorage.getItem('user-theme-preference');
+    var theme = stored;
+    if (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      theme = 'dark';
+    }
+    document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
+<style>
+/* ============================================================
+   THEME VARIABLES
+   ============================================================ */
+:root {
+  --bg-body:        #fffdf5;
+  --bg-card:        #ffffff;
+  --bg-header:      #ffffff;
+  --bg-soft:        #fff9e6;
+  --bg-code:        #fef9ef;
+
+  --text-main:      #1f2937;
+  --text-muted:     #6b7280;
+  --text-light:     #9ca3af;
+  --border-light:   #f0e8d0;
+
+  --shadow-sm:      0 10px 28px -12px rgba(245, 158, 11, 0.18);
+  --shadow-hover:   0 22px 44px -18px rgba(245, 158, 11, 0.32);
+  --shadow-card:    0 8px 30px -10px rgba(245, 158, 11, 0.15);
+
+  --gold:           #f59e0b;
+  --gold-2:         #fbbf24;
+  --gold-soft:      rgba(245, 158, 11, 0.12);
+  --gold-glow:      rgba(245, 158, 11, 0.4);
+
+  --accent:         #0d9488;
+  --accent-2:       #14b8a6;
+  --accent-soft:    rgba(13, 148, 136, 0.10);
+  --accent-glow:    rgba(13, 148, 136, 0.35);
+
+  --word-blue:      #2b579a;
+  --word-blue-2:    #3b82f6;
+
+  --success:        #10b981;
+  --danger:         #ef4444;
+  --warning:        #f59e0b;
+  --info:           #3b82f6;
+
+  --teacher-teal:   #0d9488;
+  --admin-gold:     #f59e0b;
+
+  --hl-bg:          linear-gradient(180deg, transparent 60%, rgba(245, 158, 11, 0.35) 60%);
+  --hl-teal-bg:     linear-gradient(180deg, transparent 60%, rgba(13, 148, 136, 0.28) 60%);
+  --hl-blue-bg:     linear-gradient(180deg, transparent 60%, rgba(43, 87, 154, 0.28) 60%);
+
+  --kbd-bg:         linear-gradient(180deg, #ffffff 0%, #f5f1e5 100%);
+  --kbd-border:     #d1c7a8;
+  --kbd-shadow:     inset 0 -2px 0 #d1c7a8, 0 2px 0 rgba(0,0,0,0.08);
+  --kbd-text:       #1f2937;
+
+  --card-border:    1px solid rgba(245, 158, 11, 0.12);
+  --overlay-bg:     rgba(15, 23, 42, 0.45);
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+}
+
+[data-theme="dark"] {
+  --bg-body:        #0b0e0d;
+  --bg-card:        #16201e;
+  --bg-header:      #0f1a18;
+  --bg-soft:        #131d1b;
+  --bg-code:        #0f1a18;
+
+  --text-main:      #f1f5f9;
+  --text-muted:     #9ca3af;
+  --text-light:     #64748b;
+  --border-light:   #1f2b28;
+
+  --shadow-sm:      0 10px 30px -12px rgba(0, 0, 0, 0.65);
+  --shadow-hover:   0 22px 44px -18px rgba(0, 0, 0, 0.85);
+  --shadow-card:    0 8px 32px -10px rgba(0, 0, 0, 0.55);
+
+  --gold:           #fbbf24;
+  --gold-2:         #fcd34d;
+  --gold-soft:      rgba(251, 191, 36, 0.18);
+  --gold-glow:      rgba(251, 191, 36, 0.5);
+
+  --accent:         #14b8a6;
+  --accent-2:       #2dd4bf;
+  --accent-soft:    rgba(20, 184, 166, 0.18);
+  --accent-glow:    rgba(20, 184, 166, 0.45);
+
+  --word-blue:      #3b82f6;
+  --word-blue-2:    #60a5fa;
+
+  --success:        #34d399;
+  --danger:         #f87171;
+  --warning:        #fbbf24;
+  --info:           #60a5fa;
+
+  --teacher-teal:   #14b8a6;
+  --admin-gold:     #fbbf24;
+
+  --hl-bg:          linear-gradient(180deg, transparent 60%, rgba(251, 191, 36, 0.28) 60%);
+  --hl-teal-bg:     linear-gradient(180deg, transparent 60%, rgba(20, 184, 166, 0.28) 60%);
+  --hl-blue-bg:     linear-gradient(180deg, transparent 60%, rgba(59, 130, 246, 0.3) 60%);
+
+  --kbd-bg:         linear-gradient(180deg, #2a3735 0%, #1f2b28 100%);
+  --kbd-border:     #3a4a47;
+  --kbd-shadow:     inset 0 -2px 0 #0a1210, 0 2px 0 rgba(0,0,0,0.4);
+  --kbd-text:       #f1f5f9;
+
+  --card-border:    1px solid rgba(251, 191, 36, 0.12);
+  --overlay-bg:     rgba(0, 0, 0, 0.75);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg-body);
+  scroll-padding-top: 90px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-body);
+  color: var(--text-main);
+  transition: background var(--transition-normal), color var(--transition-normal);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1.7;
+}
+
+body.sidebar-lock { overflow: hidden; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes modalPop {
+  from { transform: scale(0.9) translateY(20px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ============================================================
+   AUTH SKELETON
+   ============================================================ */
+#authSkeleton {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-body);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.2rem;
+  transition: opacity 0.35s ease;
+}
+#authSkeleton.hidden { opacity: 0; pointer-events: none; }
+.skeleton-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--border-light);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+.skeleton-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+/* ============================================================
+   APP WRAPPER
+   ============================================================ */
+.app-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.2rem 1.8rem 3rem;
+  padding-left: max(1.8rem, env(safe-area-inset-left));
+  padding-right: max(1.8rem, env(safe-area-inset-right));
+  width: 100%;
+  visibility: hidden;
+}
+.app-wrapper.revealed { visibility: visible; }
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 0.7rem 1.5rem;
+  background: var(--bg-header);
+  padding: 0.6rem 1.5rem;
+  border-radius: 60px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.8rem;
+  transition: background var(--transition-normal), box-shadow var(--transition-normal);
+  position: sticky;
+  top: 8px;
+  z-index: 100;
+}
+
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.hamburger-btn {
+  display: none;
+  background: var(--gold-soft);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.hamburger-btn:hover { background: var(--gold); color: #1f2937; }
+.hamburger-btn:active { transform: scale(0.92); }
+
+.brand-logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: none;
+}
+[data-theme="dark"] .brand-logo { filter: brightness(0) invert(1); }
+
+.brand-text {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.right-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.role-badge {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 0.35rem 0.9rem;
+  border-radius: 40px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.role-badge.student { color: #2563eb; background: rgba(37, 99, 235, 0.12); }
+.role-badge.teacher { color: var(--teacher-teal); background: rgba(13, 148, 136, 0.12); }
+.role-badge.admin   { color: var(--admin-gold); background: rgba(245, 158, 11, 0.15); }
+
+[data-theme="dark"] .role-badge.student { color: #60a5fa; background: rgba(59, 130, 246, 0.2); }
+[data-theme="dark"] .role-badge.teacher { color: #14b8a6; background: rgba(20, 184, 166, 0.2); }
+[data-theme="dark"] .role-badge.admin   { color: #fbbf24; background: rgba(245, 158, 11, 0.2); }
+
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.45rem 1.1rem;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  background: var(--gold-soft);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.back-home:hover {
+  background: var(--gold);
+  color: #1f2937;
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -10px var(--gold-glow);
+}
+
+/* ============================================================
+   MOBILE SIDEBAR
+   ============================================================ */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.sidebar-backdrop.active { opacity: 1; visibility: visible; }
+
+.mobile-sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: min(85vw, 320px);
+  background: var(--bg-card);
+  border-right: 1px solid var(--border-light);
+  box-shadow: 8px 0 40px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.mobile-sidebar.open { transform: translateX(0); }
+
+.sidebar-header {
+  padding: 1.3rem 1.2rem 1.1rem;
+  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft));
+  position: relative;
+}
+
+.sidebar-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+[data-theme="dark"] .sidebar-close { background: rgba(0,0,0,0.4); }
+.sidebar-close:hover { background: var(--gold); color: #1f2937; }
+.sidebar-close:active { transform: scale(0.9); }
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  box-shadow: 0 6px 14px -6px var(--gold-glow);
+}
+
+.sidebar-user-info { min-width: 0; flex: 1; }
+.sidebar-user-name {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+.sidebar-user-role {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.sidebar-user-role.student { color: #2563eb; }
+.sidebar-user-role.teacher { color: var(--teacher-teal); }
+.sidebar-user-role.admin   { color: var(--admin-gold); }
+[data-theme="dark"] .sidebar-user-role.student { color: #60a5fa; }
+[data-theme="dark"] .sidebar-user-role.teacher { color: #14b8a6; }
+[data-theme="dark"] .sidebar-user-role.admin   { color: #fbbf24; }
+
+.sidebar-toc-heading {
+  padding: 1rem 1.2rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sidebar-toc-heading i { color: var(--gold); }
+
+.sidebar-toc-list {
+  list-style: none;
+  padding: 0 0.7rem 1rem;
+  flex: 1;
+}
+.sidebar-toc-list li { margin-bottom: 0.2rem; }
+.sidebar-toc-list a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all var(--transition-fast);
+  line-height: 1.3;
+}
+.sidebar-toc-list a:hover { background: var(--gold-soft); transform: translateX(3px); }
+.sidebar-toc-list a:active { transform: scale(0.98); }
+.sidebar-toc-list a.active {
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  box-shadow: 0 6px 16px -8px var(--gold-glow);
+}
+.sidebar-toc-list a .num {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: var(--gold-soft);
+  color: var(--gold);
+  font-size: 0.68rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.sidebar-toc-list a.active .num { background: rgba(255,255,255,0.85); color: var(--gold); }
+
+.sidebar-footer {
+  padding: 0.9rem 1.2rem 1.4rem;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.page-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem 2.2rem;
+  background: var(--bg-card);
+  border-radius: 32px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-2), var(--accent-2));
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  right: -100px; top: -100px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, var(--gold-soft), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-text { position: relative; z-index: 1; }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--gold);
+  background: var(--gold-soft);
+  padding: 0.35rem 0.9rem;
+  border-radius: 40px;
+  border: 1px solid var(--border-light);
+  margin-bottom: 0.9rem;
+}
+.hero-text h1 {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+  margin-bottom: 0.6rem;
+}
+.hero-text h1 .accent { color: var(--gold); }
+.hero-text p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 560px;
+}
+.hero-art {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  z-index: 1;
+  animation: float 5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+.search-wrap {
+  position: relative;
+  margin-bottom: 1.6rem;
+  max-width: 560px;
+}
+.search-input {
+  width: 100%;
+  padding: 0.85rem 1rem 0.85rem 3rem;
+  border-radius: 40px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-size: 0.92rem;
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  outline: none;
+}
+.search-input::placeholder { color: var(--text-light); }
+.search-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px var(--gold-soft);
+}
+.search-icon {
+  position: absolute;
+  left: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+.search-clear {
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: var(--gold-soft);
+  color: var(--gold);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: all var(--transition-fast);
+}
+.search-clear.visible { display: flex; }
+.search-clear:hover { background: var(--gold); color: #1f2937; }
+
+.search-results-info {
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding-left: 0.3rem;
+}
+.search-results-info strong { color: var(--gold); }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.content-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.toc {
+  position: sticky;
+  top: 90px;
+  background: var(--bg-card);
+  border: var(--card-border);
+  border-radius: 20px;
+  padding: 1.2rem 1rem;
+  box-shadow: var(--shadow-sm);
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+  display: block;
+}
+.toc h3 {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  margin-bottom: 0.8rem;
+  padding-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.toc h3 i { color: var(--gold); }
+.toc ul { list-style: none; }
+.toc li { margin-bottom: 0.15rem; }
+.toc a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.5rem 0.7rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+  line-height: 1.3;
+}
+.toc a:hover { background: var(--gold-soft); color: var(--text-main); }
+.toc a.active {
+  background: var(--gold-soft);
+  color: var(--gold);
+  border-left: 3px solid var(--gold);
+  padding-left: 0.55rem;
+}
+.toc a .num {
+  font-size: 0.62rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--gold-soft);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.toc a.active .num { background: var(--gold); color: #fff; }
+
+.content { min-width: 0; }
+
+/* ============================================================
+   SECTION CARDS
+   ============================================================ */
+.section-card {
+  background: var(--bg-card);
+  border: var(--card-border);
+  border-radius: 24px;
+  padding: 2rem 2.2rem;
+  margin-bottom: 1.8rem;
+  box-shadow: var(--shadow-card);
+  scroll-margin-top: 90px;
+  transition: all var(--transition-normal);
+  animation: fadeInUp 0.5s ease both;
+}
+.section-card:nth-child(1) { animation-delay: 0.05s; }
+.section-card:nth-child(2) { animation-delay: 0.10s; }
+.section-card:nth-child(3) { animation-delay: 0.15s; }
+.section-card:nth-child(4) { animation-delay: 0.20s; }
+.section-card:nth-child(5) { animation-delay: 0.25s; }
+.section-card:nth-child(6) { animation-delay: 0.30s; }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 1.2rem;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+.section-title .icon-pill {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft));
+  border: 1px solid var(--border-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+.section-card p {
+  color: var(--text-main);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.section-card p:last-child { margin-bottom: 0; }
+.section-card p strong { color: var(--text-main); font-weight: 700; }
+
+.hl {
+  background: var(--hl-bg);
+  padding: 0 0.2em;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: 2px;
+}
+.hl-teal {
+  background: var(--hl-teal-bg);
+  padding: 0 0.2em;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: 2px;
+}
+.hl-blue {
+  background: var(--hl-blue-bg);
+  padding: 0 0.2em;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: 2px;
+}
+mark {
+  background: var(--gold-soft);
+  color: var(--gold);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.figure {
+  margin: 1.4rem 0 1.6rem;
+  padding: 1.4rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  text-align: center;
+}
+.figure svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+.figure-caption {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.5;
+}
+.figure-caption strong { color: var(--text-main); font-style: normal; font-weight: 700; }
+
+.callout {
+  display: flex;
+  gap: 12px;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  border-left: 4px solid;
+}
+.callout i { flex-shrink: 0; margin-top: 2px; font-size: 1rem; }
+.callout.info    { background: rgba(59,130,246,0.08); border-color: var(--info); color: var(--text-main); }
+.callout.info    i { color: var(--info); }
+.callout.tip     { background: var(--gold-soft); border-color: var(--gold); color: var(--text-main); }
+.callout.tip     i { color: var(--gold); }
+.callout.warning { background: rgba(239,68,68,0.08); border-color: var(--danger); color: var(--text-main); }
+.callout.warning i { color: var(--danger); }
+.callout.success { background: rgba(16,185,129,0.08); border-color: var(--success); color: var(--text-main); }
+.callout.success i { color: var(--success); }
+
+/* ============================================================
+   TOOL CARDS
+   ============================================================ */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1.2rem 0;
+}
+.tool-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 1.1rem 1rem;
+  transition: all var(--transition-fast);
+    display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.tool-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+  box-shadow: var(--shadow-sm);
+}
+.tool-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  border: 1px solid var(--border-light);
+}
+.tool-card h4 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+.tool-card p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+.tool-card code, .inline-code {
+  font-family: 'Consolas', 'Monaco', monospace;
+  background: var(--bg-code);
+  color: var(--word-blue);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  border: 1px solid var(--border-light);
+  font-weight: 600;
+}
+
+/* ============================================================
+   RIBBON GROUP MOCKUP (Word UI)
+   ============================================================ */
+.ribbon-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.8rem;
+  margin: 1.2rem 0;
+  padding: 1rem;
+  background: var(--bg-code);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+}
+.ribbon-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.6rem 0.8rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all var(--transition-fast);
+}
+.ribbon-item:hover {
+  border-color: var(--word-blue);
+  color: var(--word-blue);
+  transform: translateY(-2px);
+}
+.ribbon-item i {
+  color: var(--word-blue);
+  font-size: 0.9rem;
+  width: 16px;
+  text-align: center;
+}
+
+/* ============================================================
+   SHORTCUT LIST
+   ============================================================ */
+.shortcut-group-title {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 1.4rem 0 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.shortcut-group-title i {
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  background: var(--gold-soft);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.shortcut-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.95rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  transition: all var(--transition-fast);
+}
+.shortcut-row:hover {
+  background: var(--bg-card);
+  border-color: var(--gold);
+  transform: translateX(3px);
+  box-shadow: var(--shadow-sm);
+}
+.shortcut-desc {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+.shortcut-desc i {
+  color: var(--gold);
+  font-size: 0.9rem;
+  width: 20px;
+  flex-shrink: 0;
+  text-align: center;
+}
+.shortcut-desc span {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+.shortcut-keys {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+kbd, .kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 0.5rem;
+  border-radius: 7px;
+  background: var(--kbd-bg);
+  border: 1px solid var(--kbd-border);
+  box-shadow: var(--kbd-shadow);
+  color: var(--kbd-text);
+  font-family: 'Inter', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+  white-space: nowrap;
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+[data-theme="dark"] kbd, [data-theme="dark"] .kbd {
+  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+}
+.shortcut-row:hover kbd {
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  border-color: var(--gold);
+}
+.key-sep {
+  color: var(--text-light);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0 2px;
+}
+
+/* ============================================================
+   NO RESULTS
+   ============================================================ */
+.no-results {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-light);
+  border-radius: 20px;
+  margin: 1rem 0;
+}
+.no-results.visible { display: flex; }
+.no-results i {
+  font-size: 2.5rem;
+  color: var(--text-light);
+  margin-bottom: 0.8rem;
+}
+.no-results h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.3rem;
+}
+.no-results p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   FOOTER + BACK TO TOP
+   ============================================================ */
+.footer-note {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-light);
+  padding-top: 1.5rem;
+}
+.footer-note i { opacity: 0.5; margin-right: 6px; }
+
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #1f2937;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 12px 28px -8px var(--gold-glow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all var(--transition-normal);
+  z-index: 500;
+}
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover { background: var(--gold-2); transform: translateY(-3px); }
+
+/* ============================================================
+   LOGIN OVERLAY
+   ============================================================ */
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.login-overlay.active {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
+.login-box {
+  background: var(--bg-card);
+  border-radius: 40px;
+  padding: 2.5rem 2.8rem;
+  max-width: 440px;
+  width: 100%;
+  border: var(--card-border);
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.4);
+  text-align: center;
+  animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.login-box .icon {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold-soft);
+  border-radius: 28px;
+  font-size: 2.2rem;
+  color: var(--gold);
+}
+.login-box h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.login-box p {
+  color: var(--text-muted);
+  margin-bottom: 1.6rem;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+.login-box p strong { color: var(--text-main); }
+.login-box .login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 160px;
+  padding: 0.8rem 1.6rem;
+  border-radius: 40px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  letter-spacing: 0.3px;
+  border: none;
+  cursor: pointer;
+}
+.login-box .login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -10px var(--gold-glow);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .content-layout { grid-template-columns: 1fr; }
+  .toc { display: none; }
+}
+
+@media (max-width: 900px) {
+  .hamburger-btn { display: inline-flex; }
+
+  .app-wrapper { padding: 0.8rem 1rem 2.5rem; }
+  .top-bar {
+    border-radius: 32px;
+    padding: 0.5rem 1rem;
+    top: 6px;
+    gap: 0.5rem;
+  }
+  .brand-area { gap: 8px; }
+  .brand-text { font-size: 1rem; }
+  .brand-logo { height: 36px; }
+
+  .role-badge { display: none !important; }
+  .back-home { padding: 0.4rem 0.75rem; }
+  .back-home span { display: inline; font-size: 0.78rem; }
+  .back-home i { font-size: 0.85rem; }
+
+  .page-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 1.5rem 1.2rem;
+    gap: 1rem;
+  }
+  .hero-text h1 { font-size: 1.7rem; }
+  .hero-text p { font-size: 0.92rem; margin: 0 auto; }
+  .hero-art { width: 140px; height: 140px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 0.65rem; }
+
+  .section-card { padding: 1.5rem 1.2rem; border-radius: 20px; }
+  .section-title { font-size: 1.3rem; gap: 10px; }
+  .section-title .icon-pill { width: 38px; height: 38px; font-size: 1rem; border-radius: 12px; }
+  .section-card p { font-size: 0.94rem; }
+
+  .figure { padding: 1rem; border-radius: 16px; }
+  .tools-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  .app-wrapper { padding: 0.6rem 0.8rem 2rem; }
+  .top-bar { padding: 0.4rem 0.8rem; border-radius: 26px; gap: 0.4rem; }
+  .brand-text { font-size: 0.88rem; letter-spacing: -0.2px; }
+  .brand-logo { height: 30px; }
+  .hamburger-btn { width: 34px; height: 34px; font-size: 0.95rem; }
+  .back-home { font-size: 0.72rem; padding: 0.32rem 0.65rem; }
+  .right-actions { gap: 0.4rem; }
+
+  .page-header { padding: 1.2rem 1rem; border-radius: 22px; }
+  .hero-text h1 { font-size: 1.4rem; }
+  .hero-text p { font-size: 0.85rem; }
+  .hero-art { width: 110px; height: 110px; }
+  .hero-eyebrow { font-size: 0.58rem; padding: 0.28rem 0.7rem; letter-spacing: 0.9px; }
+
+  .section-card { padding: 1.2rem 1rem; border-radius: 16px; margin-bottom: 1.2rem; }
+  .section-title { font-size: 1.05rem; gap: 8px; flex-wrap: wrap; }
+  .section-title .icon-pill { width: 32px; height: 32px; font-size: 0.85rem; border-radius: 10px; }
+  .section-card p { font-size: 0.88rem; line-height: 1.65; }
+
+  .figure { padding: 0.8rem; border-radius: 14px; margin: 1rem 0 1.2rem; }
+  .figure-caption { font-size: 0.7rem; }
+
+  .callout { padding: 0.8rem 0.9rem; font-size: 0.83rem; border-radius: 12px; gap: 8px; }
+
+  .tools-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+  .tool-card { padding: 0.8rem 0.7rem; border-radius: 12px; gap: 8px; }
+  .tool-icon { width: 34px; height: 34px; font-size: 0.9rem; border-radius: 9px; }
+  .tool-card h4 { font-size: 0.78rem; }
+  .tool-card p { font-size: 0.68rem; line-height: 1.4; }
+
+  .ribbon-group { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; padding: 0.7rem; }
+  .ribbon-item { padding: 0.45rem 0.55rem; font-size: 0.7rem; gap: 5px; }
+
+  .shortcut-list { gap: 0.4rem; }
+  .shortcut-row {
+    padding: 0.55rem 0.65rem;
+    gap: 0.5rem;
+    border-radius: 10px;
+  }
+  .shortcut-desc { gap: 6px; }
+  .shortcut-desc i { font-size: 0.72rem; width: 14px; }
+  .shortcut-desc span { font-size: 0.72rem; line-height: 1.3; }
+  .shortcut-keys { gap: 4px; }
+
+  kbd, .kbd {
+    min-width: 24px;
+    height: 24px;
+    padding: 0 0.4rem;
+    font-size: 0.65rem;
+    border-radius: 6px;
+  }
+  .key-sep { font-size: 0.6rem; }
+
+  .shortcut-group-title { font-size: 0.92rem; margin: 1rem 0 0.5rem; }
+  .shortcut-group-title i { width: 22px; height: 22px; font-size: 0.7rem; }
+
+  .search-input { font-size: 0.85rem; padding: 0.75rem 1rem 0.75rem 2.6rem; }
+  .search-icon { left: 0.9rem; font-size: 0.85rem; }
+  .search-results-info { font-size: 0.75rem; }
+
+  .back-to-top { width: 42px; height: 42px; bottom: 16px; right: 16px; font-size: 0.95rem; }
+
+  .login-box { padding: 1.8rem 1.4rem; border-radius: 28px; }
+  .login-box .icon { width: 68px; height: 68px; font-size: 1.8rem; border-radius: 22px; margin-bottom: 1rem; }
+  .login-box h2 { font-size: 1.15rem; }
+  .login-box p { font-size: 0.8rem; margin-bottom: 1.2rem; }
+}
+
+@media (max-width: 360px) {
+  .hero-text h1 { font-size: 1.2rem; }
+  .section-title { font-size: 0.95rem; }
+  .section-card p { font-size: 0.82rem; }
+  .tools-grid { gap: 0.5rem; }
+  .tool-card h4 { font-size: 0.72rem; }
+  .tool-card p { font-size: 0.62rem; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .tool-card:hover,
+  .ribbon-item:hover,
+  .shortcut-row:hover { transform: none; box-shadow: none; background: var(--bg-soft); border-color: var(--border-light); }
+  .shortcut-row:hover kbd { background: var(--kbd-bg); color: var(--kbd-text); border-color: var(--kbd-border); }
+  .back-to-top:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+  .hero-art { animation: none; }
+  .section-card { opacity: 1; transform: none; }
+  .mobile-sidebar { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- AUTH SKELETON -->
+<div id="authSkeleton" role="status" aria-live="polite">
+  <div class="skeleton-spinner"></div>
+  <div class="skeleton-text">Verifying your session…</div>
+</div>
+
+<!-- LOGIN OVERLAY -->
+<div class="login-overlay" id="loginOverlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="login-box">
+    <div class="icon"><i class="fas fa-lock"></i></div>
+    <h2 id="loginTitle">Please Login!</h2>
+    <p>You need to be logged in as a <strong>Student</strong>, <strong>Teacher</strong>, or <strong>Admin</strong> to access MS Word lessons.</p>
+    <a href="../My Account/myaccount.html" class="login-btn" id="loginBtn">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </a>
+  </div>
+</div>
+
+<!-- MOBILE SIDEBAR BACKDROP -->
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<!-- MOBILE SIDEBAR -->
+<aside class="mobile-sidebar" id="mobileSidebar" aria-label="Navigation sidebar">
+  <div class="sidebar-header">
+    <button class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div class="sidebar-user">
+      <div class="sidebar-avatar" id="sidebarAvatar">S</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" id="sidebarUserName">Student</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">Student</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-toc-heading">
+    <i class="fas fa-list-ul"></i> On this page
+  </div>
+
+  <ul class="sidebar-toc-list" id="sidebarTocList">
+    <li><a href="#intro" data-toc="intro"><span class="num">1</span> What is MS Word?</a></li>
+    <li><a href="#anatomy" data-toc="anatomy"><span class="num">2</span> Word Interface</a></li>
+    <li><a href="#formatting" data-toc="formatting"><span class="num">3</span> Formatting Essentials</a></li>
+    <li><a href="#features" data-toc="features"><span class="num">4</span> Key Features</a></li>
+    <li><a href="#shortcuts" data-toc="shortcuts"><span class="num">5</span> Shortcut Keys</a></li>
+    <li><a href="#tips" data-toc="tips"><span class="num">6</span> Tips &amp; Uses</a></li>
+  </ul>
+
+  <div class="sidebar-footer">
+    <i class="fas fa-graduation-cap"></i> EGyan Skill Development
+  </div>
+</aside>
+
+<!-- MAIN APP -->
+<div class="app-wrapper" id="appWrapper">
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open navigation" title="Open navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="brand-area">
+      <img class="brand-logo"
+           src="https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL"
+           alt="EGyan Skill Development logo"
+           onerror="this.style.display='none'">
+      <span class="brand-text">EGyan Skill Development</span>
+    </div>
+
+    <div class="right-actions">
+      <span class="role-badge" id="roleBadge" style="display: none;">
+        <i class="fas fa-user" id="roleBadgeIcon"></i>
+        <span id="roleBadgeText">User</span>
+      </span>
+
+      <a href="BasicDashboard.html" class="back-home" aria-label="Back to dashboard">
+        <i class="fas fa-arrow-left"></i> <span>Back</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="page-header">
+    <div class="hero-text">
+      <span class="hero-eyebrow"><i class="fas fa-file-word"></i> Basic Computer · Module 5</span>
+      <h1>MS <span class="accent">Word</span></h1>
+      <p>The world's most popular word processor — create reports, letters, résumés, and professional documents with ease.</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Word document illustration">
+        <defs>
+          <linearGradient id="wdGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#2b579a"/>
+            <stop offset="100%" stop-color="#3b82f6"/>
+          </linearGradient>
+        </defs>
+        <!-- Document page -->
+        <rect x="40" y="20" width="120" height="160" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+        <!-- Page corner fold -->
+        <path d="M 140 20 L 160 20 L 160 40 Z" fill="#e5e7eb"/>
+        <path d="M 140 20 L 160 40 L 140 40 Z" fill="#f3f4f6"/>
+        <!-- Blue ribbon "W" badge -->
+        <rect x="20" y="100" width="50" height="60" rx="10" fill="url(#wdGrad)"/>
+        <text x="45" y="140" text-anchor="middle" font-family="Georgia,serif" font-weight="900" font-size="32" fill="#ffffff">W</text>
+        <!-- Text lines -->
+        <rect x="55" y="50" width="90" height="5" rx="2" fill="#2b579a" opacity="0.9"/>
+        <rect x="55" y="63" width="80" height="3" rx="1.5" fill="#d1d5db"/>
+        <rect x="55" y="72" width="88" height="3" rx="1.5" fill="#d1d5db"/>
+        <rect x="55" y="81" width="70" height="3" rx="1.5" fill="#d1d5db"/>
+        <rect x="55" y="95" width="88" height="3" rx="1.5" fill="#d1d5db"/>
+        <rect x="55" y="104" width="60" height="3" rx="1.5" fill="#d1d5db"/>
+        <!-- Highlighted text line (bold) -->
+        <rect x="55" y="120" width="50" height="6" rx="2" fill="#f59e0b" opacity="0.8"/>
+        <!-- Paragraph -->
+        <rect x="55" y="134" width="88" height="3" rx="1.5" fill="#d1d5db"/>
+        <rect x="55" y="143" width="75" height="3" rx="1.5" fill="#d1d5db"/>
+        <rect x="55" y="152" width="85" height="3" rx="1.5" fill="#d1d5db"/>
+        <rect x="55" y="161" width="40" height="3" rx="1.5" fill="#d1d5db"/>
+        <!-- Cursor blink -->
+        <rect x="96" y="160" width="1.5" height="6" fill="#2b579a"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search shortcuts or features… (e.g., bold, Ctrl+S, table)" aria-label="Search">
+    <button class="search-clear" id="searchClear" aria-label="Clear search">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="search-results-info" id="searchInfo" style="display:none;"></div>
+
+  <!-- CONTENT LAYOUT -->
+  <div class="content-layout">
+
+    <!-- Desktop TOC -->
+    <aside class="toc" aria-label="Table of contents">
+      <h3><i class="fas fa-list-ul"></i> On this page</h3>
+      <ul>
+        <li><a href="#intro" data-toc="intro"><span class="num">1</span> What is MS Word?</a></li>
+        <li><a href="#anatomy" data-toc="anatomy"><span class="num">2</span> Word Interface</a></li>
+        <li><a href="#formatting" data-toc="formatting"><span class="num">3</span> Formatting Essentials</a></li>
+        <li><a href="#features" data-toc="features"><span class="num">4</span> Key Features</a></li>
+        <li><a href="#shortcuts" data-toc="shortcuts"><span class="num">5</span> Shortcut Keys</a></li>
+        <li><a href="#tips" data-toc="tips"><span class="num">6</span> Tips &amp; Uses</a></li>
+      </ul>
+    </aside>
+
+    <main class="content" id="mainContent">
+
+      <!-- 1. INTRO -->
+      <section class="section-card" id="intro" data-title="What is MS Word">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-file-word"></i></span>
+          1. What is MS Word?
+        </h2>
+
+        <p><span class="hl">Microsoft Word</span> is a <strong>word processing program</strong> developed by Microsoft — part of the Microsoft Office suite. It lets you <span class="hl-blue">create, edit, format, and print</span> text documents of any kind: letters, essays, reports, résumés, books, newsletters, and more.</p>
+
+        <p>Word was first released in <mark>1983</mark> and has become the world's most widely used document editor. Today Word documents use the <code>.docx</code> extension and can include <strong>images, tables, charts, hyperlinks, footnotes, and drawings</strong> — not just text.</p>
+
+        <div class="callout info">
+          <i class="fas fa-circle-info"></i>
+          <div><strong>Fun fact:</strong> There are over <mark>1.2 billion</mark> Microsoft Word users worldwide. It's estimated that more than <strong>5 billion documents</strong> are created in Word every single day!</div>
+        </div>
+
+        <div class="figure">
+          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Word window mockup">
+            <!-- Window frame -->
+            <rect x="20" y="20" width="440" height="180" rx="10" fill="#1f2937"/>
+            <rect x="20" y="20" width="440" height="26" rx="10" fill="#2b579a"/>
+            <rect x="20" y="36" width="440" height="10" fill="#2b579a"/>
+            <!-- Title dots -->
+            <circle cx="40" cy="33" r="4.5" fill="#ef4444"/>
+            <circle cx="56" cy="33" r="4.5" fill="#fbbf24"/>
+            <circle cx="72" cy="33" r="4.5" fill="#10b981"/>
+            <text x="240" y="37" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="10" fill="#ffffff">Report.docx - Word</text>
+            <!-- Ribbon tabs -->
+            <rect x="20" y="46" width="440" height="16" fill="#374151"/>
+            <text x="40" y="57" font-family="Inter,sans-serif" font-weight="700" font-size="8" fill="#fbbf24">File</text>
+            <text x="80" y="57" font-family="Inter,sans-serif" font-weight="700" font-size="8" fill="#f1f5f9">Home</text>
+            <text x="128" y="57" font-family="Inter,sans-serif" font-weight="700" font-size="8" fill="#f1f5f9">Insert</text>
+            <text x="176" y="57" font-family="Inter,sans-serif" font-weight="700" font-size="8" fill="#f1f5f9">Layout</text>
+            <text x="230" y="57" font-family="Inter,sans-serif" font-weight="700" font-size="8" fill="#f1f5f9">Review</text>
+            <text x="285" y="57" font-family="Inter,sans-serif" font-weight="700" font-size="8" fill="#f1f5f9">View</text>
+            <!-- Ribbon icons row -->
+            <rect x="20" y="62" width="440" height="20" fill="#4b5563"/>
+            <!-- Bold/Italic/Underline -->
+            <text x="40" y="76" font-family="Inter,sans-serif" font-weight="900" font-size="10" fill="#f1f5f9">B</text>
+            <text x="58" y="76" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="10" fill="#f1f5f9">I</text>
+            <text x="76" y="76" font-family="Inter,sans-serif" font-weight="700" font-size="10" fill="#f1f5f9" text-decoration="underline">U</text>
+            <line x1="95" y1="66" x2="95" y2="80" stroke="#6b7280"/>
+            <text x="110" y="76" font-family="Inter,sans-serif" font-weight="600" font-size="7" fill="#f1f5f9">Calibri</text>
+            <text x="170" y="76" font-family="Inter,sans-serif" font-weight="600" font-size="7" fill="#f1f5f9">12</text>
+            <line x1="195" y1="66" x2="195" y2="80" stroke="#6b7280"/>
+            <!-- Align icons -->
+            <g fill="#f1f5f9">
+              <rect x="210" y="68" width="12" height="1.5"/>
+              <rect x="210" y="72" width="8" height="1.5"/>
+              <rect x="210" y="76" width="12" height="1.5"/>
+              <rect x="230" y="68" width="12" height="1.5"/>
+              <rect x="232" y="72" width="8" height="1.5"/>
+              <rect x="230" y="76" width="12" height="1.5"/>
+                            <rect x="250" y="68" width="12" height="1.5"/>
+              <rect x="250" y="72" width="12" height="1.5"/>
+              <rect x="250" y="76" width="12" height="1.5"/>
+            </g>
+            <!-- Document area -->
+            <rect x="20" y="82" width="440" height="118" fill="#e5e7eb"/>
+            <!-- Page -->
+            <rect x="180" y="88" width="180" height="106" fill="#ffffff" stroke="#d1d5db" stroke-width="0.5"/>
+            <!-- Document content -->
+            <rect x="195" y="98" width="100" height="6" rx="1" fill="#2b579a" opacity="0.9"/>
+            <rect x="195" y="110" width="150" height="2.5" rx="1" fill="#d1d5db"/>
+            <rect x="195" y="117" width="140" height="2.5" rx="1" fill="#d1d5db"/>
+            <rect x="195" y="124" width="148" height="2.5" rx="1" fill="#d1d5db"/>
+            <rect x="195" y="135" width="80" height="3" rx="1" fill="#f59e0b" opacity="0.7"/>
+            <rect x="195" y="144" width="150" height="2.5" rx="1" fill="#d1d5db"/>
+            <rect x="195" y="151" width="130" height="2.5" rx="1" fill="#d1d5db"/>
+            <rect x="195" y="158" width="145" height="2.5" rx="1" fill="#d1d5db"/>
+            <rect x="195" y="165" width="100" height="2.5" rx="1" fill="#d1d5db"/>
+            <rect x="195" y="178" width="60" height="2.5" rx="1" fill="#2b579a" opacity="0.6"/>
+            <!-- Status bar -->
+            <rect x="20" y="200" width="440" height="14" fill="#2b579a"/>
+            <text x="40" y="210" font-family="Inter,sans-serif" font-weight="600" font-size="7" fill="#ffffff">Page 1 of 3</text>
+            <text x="140" y="210" font-family="Inter,sans-serif" font-weight="600" font-size="7" fill="#ffffff">1,234 words</text>
+            <text x="260" y="210" font-family="Inter,sans-serif" font-weight="600" font-size="7" fill="#ffffff">English (India)</text>
+            <text x="400" y="210" font-family="Inter,sans-serif" font-weight="600" font-size="7" fill="#ffffff">100%</text>
+          </svg>
+          <div class="figure-caption"><strong>The Word window.</strong> Ribbon on top with formatting tools, page in center, and status bar at bottom showing word count and page number.</div>
+        </div>
+      </section>
+
+      <!-- 2. ANATOMY -->
+      <section class="section-card" id="anatomy" data-title="Word interface">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-window-maximize"></i></span>
+          2. The Word Interface
+        </h2>
+
+        <p>Before typing your first word, get to know <span class="hl-blue">where everything lives</span> on the Word screen.</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-bars"></i></div>
+            <div>
+              <h4>Ribbon</h4>
+              <p>The toolbar at the top with tabs: <strong>Home, Insert, Design, Layout, References, Mailings, Review, View</strong>. Everything you need is organized here.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-list"></i></div>
+            <div>
+              <h4>Quick Access Toolbar</h4>
+              <p>Top-left corner. Holds your most-used buttons: Save, Undo, Redo. You can add more by right-clicking any command.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-font"></i></div>
+            <div>
+              <h4>Font Group (Home tab)</h4>
+              <p>Bold, italic, underline, font family, font size, color, highlight, and text effects — all here.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-align-left"></i></div>
+            <div>
+              <h4>Paragraph Group</h4>
+              <p>Alignment (left/center/right/justify), bullets, numbering, indents, line spacing, borders, and shading.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-lines"></i></div>
+            <div>
+              <h4>Document Area</h4>
+              <p>The white page where you type. Blue corner marks define the margins. The blinking vertical bar is the <strong>cursor</strong>.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-magnifying-glass"></i></div>
+            <div>
+              <h4>Ruler</h4>
+              <p>Horizontal ruler at the top with margin markers. Drag to adjust margins and tabs. View → Ruler to toggle.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-scroll"></i></div>
+            <div>
+              <h4>Scroll Bar</h4>
+              <p>On the right — scroll through long documents. Word also shows page number and word count at bottom.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-chart-bar"></i></div>
+            <div>
+              <h4>Status Bar</h4>
+              <p>Bottom of window. Shows <strong>page number, word count, language, zoom level</strong>, and view modes.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-compress"></i></div>
+            <div>
+              <h4>Zoom Slider</h4>
+              <p>Bottom-right corner. Zoom from 10% to 500%. Hold <kbd>Ctrl</kbd> + scroll wheel for quick zoom.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-pen-fancy"></i></div>
+            <div>
+              <h4>Cursor</h4>
+              <p>The blinking vertical bar showing where the next character will appear. Click anywhere to move it.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Ribbon shortcut:</strong> Press <kbd>Alt</kbd> alone to reveal keyboard hints on the ribbon. Then follow the letters to use any tool without touching the mouse.</div>
+        </div>
+      </section>
+
+      <!-- 3. FORMATTING -->
+      <section class="section-card" id="formatting" data-title="Word formatting essentials">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-paintbrush"></i></span>
+          3. Formatting Essentials
+        </h2>
+
+        <p>Good formatting is what separates a <span class="hl">professional document</span> from a rough draft. Here are the core tools every Word user should master:</p>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-font"></i> Text Formatting</h3>
+        <div class="ribbon-group">
+          <div class="ribbon-item"><i class="fas fa-bold"></i> Bold</div>
+          <div class="ribbon-item"><i class="fas fa-italic"></i> Italic</div>
+          <div class="ribbon-item"><i class="fas fa-underline"></i> Underline</div>
+          <div class="ribbon-item"><i class="fas fa-strikethrough"></i> Strikethrough</div>
+          <div class="ribbon-item"><i class="fas fa-subscript"></i> Subscript</div>
+          <div class="ribbon-item"><i class="fas fa-superscript"></i> Superscript</div>
+          <div class="ribbon-item"><i class="fas fa-highlighter"></i> Highlight</div>
+          <div class="ribbon-item"><i class="fas fa-font"></i> Font color</div>
+          <div class="ribbon-item"><i class="fas fa-text-height"></i> Font size</div>
+          <div class="ribbon-item"><i class="fas fa-text-width"></i> Font family</div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-align-left"></i> Paragraph Formatting</h3>
+        <div class="ribbon-group">
+          <div class="ribbon-item"><i class="fas fa-align-left"></i> Left align</div>
+          <div class="ribbon-item"><i class="fas fa-align-center"></i> Center</div>
+          <div class="ribbon-item"><i class="fas fa-align-right"></i> Right align</div>
+          <div class="ribbon-item"><i class="fas fa-align-justify"></i> Justify</div>
+          <div class="ribbon-item"><i class="fas fa-list-ul"></i> Bullets</div>
+          <div class="ribbon-item"><i class="fas fa-list-ol"></i> Numbering</div>
+          <div class="ribbon-item"><i class="fas fa-indent"></i> Indent</div>
+          <div class="ribbon-item"><i class="fas fa-outdent"></i> Decrease indent</div>
+          <div class="ribbon-item"><i class="fas fa-border-all"></i> Borders</div>
+          <div class="ribbon-item"><i class="fas fa-fill-drip"></i> Shading</div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-heading"></i> Styles &amp; Headings</h3>
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-heading"></i></div>
+            <div>
+              <h4>Heading 1 / 2 / 3</h4>
+              <p>Pre-formatted heading styles. Using them lets you auto-generate a <strong>Table of Contents</strong> with one click.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-list"></i></div>
+            <div>
+              <h4>Style Gallery</h4>
+              <p>60+ built-in styles for titles, subtitles, quotes, captions, and more. Keep your document visually consistent.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-paint-roller"></i></div>
+            <div>
+              <h4>Format Painter</h4>
+              <p>Copy formatting from one text to another. Click the paintbrush icon, then drag over the target text.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-spray-can"></i></div>
+            <div>
+              <h4>Clear Formatting</h4>
+              <p>Removes all formatting and reverts to plain text. Useful when pasting from the web.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div><strong>Common mistake:</strong> Never press <kbd>Enter</kbd> twice to create space between paragraphs. Instead, adjust <mark>Paragraph → Space After</mark>. Using Enter spaces makes editing a nightmare later.</div>
+        </div>
+      </section>
+
+      <!-- 4. FEATURES -->
+      <section class="section-card" id="features" data-title="Key Word features">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-wand-magic-sparkles"></i></span>
+          4. Key Word Features
+        </h2>
+
+        <p>Beyond plain typing, Word has <span class="hl">powerful tools</span> that turn documents into professional deliverables:</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-table"></i></div>
+            <div>
+              <h4>Tables</h4>
+              <p>Insert → Table. Create grids to organize data. Merge cells, apply styles, and convert text to tables.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-image"></i></div>
+            <div>
+              <h4>Images &amp; Shapes</h4>
+              <p>Insert pictures, icons, shapes, charts, SmartArt, and screenshots. Wrap text around them.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-list-ul"></i></div>
+            <div>
+              <h4>Table of Contents</h4>
+              <p>References → Table of Contents. Auto-generates TOC from your Heading 1/2/3 styles. Updates in one click.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-hashtag"></i></div>
+            <div>
+              <h4>Page Numbers</h4>
+              <p>Insert → Page Number. Place at top, bottom, or margins in any style. Includes "Page X of Y" formats.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-heading"></i></div>
+            <div>
+              <h4>Headers &amp; Footers</h4>
+              <p>Insert → Header/Footer. Repeat on every page — great for titles, chapter names, or company logos.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-comment"></i></div>
+            <div>
+              <h4>Track Changes</h4>
+              <p>Review → Track Changes. Every edit is logged. Perfect for team collaboration and document review.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-spell-check"></i></div>
+            <div>
+              <h4>Spell &amp; Grammar Check</h4>
+              <p>Runs automatically (red squiggles = spelling, blue = grammar). Press <kbd>F7</kbd> for manual check.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-language"></i></div>
+            <div>
+              <h4>Thesaurus</h4>
+              <p>Right-click any word → Synonyms. Or press <kbd>Shift</kbd>+<kbd>F7</kbd> for full thesaurus.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-export"></i></div>
+            <div>
+              <h4>Export to PDF</h4>
+              <p>File → Save As → PDF. Or File → Export. Creates a fixed-format document anyone can open.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <h4>Mail Merge</h4>
+              <p>Mailings tab. Merge a template with a list of names — auto-generate 100s of personalized letters or labels.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-signature"></i></div>
+            <div>
+              <h4>Watermarks</h4>
+              <p>Design → Watermark. Add a faint background text like "DRAFT", "CONFIDENTIAL", or a company logo.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-cloud"></i></div>
+            <div>
+              <h4>Co-authoring (365)</h4>
+              <p>Multiple people edit the same document simultaneously. Live cursors, comments, and instant sync.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. SHORTCUTS -->
+      <section class="section-card" id="shortcuts" data-title="Word shortcut keys">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-keyboard"></i></span>
+          5. Word Shortcut Keys
+        </h2>
+
+        <p>These shortcuts will dramatically speed up your document work. Master them and you'll rarely touch the mouse.</p>
+
+        <!-- File & basics -->
+        <h3 class="shortcut-group-title"><i class="fas fa-file"></i> File &amp; Basics</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="new document file">
+            <div class="shortcut-desc"><i class="fas fa-file-circle-plus"></i><span>New document</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>N</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="open document file">
+            <div class="shortcut-desc"><i class="fas fa-folder-open"></i><span>Open document</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>O</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="save document file">
+            <div class="shortcut-desc"><i class="fas fa-save"></i><span>Save</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>S</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="save as file">
+            <div class="shortcut-desc"><i class="fas fa-file-export"></i><span>Save As</span></div>
+            <div class="shortcut-keys"><kbd>F12</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="print document file">
+            <div class="shortcut-desc"><i class="fas fa-print"></i><span>Print</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>P</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="close document file">
+            <div class="shortcut-desc"><i class="fas fa-xmark"></i><span>Close document</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>W</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="undo edit">
+            <div class="shortcut-desc"><i class="fas fa-undo"></i><span>Undo</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Z</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="redo edit">
+            <div class="shortcut-desc"><i class="fas fa-redo"></i><span>Redo</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Y</kbd></div>
+          </div>
+        </div>
+
+        <!-- Editing -->
+        <h3 class="shortcut-group-title"><i class="fas fa-pen"></i> Editing</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="copy">
+            <div class="shortcut-desc"><i class="fas fa-copy"></i><span>Copy</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>C</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="cut">
+            <div class="shortcut-desc"><i class="fas fa-cut"></i><span>Cut</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>X</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="paste">
+            <div class="shortcut-desc"><i class="fas fa-paste"></i><span>Paste</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>V</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="paste special text">
+            <div class="shortcut-desc"><i class="fas fa-paste"></i><span>Paste Special</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Alt</kbd><span class="key-sep">+</span><kbd>V</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="select all">
+            <div class="shortcut-desc"><i class="fas fa-object-group"></i><span>Select all</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>A</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="find">
+            <div class="shortcut-desc"><i class="fas fa-magnifying-glass"></i><span>Find</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>F</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="find replace">
+            <div class="shortcut-desc"><i class="fas fa-arrows-rotate"></i><span>Find &amp; Replace</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>H</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="go to page">
+            <div class="shortcut-desc"><i class="fas fa-compass"></i><span>Go To page / line / bookmark</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>G</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="spell check grammar">
+            <div class="shortcut-desc"><i class="fas fa-spell-check"></i><span>Spell &amp; Grammar check</span></div>
+            <div class="shortcut-keys"><kbd>F7</kbd></div>
+          </div>
+        </div>
+
+        <!-- Text formatting -->
+        <h3 class="shortcut-group-title"><i class="fas fa-font"></i> Text Formatting</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="bold">
+            <div class="shortcut-desc"><i class="fas fa-bold"></i><span>Bold</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>B</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="italic">
+            <div class="shortcut-desc"><i class="fas fa-italic"></i><span>Italic</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>I</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="underline">
+            <div class="shortcut-desc"><i class="fas fa-underline"></i><span>Underline</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>U</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="double underline">
+            <div class="shortcut-desc"><i class="fas fa-underline"></i><span>Double underline</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>D</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="strikethrough">
+            <div class="shortcut-desc"><i class="fas fa-strikethrough"></i><span>Strikethrough</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>H</kbd><span class="key-sep">+</span><kbd>4</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="increase font size">
+            <div class="shortcut-desc"><i class="fas fa-text-height"></i><span>Increase font size</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>]</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="decrease font size">
+            <div class="shortcut-desc"><i class="fas fa-text-height"></i><span>Decrease font size</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>[</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="change case uppercase lowercase">
+            <div class="shortcut-desc"><i class="fas fa-text-width"></i><span>Change case (UPPER / lower / Title)</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>F3</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="superscript">
+            <div class="shortcut-desc"><i class="fas fa-superscript"></i><span>Superscript (x²)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>+</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="subscript">
+            <div class="shortcut-desc"><i class="fas fa-subscript"></i><span>Subscript (H₂O)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>=</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="font dialog">
+            <div class="shortcut-desc"><i class="fas fa-font"></i><span>Font dialog</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>D</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="clear formatting remove">
+            <div class="shortcut-desc"><i class="fas fa-eraser"></i><span>Clear all formatting</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Space</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="copy formatting painter">
+            <div class="shortcut-desc"><i class="fas fa-paintbrush"></i><span>Copy formatting (Format Painter)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>C</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="paste formatting painter">
+            <div class="shortcut-desc"><i class="fas fa-paintbrush"></i><span>Paste formatting</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>V</kbd></div>
+          </div>
+        </div>
+
+        <!-- Paragraph formatting -->
+        <h3 class="shortcut-group-title"><i class="fas fa-align-left"></i> Paragraph Alignment &amp; Formatting</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="align left">
+            <div class="shortcut-desc"><i class="fas fa-align-left"></i><span>Align left</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>L</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="align center">
+            <div class="shortcut-desc"><i class="fas fa-align-center"></i><span>Center</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>E</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="align right">
+            <div class="shortcut-desc"><i class="fas fa-align-right"></i><span>Align right</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>R</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="justify">
+            <div class="shortcut-desc"><i class="fas fa-align-justify"></i><span>Justify</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>J</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="increase indent">
+            <div class="shortcut-desc"><i class="fas fa-indent"></i><span>Increase indent</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>M</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="decrease indent">
+            <div class="shortcut-desc"><i class="fas fa-outdent"></i><span>Decrease indent</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>M</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="line spacing single">
+            <div class="shortcut-desc"><i class="fas fa-arrows-up-down"></i><span>Single line spacing</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>1</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="line spacing double">
+            <div class="shortcut-desc"><i class="fas fa-arrows-up-down"></i><span>Double line spacing</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>2</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="line spacing 1.5">
+            <div class="shortcut-desc"><i class="fas fa-arrows-up-down"></i><span>1.5 line spacing</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>5</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="space before paragraph">
+            <div class="shortcut-desc"><i class="fas fa-arrow-up"></i><span>Add space before paragraph</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>0</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="paragraph dialog">
+            <div class="shortcut-desc"><i class="fas fa-paragraph"></i><span>Paragraph dialog</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>H</kbd><span class="key-sep">+</span><kbd>P</kbd><span class="key-sep">+</span><kbd>G</kbd></div>
+          </div>
+        </div>
+
+                <!-- Navigation & selection -->
+        <h3 class="shortcut-group-title"><i class="fas fa-compass"></i> Navigation &amp; Selection</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="beginning document home">
+            <div class="shortcut-desc"><i class="fas fa-arrow-up"></i><span>Move to beginning of document</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Home</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="end document">
+            <div class="shortcut-desc"><i class="fas fa-arrow-down"></i><span>Move to end of document</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>End</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="beginning line">
+            <div class="shortcut-desc"><i class="fas fa-arrow-left"></i><span>Beginning of line</span></div>
+            <div class="shortcut-keys"><kbd>Home</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="end line">
+            <div class="shortcut-desc"><i class="fas fa-arrow-right"></i><span>End of line</span></div>
+            <div class="shortcut-keys"><kbd>End</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="next word">
+            <div class="shortcut-desc"><i class="fas fa-arrow-right"></i><span>Next word</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>→</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="previous word">
+            <div class="shortcut-desc"><i class="fas fa-arrow-left"></i><span>Previous word</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>←</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="next page down">
+            <div class="shortcut-desc"><i class="fas fa-arrow-down"></i><span>Next page</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Page Down</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="previous page up">
+            <div class="shortcut-desc"><i class="fas fa-arrow-up"></i><span>Previous page</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Page Up</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="select word">
+            <div class="shortcut-desc"><i class="fas fa-highlighter"></i><span>Select one word (or double-click)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>→</kbd><span class="key-sep">/</span><kbd>←</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="select line">
+            <div class="shortcut-desc"><i class="fas fa-highlighter"></i><span>Select entire line</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>End</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="select paragraph">
+            <div class="shortcut-desc"><i class="fas fa-highlighter"></i><span>Select paragraph up / down</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>↑</kbd><span class="key-sep">/</span><kbd>↓</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="select to beginning end document">
+            <div class="shortcut-desc"><i class="fas fa-highlighter"></i><span>Select to beginning / end of document</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>Home</kbd><span class="key-sep">/</span><kbd>End</kbd></div>
+          </div>
+        </div>
+
+        <!-- Insert -->
+        <h3 class="shortcut-group-title"><i class="fas fa-plus"></i> Insert Elements</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="page break insert">
+            <div class="shortcut-desc"><i class="fas fa-file-lines"></i><span>Page break</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Enter</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="line break soft return">
+            <div class="shortcut-desc"><i class="fas fa-arrow-turn-down"></i><span>Line break (soft return)</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>Enter</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="insert date time">
+            <div class="shortcut-desc"><i class="fas fa-calendar"></i><span>Insert current date</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>D</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="insert time">
+            <div class="shortcut-desc"><i class="fas fa-clock"></i><span>Insert current time</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>T</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="insert hyperlink link">
+            <div class="shortcut-desc"><i class="fas fa-link"></i><span>Insert hyperlink</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>K</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="insert comment review">
+            <div class="shortcut-desc"><i class="fas fa-comment"></i><span>Insert comment</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Alt</kbd><span class="key-sep">+</span><kbd>M</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="insert footnote">
+            <div class="shortcut-desc"><i class="fas fa-note-sticky"></i><span>Insert footnote</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>F</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="insert endnote">
+            <div class="shortcut-desc"><i class="fas fa-note-sticky"></i><span>Insert endnote</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>D</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="insert symbol special character">
+            <div class="shortcut-desc"><i class="fas fa-superscript"></i><span>Insert symbol</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>N</kbd><span class="key-sep">+</span><kbd>U</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="insert equation">
+            <div class="shortcut-desc"><i class="fas fa-square-root-variable"></i><span>Insert equation</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>=</kbd></div>
+          </div>
+        </div>
+
+        <!-- Review / View -->
+        <h3 class="shortcut-group-title"><i class="fas fa-eye"></i> Review &amp; View</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="thesaurus synonyms">
+            <div class="shortcut-desc"><i class="fas fa-book"></i><span>Thesaurus (synonyms)</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>F7</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="track changes toggle">
+            <div class="shortcut-desc"><i class="fas fa-pen-to-square"></i><span>Toggle Track Changes</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>E</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="word count">
+            <div class="shortcut-desc"><i class="fas fa-calculator"></i><span>Word Count</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Shift</kbd><span class="key-sep">+</span><kbd>G</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="zoom in">
+            <div class="shortcut-desc"><i class="fas fa-magnifying-glass-plus"></i><span>Zoom in</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Alt</kbd><span class="key-sep">+</span><kbd>+</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="zoom out">
+            <div class="shortcut-desc"><i class="fas fa-magnifying-glass-minus"></i><span>Zoom out</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Alt</kbd><span class="key-sep">+</span><kbd>-</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="full screen view">
+            <div class="shortcut-desc"><i class="fas fa-expand"></i><span>Full screen / Read mode</span></div>
+            <div class="shortcut-keys"><kbd>F11</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="open navigation pane">
+            <div class="shortcut-desc"><i class="fas fa-list"></i><span>Navigation pane (headings / search)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>F</kbd></div>
+          </div>
+        </div>
+
+        <div class="callout success">
+          <i class="fas fa-star"></i>
+          <div><strong>Master these first:</strong> <kbd>Ctrl</kbd>+<kbd>B</kbd> (bold), <kbd>Ctrl</kbd>+<kbd>I</kbd> (italic), <kbd>Ctrl</kbd>+<kbd>U</kbd> (underline), <kbd>Ctrl</kbd>+<kbd>S</kbd> (save), <kbd>Ctrl</kbd>+<kbd>Z</kbd> (undo), <kbd>Ctrl</kbd>+<kbd>Enter</kbd> (page break). Those six alone cover most daily editing.</div>
+        </div>
+      </section>
+
+      <!-- 6. TIPS -->
+      <section class="section-card" id="tips" data-title="Word tips and uses">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-lightbulb"></i></span>
+          6. Tips &amp; Real-World Uses
+        </h2>
+
+        <p>Word is used across every industry — from school essays to corporate contracts. Here's how to make the most of it:</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-heading"></i></div>
+            <div>
+              <h4>Use Heading Styles</h4>
+              <p>Never manually bold a title — use Heading 1/2/3. This lets you auto-build a Table of Contents in seconds.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-copy"></i></div>
+            <div>
+              <h4>Paste Text Only</h4>
+              <p>Copying from the web brings ugly fonts. Paste with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> or use Paste → Text Only to keep your styling clean.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-magic"></i></div>
+            <div>
+              <h4>Format Painter Magic</h4>
+              <p>Already formatted one paragraph? Click it, click Format Painter, then drag over the next — instant matching formatting.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-keyboard"></i></div>
+            <div>
+              <h4>AutoCorrect is Your Friend</h4>
+              <p>File → Options → Proofing → AutoCorrect. Add your own shortcuts like typing "egyan" → "EGyan Skill Development".</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-floppy-disk"></i></div>
+            <div>
+              <h4>AutoSave to Cloud</h4>
+              <p>Sign in with a Microsoft account and AutoSave turns on — never lose work to a crash again. Saves to OneDrive.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-print"></i></div>
+            <div>
+              <h4>Print Preview</h4>
+              <p>Always press <kbd>Ctrl</kbd>+<kbd>P</kbd> before printing — check page breaks and margins. Saves paper and headaches.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-pdf"></i></div>
+            <div>
+              <h4>Share as PDF</h4>
+              <p>Before sending a résumé or report, save as PDF (<code>File → Save As → PDF</code>). It looks the same on every device.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-search"></i></div>
+            <div>
+              <h4>Use Find Effectively</h4>
+              <p>Press <kbd>Ctrl</kbd>+<kbd>F</kbd> to jump to any word. Find &amp; Replace (<kbd>Ctrl</kbd>+<kbd>H</kbd>) can fix a typo across 100 pages in seconds.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div>
+              <h4>Common Uses</h4>
+              <p>Résumés, cover letters, reports, essays, contracts, invoices, meeting minutes, eBooks, newsletters, certificates, labels, and mail merges.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-graduation-cap"></i>
+          <div><strong>Practice plan:</strong> Day 1 — type a page with proper headings. Day 2 — add images and a table. Day 3 — build an auto Table of Contents. Day 4 — apply shortcuts to edit twice as fast. Day 5 — save as PDF and print.</div>
+        </div>
+      </section>
+
+      <!-- NO RESULTS -->
+      <div class="no-results" id="noResults">
+        <i class="fas fa-magnifying-glass"></i>
+        <h4>No results found</h4>
+        <p>Try a keyword like "bold", "table", "Ctrl+S", or "heading".</p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    <i class="fas fa-arrow-right"></i>
+    You've completed the MS Word module. Practice typing and formatting to master Word.
+  </div>
+</div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  const THEME_KEY = 'user-theme-preference';
+  const DEFAULT_THEME = 'light';
+  const LOGIN_REDIRECT = '../My Account/myaccount.html';
+
+  const AUTH_KEYS = {
+    USER:          'EGyan_user',
+    USER_DATA:     'EGyan_user_data',
+    USER_TYPE:     'EGyan_user_type',
+    REMEMBER_ME:   'EGyan_remember_me',
+    SESSION_EXPIRY:'EGyan_session_expiry'
+  };
+
+  const body = document.body;
+  const html = document.documentElement;
+
+  // THEME
+  function getStoredTheme() {
+    try {
+      const stored = localStorage.getItem(THEME_KEY);
+      if (stored) return stored;
+    } catch (e) {}
+    try {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+    } catch (e) {}
+    return DEFAULT_THEME;
+  }
+
+  function applyTheme(theme) {
+    const t = theme === 'dark' ? 'dark' : 'light';
+    html.setAttribute('data-theme', t);
+    body.setAttribute('data-theme', t);
+
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#0b0e0d' : '#f59e0b');
+
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'themeChange', theme: t }, '*');
+      }
+    } catch (e) {}
+  }
+
+  applyTheme(getStoredTheme());
+
+  try {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq && mq.addEventListener) {
+      mq.addEventListener('change', function (e) {
+        try {
+          const stored = localStorage.getItem(THEME_KEY);
+          if (!stored) applyTheme(e.matches ? 'dark' : 'light');
+        } catch (err) {}
+      });
+    }
+  } catch (e) {}
+
+  window.addEventListener('storage', function (e) {
+    if (e.key === THEME_KEY && e.newValue) applyTheme(e.newValue);
+    if (e.key === 'theme-change-trigger') {
+      try {
+        const latest = localStorage.getItem(THEME_KEY);
+        if (latest) applyTheme(latest);
+      } catch (err) {}
+    }
+  });
+
+  window.addEventListener('message', function (event) {
+    if (event.data && event.data.type === 'themeChange' && event.data.theme) {
+      applyTheme(event.data.theme);
+    }
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) {
+      try {
+        const latest = localStorage.getItem(THEME_KEY);
+        if (latest) applyTheme(latest);
+      } catch (e) {}
+    }
+  });
+
+  // AUTH
+  function parseStoredAuth(raw) {
+    if (!raw) return { value: null, expiry: null };
+    try {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object' && 'value' in parsed) {
+        return { value: parsed.value, expiry: parsed.expiry || null };
+      }
+      return { value: parsed, expiry: null };
+    } catch (e) {
+      return { value: raw, expiry: null };
+    }
+  }
+
+  function readAuthKey(key) {
+    let raw = null;
+    try { raw = localStorage.getItem(key); } catch (e) {}
+    if (raw) {
+      const parsed = parseStoredAuth(raw);
+      if (parsed.expiry && Date.now() >= parsed.expiry) {
+        try { localStorage.removeItem(key); } catch (e) {}
+      } else {
+        return parsed.value;
+      }
+    }
+    try { raw = sessionStorage.getItem(key); } catch (e) { raw = null; }
+    if (!raw) return null;
+    const parsed = parseStoredAuth(raw);
+    if (parsed.expiry && Date.now() >= parsed.expiry) {
+      try { sessionStorage.removeItem(key); } catch (e) {}
+      return null;
+    }
+    return parsed.value;
+  }
+
+  function checkAuthStatus() {
+    const user = readAuthKey(AUTH_KEYS.USER);
+    const userData = readAuthKey(AUTH_KEYS.USER_DATA);
+    const userTypeRaw = readAuthKey(AUTH_KEYS.USER_TYPE);
+
+    if (!user) return { loggedIn: false, role: null, user: null, data: null };
+
+    let role = 'student';
+    if (userTypeRaw) {
+      const t = String(userTypeRaw).toLowerCase().trim();
+      if (t === 'admin') role = 'admin';
+      else if (t === 'teacher') role = 'teacher';
+      else role = 'student';
+    }
+
+    if (!userData) return { loggedIn: false, role: null, user: null, data: null };
+
+    return { loggedIn: true, role: role, user: user, data: userData };
+  }
+
+  function checkLoginStatus() {
+    return checkAuthStatus().loggedIn;
+  }
+
+  // ROLE BADGE + SIDEBAR USER
+  function renderRoleBadge(auth) {
+    const badge = document.getElementById('roleBadge');
+    const icon = document.getElementById('roleBadgeIcon');
+    const text = document.getElementById('roleBadgeText');
+    if (!badge || !icon || !text) return;
+
+    let label = 'Student';
+    let iconClass = 'fas fa-user-graduate';
+    let cls = 'student';
+
+    if (auth.role === 'admin') {
+      label = 'Admin'; iconClass = 'fas fa-user-shield'; cls = 'admin';
+    } else if (auth.role === 'teacher') {
+      label = 'Teacher'; iconClass = 'fas fa-chalkboard-teacher'; cls = 'teacher';
+    }
+
+    const data = readAuthKey(AUTH_KEYS.USER_DATA) || {};
+    const firstName =
+      data['First Name'] || data['Name'] || data['Teacher Name'] || data['User Name'] || '';
+    const lastName = data['Last Name'] || '';
+    const fullName = (firstName + ' ' + lastName).trim();
+    const displayName = fullName || data['Email Id'] || auth.user || '';
+
+    text.textContent = displayName ? (label + ' · ' + displayName) : label;
+    icon.className = iconClass;
+
+    badge.classList.remove('student', 'teacher', 'admin');
+    badge.classList.add(cls);
+    badge.style.display = 'inline-flex';
+
+    renderSidebarUser(auth);
+  }
+
+  function renderSidebarUser(auth) {
+    const avatar = document.getElementById('sidebarAvatar');
+    const nameEl = document.getElementById('sidebarUserName');
+    const roleEl = document.getElementById('sidebarUserRole');
+    if (!avatar || !nameEl || !roleEl) return;
+
+    const data = readAuthKey(AUTH_KEYS.USER_DATA) || {};
+    const firstName =
+      data['First Name'] || data['Name'] || data['Teacher Name'] || data['User Name'] || '';
+    const lastName = data['Last Name'] || '';
+    const fullName = (firstName + ' ' + lastName).trim();
+    const displayName = fullName || data['Email Id'] || auth.user || 'User';
+
+    const initial = (displayName.charAt(0) || 'U').toUpperCase();
+    avatar.textContent = initial;
+    nameEl.textContent = displayName;
+
+    let roleLabel = 'Student';
+    let roleCls = 'student';
+    if (auth.role === 'admin') { roleLabel = 'Admin'; roleCls = 'admin'; }
+    else if (auth.role === 'teacher') { roleLabel = 'Teacher'; roleCls = 'teacher'; }
+
+    roleEl.textContent = roleLabel;
+    roleEl.classList.remove('student', 'teacher', 'admin');
+    roleEl.classList.add(roleCls);
+  }
+
+  function hideRoleBadge() {
+    const badge = document.getElementById('roleBadge');
+    if (badge) badge.style.display = 'none';
+  }
+
+  // UI HELPERS
+  function hideSkeleton() {
+    const sk = document.getElementById('authSkeleton');
+    if (sk) {
+      sk.classList.add('hidden');
+      setTimeout(function () { sk.style.display = 'none'; }, 400);
+    }
+  }
+
+  function revealApp() {
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) wrap.classList.add('revealed');
+  }
+
+  function showLoginRequired() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.classList.add('active');
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) {
+      wrap.style.display = 'none';
+      wrap.classList.remove('revealed');
+    }
+    hideRoleBadge();
+  }
+
+  function hideLoginRequired() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.classList.remove('active');
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) wrap.style.display = 'block';
+  }
+
+  // SIDEBAR
+  const sidebar = document.getElementById('mobileSidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  const hamburger = document.getElementById('hamburgerBtn');
+  const sidebarClose = document.getElementById('sidebarClose');
+
+  let sidebarOpen = false;
+
+  function openSidebar() {
+    if (!sidebar || sidebarOpen) return;
+    sidebar.classList.add('open');
+    if (backdrop) backdrop.classList.add('active');
+    body.classList.add('sidebar-lock');
+    sidebarOpen = true;
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeSidebar() {
+    if (!sidebar || !sidebarOpen) return;
+    sidebar.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('active');
+    body.classList.remove('sidebar-lock');
+    sidebarOpen = false;
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  if (hamburger) hamburger.addEventListener('click', openSidebar);
+  if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+  if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+  document.querySelectorAll('.sidebar-toc-list a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      setTimeout(closeSidebar, 150);
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sidebarOpen) closeSidebar();
+  });
+
+  // Swipe gestures
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  const SWIPE_MIN_DISTANCE = 60;
+  const SWIPE_MAX_VERTICAL = 80;
+  const SWIPE_MAX_TIME = 600;
+
+  document.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchStartTime = Date.now();
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    if (e.changedTouches.length !== 1) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+    const dt = Date.now() - touchStartTime;
+
+    if (dt > SWIPE_MAX_TIME) return;
+    if (Math.abs(dy) > SWIPE_MAX_VERTICAL) return;
+    if (Math.abs(dx) < SWIPE_MIN_DISTANCE) return;
+
+    if (dx > 0) {
+      if (!sidebarOpen) openSidebar();
+    } else if (dx < 0) {
+      if (sidebarOpen) closeSidebar();
+    }
+  }, { passive: true });
+
+  // BOOT
+  function boot() {
+    const auth = checkAuthStatus();
+
+    if (!auth.loggedIn) {
+      hideSkeleton();
+      showLoginRequired();
+      return;
+    }
+
+    hideLoginRequired();
+    renderRoleBadge(auth);
+    hideSkeleton();
+    revealApp();
+
+    console.log('✅ Access granted:', auth.role, '-', auth.user);
+  }
+
+  const loginBtn = document.getElementById('loginBtn');
+  if (loginBtn) loginBtn.setAttribute('href', LOGIN_REDIRECT);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(boot, 80);
+  });
+
+  window.addEventListener('storage', function (e) {
+    const isAuthKey = Object.keys(AUTH_KEYS).some(function (k) {
+      return AUTH_KEYS[k] === e.key;
+    });
+    if (isAuthKey) {
+      if (!checkLoginStatus()) showLoginRequired();
+      else {
+        const auth = checkAuthStatus();
+        if (auth.loggedIn) {
+          hideLoginRequired();
+          renderRoleBadge(auth);
+          revealApp();
+        }
+      }
+    }
+  });
+
+  setInterval(function () {
+    if (!checkLoginStatus()) {
+      const overlay = document.getElementById('loginOverlay');
+      if (overlay && !overlay.classList.contains('active')) showLoginRequired();
+    }
+  }, 15000);
+
+  // TOC SCROLL-SPY
+  const allTocLinks = document.querySelectorAll('[data-toc]');
+  const sections = document.querySelectorAll('section.section-card[id]');
+
+  function setActiveToc(id) {
+    allTocLinks.forEach(function (link) {
+      link.classList.toggle('active', link.getAttribute('data-toc') === id);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      const visible = entries
+        .filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return b.intersectionRatio - a.intersectionRatio; });
+      if (visible.length > 0) setActiveToc(visible[0].target.id);
+    }, {
+      rootMargin: '-90px 0px -55% 0px',
+      threshold: [0.1, 0.5, 0.9]
+    });
+    sections.forEach(function (s) { observer.observe(s); });
+  }
+
+  allTocLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      const id = link.getAttribute('data-toc');
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        setActiveToc(id);
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+  });
+
+  // SEARCH FILTER
+  const searchInput = document.getElementById('searchInput');
+  const searchClear = document.getElementById('searchClear');
+  const searchInfo = document.getElementById('searchInfo');
+  const noResults = document.getElementById('noResults');
+  const sectionCards = document.querySelectorAll('.section-card');
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+    });
+  }
+
+  function runFilter(query) {
+    const q = (query || '').toLowerCase().trim();
+    let visibleCount = 0;
+
+    if (searchClear) {
+      searchClear.classList.toggle('visible', q.length > 0);
+    }
+
+    sectionCards.forEach(function (section) {
+      let sectionVisible = 0;
+
+      const tools = section.querySelectorAll('.tool-card');
+      tools.forEach(function (tool) {
+        const h4 = (tool.querySelector('h4') || {}).textContent || '';
+        const p = (tool.querySelector('p') || {}).textContent || '';
+        const code = (tool.querySelector('code, .formula-block') || {}).textContent || '';
+        const haystack = (h4 + ' ' + p + ' ' + code).toLowerCase();
+        const match = !q || haystack.indexOf(q) !== -1;
+        tool.style.display = match ? '' : 'none';
+        if (match) { sectionVisible++; visibleCount++; }
+      });
+
+      const ribbons = section.querySelectorAll('.ribbon-item');
+      ribbons.forEach(function (ri) {
+        const txt = (ri.textContent || '').toLowerCase();
+        const match = !q || txt.indexOf(q) !== -1;
+        ri.style.display = match ? '' : 'none';
+        if (match) { sectionVisible++; visibleCount++; }
+      });
+
+      const rows = section.querySelectorAll('.shortcut-row');
+      rows.forEach(function (row) {
+        const desc = (row.querySelector('.shortcut-desc span') || {}).textContent || '';
+                const keys = (row.querySelector('.shortcut-keys') || {}).textContent || '';
+        const searchMeta = row.getAttribute('data-search') || '';
+        const haystack = (desc + ' ' + keys + ' ' + searchMeta).toLowerCase();
+        const match = !q || haystack.indexOf(q) !== -1;
+        row.style.display = match ? '' : 'none';
+        if (match) { sectionVisible++; visibleCount++; }
+      });
+
+      if (sectionVisible === 0) {
+        section.style.display = 'none';
+      } else {
+        section.style.display = '';
+      }
+    });
+
+    if (noResults) {
+      noResults.classList.toggle('visible', visibleCount === 0 && q.length > 0);
+    }
+
+    if (searchInfo) {
+      if (q.length > 0) {
+        searchInfo.style.display = '';
+        searchInfo.innerHTML = 'Showing <strong>' + visibleCount + '</strong> ' +
+          (visibleCount === 1 ? 'result' : 'results') +
+          ' for "<strong>' + escapeHtml(q) + '</strong>"';
+      } else {
+        searchInfo.style.display = 'none';
+        searchInfo.innerHTML = '';
+      }
+    }
+  }
+
+  if (searchInput) {
+    let searchTimer = null;
+    searchInput.addEventListener('input', function (e) {
+      clearTimeout(searchTimer);
+      const val = e.target.value;
+      searchTimer = setTimeout(function () { runFilter(val); }, 120);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        const tag = (document.activeElement && document.activeElement.tagName) || '';
+        if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      }
+      if (e.key === 'Escape' && document.activeElement === searchInput) {
+        searchInput.value = '';
+        runFilter('');
+        searchInput.blur();
+      }
+    });
+  }
+
+  if (searchClear) {
+    searchClear.addEventListener('click', function () {
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+      }
+      runFilter('');
+    });
+  }
+
+  // BACK TO TOP
+  const backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    function updateBackToTop() {
+      if (window.pageYOffset > 400) backToTop.classList.add('visible');
+      else backToTop.classList.remove('visible');
+    }
+    window.addEventListener('scroll', updateBackToTop, { passive: true });
+    updateBackToTop();
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // KEY PRESS VISUAL FEEDBACK
+  document.addEventListener('keydown', function (e) {
+    const key = e.key;
+    if (!key || key.length > 3) return;
+    if (document.activeElement === searchInput) return;
+
+    const allKbds = document.querySelectorAll('kbd');
+    allKbds.forEach(function (kbd) {
+      const txt = (kbd.textContent || '').trim().toLowerCase();
+      const pressed = key.toLowerCase();
+
+      if (txt === pressed ||
+          (pressed === 'control' && txt === 'ctrl') ||
+          (pressed === 'escape' && txt === 'esc') ||
+          (pressed === 'delete' && txt === 'del') ||
+          (pressed === 'arrowup' && txt === '↑') ||
+          (pressed === 'arrowdown' && txt === '↓') ||
+          (pressed === 'arrowleft' && txt === '←') ||
+          (pressed === 'arrowright' && txt === '→') ||
+          (pressed === ' ' && txt === 'space')) {
+        kbd.style.transform = 'scale(0.9)';
+        kbd.style.background = 'linear-gradient(135deg, #f59e0b, #fbbf24)';
+        kbd.style.color = '#1f2937';
+        setTimeout(function () {
+          kbd.style.transform = '';
+          kbd.style.background = '';
+          kbd.style.color = '';
+        }, 200);
+      }
+    });
+  });
+
+  console.log('📄 MS Word page ready — theme:', html.getAttribute('data-theme'));
+})();
+</script>
+</body>
+</html>

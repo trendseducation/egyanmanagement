@@ -1,0 +1,2527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="dns-prefetch" href="https://script.google.com">
+<link rel="dns-prefetch" href="https://lh3.googleusercontent.com">
+
+<title>EGyan Skill Development · MCQ Test</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet" media="print" onload="this.media='all'">
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</noscript>
+
+<script>
+(function () {
+    try {
+        var t = localStorage.getItem('user-theme-preference') || 'light';
+        document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+    } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+})();
+</script>
+
+<style>
+/* ============================================================
+   THEME VARIABLES
+   ============================================================ */
+:root {
+    --bg-body: #eef2f9;
+    --bg-body-grad: radial-gradient(1400px 700px at 50% -10%, rgba(37,99,235,0.08), transparent 60%);
+    --bg-card: #ffffff;
+    --bg-elevated: #ffffff;
+    --bg-soft: #f8fafc;
+    --bg-softer: #f1f5f9;
+    --text-main: #0f172a;
+    --text-muted: #5b6e8c;
+    --text-light: #94a3b8;
+    --border-light: #e2e8f0;
+    --border-strong: #cbd5e1;
+
+    --shadow-xs: 0 2px 6px -2px rgba(15, 23, 42, 0.06);
+    --shadow-sm: 0 10px 30px -12px rgba(15, 23, 42, 0.12);
+    --shadow-md: 0 18px 40px -18px rgba(15, 23, 42, 0.18);
+    --shadow-lg: 0 26px 52px -22px rgba(15, 23, 42, 0.26);
+
+    --accent: #2563eb;
+    --accent-2: #7c3aed;
+    --accent-soft: rgba(37, 99, 235, 0.10);
+    --accent-glow: rgba(37, 99, 235, 0.35);
+
+    --success: #10b981;
+    --success-soft: rgba(16, 185, 129, 0.12);
+    --danger: #ef4444;
+    --danger-soft: rgba(239, 68, 68, 0.12);
+    --warning: #f59e0b;
+    --warning-soft: rgba(245, 158, 11, 0.12);
+
+    --input-bg: #f8fafc;
+    --backdrop: rgba(15, 23, 42, 0.55);
+
+    --grad-hero: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    --grad-success: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+    --grad-danger: linear-gradient(135deg, #ef4444 0%, #ec4899 100%);
+    --grad-warning: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-top: env(safe-area-inset-top, 0px);
+}
+[data-theme="dark"] {
+    --bg-body: #060b18;
+    --bg-body-grad: radial-gradient(1400px 700px at 50% -10%, rgba(59,130,246,0.10), transparent 60%);
+    --bg-card: #0f172a;
+    --bg-elevated: #16213a;
+    --bg-soft: #0d1526;
+    --bg-softer: #101a30;
+    --text-main: #f1f5f9;
+    --text-muted: #9ca3af;
+    --text-light: #64748b;
+    --border-light: #1e2a44;
+    --border-strong: #2b3a58;
+
+    --shadow-xs: 0 2px 6px -2px rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 10px 30px -12px rgba(0, 0, 0, 0.65);
+    --shadow-md: 0 18px 40px -18px rgba(0, 0, 0, 0.8);
+    --shadow-lg: 0 26px 52px -22px rgba(0, 0, 0, 0.9);
+
+    --accent: #3b82f6;
+    --accent-2: #a78bfa;
+    --accent-soft: rgba(59, 130, 246, 0.18);
+    --accent-glow: rgba(59, 130, 246, 0.5);
+
+    --success: #22c55e;
+    --success-soft: rgba(34, 197, 94, 0.18);
+    --danger: #f87171;
+    --danger-soft: rgba(248, 113, 113, 0.18);
+    --warning: #fbbf24;
+    --warning-soft: rgba(251, 191, 36, 0.18);
+
+    --input-bg: #16213a;
+    --backdrop: rgba(0, 0, 0, 0.78);
+
+    --grad-hero: linear-gradient(135deg, #1e40af 0%, #6d28d9 100%);
+    --grad-success: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+    --grad-danger: linear-gradient(135deg, #dc2626 0%, #be185d 100%);
+    --grad-warning: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-body-grad), var(--bg-body);
+    color: var(--text-main);
+    transition: background 400ms ease, color 300ms ease;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+::-webkit-scrollbar-track { background: transparent; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes shimmer { 0% { background-position: -500px 0; } 100% { background-position: 500px 0; } }
+@keyframes softPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+@keyframes scaleIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes slideInRight { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes modalPop { from { transform: scale(0.92) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+@keyframes pulseRing {
+    0% { box-shadow: 0 0 0 0 var(--danger-soft); }
+    70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+@keyframes timerDanger {
+    0%, 100% { color: var(--danger); }
+    50% { color: #f97316; }
+}
+@keyframes splashSpin { to { transform: rotate(360deg); } }
+@keyframes splashLogoIn {
+    from { transform: scale(0.6); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+@keyframes splashTextIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes splashBounce {
+    0%, 80%, 100% { transform: scale(0.7); opacity: 0.55; }
+    40% { transform: scale(1.1); opacity: 1; }
+}
+
+/* ============================================================
+   SPINNERS
+   ============================================================ */
+.spinner {
+    display: inline-block;
+    width: 18px; height: 18px;
+    border: 3px solid rgba(255,255,255,0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    will-change: transform;
+}
+.spinner-accent {
+    border: 3px solid var(--border-light);
+    border-top-color: var(--accent);
+}
+
+/* ============================================================
+   APP SHELL
+   ============================================================ */
+.app-shell {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(0.75rem, 2vw, 1.5rem);
+    padding-top: calc(clamp(0.75rem, 2vw, 1.5rem) + var(--safe-top));
+    padding-bottom: calc(clamp(0.75rem, 2vw, 1.5rem) + var(--safe-bottom));
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.85rem, 2vw, 1.3rem);
+}
+
+/* ============================================================
+   TITLE BAR
+   ============================================================ */
+.title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.4rem 0.2rem;
+    flex-wrap: wrap;
+}
+.title-left { display: flex; align-items: center; gap: 0.85rem; min-width: 0; flex: 1; }
+.title-logo {
+    width: clamp(36px, 4vw, 44px);
+    height: clamp(36px, 4vw, 44px);
+    border-radius: 12px;
+    object-fit: cover;
+    background: var(--bg-soft);
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px -4px rgba(0,0,0,0.2);
+}
+.title-text { min-width: 0; }
+.title-main {
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, var(--warning) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.title-sub {
+    font-size: clamp(0.72rem, 1.1vw, 0.82rem);
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.title-right { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+
+.btn-back {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+    font-size: clamp(0.78rem, 1.1vw, 0.88rem);
+    cursor: pointer;
+    transition: background 220ms ease, color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+    font-family: inherit;
+    white-space: nowrap;
+}
+.btn-back:hover { background: var(--accent); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 22px -10px var(--accent-glow); }
+.btn-back:active { transform: scale(0.97); }
+.btn-back i { transition: transform 260ms ease; }
+.btn-back:hover i { transform: translateX(-3px); }
+
+/* ============================================================
+   INSTRUCTIONS / LANDING CARD
+   ============================================================ */
+.instructions-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: clamp(18px, 3vw, 28px);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    animation: fadeUp 0.5s ease;
+    position: relative;
+}
+.instructions-hero {
+    background: var(--grad-hero);
+    padding: clamp(1.4rem, 3.5vw, 2.2rem) clamp(1.2rem, 3vw, 2rem);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.instructions-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.18), transparent 55%);
+    pointer-events: none;
+}
+.instructions-hero-icon {
+    width: clamp(52px, 8vw, 68px);
+    height: clamp(52px, 8vw, 68px);
+    border-radius: clamp(14px, 2vw, 20px);
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(8px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    margin-bottom: 0.9rem;
+    border: 1px solid rgba(255,255,255,0.25);
+    position: relative;
+    z-index: 1;
+}
+.instructions-hero h1 {
+    font-size: clamp(1.2rem, 2.8vw, 1.75rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0.4rem;
+}
+.instructions-hero p {
+    font-size: clamp(0.82rem, 1.3vw, 0.95rem);
+    opacity: 0.92;
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+}
+.instructions-body { padding: clamp(1.1rem, 2.5vw, 1.8rem); }
+
+.student-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: clamp(0.6rem, 1.4vw, 0.9rem);
+    margin-bottom: clamp(1rem, 2.2vw, 1.4rem);
+}
+.info-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: var(--bg-soft);
+    border: 1px solid var(--border-light);
+    border-radius: clamp(12px, 1.6vw, 16px);
+    padding: clamp(0.7rem, 1.6vw, 0.9rem) clamp(0.85rem, 1.8vw, 1rem);
+    min-width: 0;
+}
+.info-chip-icon {
+    width: clamp(34px, 4vw, 42px);
+    height: clamp(34px, 4vw, 42px);
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+    flex-shrink: 0;
+}
+.info-chip-meta { min-width: 0; flex: 1; }
+.info-chip-lbl {
+    font-size: clamp(0.6rem, 0.85vw, 0.68rem);
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 800;
+    margin-bottom: 2px;
+}
+.info-chip-val {
+    font-size: clamp(0.82rem, 1.15vw, 0.95rem);
+    font-weight: 700;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.instructions-panel {
+    background: linear-gradient(135deg, var(--accent-soft), rgba(124,58,237,0.06));
+    border: 1px solid var(--accent-soft);
+    border-radius: clamp(14px, 2vw, 18px);
+    padding: clamp(1rem, 2.2vw, 1.4rem);
+    margin-bottom: clamp(1rem, 2.2vw, 1.4rem);
+}
+.instructions-panel h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: clamp(0.9rem, 1.4vw, 1rem);
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: clamp(0.7rem, 1.6vw, 1rem);
+    letter-spacing: -0.01em;
+}
+.instructions-list {
+    display: grid;
+    gap: clamp(0.5rem, 1.2vw, 0.7rem);
+    list-style: none;
+}
+.instructions-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: clamp(0.82rem, 1.2vw, 0.92rem);
+    color: var(--text-main);
+    font-weight: 600;
+    line-height: 1.5;
+}
+.instructions-list li::before {
+    content: '';
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    background: var(--grad-hero);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 1px;
+    box-shadow: 0 4px 10px -4px var(--accent-glow);
+}
+.instructions-list li:nth-child(1)::before { content: '1'; }
+.instructions-list li:nth-child(2)::before { content: '2'; }
+.instructions-list li:nth-child(3)::before { content: '3'; }
+.instructions-list li:nth-child(4)::before { content: '4'; }
+.instructions-list li:nth-child(5)::before { content: '5'; }
+
+.start-btn-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+.btn-start {
+    background: var(--grad-success);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: clamp(0.9rem, 1.8vw, 1.1rem) clamp(2rem, 5vw, 3rem);
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 12px 28px -10px var(--success);
+    transition: transform 260ms cubic-bezier(0.2,0.9,0.3,1.1), box-shadow 260ms ease;
+    position: relative;
+    overflow: hidden;
+}
+.btn-start::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent 60%);
+    pointer-events: none;
+}
+.btn-start:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 18px 36px -12px var(--success); }
+.btn-start:active { transform: scale(0.98); }
+.btn-start i { font-size: 1.1em; }
+.btn-start:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* ============================================================
+   TEST VIEW
+   ============================================================ */
+#testView { display: none; flex-direction: column; gap: clamp(0.85rem, 2vw, 1.2rem); }
+#testView.active { display: flex; animation: fadeIn 0.35s ease; }
+
+.test-header {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: clamp(14px, 2vw, 18px);
+    padding: clamp(0.85rem, 1.8vw, 1.1rem) clamp(1rem, 2.2vw, 1.4rem);
+    box-shadow: var(--shadow-xs);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    position: sticky;
+    top: calc(var(--safe-top) + 8px);
+    z-index: 30;
+    transition: background 260ms ease, box-shadow 260ms ease;
+    backdrop-filter: blur(10px);
+}
+.test-header-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.test-header-name {
+    font-size: clamp(0.9rem, 1.4vw, 1.02rem);
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.test-header-topic {
+    font-size: clamp(0.68rem, 0.95vw, 0.78rem);
+    color: var(--text-muted);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.test-header-topic i { color: var(--accent); font-size: 0.9em; }
+
+.timer-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-soft);
+    border: 2px solid var(--border-light);
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    font-weight: 800;
+    font-size: clamp(0.9rem, 1.3vw, 1rem);
+    color: var(--text-main);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+    transition: border-color 260ms ease, background 260ms ease;
+    flex-shrink: 0;
+}
+.timer-box i { color: var(--accent); font-size: 0.95em; }
+.timer-box.warning { border-color: var(--warning); background: var(--warning-soft); }
+.timer-box.warning i { color: var(--warning); }
+.timer-box.danger {
+    border-color: var(--danger);
+    background: var(--danger-soft);
+    animation: pulseRing 1.6s ease-in-out infinite;
+}
+.timer-box.danger i { color: var(--danger); }
+.timer-box.danger .timer-text { animation: timerDanger 1s ease-in-out infinite; }
+
+.progress-bar-wrap {
+    height: 6px;
+    background: var(--bg-soft);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+}
+.progress-bar {
+    height: 100%;
+    background: var(--grad-hero);
+    border-radius: 999px;
+    width: 0%;
+    transition: width 350ms cubic-bezier(0.2,0.9,0.3,1.1);
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* ============================================================
+   QUESTION CARD
+   ============================================================ */
+.question-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: clamp(18px, 3vw, 26px);
+    box-shadow: var(--shadow-md);
+    padding: clamp(1.1rem, 2.5vw, 1.8rem);
+    animation: fadeUp 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+.question-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--grad-hero);
+    opacity: 0.85;
+}
+.question-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-bottom: clamp(0.9rem, 2vw, 1.3rem);
+    flex-wrap: wrap;
+}
+.q-number-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+    font-weight: 800;
+    font-size: clamp(0.72rem, 1vw, 0.82rem);
+    letter-spacing: 0.02em;
+}
+.q-number-badge i { font-size: 0.9em; }
+.q-counter {
+    font-size: clamp(0.72rem, 1vw, 0.82rem);
+    color: var(--text-muted);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.question-text {
+    font-size: clamp(1rem, 1.8vw, 1.22rem);
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--text-main);
+    margin-bottom: clamp(1.1rem, 2.5vw, 1.5rem);
+    letter-spacing: -0.005em;
+    word-break: break-word;
+}
+
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.55rem, 1.3vw, 0.75rem);
+}
+.option-btn {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.7rem, 1.4vw, 0.95rem);
+    background: var(--bg-soft);
+    border: 2px solid var(--border-light);
+    border-radius: clamp(12px, 1.8vw, 16px);
+    padding: clamp(0.75rem, 1.8vw, 1rem) clamp(0.85rem, 2vw, 1.15rem);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: clamp(0.85rem, 1.25vw, 0.98rem);
+    font-weight: 600;
+    color: var(--text-main);
+    text-align: left;
+    transition: transform 220ms cubic-bezier(0.2,0.9,0.3,1.1),
+                border-color 220ms ease,
+                background 220ms ease,
+                box-shadow 220ms ease;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.option-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-soft), transparent 70%);
+    opacity: 0;
+    transition: opacity 220ms ease;
+    pointer-events: none;
+}
+.option-btn:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px -10px var(--accent-glow);
+}
+.option-btn:hover::before { opacity: 1; }
+.option-btn.selected {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    box-shadow: 0 0 0 3px var(--accent-soft), var(--shadow-sm);
+}
+.option-btn.selected::before { opacity: 1; }
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+
+.option-letter {
+    width: clamp(30px, 3.6vw, 36px);
+    height: clamp(30px, 3.6vw, 36px);
+    min-width: clamp(30px, 3.6vw, 36px);
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 2px solid var(--border-light);
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: clamp(0.75rem, 1vw, 0.85rem);
+    flex-shrink: 0;
+    transition: background 220ms ease, color 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+.option-btn:hover .option-letter { border-color: var(--accent); color: var(--accent); }
+.option-btn.selected .option-letter {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    transform: scale(1.06);
+}
+.option-text { flex: 1; min-width: 0; word-break: break-word; }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin-top: clamp(1rem, 2.2vw, 1.3rem);
+}
+.btn-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: clamp(0.65rem, 1.4vw, 0.85rem) clamp(1.1rem, 2.4vw, 1.5rem);
+    border-radius: 999px;
+    font-size: clamp(0.82rem, 1.15vw, 0.92rem);
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    border: 2px solid var(--border-light);
+    background: var(--bg-card);
+    color: var(--text-main);
+    transition: transform 220ms ease, background 220ms ease, color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+.btn-nav:hover:not(:disabled) {
+    background: var(--bg-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px -10px var(--accent-glow);
+}
+.btn-nav:active:not(:disabled) { transform: scale(0.97); }
+.btn-nav:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-nav.primary {
+    background: var(--grad-hero);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 8px 20px -8px var(--accent-glow);
+}
+.btn-nav.primary:hover:not(:disabled) {
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px -10px var(--accent-glow);
+}
+.btn-nav.submit {
+    background: var(--grad-success);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 8px 20px -8px var(--success);
+}
+.btn-nav.submit:hover:not(:disabled) {
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px -10px var(--success);
+}
+.btn-nav i { font-size: 0.9em; }
+
+.question-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    margin-top: clamp(0.7rem, 1.6vw, 1rem);
+    padding: clamp(0.6rem, 1.4vw, 0.85rem);
+    background: var(--bg-soft);
+    border-radius: 14px;
+    max-height: 120px;
+    overflow-y: auto;
+}
+.q-dot {
+    width: clamp(26px, 3.4vw, 32px);
+    height: clamp(26px, 3.4vw, 32px);
+    border-radius: 8px;
+    background: var(--bg-card);
+    border: 2px solid var(--border-light);
+    color: var(--text-muted);
+    font-size: clamp(0.62rem, 0.9vw, 0.72rem);
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+.q-dot:hover { transform: translateY(-2px); border-color: var(--accent); }
+.q-dot.active { background: var(--accent); border-color: var(--accent); color: #fff; transform: scale(1.08); }
+.q-dot.answered { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+.q-dot.active.answered { background: var(--success); border-color: var(--success); color: #fff; }
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--backdrop);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(0.8rem, 2vw, 1.4rem);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 260ms ease, visibility 260ms ease;
+    backdrop-filter: blur(4px);
+}
+.modal-overlay.active { display: flex; opacity: 1; visibility: visible; }
+.modal-box {
+    background: var(--bg-elevated);
+        border-radius: clamp(18px, 3vw, 26px);
+    max-width: 480px;
+    width: 100%;
+    max-height: 92vh;
+    overflow-y: auto;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.5);
+    animation: modalPop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-header {
+    background: var(--grad-hero);
+    padding: clamp(0.9rem, 2vw, 1.1rem) clamp(1rem, 2.5vw, 1.4rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: clamp(18px, 3vw, 26px) clamp(18px, 3vw, 26px) 0 0;
+    color: #fff;
+    gap: 0.6rem;
+}
+.modal-header h3 {
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+.modal-header.warn { background: var(--grad-warning); }
+.modal-header.danger { background: var(--grad-danger); }
+.modal-header.success { background: var(--grad-success); }
+
+.modal-body { padding: clamp(1.1rem, 2.5vw, 1.5rem); }
+.modal-message {
+    font-size: clamp(0.88rem, 1.25vw, 0.98rem);
+    color: var(--text-main);
+    line-height: 1.6;
+    margin-bottom: clamp(1rem, 2.2vw, 1.4rem);
+    font-weight: 600;
+}
+.modal-message strong { color: var(--accent); }
+.modal-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+.modal-actions .btn-nav {
+    flex: 1;
+    min-width: 110px;
+    justify-content: center;
+}
+
+/* ============================================================
+   RESULT VIEW
+   ============================================================ */
+#resultView { display: none; flex-direction: column; }
+#resultView.active { display: flex; animation: fadeUp 0.5s ease; }
+
+.result-success-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: clamp(20px, 3vw, 28px);
+    box-shadow: var(--shadow-lg);
+    padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 3.5vw, 2.5rem);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.result-success-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: var(--grad-success);
+}
+.result-icon-wrap {
+    width: clamp(80px, 14vw, 120px);
+    height: clamp(80px, 14vw, 120px);
+    margin: 0 auto clamp(1.2rem, 2.5vw, 1.7rem);
+    border-radius: 50%;
+    background: var(--success-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--success);
+    animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+}
+.result-icon-wrap::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px dashed var(--success);
+    opacity: 0.3;
+    animation: spin 16s linear infinite;
+}
+.result-title {
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.025em;
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
+}
+.result-subtitle {
+    font-size: clamp(0.9rem, 1.35vw, 1rem);
+    color: var(--text-muted);
+    font-weight: 600;
+    line-height: 1.6;
+    max-width: 460px;
+    margin: 0 auto clamp(1.5rem, 3vw, 2rem);
+}
+.result-summary-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: clamp(0.5rem, 1.2vw, 0.8rem);
+    background: var(--bg-soft);
+    border-radius: clamp(14px, 2vw, 18px);
+    padding: clamp(0.9rem, 2vw, 1.2rem);
+    margin-bottom: clamp(1.4rem, 3vw, 2rem);
+}
+.result-mini-stat {
+    text-align: center;
+    padding: 0.4rem;
+}
+.result-mini-num {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1;
+    margin-bottom: 4px;
+}
+.result-mini-num.c-correct { color: var(--success); }
+.result-mini-num.c-wrong   { color: var(--danger); }
+.result-mini-num.c-skip    { color: var(--warning); }
+.result-mini-lbl {
+    font-size: clamp(0.6rem, 0.85vw, 0.7rem);
+    color: var(--text-muted);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.result-actions {
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.result-actions .btn-nav {
+    min-width: 160px;
+    justify-content: center;
+}
+
+/* ============================================================
+   STATES
+   ============================================================ */
+.state-box {
+    background: var(--bg-card);
+    border-radius: clamp(16px, 2.2vw, 22px);
+    padding: clamp(2rem, 5vw, 3.5rem) 1.5rem;
+    text-align: center;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-xs);
+    display: none;
+}
+.state-box.show { display: block; animation: fadeUp 0.4s ease; }
+.state-box .state-ico {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--accent);
+    margin-bottom: 1rem;
+    animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.state-box h3 {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+}
+.state-box p {
+    color: var(--text-muted);
+    font-size: clamp(0.82rem, 1.4vw, 0.9rem);
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, var(--bg-soft) 0%, var(--border-light) 50%, var(--bg-soft) 100%);
+    background-size: 500px 100%;
+    animation: shimmer 1.4s infinite linear;
+    border-radius: 8px;
+    will-change: background-position;
+}
+.skeleton-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: clamp(14px, 2vw, 20px);
+    overflow: hidden;
+    box-shadow: var(--shadow-xs);
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast-host {
+    position: fixed;
+    bottom: calc(20px + var(--safe-bottom));
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 2000;
+    pointer-events: none;
+    max-width: min(92vw, 340px);
+}
+.toast {
+    background: var(--bg-card);
+    border-left: 5px solid var(--accent);
+    padding: 0.8rem 1rem;
+    border-radius: 0 14px 14px 0;
+    box-shadow: var(--shadow-lg);
+    font-weight: 600;
+    font-size: 0.86rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    pointer-events: auto;
+    animation: fadeUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    will-change: transform, opacity;
+    transition: opacity 250ms ease, transform 250ms ease;
+}
+.toast.success { border-left-color: var(--success); }
+.toast.error   { border-left-color: var(--danger); }
+.toast.warning { border-left-color: var(--warning); }
+.toast.info    { border-left-color: var(--accent); }
+.toast i { font-size: 1rem; }
+.toast.success i { color: var(--success); }
+.toast.error i   { color: var(--danger); }
+.toast.warning i { color: var(--warning); }
+.toast.info i    { color: var(--accent); }
+
+/* ============================================================
+   ANTI-CHEAT SHIELD
+   ============================================================ */
+.shield-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(8px);
+    z-index: 900;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    text-align: center;
+    color: #fff;
+}
+.shield-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
+.shield-box {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border-radius: 24px;
+    padding: 2rem 1.5rem;
+    max-width: 400px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-light);
+}
+.shield-box .s-ico {
+    font-size: 2.5rem;
+    color: var(--warning);
+    margin-bottom: 1rem;
+}
+.shield-box h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+}
+.shield-box p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+}
+
+/* ============================================================
+   SPLASH SCREEN
+   ============================================================ */
+.splash {
+    position: fixed;
+    inset: 0;
+    background: #333332;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.4rem;
+    padding: 1.5rem;
+    text-align: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 450ms ease, visibility 450ms ease;
+    overflow: hidden;
+}
+.splash.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.splash::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18), transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.12), transparent 50%);
+    pointer-events: none;
+}
+.splash::after {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(255,255,255,0.08) 90deg,
+        transparent 180deg,
+        rgba(255,255,255,0.08) 270deg,
+        transparent 360deg
+    );
+    animation: splashSpin 8s linear infinite;
+    pointer-events: none;
+}
+
+.splash-logo-wrap {
+    width: clamp(90px, 20vw, 130px);
+    height: clamp(90px, 20vw, 130px);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-shadow:
+        0 0 0 8px rgba(255,255,255,0.08),
+        0 20px 50px -15px rgba(0,0,0,0.4);
+    animation: splashLogoIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    position: relative;
+    z-index: 2;
+}
+.splash-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+}
+
+.splash-title {
+    font-size: clamp(1.15rem, 3.2vw, 1.65rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    position: relative;
+    z-index: 2;
+    animation: splashTextIn 0.6s ease 0.15s both;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    max-width: 90vw;
+}
+.splash-subtitle {
+    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+    margin-top: -0.7rem;
+    animation: splashTextIn 0.6s ease 0.25s both;
+}
+
+.splash-loader {
+    display: flex;
+    gap: 6px;
+    margin-top: 0.5rem;
+    position: relative;
+    z-index: 2;
+    animation: splashTextIn 0.6s ease 0.35s both;
+}
+.splash-loader span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    animation: splashBounce 1.3s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(255,255,255,0.5);
+}
+.splash-loader span:nth-child(2) { animation-delay: 0.15s; }
+.splash-loader span:nth-child(3) { animation-delay: 0.3s; }
+
+.splash-hint {
+    font-size: clamp(0.68rem, 1.1vw, 0.78rem);
+    color: rgba(255,255,255,0.72);
+    font-weight: 600;
+    margin-top: 0.4rem;
+    position: relative;
+    z-index: 2;
+    animation: splashTextIn 0.6s ease 0.45s both;
+}
+
+/* ============================================================
+   RESPONSIVE — TABLET
+   ============================================================ */
+@media (max-width: 720px) {
+    .test-header { gap: 0.75rem; }
+    .modal-box { max-width: 100%; }
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+@media (max-width: 640px) {
+    body { font-size: 14px; }
+    .app-shell {
+        padding: 0.65rem 0.75rem;
+        padding-top: calc(0.65rem + var(--safe-top));
+        padding-bottom: calc(0.9rem + var(--safe-bottom));
+        gap: 0.85rem;
+    }
+    .title-bar { gap: 0.7rem; }
+    .title-right { width: 100%; justify-content: space-between; }
+    .btn-back { padding: 0.42rem 0.8rem; font-size: 0.78rem; }
+
+    .instructions-hero { padding: 1.3rem 1.1rem; }
+    .instructions-body { padding: 1.1rem; }
+    .student-info-grid { grid-template-columns: 1fr 1fr; gap: 0.55rem; }
+    .info-chip { padding: 0.6rem 0.7rem; gap: 0.55rem; border-radius: 12px; }
+    .info-chip-icon { width: 32px; height: 32px; font-size: 0.85rem; }
+    .info-chip-lbl { font-size: 0.58rem; }
+    .info-chip-val { font-size: 0.8rem; }
+
+    .btn-start { padding: 0.9rem 2rem; font-size: 1rem; width: 100%; }
+
+    .test-header {
+        padding: 0.75rem 0.85rem;
+        gap: 0.7rem;
+        top: calc(var(--safe-top) + 4px);
+    }
+    .test-header-name { font-size: 0.85rem; }
+    .test-header-topic { font-size: 0.65rem; }
+    .timer-box { font-size: 0.85rem; padding: 0.4rem 0.75rem; }
+
+    .question-card { padding: 1.1rem; border-radius: 20px; }
+    .question-text { font-size: 1rem; }
+    .option-btn { padding: 0.75rem 0.9rem; font-size: 0.88rem; gap: 0.7rem; }
+    .option-letter { width: 30px; height: 30px; font-size: 0.72rem; border-radius: 8px; }
+
+    .nav-buttons { flex-direction: column-reverse; gap: 0.55rem; }
+    .btn-nav { width: 100%; justify-content: center; }
+
+    .modal-overlay { align-items: flex-end; padding: 0; }
+    .modal-box { border-radius: 24px 24px 0 0; max-width: 100%; max-height: 94dvh; }
+    .modal-header { border-radius: 24px 24px 0 0; }
+    .modal-actions { flex-direction: column; }
+    .modal-actions .btn-nav { width: 100%; }
+
+    .result-success-card { padding: 1.75rem 1.2rem; }
+    .result-actions .btn-nav { width: 100%; }
+
+    .toast-host {
+        left: 12px;
+        right: 12px;
+        bottom: calc(12px + var(--safe-bottom));
+        max-width: none;
+    }
+    .toast {
+        border-radius: 14px;
+        border-left: none;
+        border-top: 4px solid var(--accent);
+        padding: 0.75rem 0.95rem;
+    }
+    .toast.success { border-top-color: var(--success); border-left-color: transparent; }
+    .toast.error   { border-top-color: var(--danger);  border-left-color: transparent; }
+    .toast.warning { border-top-color: var(--warning); border-left-color: transparent; }
+}
+
+/* ============================================================
+   RESPONSIVE — SMALL PHONE
+   ============================================================ */
+@media (max-width: 400px) {
+    .student-info-grid { grid-template-columns: 1fr; }
+    .title-main { font-size: 0.95rem; }
+    .result-summary-strip { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 340px) {
+    .question-dots { max-height: 90px; }
+    .splash-title { font-size: 1.05rem; }
+}
+
+/* ============================================================
+   ACCESSIBILITY / PREFERENCES
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .splash::after,
+    .splash-logo-wrap,
+    .splash-title,
+    .splash-subtitle,
+    .splash-loader,
+    .splash-loader span,
+    .splash-hint {
+        animation: none !important;
+    }
+}
+
+/* Prevent text selection during the exam */
+body.test-active {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SPLASH SCREEN — visible immediately on page open
+     ══════════════════════════════════════════════════════════════ -->
+<div class="splash" id="splashScreen" role="status" aria-live="polite" aria-label="Loading test">
+    <div class="splash-logo-wrap">
+        <img class="splash-logo"
+             src="https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL=w200"
+             alt="EGyan Skill Development" width="130" height="130"
+             decoding="async" fetchpriority="high">
+    </div>
+    <div>
+        <h1 class="splash-title">MCQ Test</h1></br>
+        <p class="splash-subtitle">PC Operation (Basic) 4</p>
+    </div>
+    <div class="splash-loader" aria-hidden="true">
+        <span></span><span></span><span></span>
+    </div>
+    <p class="splash-hint">Preparing your test…</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     APP SHELL
+     ══════════════════════════════════════════════════════════════ -->
+<div class="app-shell">
+
+    <!-- ─────────── TITLE BAR ─────────── -->
+    <header class="title-bar" id="titleBar" style="display:none;">
+        <div class="title-left">
+            <img class="title-logo" id="titleLogo"
+                 src="https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL=w80"
+                 alt="EGyan" width="44" height="44"
+                 decoding="async" loading="lazy">
+            <div class="title-text">
+                <div class="title-main">MCQ Test</div>
+                <div class="title-sub" id="titleSub">PC Operation (Basic) 4</div>
+            </div>
+        </div>
+        <div class="title-right">
+            <button class="btn-back" id="btnBack" type="button" aria-label="Back to dashboard">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+        </div>
+    </header>
+
+    <!-- ─────────── SKELETON LOADER ─────────── -->
+    <div id="skeleton" style="display:none;">
+        <div class="skeleton-card skeleton" style="height: 200px; margin-bottom: 1rem;"></div>
+        <div class="skeleton-card skeleton" style="height: 300px;"></div>
+    </div>
+
+    <!-- ─────────── ERROR STATE ─────────── -->
+    <div class="state-box" id="errorState" role="alert">
+        <div class="state-ico" style="color: var(--danger);">
+            <i class="fas fa-circle-exclamation"></i>
+        </div>
+        <h3 id="errorTitle">Something went wrong</h3>
+        <p id="errorMsg">Please try again or contact your academy.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         INSTRUCTIONS / LANDING VIEW
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="instructions-card" id="instructionsCard" style="display:none;">
+        <div class="instructions-hero">
+            <div class="instructions-hero-icon"><i class="fas fa-pen-fancy"></i></div>
+            <h1>PC Operation (Basic) 4</h1>
+            <p>Read the instructions carefully before you begin the test.</p>
+        </div>
+        <div class="instructions-body">
+
+            <!-- Student info chips -->
+            <div class="student-info-grid">
+                <div class="info-chip">
+                    <div class="info-chip-icon"><i class="fas fa-user"></i></div>
+                    <div class="info-chip-meta">
+                        <div class="info-chip-lbl">Student Name</div>
+                        <div class="info-chip-val" id="infoName">—</div>
+                    </div>
+                </div>
+                <div class="info-chip">
+                    <div class="info-chip-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="info-chip-meta">
+                        <div class="info-chip-lbl">Course</div>
+                        <div class="info-chip-val" id="infoCourse">—</div>
+                    </div>
+                </div>
+                <div class="info-chip">
+                    <div class="info-chip-icon"><i class="fas fa-book-open"></i></div>
+                    <div class="info-chip-meta">
+                        <div class="info-chip-lbl">Test Name</div>
+                        <div class="info-chip-val" id="infoTest">PC Operation (Basic) 4</div>
+                    </div>
+                </div>
+                <div class="info-chip">
+                    <div class="info-chip-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="info-chip-meta">
+                        <div class="info-chip-lbl">Email Id</div>
+                        <div class="info-chip-val" id="infoEmail">—</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions panel -->
+            <div class="instructions-panel">
+                <h3><i class="fas fa-list-check"></i> Instructions</h3>
+                <ul class="instructions-list">
+                    <li>Total <strong>50 Questions</strong> · Total <strong>100 Marks</strong></li>
+                    <li>Passing Marks: <strong>40</strong> · Timing: <strong>60 Minutes</strong></li>
+                    <li>Each question carries <strong>2 Marks</strong></li>
+                    <li>If you don't know an answer, <strong>skip it</strong> — no negative marking</li>
+                    <li>Do not close or switch tabs during the test</li>
+                </ul>
+            </div>
+
+            <!-- Start button -->
+            <div class="start-btn-row">
+                <button class="btn-start" id="btnStart" type="button">
+                    <i class="fas fa-play"></i> Start Test
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         TEST VIEW
+         ═══════════════════════════════════════════════════════════ -->
+    <section id="testView">
+
+        <!-- Sticky test header -->
+        <div class="test-header">
+            <div class="test-header-info">
+                <div class="test-header-name" id="testHeaderName">—</div>
+                <div class="test-header-topic">
+                    <i class="fas fa-book"></i>
+                    <span id="testHeaderTopic">PC Operation (Basic) 4</span>
+                </div>
+            </div>
+            <div class="timer-box" id="timerBox">
+                <i class="fas fa-clock"></i>
+                <span class="timer-text" id="timerText">60:00</span>
+            </div>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="progress-bar-wrap">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Question card -->
+        <div class="question-card" id="questionCard">
+            <div class="question-meta">
+                <div class="q-number-badge">
+                    <i class="fas fa-question"></i>
+                    <span>Question <span id="qNum">1</span></span>
+                </div>
+                <div class="q-counter">of <span id="qTotal">50</span></div>
+            </div>
+            <div class="question-text" id="questionText">Loading question…</div>
+            <div class="options-list" id="optionsList"></div>
+
+            <!-- Navigation buttons -->
+            <div class="nav-buttons">
+                <button class="btn-nav" id="btnPrev" type="button">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="btn-nav primary" id="btnNext" type="button">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="btn-nav submit" id="btnSubmit" type="button" style="display:none;">
+                    <i class="fas fa-paper-plane"></i> Submit
+                </button>
+            </div>
+        </div>
+
+        <!-- Question dots navigator -->
+        <div class="question-dots" id="questionDots"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         RESULT VIEW (success screen — no scores shown)
+         ═══════════════════════════════════════════════════════════ -->
+    <section id="resultView">
+        <div class="result-success-card">
+            <div class="result-icon-wrap"><i class="fas fa-check-circle"></i></div>
+            <h2 class="result-title">Test Submitted Successfully</h2>
+            <p class="result-subtitle" id="resultSubtitle">
+                Go to your result section for review of your Results.
+            </p>
+            <div class="result-summary-strip" id="resultSummary">
+                <!-- Filled dynamically by JavaScript -->
+            </div>
+            <div class="result-actions">
+                <a href="../StudentDashboard.html" class="btn-nav primary">
+                    <i class="fas fa-house"></i> Back to Dashboard
+                </a>
+                <a href="../result.html" class="btn-nav">
+                    <i class="fas fa-chart-bar"></i> View Results
+                </a>
+            </div>
+        </div>
+    </section>
+
+</div><!-- /.app-shell -->
+
+<!-- ══════════════════════════════════════════════════════════════
+     CONFIRM SUBMIT MODAL
+     ══════════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="submitModal">
+    <div class="modal-box">
+        <div class="modal-header warn">
+            <h3><i class="fas fa-triangle-exclamation"></i> Confirm Submission</h3>
+        </div>
+        <div class="modal-body">
+            <div class="modal-message" id="submitModalMsg">
+                You have answered <strong id="answeredCount">0</strong> of
+                <strong id="totalCount">50</strong> questions.
+                <br><br>
+                Once submitted, you cannot change your answers.
+                Are you sure you want to submit?
+            </div>
+            <div class="modal-actions">
+                <button class="btn-nav" type="button" id="btnCancelSubmit">
+                    <i class="fas fa-xmark"></i> Cancel
+                </button>
+                <button class="btn-nav submit" type="button" id="btnConfirmSubmit">
+                    <i class="fas fa-check"></i> Yes, Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     ANTI-CHEAT SHIELD (shown when user leaves tab/window)
+     ══════════════════════════════════════════════════════════════ -->
+<div class="shield-overlay" id="shieldOverlay">
+    <div class="shield-box">
+        <div class="s-ico"><i class="fas fa-eye-slash"></i></div>
+        <h3>Test Paused</h3>
+        <p>
+            You left the test window. Please return to continue the test.
+            Leaving multiple times may auto-submit your test.
+        </p>
+        <button class="btn-nav primary" type="button" id="btnResume">
+            <i class="fas fa-play"></i> Resume Test
+        </button>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     LOADING OVERLAY (during submission)
+     ══════════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="loadingOverlay">
+    <div class="modal-box" style="max-width: 300px;">
+        <div class="modal-body" style="text-align: center; padding: 2.5rem 1.5rem;">
+            <span class="spinner spinner-accent" style="width: 40px; height: 40px; border-width: 4px;"></span>
+            <p style="margin-top: 1rem; font-weight: 700; font-size: 0.9rem; color: var(--text-muted);"
+               id="loadingMsg">
+                Submitting test…
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     TOAST HOST
+     ══════════════════════════════════════════════════════════════ -->
+<div class="toast-host" id="toastHost" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+(function () {
+
+/* ============================================================
+   CONFIG
+   ============================================================ */
+const SCRIPT_URL          = "https://script.google.com/macros/s/AKfycbwzEbd10tAnSKJSsg01LOXr8MAgKTFO4cp2sjq9moatjN3_IWZ8ZWF9uViTXE-991Nq/exec";
+const TEST_SPREADSHEET_ID = "1gxST-uKGcdS4khcdoI2TtrW7uIPGCPLuTMh0prugY3g";
+const TEST_SHEET_NAME     = "Basic_MockTest_4";
+const RESULT_SHEET_NAME   = "Result";
+
+/* Profile spreadsheet (same as StudentDashboard.html) */
+const PROFILE_SPREADSHEET_ID = "14DSh6jSYukltWrm72rZewxWjQpMcUFuvnR5sqrm9pDg";
+const LOGIN_SPREADSHEET_ID   = "14DSh6jSYukltWrm72rZewxWjQpMcUFuvnR5sqrm9pDg";
+const LOGIN_SHEET_NAME       = "Student_Login";
+const PROFILE_STUDENT_SHEETS = ['Adm_Details'];
+
+const TEST_NAME     = "PC Operation (Basic) 4";
+const TEST_DURATION = 60 * 60;           /* seconds (60 minutes) */
+const TOTAL_MARKS   = 100;
+const PASSING_MARKS = 40;
+const MARKS_PER_Q   = 2;
+
+/* Column headers in Basic_MockTest_2 */
+const COL = {
+    SR_NO:    'Sr. No',
+    QUESTION: 'Questions',
+    OPTION_1: 'Option 1',
+    OPTION_2: 'Option 2',
+    OPTION_3: 'Option 3',
+    OPTION_4: 'Option 4',
+    CORRECT:  'Correct'
+};
+
+/* Column headers in Adm_Details */
+const PROFILE_COL = {
+    EMAIL:     'Email Id',
+    FULL_NAME: 'Full Name',
+    STD:       'Adm In',
+    IMAGE:     'Image'
+};
+
+const EMAIL_HEADER_ALIASES = [
+    'email id', 'email', 'emailid', 'e-mail', 'email address', 'emailaddress'
+];
+const NAME_HEADER_ALIASES = [
+    'full name','fullname','name','student name','studentname',
+    'student','full_name','full-name','student_name','student-name',
+    'name of student','nameofstudent'
+];
+const STD_HEADER_ALIASES = [
+    'adm in','adm_in','adm-in','admission in','standard','std','class','grade'
+];
+
+/* Session keys — must match StudentDashboard.html */
+const SESSION_KEYS = { USER: 'EGyan_user', USER_TYPE: 'EGyan_user_type' };
+const THEME_KEY    = 'user-theme-preference';
+
+/* Optional: resume test progress if the user reloads */
+const PROGRESS_KEY = 'EGyan_mcq_progress_v1';
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let questions      = [];    // Array of { srNo, question, options: [{letter, num, text}], correct: 1..4 }
+let answers        = {};    // { questionIndex: selectedOptionNumber (1..4) }
+let currentIndex   = 0;
+let testStartedAt  = null;
+let timeRemaining  = TEST_DURATION;
+let timerIntervalId = null;
+
+let student = {
+    email:  '',
+    name:   '',
+    std:    '',
+    avatar: ''
+};
+
+let isTestActive    = false;
+let isSubmitting    = false;
+let tabSwitchCount  = 0;
+const MAX_TAB_SWITCHES = 3;
+
+/* ============================================================
+   DOM HELPERS
+   ============================================================ */
+const $ = (id) => document.getElementById(id);
+const dom = {};
+function cacheDom() {
+    dom.titleBar        = $('titleBar');
+    dom.titleSub        = $('titleSub');
+    dom.titleLogo       = $('titleLogo');
+    dom.btnBack         = $('btnBack');
+    dom.skeleton        = $('skeleton');
+    dom.errorState      = $('errorState');
+    dom.errorTitle      = $('errorTitle');
+    dom.errorMsg        = $('errorMsg');
+
+    dom.instructions    = $('instructionsCard');
+    dom.infoName        = $('infoName');
+    dom.infoCourse      = $('infoCourse');
+    dom.infoTest        = $('infoTest');
+    dom.infoEmail       = $('infoEmail');
+    dom.btnStart        = $('btnStart');
+
+    dom.testView        = $('testView');
+    dom.testHeaderName  = $('testHeaderName');
+    dom.testHeaderTopic = $('testHeaderTopic');
+    dom.timerBox        = $('timerBox');
+    dom.timerText       = $('timerText');
+    dom.progressBar     = $('progressBar');
+
+    dom.questionCard    = $('questionCard');
+    dom.qNum            = $('qNum');
+    dom.qTotal          = $('qTotal');
+    dom.questionText    = $('questionText');
+    dom.optionsList     = $('optionsList');
+    dom.btnPrev         = $('btnPrev');
+    dom.btnNext         = $('btnNext');
+    dom.btnSubmit       = $('btnSubmit');
+    dom.questionDots    = $('questionDots');
+
+    dom.resultView      = $('resultView');
+    dom.resultSubtitle  = $('resultSubtitle');
+    dom.resultSummary   = $('resultSummary');
+
+    dom.submitModal     = $('submitModal');
+    dom.submitModalMsg  = $('submitModalMsg');
+    dom.answeredCount   = $('answeredCount');
+    dom.totalCount      = $('totalCount');
+    dom.btnCancelSubmit = $('btnCancelSubmit');
+    dom.btnConfirmSubmit= $('btnConfirmSubmit');
+
+    dom.shieldOverlay   = $('shieldOverlay');
+    dom.btnResume       = $('btnResume');
+
+    dom.loadingOverlay  = $('loadingOverlay');
+    dom.loadingMsg      = $('loadingMsg');
+    dom.toastHost       = $('toastHost');
+}
+
+/* ============================================================
+   SPLASH
+   ============================================================ */
+let splashHidden = false;
+function hideSplash() {
+    if (splashHidden) return;
+    splashHidden = true;
+    const el = document.getElementById('splashScreen');
+    if (!el) return;
+    el.classList.add('hide');
+    setTimeout(() => {
+        try { el.remove(); } catch (e) {}
+    }, 500);
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+function escapeHtml(v) {
+    return (v == null ? '' : v.toString())
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function normalizeEmail(v) { return (v || '').toString().trim().toLowerCase(); }
+function getFileId(url) {
+    if (!url) return '';
+    const m = url.toString().match(/\/d\/([-\w]{25,})|id=([-\w]{25,})/);
+    if (m) return m[1] || m[2] || '';
+    const bare = url.toString().match(/^([-\w]{25,})$/);
+    return bare ? bare[1] : '';
+}
+function lsGet(key) {
+    try { const r = localStorage.getItem(key); return r ? JSON.parse(r) : null; }
+    catch (e) { return null; }
+}
+function lsSet(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+    catch (e) { return false; }
+}
+function lsRemove(key) { try { localStorage.removeItem(key); } catch (e) {} }
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+const TOAST_ICONS = {
+    success: 'fa-circle-check',
+    error:   'fa-circle-xmark',
+    warning: 'fa-triangle-exclamation',
+    info:    'fa-circle-info'
+};
+function showToast(msg, type = 'info', ms = 3200) {
+    if (!dom.toastHost) return;
+    const el = document.createElement('div');
+    el.className = `toast ${type}`;
+    el.innerHTML = `<i class="fas ${TOAST_ICONS[type] || TOAST_ICONS.info}"></i><span>${escapeHtml(msg)}</span>`;
+    dom.toastHost.appendChild(el);
+    setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(10px)';
+        setTimeout(() => el.remove(), 250);
+    }, ms);
+}
+
+/* ============================================================
+   THEME SYNC
+   ============================================================ */
+function initThemeSync() {
+    const applyTheme = (t) => {
+        if (t) document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+    };
+    applyTheme(localStorage.getItem(THEME_KEY) || 'light');
+    window.addEventListener('storage', (e) => {
+        if (e.key === THEME_KEY && e.newValue) applyTheme(e.newValue);
+    });
+    window.addEventListener('message', (e) => {
+        if (e.data && e.data.type === 'themeChange' && e.data.theme) applyTheme(e.data.theme);
+    });
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) applyTheme(localStorage.getItem(THEME_KEY) || 'light');
+    });
+}
+
+/* ============================================================
+   SESSION
+   ============================================================ */
+function readSessionValue(key) {
+    const localRaw = localStorage.getItem(key);
+    if (localRaw) {
+        try {
+            const parsed = JSON.parse(localRaw);
+            if (parsed && typeof parsed === 'object' && 'value' in parsed) {
+                if (parsed.expiry && Date.now() >= parsed.expiry) {
+                    localStorage.removeItem(key);
+                    return null;
+                }
+                return parsed.value;
+            }
+            return parsed;
+        } catch (e) { return localRaw; }
+    }
+    const s = sessionStorage.getItem(key);
+    if (s) { try { return JSON.parse(s); } catch (e) { return s; } }
+    return null;
+}
+function getLoggedInEmail() {
+    const userType = readSessionValue(SESSION_KEYS.USER_TYPE);
+    if (userType !== 'student') return null;
+    const email = readSessionValue(SESSION_KEYS.USER);
+    return email ? normalizeEmail(email) : null;
+}
+
+/* ============================================================
+   ROW READERS (alias-aware)
+   ============================================================ */
+function getRowByAliases(row, directKey, aliases) {
+    if (!row) return '';
+    const direct = row[directKey];
+    if (direct != null && direct.toString().trim() !== '') return direct.toString().trim();
+    for (const key of Object.keys(row)) {
+        const norm = key.toString().trim().toLowerCase();
+        if (aliases.includes(norm)) {
+            const v = row[key];
+            if (v != null && v.toString().trim() !== '') return v.toString().trim();
+        }
+    }
+    return '';
+}
+function getRowName(row)  { return getRowByAliases(row, PROFILE_COL.FULL_NAME, NAME_HEADER_ALIASES); }
+function getRowEmail(row) { return getRowByAliases(row, PROFILE_COL.EMAIL,     EMAIL_HEADER_ALIASES); }
+function getRowStd(row)   { return getRowByAliases(row, PROFILE_COL.STD,       STD_HEADER_ALIASES); }
+
+/* ============================================================
+   NETWORK
+   ============================================================ */
+async function fetchSheetRows(spreadsheetId, sheetName) {
+    const url = `${SCRIPT_URL}?spreadsheetId=${spreadsheetId}&sheetName=${encodeURIComponent(sheetName)}&action=getData&_=${Date.now()}`;
+    const resp = await fetch(url, { cache: 'no-store' });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const json = await resp.json();
+    if (json.status !== 'success' || !Array.isArray(json.data)) {
+        throw new Error(json.message || 'Invalid response');
+    }
+    return json.data;
+}
+
+/* ============================================================
+   PROFILE
+   ============================================================ */
+async function loadStudentProfile(email) {
+    const rows = await fetchSheetRows(PROFILE_SPREADSHEET_ID, PROFILE_STUDENT_SHEETS[0]);
+    const target = normalizeEmail(email);
+    const row = rows.find(r => normalizeEmail(getRowEmail(r)) === target);
+    if (!row) return null;
+    return {
+        email,
+        name:   getRowName(row) || 'Student',
+        std:    getRowStd(row)  || '—',
+        avatar: row[PROFILE_COL.IMAGE] || ''
+    };
+}
+
+/* ============================================================
+   LOAD QUESTIONS
+   ============================================================ */
+function normalizeCorrectValue(raw) {
+    if (raw == null) return 0;
+    const s = raw.toString().trim();
+    if (!s) return 0;
+    const num = parseInt(s, 10);
+    if (!isNaN(num) && num >= 1 && num <= 4) return num;
+    const low = s.toLowerCase();
+    if (low.startsWith('a')) return 1;
+    if (low.startsWith('b')) return 2;
+    if (low.startsWith('c')) return 3;
+    if (low.startsWith('d')) return 4;
+    return 0;
+}
+
+async function loadQuestions() {
+    const rows = await fetchSheetRows(TEST_SPREADSHEET_ID, TEST_SHEET_NAME);
+    const parsed = [];
+    for (const row of rows) {
+        const questionText = (row[COL.QUESTION] || '').toString().trim();
+        if (!questionText) continue;
+
+        const opts = [
+            (row[COL.OPTION_1] || '').toString().trim(),
+            (row[COL.OPTION_2] || '').toString().trim(),
+            (row[COL.OPTION_3] || '').toString().trim(),
+            (row[COL.OPTION_4] || '').toString().trim()
+        ];
+        const optionObjs = opts
+            .map((text, i) => text ? { letter: ['A','B','C','D'][i], num: i + 1, text } : null)
+            .filter(Boolean);
+
+        if (optionObjs.length === 0) continue;
+
+        parsed.push({
+            srNo:     (row[COL.SR_NO] || (parsed.length + 1)).toString().trim(),
+            question: questionText,
+            options:  optionObjs,
+            correct:  normalizeCorrectValue(row[COL.CORRECT])
+        });
+    }
+    return parsed;
+}
+
+/* ============================================================
+   LANDING
+   ============================================================ */
+function showLanding() {
+    dom.titleBar.style.display = 'flex';
+    dom.skeleton.style.display = 'none';
+    dom.instructions.style.display = 'block';
+    dom.testView.classList.remove('active');
+    dom.resultView.classList.remove('active');
+    dom.errorState.classList.remove('show');
+
+    dom.infoName.textContent   = student.name  || '—';
+    dom.infoCourse.textContent = student.std   || '—';
+    dom.infoTest.textContent   = TEST_NAME;
+    dom.infoEmail.textContent  = student.email || '—';
+    dom.titleSub.textContent   = TEST_NAME;
+
+    if (student.avatar) {
+        const id = getFileId(student.avatar);
+        if (id) dom.titleLogo.src = `https://lh3.googleusercontent.com/d/${id}=w80`;
+    }
+}
+
+function showError(title, msg) {
+    dom.skeleton.style.display = 'none';
+    dom.instructions.style.display = 'none';
+    dom.testView.classList.remove('active');
+    dom.resultView.classList.remove('active');
+    dom.titleBar.style.display = 'none';
+    dom.errorTitle.textContent = title;
+    dom.errorMsg.textContent   = msg;
+    dom.errorState.classList.add('show');
+}
+
+/* ============================================================
+   START TEST
+   ============================================================ */
+function startTest() {
+    if (!questions.length) {
+        showToast('Test questions not loaded. Please refresh.', 'error');
+        return;
+    }
+    isTestActive   = true;
+    testStartedAt  = Date.now();
+    timeRemaining  = TEST_DURATION;
+    answers        = {};
+    currentIndex   = 0;
+    tabSwitchCount = 0;
+
+    dom.instructions.style.display = 'none';
+    dom.testView.classList.add('active');
+    dom.resultView.classList.remove('active');
+    document.body.classList.add('test-active');
+
+    dom.qTotal.textContent          = questions.length;
+    dom.testHeaderName.textContent  = student.name || 'Student';
+    dom.testHeaderTopic.textContent = TEST_NAME;
+
+    renderQuestion();
+    buildDots();
+    updateProgress();
+    startTimer();
+    showToast('Test started. Good luck!', 'success', 2400);
+
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(() => {});
+    }
+}
+
+/* ============================================================
+   TIMER
+   ============================================================ */
+function startTimer() {
+    stopTimer();
+    updateTimerUI();
+    timerIntervalId = setInterval(() => {
+        timeRemaining--;
+        if (timeRemaining <= 0) {
+            timeRemaining = 0;
+            updateTimerUI();
+            stopTimer();
+            showToast('Time is up! Auto-submitting…', 'warning', 3000);
+            submitTest(true);
+            return;
+        }
+        updateTimerUI();
+    }, 1000);
+}
+function stopTimer() {
+    if (timerIntervalId) { clearInterval(timerIntervalId); timerIntervalId = null; }
+}
+function updateTimerUI() {
+    const mins = Math.floor(timeRemaining / 60);
+    const secs = timeRemaining % 60;
+    dom.timerText.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+    dom.timerBox.classList.remove('warning', 'danger');
+    if (timeRemaining <= 60) dom.timerBox.classList.add('danger');
+    else if (timeRemaining <= 300) dom.timerBox.classList.add('warning');
+}
+
+/* ============================================================
+   QUESTION RENDERING
+   ============================================================ */
+function renderQuestion() {
+    const q = questions[currentIndex];
+    if (!q) return;
+
+    dom.qNum.textContent = currentIndex + 1;
+    dom.questionText.textContent = q.question;
+
+    dom.optionsList.innerHTML = q.options.map(opt => {
+        const selected = answers[currentIndex] === opt.num;
+        return `
+            <button class="option-btn${selected ? ' selected' : ''}" type="button"
+                    data-opt="${opt.num}" aria-pressed="${selected}">
+                <span class="option-letter">${opt.letter}</span>
+                <span class="option-text">${escapeHtml(opt.text)}</span>
+            </button>
+        `;
+    }).join('');
+
+    dom.optionsList.querySelectorAll('.option-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const num = parseInt(btn.dataset.opt, 10);
+            selectOption(num);
+        });
+    });
+
+    dom.btnPrev.disabled = currentIndex === 0;
+    const isLast = currentIndex === questions.length - 1;
+    dom.btnNext.style.display   = isLast ? 'none' : 'inline-flex';
+    dom.btnSubmit.style.display = isLast ? 'inline-flex' : 'none';
+
+    updateDots();
+    updateProgress();
+}
+
+function selectOption(num) {
+    if (!isTestActive) return;
+    answers[currentIndex] = num;
+
+    dom.optionsList.querySelectorAll('.option-btn').forEach(btn => {
+        const isSel = parseInt(btn.dataset.opt, 10) === num;
+        btn.classList.toggle('selected', isSel);
+        btn.setAttribute('aria-pressed', String(isSel));
+    });
+    updateDots();
+    updateProgress();
+}
+
+function updateProgress() {
+    const answered = Object.keys(answers).length;
+    const pct = questions.length ? (answered / questions.length) * 100 : 0;
+    dom.progressBar.style.width = pct + '%';
+}
+
+/* ============================================================
+   QUESTION DOTS
+   ============================================================ */
+function buildDots() {
+    dom.questionDots.innerHTML = questions.map((_, i) => `
+        <button class="q-dot" type="button" data-idx="${i}" aria-label="Question ${i + 1}">${i + 1}</button>
+    `).join('');
+    dom.questionDots.querySelectorAll('.q-dot').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const idx = parseInt(btn.dataset.idx, 10);
+            if (idx === currentIndex) return;
+            currentIndex = idx;
+            renderQuestion();
+        });
+    });
+    updateDots();
+}
+function updateDots() {
+    dom.questionDots.querySelectorAll('.q-dot').forEach(btn => {
+        const idx = parseInt(btn.dataset.idx, 10);
+        btn.classList.toggle('active',   idx === currentIndex);
+        btn.classList.toggle('answered', answers[idx] != null);
+    });
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function goPrev() {
+    if (currentIndex > 0) { currentIndex--; renderQuestion(); }
+}
+function goNext() {
+    if (currentIndex < questions.length - 1) { currentIndex++; renderQuestion(); }
+}
+
+/* ============================================================
+   SUBMIT FLOW
+   ============================================================ */
+function openSubmitModal() {
+    const answered = Object.keys(answers).length;
+    dom.answeredCount.textContent = answered;
+    dom.totalCount.textContent    = questions.length;
+    dom.submitModal.classList.add('active');
+}
+function closeSubmitModal() {
+    dom.submitModal.classList.remove('active');
+}
+
+async function submitTest(auto = false) {
+    if (isSubmitting) return;
+    isSubmitting = true;
+    closeSubmitModal();
+
+    dom.loadingMsg.textContent = auto ? 'Time up — submitting test…' : 'Submitting test…';
+    dom.loadingOverlay.classList.add('active');
+    stopTimer();
+    isTestActive = false;
+    document.body.classList.remove('test-active');
+
+    try {
+        const summary = computeSummary();
+        await saveResult(summary);
+        lsRemove(PROGRESS_KEY);
+
+        dom.testView.classList.remove('active');
+        dom.resultView.classList.add('active');
+
+        dom.resultSummary.innerHTML = `
+            <div class="result-mini-stat">
+                <div class="result-mini-num c-correct">${summary.correct}</div>
+                <div class="result-mini-lbl">Correct</div>
+            </div>
+            <div class="result-mini-stat">
+                <div class="result-mini-num c-wrong">${summary.incorrect}</div>
+                <div class="result-mini-lbl">Incorrect</div>
+            </div>
+            <div class="result-mini-stat">
+                <div class="result-mini-num c-skip">${summary.skipped}</div>
+                <div class="result-mini-lbl">Skipped</div>
+            </div>
+            <div class="result-mini-stat">
+                <div class="result-mini-num">${summary.percentage}%</div>
+                <div class="result-mini-lbl">Score</div>
+            </div>
+        `;
+
+        dom.resultSubtitle.textContent =
+            'Your responses have been recorded. Go to your Result section to review your detailed Results.';
+
+        if (document.fullscreenElement && document.exitFullscreen) {
+            document.exitFullscreen().catch(() => {});
+        }
+    } catch (err) {
+        console.error('[submit]', err);
+        showToast('Submission failed: ' + (err.message || 'Network error'), 'error', 5000);
+        isSubmitting = false;
+        dom.loadingOverlay.classList.remove('active');
+        return;
+    }
+
+    dom.loadingOverlay.classList.remove('active');
+    isSubmitting = false;
+}
+
+/* ============================================================
+   SUMMARY
+   ============================================================ */
+function computeSummary() {
+    let correct = 0, incorrect = 0, skipped = 0;
+    questions.forEach((q, i) => {
+        const chosen = answers[i];
+        if (chosen == null) { skipped++; return; }
+        if (q.correct && chosen === q.correct) correct++;
+        else incorrect++;
+    });
+    const total          = questions.length;
+    const percentage     = total > 0 ? Math.round((correct * 100 / total) * 100) / 100 : 0;
+    const marksObtained  = correct * MARKS_PER_Q;
+    const passed         = marksObtained >= PASSING_MARKS;
+    const timeTakenSec   = testStartedAt ? Math.max(0, Math.floor((Date.now() - testStartedAt) / 1000)) : 0;
+
+    return {
+        correct, incorrect, skipped, total,
+        percentage,
+        marksObtained,
+        passed,
+        timeTakenSec,
+        remark: getRemark(percentage)
+    };
+}
+
+function getRemark(percentage) {
+    if (percentage < 40) return 'You Need to Study Hard, and attempt Re-Exam';
+    if (percentage < 60) return 'You Need to work more hard and Achieve more';
+    if (percentage < 80) return 'Your Achievement need more';
+    return 'Your Excellency is here, Good';
+}
+
+function formatTimeTaken(sec) {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    if (m === 0) return `${s} sec`;
+    return `${m} min ${s} sec`;
+}
+
+function formatDateDMY(d) {
+    const dd   = String(d.getDate()).padStart(2, '0');
+    const mm   = String(d.getMonth() + 1).padStart(2, '0');
+    const yyyy = d.getFullYear();
+    return `${dd}/${mm}/${yyyy}`;
+}
+
+/* ============================================================
+   SAVE RESULT
+   ============================================================ */
+async function saveResult(summary) {
+    const now = new Date();
+    const params = new URLSearchParams();
+
+    params.append('action',        'insert');
+    params.append('spreadsheetId', TEST_SPREADSHEET_ID);
+    params.append('sheetName',     RESULT_SHEET_NAME);
+
+    params.append('Student Name',      student.name);
+    params.append('Email Id',          student.email);
+    params.append('Test Topic',        TEST_NAME);
+    params.append('Correct Answers',   String(summary.correct));
+    params.append('Incorrect Answers', String(summary.incorrect));
+    params.append('Skipped Questions', String(summary.skipped));
+    params.append('Total Questions',   String(summary.total));
+    params.append('Percentage',        String(summary.percentage) + '%');
+    params.append('Status',            summary.passed ? 'Pass' : 'Fail');
+    params.append('Time Taken',        formatTimeTaken(summary.timeTakenSec));
+    params.append('Date Submitted',    formatDateDMY(now));
+    params.append('Remarks',           summary.remark);
+
+    const resp = await fetch(SCRIPT_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body:    params.toString()
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const json = await resp.json();
+    if (json.status !== 'success') {
+        throw new Error(json.message || 'Failed to save result');
+    }
+    return json;
+}
+
+/* ============================================================
+   ANTI-CHEAT
+   ============================================================ */
+function armAntiCheat() {
+    document.addEventListener('visibilitychange', () => {
+        if (!isTestActive) return;
+        if (document.hidden) {
+            tabSwitchCount++;
+            showShield();
+            if (tabSwitchCount >= MAX_TAB_SWITCHES) {
+                showToast('Too many tab switches — auto-submitting.', 'error', 4000);
+                submitTest(true);
+            }
+        }
+    });
+
+    window.addEventListener('blur', () => {
+        if (isTestActive && document.visibilityState === 'visible') {
+            showShield();
+        }
+    });
+
+    document.addEventListener('contextmenu', (e) => {
+        if (isTestActive) e.preventDefault();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (!isTestActive) return;
+        const key = (e.key || '').toLowerCase();
+        if ((e.ctrlKey || e.metaKey) && ['c','v','p','s','u','a'].includes(key)) {
+            e.preventDefault();
+            showToast('Not allowed during the test', 'warning', 1500);
+        }
+    });
+
+    window.addEventListener('beforeunload', (e) => {
+        if (isTestActive) {
+            e.preventDefault();
+            e.returnValue = '';
+            return '';
+        }
+    });
+}
+
+function showShield() { dom.shieldOverlay.classList.add('active'); }
+function hideShield() { dom.shieldOverlay.classList.remove('active'); }
+
+/* ============================================================
+   PROGRESS PERSISTENCE
+   ============================================================ */
+function saveProgress() {
+    if (!isTestActive) return;
+    lsSet(PROGRESS_KEY, {
+        email:          student.email,
+        startedAt:      testStartedAt,
+        answers,
+        currentIndex,
+        tabSwitchCount,
+        timeRemaining,
+        testName:       TEST_NAME
+    });
+}
+function loadProgress() {
+    const saved = lsGet(PROGRESS_KEY);
+    if (!saved) return null;
+    if (saved.email     !== student.email)  return null;
+    if (saved.testName  !== TEST_NAME)      return null;
+    if (!saved.answers  || !saved.startedAt) return null;
+    return saved;
+}
+setInterval(() => { if (isTestActive) saveProgress(); }, 3000);
+window.addEventListener('beforeunload', () => { if (isTestActive) saveProgress(); });
+
+/* ============================================================
+   BIND EVENTS
+   ============================================================ */
+function bindEvents() {
+    dom.btnBack.addEventListener('click', () => {
+        if (isTestActive) {
+            showToast('You cannot leave during the test. Please submit first.', 'warning');
+            return;
+        }
+        if (history.length > 1) history.back();
+        else window.location.href = '../StudentDashboard.html';
+    });
+
+    dom.btnStart.addEventListener('click', () => startTest());
+    dom.btnPrev.addEventListener('click', goPrev);
+    dom.btnNext.addEventListener('click', goNext);
+    dom.btnSubmit.addEventListener('click', openSubmitModal);
+
+    dom.btnCancelSubmit.addEventListener('click', closeSubmitModal);
+    dom.btnConfirmSubmit.addEventListener('click', () => submitTest(false));
+
+    dom.submitModal.addEventListener('click', (e) => {
+        if (e.target === dom.submitModal) closeSubmitModal();
+    });
+
+    dom.btnResume.addEventListener('click', () => {
+        hideShield();
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen().catch(() => {});
+        }
+    });
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+async function init() {
+    cacheDom();
+    initThemeSync();
+    bindEvents();
+    armAntiCheat();
+
+    /* Safety: hide splash after 6s even if something stalls */
+    const splashSafety = setTimeout(() => {
+        console.warn('[splash] safety timeout — forcing hide');
+        hideSplash();
+    }, 6000);
+
+    const email = getLoggedInEmail();
+    if (!email) {
+        clearTimeout(splashSafety);
+        hideSplash();
+        showError('Please log in', 'You need to be logged in as a student to take the test.');
+        return;
+    }
+
+    dom.skeleton.style.display = 'block';
+    dom.titleBar.style.display = 'none';
+
+    try {
+        const [profileResult, questionsResult] = await Promise.allSettled([
+            loadStudentProfile(email),
+            loadQuestions()
+        ]);
+
+        if (profileResult.status === 'rejected' || !profileResult.value) {
+            clearTimeout(splashSafety);
+            hideSplash();
+            showError('Profile not found',
+                'We could not find your student record. Please contact the academy.');
+            return;
+        }
+        student = profileResult.value;
+
+        if (questionsResult.status === 'rejected' || !questionsResult.value.length) {
+            clearTimeout(splashSafety);
+            hideSplash();
+            showError('Test not available',
+                'Unable to load test questions. Please try again later.');
+            return;
+        }
+        questions = questionsResult.value;
+
+        clearTimeout(splashSafety);
+        hideSplash();
+
+        const saved = loadProgress();
+        if (saved) {
+            const resume = confirm(
+                `You have an unfinished attempt for "${TEST_NAME}".\n\n` +
+                `Resume from where you left off?\n\n` +
+                `Click OK to resume, Cancel to start fresh.`
+            );
+            if (resume) {
+                startTest();
+                answers        = saved.answers || {};
+                currentIndex   = Math.min(saved.currentIndex || 0, questions.length - 1);
+                timeRemaining  = Math.max(10, saved.timeRemaining || TEST_DURATION);
+                if (saved.startedAt) {
+                    const elapsed   = Math.floor((Date.now() - saved.startedAt) / 1000);
+                    const remaining = Math.max(10, TEST_DURATION - elapsed);
+                    timeRemaining   = Math.min(timeRemaining, remaining);
+                }
+                tabSwitchCount = saved.tabSwitchCount || 0;
+                stopTimer();
+                startTimer();
+                renderQuestion();
+                updateDots();
+                updateProgress();
+                showToast('Test resumed', 'info', 2400);
+                return;
+            } else {
+                lsRemove(PROGRESS_KEY);
+            }
+        }
+
+        showLanding();
+    } catch (err) {
+        clearTimeout(splashSafety);
+        hideSplash();
+        console.error('[init]', err);
+        showError('Failed to load test', err.message || 'Something went wrong.');
+    }
+}
+
+/* ============================================================
+   SCHEDULE BOOT
+   ============================================================ */
+function scheduleInit() {
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => init(), { timeout: 1200 });
+    } else {
+        setTimeout(init, 0);
+    }
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleInit, { once: true });
+} else {
+    scheduleInit();
+}
+
+})();
+</script>
+</body>
+</html>
