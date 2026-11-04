@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#f59e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+<title>Workbook Management &amp; Audit · Basic Computer · EGyan</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- FOUC prevention -->
+<script>
+(function () {
+  try {
+    var stored = localStorage.getItem('user-theme-preference');
+    var theme = stored;
+    if (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      theme = 'dark';
+    }
+    document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
+<style>
+/* ============================================================
+   THEME VARIABLES (Identical to Eway.html)
+   ============================================================ */
+:root {
+  --bg-body:        #fffdf5;
+  --bg-card:        #ffffff;
+  --bg-header:      #ffffff;
+  --bg-soft:        #fff9e6;
+  --bg-code:        #fef9ef;
+
+  --text-main:      #1f2937;
+  --text-muted:     #6b7280;
+  --text-light:     #9ca3af;
+  --border-light:   #f0e8d0;
+
+  --shadow-sm:      0 10px 28px -12px rgba(245, 158, 11, 0.18);
+  --shadow-hover:   0 22px 44px -18px rgba(245, 158, 11, 0.32);
+  --shadow-card:    0 8px 30px -10px rgba(245, 158, 11, 0.15);
+
+  --gold:           #f59e0b;
+  --gold-2:         #fbbf24;
+  --gold-soft:      rgba(245, 158, 11, 0.12);
+  --gold-glow:      rgba(245, 158, 11, 0.4);
+
+  --accent:         #0d9488;
+  --accent-2:       #14b8a6;
+  --accent-soft:    rgba(13, 148, 136, 0.10);
+  --accent-glow:    rgba(13, 148, 136, 0.35);
+
+  --drive-blue:     #4285f4;
+  --drive-green:    #34a853;
+  --drive-yellow:   #fbbc05;
+  --drive-red:      #ea4335;
+
+  --success:        #10b981;
+  --danger:         #ef4444;
+  --warning:        #f59e0b;
+  --info:           #3b82f6;
+
+  --teacher-teal:   #0d9488;
+  --admin-gold:     #f59e0b;
+
+  --hl-bg:          linear-gradient(180deg, transparent 60%, rgba(245, 158, 11, 0.35) 60%);
+  --hl-teal-bg:     linear-gradient(180deg, transparent 60%, rgba(13, 148, 136, 0.28) 60%);
+  --hl-blue-bg:     linear-gradient(180deg, transparent 60%, rgba(66, 133, 244, 0.28) 60%);
+
+  --kbd-bg:         linear-gradient(180deg, #ffffff 0%, #f5f1e5 100%);
+  --kbd-border:     #d1c7a8;
+  --kbd-shadow:     inset 0 -2px 0 #d1c7a8, 0 2px 0 rgba(0,0,0,0.08);
+  --kbd-text:       #1f2937;
+
+  --card-border:    1px solid rgba(245, 158, 11, 0.12);
+  --overlay-bg:     rgba(15, 23, 42, 0.45);
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+}
+
+[data-theme="dark"] {
+  --bg-body:        #0b0e0d;
+  --bg-card:        #16201e;
+  --bg-header:      #0f1a18;
+  --bg-soft:        #131d1b;
+  --bg-code:        #0f1a18;
+
+  --text-main:      #f1f5f9;
+  --text-muted:     #9ca3af;
+  --text-light:     #64748b;
+  --border-light:   #1f2b28;
+
+  --shadow-sm:      0 10px 30px -12px rgba(0, 0, 0, 0.65);
+  --shadow-hover:   0 22px 44px -18px rgba(0, 0, 0, 0.85);
+  --shadow-card:    0 8px 32px -10px rgba(0, 0, 0, 0.55);
+
+  --gold:           #fbbf24;
+  --gold-2:         #fcd34d;
+  --gold-soft:      rgba(251, 191, 36, 0.18);
+  --gold-glow:      rgba(251, 191, 36, 0.5);
+
+  --accent:         #14b8a6;
+  --accent-2:       #2dd4bf;
+  --accent-soft:    rgba(20, 184, 166, 0.18);
+  --accent-glow:    rgba(20, 184, 166, 0.45);
+
+  --drive-blue:     #60a5fa;
+  --drive-green:    #4ade80;
+  --drive-yellow:   #fcd34d;
+  --drive-red:      #f87171;
+
+  --success:        #34d399;
+  --danger:         #f87171;
+  --warning:        #fbbf24;
+  --info:           #60a5fa;
+
+  --teacher-teal:   #14b8a6;
+  --admin-gold:     #fbbf24;
+
+  --hl-bg:          linear-gradient(180deg, transparent 60%, rgba(251, 191, 36, 0.28) 60%);
+  --hl-teal-bg:     linear-gradient(180deg, transparent 60%, rgba(20, 184, 166, 0.28) 60%);
+  --hl-blue-bg:     linear-gradient(180deg, transparent 60%, rgba(96, 165, 250, 0.3) 60%);
+
+  --kbd-bg:         linear-gradient(180deg, #2a3735 0%, #1f2b28 100%);
+  --kbd-border:     #3a4a47;
+  --kbd-shadow:     inset 0 -2px 0 #0a1210, 0 2px 0 rgba(0,0,0,0.4);
+  --kbd-text:       #f1f5f9;
+
+  --card-border:    1px solid rgba(251, 191, 36, 0.12);
+  --overlay-bg:     rgba(0, 0, 0, 0.75);
+}
+
+/* ============================================================
+   BASE (Identical)
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--bg-body); scroll-padding-top: 90px; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-body); color: var(--text-main);
+  transition: background var(--transition-normal), color var(--transition-normal);
+  min-height: 100vh; min-height: 100dvh; overflow-x: hidden;
+  -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; line-height: 1.7;
+}
+body.sidebar-lock { overflow: hidden; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes modalPop { from { transform: scale(0.9) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+#authSkeleton { position: fixed; inset: 0; background: var(--bg-body); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1.2rem; transition: opacity 0.35s ease; }
+#authSkeleton.hidden { opacity: 0; pointer-events: none; }
+.skeleton-spinner { width: 44px; height: 44px; border: 4px solid var(--border-light); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
+.skeleton-text { font-size: 0.85rem; color: var(--text-muted); letter-spacing: 0.5px; font-weight: 500; }
+
+.app-wrapper { max-width: 1200px; margin: 0 auto; padding: 1.2rem 1.8rem 3rem; padding-left: max(1.8rem, env(safe-area-inset-left)); padding-right: max(1.8rem, env(safe-area-inset-right)); width: 100%; visibility: hidden; }
+.app-wrapper.revealed { visibility: visible; }
+
+/* Top Bar & Sidebar (Identical) */
+.top-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 0.7rem 1.5rem; background: var(--bg-header); padding: 0.6rem 1.5rem; border-radius: 60px; border: var(--card-border); box-shadow: var(--shadow-sm); margin-bottom: 1.8rem; transition: background var(--transition-normal), box-shadow var(--transition-normal); position: sticky; top: 8px; z-index: 100; }
+.brand-area { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+.hamburger-btn { display: none; background: var(--gold-soft); border: 1px solid var(--border-light); color: var(--text-main); width: 38px; height: 38px; border-radius: 12px; font-size: 1.05rem; cursor: pointer; align-items: center; justify-content: center; flex-shrink: 0; transition: all var(--transition-fast); }
+.hamburger-btn:hover { background: var(--gold); color: #1f2937; }
+.brand-logo { height: 42px; width: auto; object-fit: contain; flex-shrink: 0; filter: none; }
+[data-theme="dark"] .brand-logo { filter: brightness(0) invert(1); }
+.brand-text { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.015em; background: linear-gradient(135deg, var(--gold), var(--gold-2), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.right-actions { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+.role-badge { display: none; align-items: center; gap: 6px; padding: 0.35rem 0.9rem; border-radius: 40px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid currentColor; white-space: nowrap; }
+.role-badge.student { color: #2563eb; background: rgba(37, 99, 235, 0.12); }
+.role-badge.teacher { color: var(--teacher-teal); background: rgba(13, 148, 136, 0.12); }
+.role-badge.admin   { color: var(--admin-gold); background: rgba(245, 158, 11, 0.15); }
+[data-theme="dark"] .role-badge.student { color: #60a5fa; background: rgba(59, 130, 246, 0.2); }
+[data-theme="dark"] .role-badge.teacher { color: #14b8a6; background: rgba(20, 184, 166, 0.2); }
+[data-theme="dark"] .role-badge.admin   { color: #fbbf24; background: rgba(245, 158, 11, 0.2); }
+.back-home { display: inline-flex; align-items: center; gap: 8px; padding: 0.45rem 1.1rem; border-radius: 40px; font-weight: 700; font-size: 0.85rem; color: var(--text-main); background: var(--gold-soft); border: 1px solid var(--border-light); transition: all var(--transition-fast); white-space: nowrap; }
+.back-home:hover { background: var(--gold); color: #1f2937; border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 10px 24px -10px var(--gold-glow); }
+
+.sidebar-backdrop { position: fixed; inset: 0; background: var(--overlay-bg); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); z-index: 998; opacity: 0; visibility: hidden; transition: opacity 0.35s ease, visibility 0.35s ease; }
+.sidebar-backdrop.active { opacity: 1; visibility: visible; }
+.mobile-sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: min(85vw, 320px); background: var(--bg-card); border-right: 1px solid var(--border-light); box-shadow: 8px 0 40px rgba(0, 0, 0, 0.25); z-index: 999; display: flex; flex-direction: column; transform: translateX(-100%); transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+.mobile-sidebar.open { transform: translateX(0); }
+.sidebar-header { padding: 1.3rem 1.2rem 1.1rem; border-bottom: 1px solid var(--border-light); background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft)); position: relative; }
+.sidebar-close { position: absolute; top: 0.9rem; right: 0.9rem; width: 32px; height: 32px; border-radius: 10px; background: rgba(255,255,255,0.7); border: 1px solid var(--border-light); color: var(--text-main); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all var(--transition-fast); }
+[data-theme="dark"] .sidebar-close { background: rgba(0,0,0,0.4); }
+.sidebar-close:hover { background: var(--gold); color: #1f2937; }
+.sidebar-user { display: flex; align-items: center; gap: 12px; }
+.sidebar-avatar { width: 48px; height: 48px; border-radius: 16px; background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: #1f2937; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 800; flex-shrink: 0; box-shadow: 0 6px 14px -6px var(--gold-glow); }
+.sidebar-user-info { min-width: 0; flex: 1; }
+.sidebar-user-name { font-size: 0.98rem; font-weight: 800; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.25; }
+.sidebar-user-role { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-muted); margin-top: 2px; }
+.sidebar-user-role.student { color: #2563eb; } .sidebar-user-role.teacher { color: var(--teacher-teal); } .sidebar-user-role.admin { color: var(--admin-gold); }
+[data-theme="dark"] .sidebar-user-role.student { color: #60a5fa; } [data-theme="dark"] .sidebar-user-role.teacher { color: #14b8a6; } [data-theme="dark"] .sidebar-user-role.admin { color: #fbbf24; }
+.sidebar-toc-heading { padding: 1rem 1.2rem 0.6rem; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+.sidebar-toc-heading i { color: var(--gold); }
+.sidebar-toc-list { list-style: none; padding: 0 0.7rem 1rem; flex: 1; }
+.sidebar-toc-list li { margin-bottom: 0.2rem; }
+.sidebar-toc-list a { display: flex; align-items: center; gap: 10px; padding: 0.7rem 0.9rem; border-radius: 12px; font-size: 0.86rem; font-weight: 600; color: var(--text-main); transition: all var(--transition-fast); line-height: 1.3; }
+.sidebar-toc-list a:hover { background: var(--gold-soft); transform: translateX(3px); }
+.sidebar-toc-list a.active { background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: #1f2937; box-shadow: 0 6px 16px -8px var(--gold-glow); }
+.sidebar-toc-list a .num { width: 22px; height: 22px; border-radius: 7px; background: var(--gold-soft); color: var(--gold); font-size: 0.68rem; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sidebar-toc-list a.active .num { background: rgba(255,255,255,0.85); color: var(--gold); }
+.sidebar-footer { padding: 0.9rem 1.2rem 1.4rem; border-top: 1px solid var(--border-light); font-size: 0.72rem; color: var(--text-muted); text-align: center; }
+
+/* Hero & Search (Identical) */
+.page-header { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; margin-bottom: 2rem; padding: 2rem 2.2rem; background: var(--bg-card); border-radius: 32px; border: var(--card-border); box-shadow: var(--shadow-card); position: relative; overflow: hidden; transition: all var(--transition-normal); }
+.page-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--gold), var(--gold-2), var(--accent-2)); }
+.page-header::after { content: ''; position: absolute; right: -100px; top: -100px; width: 320px; height: 320px; background: radial-gradient(circle, var(--gold-soft), transparent 70%); border-radius: 50%; pointer-events: none; }
+.hero-text { position: relative; z-index: 1; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gold); background: var(--gold-soft); padding: 0.35rem 0.9rem; border-radius: 40px; border: 1px solid var(--border-light); margin-bottom: 0.9rem; }
+.hero-text h1 { font-family: 'Merriweather', Georgia, serif; font-size: 2.4rem; font-weight: 700; line-height: 1.15; letter-spacing: -0.8px; margin-bottom: 0.6rem; }
+.hero-text h1 .accent { color: var(--gold); }
+.hero-text p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; max-width: 560px; }
+.hero-art { width: 200px; height: 200px; position: relative; z-index: 1; animation: float 5s ease-in-out infinite; flex-shrink: 0; }
+
+.search-wrap { position: relative; margin-bottom: 1.6rem; max-width: 560px; }
+.search-input { width: 100%; padding: 0.85rem 1rem 0.85rem 3rem; border-radius: 40px; border: 1px solid var(--border-light); background: var(--bg-card); color: var(--text-main); font-size: 0.92rem; font-family: inherit; box-shadow: var(--shadow-sm); transition: all var(--transition-fast); outline: none; }
+.search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px var(--gold-soft); }
+.search-icon { position: absolute; left: 1.1rem; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 0.95rem; pointer-events: none; }
+.search-clear { position: absolute; right: 0.7rem; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; border: none; background: var(--gold-soft); color: var(--gold); cursor: pointer; display: none; align-items: center; justify-content: center; font-size: 0.75rem; transition: all var(--transition-fast); }
+.search-clear.visible { display: flex; }
+.search-clear:hover { background: var(--gold); color: #1f2937; }
+.search-results-info { margin-bottom: 1rem; font-size: 0.82rem; color: var(--text-muted); padding-left: 0.3rem; }
+
+/* Layout & Cards (Identical) */
+.content-layout { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; align-items: start; }
+.toc { position: sticky; top: 90px; background: var(--bg-card); border: var(--card-border); border-radius: 20px; padding: 1.2rem 1rem; box-shadow: var(--shadow-sm); max-height: calc(100vh - 110px); overflow-y: auto; display: block; }
+.toc h3 { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); margin-bottom: 0.8rem; padding-left: 0.5rem; display: flex; align-items: center; gap: 6px; }
+.toc h3 i { color: var(--gold); }
+.toc ul { list-style: none; }
+.toc li { margin-bottom: 0.15rem; }
+.toc a { display: flex; align-items: center; gap: 8px; padding: 0.5rem 0.7rem; border-radius: 10px; font-size: 0.82rem; font-weight: 600; color: var(--text-muted); transition: all var(--transition-fast); line-height: 1.3; }
+.toc a:hover { background: var(--gold-soft); color: var(--text-main); }
+.toc a.active { background: var(--gold-soft); color: var(--gold); border-left: 3px solid var(--gold); padding-left: 0.55rem; }
+.toc a .num { font-size: 0.62rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; background: var(--gold-soft); color: var(--gold); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.toc a.active .num { background: var(--gold); color: #fff; }
+
+.section-card { background: var(--bg-card); border: var(--card-border); border-radius: 24px; padding: 2rem 2.2rem; margin-bottom: 1.8rem; box-shadow: var(--shadow-card); scroll-margin-top: 90px; transition: all var(--transition-normal); animation: fadeInUp 0.5s ease both; }
+.section-card:nth-child(1) { animation-delay: 0.05s; } .section-card:nth-child(2) { animation-delay: 0.10s; } .section-card:nth-child(3) { animation-delay: 0.15s; } .section-card:nth-child(4) { animation-delay: 0.20s; } .section-card:nth-child(5) { animation-delay: 0.25s; } .section-card:nth-child(6) { animation-delay: 0.30s; }
+
+.section-title { display: flex; align-items: center; gap: 12px; font-family: 'Merriweather', Georgia, serif; font-size: 1.55rem; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 1.2rem; color: var(--text-main); line-height: 1.25; }
+.section-title .icon-pill { width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft)); border: 1px solid var(--border-light); display: inline-flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.15rem; flex-shrink: 0; }
+.section-card p { color: var(--text-main); font-size: 1rem; line-height: 1.75; margin-bottom: 1rem; }
+.section-card p:last-child { margin-bottom: 0; }
+.section-card p strong { color: var(--text-main); font-weight: 700; }
+
+.hl { background: var(--hl-bg); padding: 0 0.2em; font-weight: 700; color: var(--text-main); border-radius: 2px; }
+.hl-teal { background: var(--hl-teal-bg); padding: 0 0.2em; font-weight: 700; color: var(--text-main); border-radius: 2px; }
+.hl-blue { background: var(--hl-blue-bg); padding: 0 0.2em; font-weight: 700; color: var(--text-main); border-radius: 2px; }
+mark { background: var(--gold-soft); color: var(--gold); padding: 0.05em 0.35em; border-radius: 4px; font-weight: 700; }
+
+.figure { margin: 1.4rem 0 1.6rem; padding: 1.4rem; background: var(--bg-soft); border: 1px solid var(--border-light); border-radius: 20px; text-align: center; }
+.figure-caption { margin-top: 0.8rem; font-size: 0.78rem; color: var(--text-muted); font-style: italic; line-height: 1.5; }
+.figure-caption strong { color: var(--text-main); font-style: normal; font-weight: 700; }
+
+.callout { display: flex; gap: 12px; padding: 1rem 1.2rem; border-radius: 14px; margin: 1rem 0; font-size: 0.92rem; line-height: 1.6; border-left: 4px solid; }
+.callout i { flex-shrink: 0; margin-top: 2px; font-size: 1rem; }
+.callout.info    { background: rgba(59,130,246,0.08); border-color: var(--info); color: var(--text-main); } .callout.info i { color: var(--info); }
+.callout.tip     { background: var(--gold-soft); border-color: var(--gold); color: var(--text-main); } .callout.tip i { color: var(--gold); }
+.callout.warning { background: rgba(239,68,68,0.08); border-color: var(--danger); color: var(--text-main); } .callout.warning i { color: var(--danger); }
+.callout.success { background: rgba(16,185,129,0.08); border-color: var(--success); color: var(--text-main); } .callout.success i { color: var(--success); }
+
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin: 1.2rem 0; }
+.tool-card { background: var(--bg-soft); border: 1px solid var(--border-light); border-radius: 16px; padding: 1.1rem 1rem; transition: all var(--transition-fast); display: flex; gap: 12px; align-items: flex-start; }
+.tool-card:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: var(--shadow-sm); }
+.tool-icon { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft)); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.15rem; flex-shrink: 0; border: 1px solid var(--border-light); }
+.tool-card h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 0.25rem; color: var(--text-main); line-height: 1.3; }
+.tool-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+.tool-card code, .inline-code { font-family: 'Consolas', 'Monaco', monospace; background: var(--bg-code); color: var(--drive-blue); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.85em; border: 1px solid var(--border-light); font-weight: 600; }
+
+.shortcut-group-title { font-family: 'Merriweather', Georgia, serif; font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin: 1.4rem 0 0.6rem; display: flex; align-items: center; gap: 8px; }
+.shortcut-group-title i { width: 26px; height: 26px; border-radius: 8px; background: var(--gold-soft); color: var(--gold); display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+.shortcut-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.shortcut-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.7rem 0.95rem; background: var(--bg-soft); border: 1px solid var(--border-light); border-radius: 12px; transition: all var(--transition-fast); }
+.shortcut-row:hover { background: var(--bg-card); border-color: var(--gold); transform: translateX(3px); box-shadow: var(--shadow-sm); }
+.shortcut-desc { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+.shortcut-desc i { color: var(--gold); font-size: 0.9rem; width: 20px; flex-shrink: 0; text-align: center; }
+.shortcut-desc span { font-size: 0.88rem; font-weight: 500; color: var(--text-main); line-height: 1.35; }
+.shortcut-keys { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+kbd, .kbd { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; padding: 0 0.5rem; border-radius: 7px; background: var(--kbd-bg); border: 1px solid var(--kbd-border); box-shadow: var(--kbd-shadow); color: var(--kbd-text); font-family: 'Inter', monospace; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.2px; text-shadow: 0 1px 0 rgba(255,255,255,0.3); white-space: nowrap; user-select: none; transition: all var(--transition-fast); }
+[data-theme="dark"] kbd, [data-theme="dark"] .kbd { text-shadow: 0 1px 0 rgba(0,0,0,0.4); }
+.shortcut-row:hover kbd { background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: #1f2937; border-color: var(--gold); }
+.key-sep { color: var(--text-light); font-size: 0.7rem; font-weight: 700; padding: 0 2px; }
+
+.no-results { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 1rem; text-align: center; background: var(--bg-card); border: 1px dashed var(--border-light); border-radius: 20px; margin: 1rem 0; }
+.no-results.visible { display: flex; }
+.no-results i { font-size: 2.5rem; color: var(--text-light); margin-bottom: 0.8rem; }
+.no-results h4 { font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem; }
+.no-results p { font-size: 0.85rem; color: var(--text-muted); }
+
+.footer-note { margin-top: 2rem; text-align: center; font-size: 0.82rem; color: var(--text-muted); border-top: 1px solid var(--border-light); padding-top: 1.5rem; }
+.back-to-top { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%; background: var(--gold); color: #1f2937; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: 0 12px 28px -8px var(--gold-glow); opacity: 0; visibility: hidden; transform: translateY(20px); transition: all var(--transition-normal); z-index: 500; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { background: var(--gold-2); transform: translateY(-3px); }
+
+.login-overlay { position: fixed; inset: 0; background: var(--overlay-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 1.5rem; visibility: hidden; opacity: 0; transition: opacity 0.3s ease, visibility 0.3s ease; }
+.login-overlay.active { display: flex; visibility: visible; opacity: 1; }
+.login-box { background: var(--bg-card); border-radius: 40px; padding: 2.5rem 2.8rem; max-width: 440px; width: 100%; border: var(--card-border); box-shadow: 0 40px 80px -20px rgba(0,0,0,0.4); text-align: center; animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.login-box .icon { width: 84px; height: 84px; margin: 0 auto 1.2rem; display: flex; align-items: center; justify-content: center; background: var(--gold-soft); border-radius: 28px; font-size: 2.2rem; color: var(--gold); }
+.login-box h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; }
+.login-box p { color: var(--text-muted); margin-bottom: 1.6rem; line-height: 1.6; font-size: 0.9rem; }
+.login-box p strong { color: var(--text-main); }
+.login-box .login-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 160px; padding: 0.8rem 1.6rem; border-radius: 40px; background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: #1f2937; font-weight: 800; font-size: 0.9rem; text-decoration: none; box-shadow: var(--shadow-sm); transition: all var(--transition-fast); letter-spacing: 0.3px; border: none; cursor: pointer; }
+.login-box .login-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px var(--gold-glow); }
+
+@media (max-width: 1024px) { .content-layout { grid-template-columns: 1fr; } .toc { display: none; } }
+@media (max-width: 900px) {
+  .hamburger-btn { display: inline-flex; }
+  .app-wrapper { padding: 0.8rem 1rem 2.5rem; }
+  .top-bar { border-radius: 32px; padding: 0.5rem 1rem; top: 6px; gap: 0.5rem; }
+  .brand-area { gap: 8px; } .brand-text { font-size: 1rem; } .brand-logo { height: 36px; }
+  .role-badge { display: none !important; } .back-home { padding: 0.4rem 0.75rem; } .back-home span { display: inline; font-size: 0.78rem; } .back-home i { font-size: 0.85rem; }
+  .page-header { grid-template-columns: 1fr; text-align: center; padding: 1.5rem 1.2rem; gap: 1rem; }
+  .hero-text h1 { font-size: 1.7rem; } .hero-text p { font-size: 0.92rem; margin: 0 auto; } .hero-art { width: 140px; height: 140px; margin: 0 auto; } .hero-eyebrow { font-size: 0.65rem; }
+  .section-card { padding: 1.5rem 1.2rem; border-radius: 20px; } .section-title { font-size: 1.3rem; gap: 10px; } .section-title .icon-pill { width: 38px; height: 38px; font-size: 1rem; border-radius: 12px; } .section-card p { font-size: 0.94rem; }
+  .figure { padding: 1rem; border-radius: 16px; } .tools-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.8rem; }
+}
+@media (max-width: 480px) {
+  .app-wrapper { padding: 0.6rem 0.8rem 2rem; } .top-bar { padding: 0.4rem 0.8rem; border-radius: 26px; gap: 0.4rem; }
+  .brand-text { font-size: 0.88rem; letter-spacing: -0.2px; } .brand-logo { height: 30px; } .hamburger-btn { width: 34px; height: 34px; font-size: 0.95rem; } .back-home { font-size: 0.72rem; padding: 0.32rem 0.65rem; } .right-actions { gap: 0.4rem; }
+  .page-header { padding: 1.2rem 1rem; border-radius: 22px; } .hero-text h1 { font-size: 1.4rem; } .hero-text p { font-size: 0.85rem; } .hero-art { width: 110px; height: 110px; } .hero-eyebrow { font-size: 0.58rem; padding: 0.28rem 0.7rem; letter-spacing: 0.9px; }
+  .section-card { padding: 1.2rem 1rem; border-radius: 16px; margin-bottom: 1.2rem; } .section-title { font-size: 1.05rem; gap: 8px; flex-wrap: wrap; } .section-title .icon-pill { width: 32px; height: 32px; font-size: 0.85rem; border-radius: 10px; } .section-card p { font-size: 0.88rem; line-height: 1.65; }
+  .figure { padding: 0.8rem; border-radius: 14px; margin: 1rem 0 1.2rem; } .figure-caption { font-size: 0.7rem; }
+  .callout { padding: 0.8rem 0.9rem; font-size: 0.83rem; border-radius: 12px; gap: 8px; }
+  .tools-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; } .tool-card { padding: 0.8rem 0.7rem; border-radius: 12px; gap: 8px; } .tool-icon { width: 34px; height: 34px; font-size: 0.9rem; border-radius: 9px; } .tool-card h4 { font-size: 0.78rem; } .tool-card p { font-size: 0.68rem; line-height: 1.4; }
+  .shortcut-list { gap: 0.4rem; } .shortcut-row { padding: 0.55rem 0.65rem; gap: 0.5rem; border-radius: 10px; } .shortcut-desc { gap: 6px; } .shortcut-desc i { font-size: 0.72rem; width: 14px; } .shortcut-desc span { font-size: 0.72rem; line-height: 1.3; } .shortcut-keys { gap: 4px; }
+  kbd, .kbd { min-width: 24px; height: 24px; padding: 0 0.4rem; font-size: 0.65rem; border-radius: 6px; } .key-sep { font-size: 0.6rem; }
+  .shortcut-group-title { font-size: 0.92rem; margin: 1rem 0 0.5rem; } .shortcut-group-title i { width: 22px; height: 22px; font-size: 0.7rem; }
+  .search-input { font-size: 0.85rem; padding: 0.75rem 1rem 0.75rem 2.6rem; } .search-icon { left: 0.9rem; font-size: 0.85rem; } .search-results-info { font-size: 0.75rem; }
+  .back-to-top { width: 42px; height: 42px; bottom: 16px; right: 16px; font-size: 0.95rem; }
+  .login-box { padding: 1.8rem 1.4rem; border-radius: 28px; } .login-box .icon { width: 68px; height: 68px; font-size: 1.8rem; border-radius: 22px; margin-bottom: 1rem; } .login-box h2 { font-size: 1.15rem; } .login-box p { font-size: 0.8rem; margin-bottom: 1.2rem; }
+}
+@media (max-width: 360px) { .hero-text h1 { font-size: 1.2rem; } .section-title { font-size: 0.95rem; } .section-card p { font-size: 0.82rem; } .tools-grid { gap: 0.5rem; } .tool-card h4 { font-size: 0.72rem; } .tool-card p { font-size: 0.62rem; } }
+@media (hover: none) and (pointer: coarse) { .tool-card:hover, .shortcut-row:hover { transform: none; box-shadow: none; background: var(--bg-soft); border-color: var(--border-light); } .shortcut-row:hover kbd { background: var(--kbd-bg); color: var(--kbd-text); border-color: var(--kbd-border); } .back-to-top:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; animation-delay: 0ms !important; } .hero-art { animation: none; } .section-card { opacity: 1; transform: none; } .mobile-sidebar { transition: none; } }
+</style>
+</head>
+<body>
+
+<!-- AUTH SKELETON -->
+<div id="authSkeleton" role="status" aria-live="polite">
+  <div class="skeleton-spinner"></div>
+  <div class="skeleton-text">Verifying your session…</div>
+</div>
+
+<!-- LOGIN OVERLAY -->
+<div class="login-overlay" id="loginOverlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="login-box">
+    <div class="icon"><i class="fas fa-lock"></i></div>
+    <h2 id="loginTitle">Please Login!</h2>
+    <p>You need to be logged in as a <strong>Student</strong>, <strong>Teacher</strong>, or <strong>Admin</strong> to access Workbook Management lessons.</p>
+    <a href="../My Account/myaccount.html" class="login-btn" id="loginBtn">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </a>
+  </div>
+</div>
+
+<!-- MOBILE SIDEBAR BACKDROP -->
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<!-- MOBILE SIDEBAR -->
+<aside class="mobile-sidebar" id="mobileSidebar" aria-label="Navigation sidebar">
+  <div class="sidebar-header">
+    <button class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="sidebar-user">
+      <div class="sidebar-avatar" id="sidebarAvatar">S</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" id="sidebarUserName">Student</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">Student</div>
+      </div>
+    </div>
+  </div>
+  <div class="sidebar-toc-heading">
+    <i class="fas fa-list-ul"></i> On this page
+  </div>
+  <ul class="sidebar-toc-list" id="sidebarTocList">
+    <li><a href="#workbook-structure" data-toc="workbook-structure"><span class="num">1</span> Workbook Structure</a></li>
+    <li><a href="#audit-formulas" data-toc="audit-formulas"><span class="num">2</span> Auditing Formulas</a></li>
+    <li><a href="#protection" data-toc="protection"><span class="num">3</span> Protection &amp; Security</a></li>
+    <li><a href="#documentation" data-toc="documentation"><span class="num">4</span> Documentation &amp; Versioning</a></li>
+    <li><a href="#shortcuts" data-toc="shortcuts"><span class="num">5</span> Shortcut Keys</a></li>
+    <li><a href="#tips" data-toc="tips"><span class="num">6</span> Tips &amp; Best Practices</a></li>
+  </ul>
+  <div class="sidebar-footer">
+    <i class="fas fa-graduation-cap"></i> EGyan Skill Development
+  </div>
+</aside>
+
+<!-- MAIN APP -->
+<div class="app-wrapper" id="appWrapper">
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open navigation" title="Open navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="brand-area">
+      <img class="brand-logo" src="https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL" alt="EGyan Skill Development logo" onerror="this.style.display='none'">
+      <span class="brand-text">EGyan Skill Development</span>
+    </div>
+    <div class="right-actions">
+      <span class="role-badge" id="roleBadge" style="display: none;">
+        <i class="fas fa-user" id="roleBadgeIcon"></i>
+        <span id="roleBadgeText">User</span>
+      </span>
+      <a href="AdvExcelDashboard.html" class="back-home" aria-label="Back to dashboard">
+        <i class="fas fa-arrow-left"></i> <span>Back</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="page-header">
+    <div class="hero-text">
+      <span class="hero-eyebrow"><i class="fas fa-folder-open"></i> Basic Computer · Module 25</span>
+      <h1>Workbook Management &amp; <span class="accent">Audit</span></h1>
+      <p>Build spreadsheets that last. Learn to structure workbooks, trace formula errors, protect data, and document your models so others can trust and maintain them.</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Workbook management illustration">
+        <rect x="40" y="40" width="120" height="120" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+        <rect x="40" y="40" width="120" height="24" rx="10" fill="#0d9488"/>
+        <text x="100" y="56" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="7" fill="#ffffff">WORKBOOK</text>
+        <line x1="55" y1="80" x2="145" y2="80" stroke="#e5e7eb" stroke-width="1.5"/>
+        <line x1="55" y1="95" x2="130" y2="95" stroke="#e5e7eb" stroke-width="1.5"/>
+        <line x1="55" y1="110" x2="140" y2="110" stroke="#e5e7eb" stroke-width="1.5"/>
+        <line x1="55" y1="125" x2="120" y2="125" stroke="#e5e7eb" stroke-width="1.5"/>
+        <text x="100" y="152" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="16" fill="#f59e0b">🔍</text>
+        <circle cx="160" cy="145" r="20" fill="#f59e0b"/>
+        <text x="160" y="151" text-anchor="middle" font-family="Font Awesome 6 Free" font-weight="900" font-size="14" fill="#1f2937">🛡️</text>
+        <circle cx="22" cy="40" r="2" fill="#fbbf24"/>
+        <circle cx="178" cy="35" r="2.5" fill="#fbbf24"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search concepts… (e.g., trace precedents, sheet protection, versioning)" aria-label="Search">
+    <button class="search-clear" id="searchClear" aria-label="Clear search">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="search-results-info" id="searchInfo" style="display:none;"></div>
+
+  <!-- CONTENT LAYOUT -->
+  <div class="content-layout">
+
+    <!-- Desktop TOC -->
+    <aside class="toc" aria-label="Table of contents">
+      <h3><i class="fas fa-list-ul"></i> On this page</h3>
+      <ul>
+        <li><a href="#workbook-structure" data-toc="workbook-structure"><span class="num">1</span> Workbook Structure</a></li>
+        <li><a href="#audit-formulas" data-toc="audit-formulas"><span class="num">2</span> Auditing Formulas</a></li>
+        <li><a href="#protection" data-toc="protection"><span class="num">3</span> Protection &amp; Security</a></li>
+        <li><a href="#documentation" data-toc="documentation"><span class="num">4</span> Documentation &amp; Versioning</a></li>
+        <li><a href="#shortcuts" data-toc="shortcuts"><span class="num">5</span> Shortcut Keys</a></li>
+        <li><a href="#tips" data-toc="tips"><span class="num">6</span> Tips &amp; Best Practices</a></li>
+      </ul>
+    </aside>
+
+    <main class="content" id="mainContent">
+
+      <!-- 1. WORKBOOK STRUCTURE -->
+      <section class="section-card" id="workbook-structure" data-title="Workbook Structure">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-layer-group"></i></span>
+          1. Workbook Structure: Sheets, Names, Links
+        </h2>
+
+        <p>A well-organized workbook is easier to navigate, audit, and share. The first step is a clear <span class="hl">sheet architecture</span>: separate raw data, calculations, and presentation layers. Never mix all three on one sheet .</p>
+
+        <p>Use <span class="hl-blue">named ranges</span> instead of raw cell addresses. A formula like <code>=SUM(Sales_2024)</code> is far more readable than <code>=SUM(Sheet1!B2:B1000)</code> — and if the range moves, you update the name once, not every formula .</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-database"></i></div>
+            <div>
+              <h4>Data Sheet</h4>
+              <p>Raw, untouched source data. One table per sheet. No formulas, no formatting — just clean rows and columns .</p>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-calculator"></i></div>
+            <div>
+              <h4>Calc Sheet</h4>
+              <p>All formulas live here. Reference the Data sheet by name. Keep calculations separate so the logic is auditable .</p>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-chart-pie"></i></div>
+            <div>
+              <h4>Report Sheet</h4>
+              <p>PivotTables, charts, and dashboards that pull from the Calc sheet. This is what stakeholders see .</p>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-tag"></i></div>
+            <div>
+              <h4>Named Ranges</h4>
+              <p>Define names via Formulas → Name Manager (<kbd>Ctrl</kbd>+<kbd>F3</kbd>). Use them in formulas for clarity and stability .</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <i class="fas fa-circle-info"></i>
+          <div><strong>External links:</strong> If your workbook pulls data from another file, check <kbd>Data</kbd> → <kbd>Edit Links</kbd> to see all connections. Broken links cause #REF! errors and silent data failures .</div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Naming convention:</strong> Use a consistent sheet naming scheme: <code>01_Data</code>, <code>02_Calc</code>, <code>03_Report</code>. The numeric prefix keeps sheets in logical order and makes navigation predictable.</div>
+        </div>
+      </section>
+
+      <!-- 2. AUDIT FORMULAS -->
+      <section class="section-card" id="audit-formulas" data-title="Auditing Formulas">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-search"></i></span>
+          2. Auditing Formulas
+        </h2>
+
+        <p>When a formula returns an unexpected result, you need to <span class="hl">trace its inputs and outputs</span>. Excel's Formula Auditing tools show you exactly which cells feed a formula and which cells depend on it .</p>
+
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="trace precedents ctrl bracket">
+            <div class="shortcut-desc"><i class="fas fa-arrow-left"></i><span><strong>Trace Precedents</strong> — arrows point to the cells that feed the selected formula</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>[</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="trace dependents ctrl bracket right">
+            <div class="shortcut-desc"><i class="fas fa-arrow-right"></i><span><strong>Trace Dependents</strong> — arrows point to the cells that use the selected cell</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>]</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="evaluate formula f9">
+            <div class="shortcut-desc"><i class="fas fa-calculator"></i><span><strong>Evaluate Formula</strong> — step through a formula one calculation at a time</span></div>
+            <div class="shortcut-keys"><kbd>F9</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="show formulas ctrl backtick">
+            <div class="shortcut-desc"><i class="fas fa-eye"></i><span><strong>Show Formulas</strong> — toggle all formulas on the sheet</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>`</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="error checking">
+            <div class="shortcut-desc"><i class="fas fa-exclamation-triangle"></i><span><strong>Error Checking</strong> — find cells with errors and trace their source</span></div>
+            <div class="shortcut-keys"><kbd>Menu</kbd></div>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div><strong>Watch Window:</strong> Use <kbd>Formulas</kbd> → <kbd>Watch Window</kbd> to monitor key cells while scrolling through a large model. It shows the value, formula, and location of each watched cell in a floating pane .</div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>F9 for partial evaluation:</strong> Select just one part of a formula in the formula bar and press <kbd>F9</kbd> to evaluate only that segment. Press <kbd>Esc</kbd> to restore the formula — do not press Enter, or you'll replace the formula with the value .</div>
+        </div>
+      </section>
+
+      <!-- 3. PROTECTION -->
+      <section class="section-card" id="protection" data-title="Protection and Security">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-shield-alt"></i></span>
+          3. Protection &amp; Security
+        </h2>
+
+        <p>Protection prevents accidental (or intentional) changes to formulas, structure, and layout. Excel offers multiple layers: <span class="hl">sheet protection</span>, <span class="hl-blue">workbook protection</span>, and <span class="hl-blue">file encryption</span> .</p>
+
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="protect sheet review tab">
+            <div class="shortcut-desc"><i class="fas fa-lock"></i><span><strong>Protect Sheet</strong> — lock cells, prevent insertion/deletion of rows and columns. <kbd>Review</kbd> → <kbd>Protect Sheet</kbd></span></div>
+            <div class="shortcut-keys"><kbd>Sheet</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="protect workbook structure">
+            <div class="shortcut-desc"><i class="fas fa-file-shield"></i><span><strong>Protect Workbook</strong> — prevent adding, deleting, renaming, or hiding sheets</span></div>
+            <div class="shortcut-keys"><kbd>Workbook</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="encrypt with password file info">
+            <div class="shortcut-desc"><i class="fas fa-key"></i><span><strong>Encrypt with Password</strong> — require a password to open the file. <kbd>File</kbd> → <kbd>Info</kbd> → <kbd>Protect Workbook</kbd></span></div>
+            <div class="shortcut-keys"><kbd>File</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="allow edit ranges">
+            <div class="shortcut-desc"><i class="fas fa-edit"></i><span><strong>Allow Edit Ranges</strong> — let users edit specific cells while the rest of the sheet stays locked</span></div>
+            <div class="shortcut-keys"><kbd>Ranges</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="mark as final">
+            <div class="shortcut-desc"><i class="fas fa-check-circle"></i><span><strong>Mark as Final</strong> — makes the file read-only (a soft deterrent, not true security)</span></div>
+            <div class="shortcut-keys"><kbd>Final</kbd></div>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div><strong>Not real security:</strong> Excel sheet and workbook protection are <mark>deterrents, not encryption</mark>. A determined user can remove them with third-party tools. For true confidentiality, use <strong>Encrypt with Password</strong> or store the file in a secure, access-controlled location .</div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Lock only what matters:</strong> By default, all cells are "Locked" but protection is off. When you enable Protect Sheet, all cells become read-only. Before protecting, select the input cells and uncheck "Locked" in Format Cells (<kbd>Ctrl</kbd>+<kbd>1</kbd>) .</div>
+        </div>
+      </section>
+
+      <!-- 4. DOCUMENTATION -->
+      <section class="section-card" id="documentation" data-title="Documentation and Versioning">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-book"></i></span>
+          4. Documentation &amp; Versioning
+        </h2>
+
+        <p>A workbook without documentation is a black box. If you leave the organization, or simply return to the file six months later, will you remember why <code>B7</code> is multiplied by <code>1.18</code>? <span class="hl">Documentation answers that</span> .</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-alt"></i></div>
+            <div>
+              <h4>ReadMe Sheet</h4>
+              <p>First sheet in the workbook: purpose, author, version, last updated, and a list of key assumptions .</p>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-comment"></i></div>
+            <div>
+              <h4>Cell Comments</h4>
+              <p>Right-click → Insert Comment (<kbd>Shift</kbd>+<kbd>F2</kbd>) on complex formulas. Explain <em>why</em>, not just <em>what</em> .</p>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-palette"></i></div>
+            <div>
+              <h4>Color-Coding</h4>
+              <p>Industry convention: <span style="color:#2563eb;">blue font</span> for inputs, black for formulas, green for links to other sheets .</p>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-code-branch"></i></div>
+            <div>
+              <h4>Version History</h4>
+              <p>Save versions as <code>Model_v1.0.xlsx</code>, <code>v1.1</code>, etc. Or use SharePoint/OneDrive version history .</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <i class="fas fa-circle-info"></i>
+          <div><strong>Data validation as documentation:</strong> Add input messages and error alerts to key cells. When a user clicks an input, a tooltip explains what the cell expects. This is live documentation embedded in the model .</div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Changelog sheet:</strong> Maintain a simple table: Date | Version | Change | Author. This is invaluable when multiple people touch the same workbook.</div>
+        </div>
+      </section>
+
+      <!-- 5. SHORTCUTS -->
+      <section class="section-card" id="shortcuts" data-title="Shortcut Keys">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-keyboard"></i></span>
+          5. Shortcut Keys
+        </h2>
+
+        <p>These shortcuts speed up auditing, protection, and navigation:</p>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-bolt"></i> Auditing &amp; Formulas</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="trace precedents ctrl bracket">
+            <div class="shortcut-desc"><i class="fas fa-arrow-left"></i><span>Trace Precedents</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>[</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="trace dependents ctrl bracket right">
+            <div class="shortcut-desc"><i class="fas fa-arrow-right"></i><span>Trace Dependents</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>]</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="show formulas ctrl backtick">
+            <div class="shortcut-desc"><i class="fas fa-eye"></i><span>Show all formulas</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>`</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="evaluate formula f9">
+            <div class="shortcut-desc"><i class="fas fa-calculator"></i><span>Evaluate part of formula (in formula bar)</span></div>
+            <div class="shortcut-keys"><kbd>F9</kbd></div>
+          </div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-table"></i> Navigation &amp; Organization</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="name manager ctrl f3">
+            <div class="shortcut-desc"><i class="fas fa-tag"></i><span>Open Name Manager</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>F3</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="format cells ctrl 1">
+            <div class="shortcut-desc"><i class="fas fa-cog"></i><span>Format Cells (lock/unlock inputs)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>1</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="insert comment shift f2">
+            <div class="shortcut-desc"><i class="fas fa-comment"></i><span>Insert/Edit Cell Comment</span></div>
+            <div class="shortcut-keys"><kbd>Shift</kbd><span class="key-sep">+</span><kbd>F2</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="save ctrl s">
+            <div class="shortcut-desc"><i class="fas fa-save"></i><span>Save (do this before protecting anything)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>S</kbd></div>
+          </div>
+        </div>
+
+        <div class="callout success">
+          <i class="fas fa-star"></i>
+          <div><strong>Learning path:</strong> Day 1 — restructure a messy workbook into Data, Calc, Report sheets. Day 2 — create named ranges and replace raw cell references. Day 3 — trace a broken formula with Trace Precedents and Evaluate Formula. Day 4 — protect the sheet while leaving input cells editable. Day 5 — add a ReadMe sheet and color-code all inputs blue .</div>
+        </div>
+      </section>
+
+      <!-- 6. TIPS -->
+      <section class="section-card" id="tips" data-title="Tips and Best Practices">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-lightbulb"></i></span>
+          6. Tips &amp; Best Practices
+        </h2>
+
+        <p>These habits make workbooks reliable, maintainable, and shareable:</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-save"></i></div>
+            <div>
+              <h4>Save Before Protecting</h4>
+              <p>Always save a version before enabling protection. If you forget the password or lock the wrong cells, you can revert .</p>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-compress-alt"></i></div>
+            <div>
+              <h4>Avoid Merged Cells</h4>
+              <p>Merged cells break sorting, filtering, PivotTables, and data validation. Use "Center Across Selection" instead .</p>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-copy"></i></div>
+            <div>
+              <h4>Consistent Formatting</h4>
+              <p>Use Cell Styles (<kbd>Home</kbd> → <kbd>Cell Styles</kbd>) for headers, inputs, and calculations. Consistency reduces errors.</p>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-check-double"></i></div>
+            <div>
+              <h4>Build Error Checks</h4>
+              <p>Add a "Checks" section: <code>=IF(ABS(Balance_Check)>0.01,"ERROR","OK")</code>. Any nonzero value means a problem .</p>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-ban"></i></div>
+            <div>
+              <h4>Avoid Hardcoded Values</h4>
+              <p>If a formula contains <code>*1.18</code>, move the 18% to an input cell. Hardcoded numbers hide assumptions and break when rules change .</p>
+            </div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <h4>Keep a Master Copy</h4>
+              <p>Maintain an untouched "master" version. Work in a copy. When something goes wrong, the master is your reset button.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div><strong>Critical audit check:</strong> Before sharing a workbook, run a final pass: (1) Show Formulas — scan for errors like #REF!, #VALUE!, #DIV/0!. (2) Check Edit Links — remove broken external references. (3) Verify all input cells are unlocked and all formula cells are locked. (4) Confirm the ReadMe sheet is current.</div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-graduation-cap"></i>
+          <div><strong>Practice plan:</strong> Take a messy workbook and restructure it into Data, Calc, and Report sheets. Add named ranges. Trace a formula chain with Trace Precedents. Protect the sheet while allowing input cell edits. Write a ReadMe sheet documenting the model's purpose and assumptions. Save as v1.0.</div>
+        </div>
+      </section>
+
+      <!-- NO RESULTS -->
+      <div class="no-results" id="noResults">
+        <i class="fas fa-magnifying-glass"></i>
+        <h4>No results found</h4>
+        <p>Try a keyword like "trace precedents", "protection", "named ranges", "ReadMe", or "versioning".</p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    <i class="fas fa-arrow-right"></i>
+    You've completed the Workbook Management &amp; Audit module. Your spreadsheets are now structured, protected, and documented.
+  </div>
+</div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  const THEME_KEY = 'user-theme-preference';
+  const DEFAULT_THEME = 'light';
+  const LOGIN_REDIRECT = '../My Account/myaccount.html';
+
+  const AUTH_KEYS = {
+    USER:          'EGyan_user',
+    USER_DATA:     'EGyan_user_data',
+    USER_TYPE:     'EGyan_user_type',
+    REMEMBER_ME:   'EGyan_remember_me',
+    SESSION_EXPIRY:'EGyan_session_expiry'
+  };
+
+  const body = document.body;
+  const html = document.documentElement;
+
+  // THEME
+  function getStoredTheme() {
+    try {
+      const stored = localStorage.getItem(THEME_KEY);
+      if (stored) return stored;
+    } catch (e) {}
+    try {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+    } catch (e) {}
+    return DEFAULT_THEME;
+  }
+
+  function applyTheme(theme) {
+    const t = theme === 'dark' ? 'dark' : 'light';
+    html.setAttribute('data-theme', t);
+    body.setAttribute('data-theme', t);
+
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#0b0e0d' : '#f59e0b');
+
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'themeChange', theme: t }, '*');
+      }
+    } catch (e) {}
+  }
+
+  applyTheme(getStoredTheme());
+
+  try {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq && mq.addEventListener) {
+      mq.addEventListener('change', function (e) {
+        try {
+          const stored = localStorage.getItem(THEME_KEY);
+          if (!stored) applyTheme(e.matches ? 'dark' : 'light');
+        } catch (err) {}
+      });
+    }
+  } catch (e) {}
+
+  window.addEventListener('storage', function (e) {
+    if (e.key === THEME_KEY && e.newValue) applyTheme(e.newValue);
+    if (e.key === 'theme-change-trigger') {
+      try {
+        const latest = localStorage.getItem(THEME_KEY);
+        if (latest) applyTheme(latest);
+      } catch (err) {}
+    }
+  });
+
+  window.addEventListener('message', function (event) {
+    if (event.data && event.data.type === 'themeChange' && event.data.theme) {
+      applyTheme(event.data.theme);
+    }
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) {
+      try {
+        const latest = localStorage.getItem(THEME_KEY);
+        if (latest) applyTheme(latest);
+      } catch (e) {}
+    }
+  });
+
+  // AUTH
+  function parseStoredAuth(raw) {
+    if (!raw) return { value: null, expiry: null };
+    try {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object' && 'value' in parsed) {
+        return { value: parsed.value, expiry: parsed.expiry || null };
+      }
+      return { value: parsed, expiry: null };
+    } catch (e) {
+      return { value: raw, expiry: null };
+    }
+  }
+
+  function readAuthKey(key) {
+    let raw = null;
+    try { raw = localStorage.getItem(key); } catch (e) {}
+    if (raw) {
+      const parsed = parseStoredAuth(raw);
+      if (parsed.expiry && Date.now() >= parsed.expiry) {
+        try { localStorage.removeItem(key); } catch (e) {}
+      } else {
+        return parsed.value;
+      }
+    }
+    try { raw = sessionStorage.getItem(key); } catch (e) { raw = null; }
+    if (!raw) return null;
+    const parsed = parseStoredAuth(raw);
+    if (parsed.expiry && Date.now() >= parsed.expiry) {
+      try { sessionStorage.removeItem(key); } catch (e) {}
+      return null;
+    }
+    return parsed.value;
+  }
+
+  function checkAuthStatus() {
+    const user = readAuthKey(AUTH_KEYS.USER);
+    const userData = readAuthKey(AUTH_KEYS.USER_DATA);
+    const userTypeRaw = readAuthKey(AUTH_KEYS.USER_TYPE);
+
+    if (!user) return { loggedIn: false, role: null, user: null, data: null };
+
+    let role = 'student';
+    if (userTypeRaw) {
+      const t = String(userTypeRaw).toLowerCase().trim();
+      if (t === 'admin') role = 'admin';
+      else if (t === 'teacher') role = 'teacher';
+      else role = 'student';
+    }
+
+    if (!userData) return { loggedIn: false, role: null, user: null, data: null };
+
+    return { loggedIn: true, role: role, user: user, data: userData };
+  }
+
+  function checkLoginStatus() {
+    return checkAuthStatus().loggedIn;
+  }
+
+  // ROLE BADGE + SIDEBAR USER
+  function renderRoleBadge(auth) {
+    const badge = document.getElementById('roleBadge');
+    const icon = document.getElementById('roleBadgeIcon');
+    const text = document.getElementById('roleBadgeText');
+    if (!badge || !icon || !text) return;
+
+    let label = 'Student';
+    let iconClass = 'fas fa-user-graduate';
+    let cls = 'student';
+
+    if (auth.role === 'admin') {
+      label = 'Admin'; iconClass = 'fas fa-user-shield'; cls = 'admin';
+    } else if (auth.role === 'teacher') {
+      label = 'Teacher'; iconClass = 'fas fa-chalkboard-teacher'; cls = 'teacher';
+    }
+
+    const data = readAuthKey(AUTH_KEYS.USER_DATA) || {};
+    const firstName =
+      data['First Name'] || data['Name'] || data['Teacher Name'] || data['User Name'] || '';
+    const lastName = data['Last Name'] || '';
+    const fullName = (firstName + ' ' + lastName).trim();
+    const displayName = fullName || data['Email Id'] || auth.user || '';
+
+    text.textContent = displayName ? (label + ' · ' + displayName) : label;
+    icon.className = iconClass;
+
+    badge.classList.remove('student', 'teacher', 'admin');
+    badge.classList.add(cls);
+    badge.style.display = 'inline-flex';
+
+    renderSidebarUser(auth);
+  }
+
+  function renderSidebarUser(auth) {
+    const avatar = document.getElementById('sidebarAvatar');
+    const nameEl = document.getElementById('sidebarUserName');
+    const roleEl = document.getElementById('sidebarUserRole');
+    if (!avatar || !nameEl || !roleEl) return;
+
+    const data = readAuthKey(AUTH_KEYS.USER_DATA) || {};
+    const firstName =
+      data['First Name'] || data['Name'] || data['Teacher Name'] || data['User Name'] || '';
+    const lastName = data['Last Name'] || '';
+    const fullName = (firstName + ' ' + lastName).trim();
+    const displayName = fullName || data['Email Id'] || auth.user || 'User';
+
+    const initial = (displayName.charAt(0) || 'U').toUpperCase();
+    avatar.textContent = initial;
+    nameEl.textContent = displayName;
+
+    let roleLabel = 'Student';
+    let roleCls = 'student';
+    if (auth.role === 'admin') { roleLabel = 'Admin'; roleCls = 'admin'; }
+    else if (auth.role === 'teacher') { roleLabel = 'Teacher'; roleCls = 'teacher'; }
+
+    roleEl.textContent = roleLabel;
+    roleEl.classList.remove('student', 'teacher', 'admin');
+    roleEl.classList.add(roleCls);
+  }
+
+  function hideRoleBadge() {
+    const badge = document.getElementById('roleBadge');
+    if (badge) badge.style.display = 'none';
+  }
+
+  // UI HELPERS
+  function hideSkeleton() {
+    const sk = document.getElementById('authSkeleton');
+    if (sk) {
+      sk.classList.add('hidden');
+      setTimeout(function () { sk.style.display = 'none'; }, 400);
+    }
+  }
+
+  function revealApp() {
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) wrap.classList.add('revealed');
+  }
+
+  function showLoginRequired() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.classList.add('active');
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) {
+      wrap.style.display = 'none';
+      wrap.classList.remove('revealed');
+    }
+    hideRoleBadge();
+  }
+
+  function hideLoginRequired() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.classList.remove('active');
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) wrap.style.display = 'block';
+  }
+
+  // SIDEBAR
+  const sidebar = document.getElementById('mobileSidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  const hamburger = document.getElementById('hamburgerBtn');
+  const sidebarClose = document.getElementById('sidebarClose');
+
+  let sidebarOpen = false;
+
+  function openSidebar() {
+    if (!sidebar || sidebarOpen) return;
+    sidebar.classList.add('open');
+    if (backdrop) backdrop.classList.add('active');
+    body.classList.add('sidebar-lock');
+    sidebarOpen = true;
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeSidebar() {
+    if (!sidebar || !sidebarOpen) return;
+    sidebar.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('active');
+    body.classList.remove('sidebar-lock');
+    sidebarOpen = false;
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  if (hamburger) hamburger.addEventListener('click', openSidebar);
+  if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+  if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+  document.querySelectorAll('.sidebar-toc-list a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      setTimeout(closeSidebar, 150);
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sidebarOpen) closeSidebar();
+  });
+
+  // Swipe gestures
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  const SWIPE_MIN_DISTANCE = 60;
+  const SWIPE_MAX_VERTICAL = 80;
+  const SWIPE_MAX_TIME = 600;
+
+  document.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchStartTime = Date.now();
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    if (e.changedTouches.length !== 1) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+    const dt = Date.now() - touchStartTime;
+
+    if (dt > SWIPE_MAX_TIME) return;
+    if (Math.abs(dy) > SWIPE_MAX_VERTICAL) return;
+    if (Math.abs(dx) < SWIPE_MIN_DISTANCE) return;
+
+    if (dx > 0) {
+      if (!sidebarOpen) openSidebar();
+    } else if (dx < 0) {
+      if (sidebarOpen) closeSidebar();
+    }
+  }, { passive: true });
+
+  // BOOT
+  function boot() {
+    const auth = checkAuthStatus();
+
+    if (!auth.loggedIn) {
+      hideSkeleton();
+      showLoginRequired();
+      return;
+    }
+
+    hideLoginRequired();
+    renderRoleBadge(auth);
+    hideSkeleton();
+    revealApp();
+
+    console.log('✅ Access granted:', auth.role, '-', auth.user);
+  }
+
+  const loginBtn = document.getElementById('loginBtn');
+  if (loginBtn) loginBtn.setAttribute('href', LOGIN_REDIRECT);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(boot, 80);
+  });
+
+  window.addEventListener('storage', function (e) {
+    const isAuthKey = Object.keys(AUTH_KEYS).some(function (k) {
+      return AUTH_KEYS[k] === e.key;
+    });
+    if (isAuthKey) {
+      if (!checkLoginStatus()) showLoginRequired();
+      else {
+        const auth = checkAuthStatus();
+        if (auth.loggedIn) {
+          hideLoginRequired();
+          renderRoleBadge(auth);
+          revealApp();
+        }
+      }
+    }
+  });
+
+  setInterval(function () {
+    if (!checkLoginStatus()) {
+      const overlay = document.getElementById('loginOverlay');
+      if (overlay && !overlay.classList.contains('active')) showLoginRequired();
+    }
+  }, 15000);
+
+  // TOC SCROLL-SPY
+  const allTocLinks = document.querySelectorAll('[data-toc]');
+  const sections = document.querySelectorAll('section.section-card[id]');
+
+  function setActiveToc(id) {
+    allTocLinks.forEach(function (link) {
+      link.classList.toggle('active', link.getAttribute('data-toc') === id);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      const visible = entries
+        .filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return b.intersectionRatio - a.intersectionRatio; });
+      if (visible.length > 0) setActiveToc(visible[0].target.id);
+    }, {
+      rootMargin: '-90px 0px -55% 0px',
+      threshold: [0.1, 0.5, 0.9]
+    });
+    sections.forEach(function (s) { observer.observe(s); });
+  }
+
+  allTocLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      const id = link.getAttribute('data-toc');
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        setActiveToc(id);
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+  });
+
+  // SEARCH FILTER
+  const searchInput = document.getElementById('searchInput');
+  const searchClear = document.getElementById('searchClear');
+  const searchInfo = document.getElementById('searchInfo');
+  const noResults = document.getElementById('noResults');
+  const sectionCards = document.querySelectorAll('.section-card');
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+    });
+  }
+
+  function runFilter(query) {
+    const q = (query || '').toLowerCase().trim();
+    let visibleCount = 0;
+
+    if (searchClear) {
+      searchClear.classList.toggle('visible', q.length > 0);
+    }
+
+    sectionCards.forEach(function (section) {
+      let sectionVisible = 0;
+
+      const tools = section.querySelectorAll('.tool-card');
+      tools.forEach(function (tool) {
+        const h4 = (tool.querySelector('h4') || {}).textContent || '';
+        const p = (tool.querySelector('p') || {}).textContent || '';
+        const haystack = (h4 + ' ' + p).toLowerCase();
+        const match = !q || haystack.indexOf(q) !== -1;
+        tool.style.display = match ? '' : 'none';
+        if (match) { sectionVisible++; visibleCount++; }
+      });
+
+      const rows = section.querySelectorAll('.shortcut-row');
+      rows.forEach(function (row) {
+        const desc = (row.querySelector('.shortcut-desc span') || {}).textContent || '';
+        const keys = (row.querySelector('.shortcut-keys') || {}).textContent || '';
+        const searchMeta = row.getAttribute('data-search') || '';
+        const haystack = (desc + ' ' + keys + ' ' + searchMeta).toLowerCase();
+        const match = !q || haystack.indexOf(q) !== -1;
+        row.style.display = match ? '' : 'none';
+        if (match) { sectionVisible++; visibleCount++; }
+      });
+
+      if (sectionVisible === 0) {
+        section.style.display = 'none';
+      } else {
+        section.style.display = '';
+      }
+    });
+
+    if (noResults) {
+      noResults.classList.toggle('visible', visibleCount === 0 && q.length > 0);
+    }
+
+    if (searchInfo) {
+      if (q.length > 0) {
+        searchInfo.style.display = '';
+        searchInfo.innerHTML = 'Showing <strong>' + visibleCount + '</strong> ' +
+          (visibleCount === 1 ? 'result' : 'results') +
+          ' for "<strong>' + escapeHtml(q) + '</strong>"';
+      } else {
+        searchInfo.style.display = 'none';
+        searchInfo.innerHTML = '';
+      }
+    }
+  }
+
+  if (searchInput) {
+    let searchTimer = null;
+    searchInput.addEventListener('input', function (e) {
+      clearTimeout(searchTimer);
+      const val = e.target.value;
+      searchTimer = setTimeout(function () { runFilter(val); }, 120);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        const tag = (document.activeElement && document.activeElement.tagName) || '';
+        if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      }
+      if (e.key === 'Escape' && document.activeElement === searchInput) {
+        searchInput.value = '';
+        runFilter('');
+        searchInput.blur();
+      }
+    });
+  }
+
+  if (searchClear) {
+    searchClear.addEventListener('click', function () {
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+      }
+      runFilter('');
+    });
+  }
+
+  // BACK TO TOP
+  const backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    function updateBackToTop() {
+      if (window.pageYOffset > 400) backToTop.classList.add('visible');
+      else backToTop.classList.remove('visible');
+    }
+    window.addEventListener('scroll', updateBackToTop, { passive: true });
+    updateBackToTop();
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // KEY PRESS VISUAL FEEDBACK
+  document.addEventListener('keydown', function (e) {
+    const key = e.key;
+    if (!key || key.length > 3) return;
+    if (document.activeElement === searchInput) return;
+
+    const allKbds = document.querySelectorAll('kbd');
+    allKbds.forEach(function (kbd) {
+      const txt = (kbd.textContent || '').trim().toLowerCase();
+      const pressed = key.toLowerCase();
+
+      if (txt === pressed ||
+          (pressed === 'control' && txt === 'ctrl') ||
+          (pressed === 'escape' && txt === 'esc') ||
+          (pressed === 'delete' && txt === 'del') ||
+          (pressed === 'arrowup' && txt === '↑') ||
+          (pressed === 'arrowdown' && txt === '↓') ||
+          (pressed === 'arrowleft' && txt === '←') ||
+          (pressed === 'arrowright' && txt === '→') ||
+          (pressed === ' ' && txt === 'space')) {
+        kbd.style.transform = 'scale(0.9)';
+        kbd.style.background = 'linear-gradient(135deg, #f59e0b, #fbbf24)';
+        kbd.style.color = '#1f2937';
+        setTimeout(function () {
+          kbd.style.transform = '';
+          kbd.style.background = '';
+          kbd.style.color = '';
+        }, 200);
+      }
+    });
+  });
+
+  console.log('📁 Workbook Management & Audit page ready — theme:', html.getAttribute('data-theme'));
+})();
+</script>
+</body>
+</html>
