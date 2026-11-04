@@ -1,0 +1,2402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#f59e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+<title>TallyPrime Shortcut Keys · Basic Computer · EGyan</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- FOUC prevention -->
+<script>
+(function () {
+  try {
+    var stored = localStorage.getItem('user-theme-preference');
+    var theme = stored;
+    if (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      theme = 'dark';
+    }
+    document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
+<style>
+/* ============================================================
+   THEME VARIABLES
+   ============================================================ */
+:root {
+  --bg-body:        #fffdf5;
+  --bg-card:        #ffffff;
+  --bg-header:      #ffffff;
+  --bg-soft:        #fff9e6;
+  --bg-code:        #fef9ef;
+
+  --text-main:      #1f2937;
+  --text-muted:     #6b7280;
+  --text-light:     #9ca3af;
+  --border-light:   #f0e8d0;
+
+  --shadow-sm:      0 10px 28px -12px rgba(245, 158, 11, 0.18);
+  --shadow-hover:   0 22px 44px -18px rgba(245, 158, 11, 0.32);
+  --shadow-card:    0 8px 30px -10px rgba(245, 158, 11, 0.15);
+
+  --gold:           #f59e0b;
+  --gold-2:         #fbbf24;
+  --gold-soft:      rgba(245, 158, 11, 0.12);
+  --gold-glow:      rgba(245, 158, 11, 0.4);
+
+  --accent:         #0d9488;
+  --accent-2:       #14b8a6;
+  --accent-soft:    rgba(13, 148, 136, 0.10);
+  --accent-glow:    rgba(13, 148, 136, 0.35);
+
+  --drive-blue:     #4285f4;
+  --drive-green:    #34a853;
+  --drive-yellow:   #fbbc05;
+  --drive-red:      #ea4335;
+
+  --success:        #10b981;
+  --danger:         #ef4444;
+  --warning:        #f59e0b;
+  --info:           #3b82f6;
+
+  --teacher-teal:   #0d9488;
+  --admin-gold:     #f59e0b;
+
+  --hl-bg:          linear-gradient(180deg, transparent 60%, rgba(245, 158, 11, 0.35) 60%);
+  --hl-teal-bg:     linear-gradient(180deg, transparent 60%, rgba(13, 148, 136, 0.28) 60%);
+  --hl-blue-bg:     linear-gradient(180deg, transparent 60%, rgba(66, 133, 244, 0.28) 60%);
+
+  --kbd-bg:         linear-gradient(180deg, #ffffff 0%, #f5f1e5 100%);
+  --kbd-border:     #d1c7a8;
+  --kbd-shadow:     inset 0 -2px 0 #d1c7a8, 0 2px 0 rgba(0,0,0,0.08);
+  --kbd-text:       #1f2937;
+
+  --card-border:    1px solid rgba(245, 158, 11, 0.12);
+  --overlay-bg:     rgba(15, 23, 42, 0.45);
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+}
+
+[data-theme="dark"] {
+  --bg-body:        #0b0e0d;
+  --bg-card:        #16201e;
+  --bg-header:      #0f1a18;
+  --bg-soft:        #131d1b;
+  --bg-code:        #0f1a18;
+
+  --text-main:      #f1f5f9;
+  --text-muted:     #9ca3af;
+  --text-light:     #64748b;
+  --border-light:   #1f2b28;
+
+  --shadow-sm:      0 10px 30px -12px rgba(0, 0, 0, 0.65);
+  --shadow-hover:   0 22px 44px -18px rgba(0, 0, 0, 0.85);
+  --shadow-card:    0 8px 32px -10px rgba(0, 0, 0, 0.55);
+
+  --gold:           #fbbf24;
+  --gold-2:         #fcd34d;
+  --gold-soft:      rgba(251, 191, 36, 0.18);
+  --gold-glow:      rgba(251, 191, 36, 0.5);
+
+  --accent:         #14b8a6;
+  --accent-2:       #2dd4bf;
+  --accent-soft:    rgba(20, 184, 166, 0.18);
+  --accent-glow:    rgba(20, 184, 166, 0.45);
+
+  --drive-blue:     #60a5fa;
+  --drive-green:    #4ade80;
+  --drive-yellow:   #fcd34d;
+  --drive-red:      #f87171;
+
+  --success:        #34d399;
+  --danger:         #f87171;
+  --warning:        #fbbf24;
+  --info:           #60a5fa;
+
+  --teacher-teal:   #14b8a6;
+  --admin-gold:     #fbbf24;
+
+  --hl-bg:          linear-gradient(180deg, transparent 60%, rgba(251, 191, 36, 0.28) 60%);
+  --hl-teal-bg:     linear-gradient(180deg, transparent 60%, rgba(20, 184, 166, 0.28) 60%);
+  --hl-blue-bg:     linear-gradient(180deg, transparent 60%, rgba(96, 165, 250, 0.3) 60%);
+
+  --kbd-bg:         linear-gradient(180deg, #2a3735 0%, #1f2b28 100%);
+  --kbd-border:     #3a4a47;
+  --kbd-shadow:     inset 0 -2px 0 #0a1210, 0 2px 0 rgba(0,0,0,0.4);
+  --kbd-text:       #f1f5f9;
+
+  --card-border:    1px solid rgba(251, 191, 36, 0.12);
+  --overlay-bg:     rgba(0, 0, 0, 0.75);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg-body);
+  scroll-padding-top: 90px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-body);
+  color: var(--text-main);
+  transition: background var(--transition-normal), color var(--transition-normal);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1.7;
+}
+
+body.sidebar-lock { overflow: hidden; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes modalPop {
+  from { transform: scale(0.9) translateY(20px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ============================================================
+   AUTH SKELETON
+   ============================================================ */
+#authSkeleton {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-body);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.2rem;
+  transition: opacity 0.35s ease;
+}
+#authSkeleton.hidden { opacity: 0; pointer-events: none; }
+.skeleton-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--border-light);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+.skeleton-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+/* ============================================================
+   APP WRAPPER
+   ============================================================ */
+.app-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.2rem 1.8rem 3rem;
+  padding-left: max(1.8rem, env(safe-area-inset-left));
+  padding-right: max(1.8rem, env(safe-area-inset-right));
+  width: 100%;
+  visibility: hidden;
+}
+.app-wrapper.revealed { visibility: visible; }
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 0.7rem 1.5rem;
+  background: var(--bg-header);
+  padding: 0.6rem 1.5rem;
+  border-radius: 60px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.8rem;
+  transition: background var(--transition-normal), box-shadow var(--transition-normal);
+  position: sticky;
+  top: 8px;
+  z-index: 100;
+}
+
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.hamburger-btn {
+  display: none;
+  background: var(--gold-soft);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.hamburger-btn:hover { background: var(--gold); color: #1f2937; }
+.hamburger-btn:active { transform: scale(0.92); }
+
+.brand-logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: none;
+}
+[data-theme="dark"] .brand-logo { filter: brightness(0) invert(1); }
+
+.brand-text {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.right-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.role-badge {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 0.35rem 0.9rem;
+  border-radius: 40px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.role-badge.student { color: #2563eb; background: rgba(37, 99, 235, 0.12); }
+.role-badge.teacher { color: var(--teacher-teal); background: rgba(13, 148, 136, 0.12); }
+.role-badge.admin   { color: var(--admin-gold); background: rgba(245, 158, 11, 0.15); }
+
+[data-theme="dark"] .role-badge.student { color: #60a5fa; background: rgba(59, 130, 246, 0.2); }
+[data-theme="dark"] .role-badge.teacher { color: #14b8a6; background: rgba(20, 184, 166, 0.2); }
+[data-theme="dark"] .role-badge.admin   { color: #fbbf24; background: rgba(245, 158, 11, 0.2); }
+
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.45rem 1.1rem;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  background: var(--gold-soft);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.back-home:hover {
+  background: var(--gold);
+  color: #1f2937;
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -10px var(--gold-glow);
+}
+
+/* ============================================================
+   MOBILE SIDEBAR
+   ============================================================ */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.sidebar-backdrop.active { opacity: 1; visibility: visible; }
+
+.mobile-sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: min(85vw, 320px);
+  background: var(--bg-card);
+  border-right: 1px solid var(--border-light);
+  box-shadow: 8px 0 40px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.mobile-sidebar.open { transform: translateX(0); }
+
+.sidebar-header {
+  padding: 1.3rem 1.2rem 1.1rem;
+  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft));
+  position: relative;
+}
+
+.sidebar-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+[data-theme="dark"] .sidebar-close { background: rgba(0,0,0,0.4); }
+.sidebar-close:hover { background: var(--gold); color: #1f2937; }
+.sidebar-close:active { transform: scale(0.9); }
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  box-shadow: 0 6px 14px -6px var(--gold-glow);
+}
+
+.sidebar-user-info { min-width: 0; flex: 1; }
+.sidebar-user-name {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+.sidebar-user-role {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.sidebar-user-role.student { color: #2563eb; }
+.sidebar-user-role.teacher { color: var(--teacher-teal); }
+.sidebar-user-role.admin   { color: var(--admin-gold); }
+[data-theme="dark"] .sidebar-user-role.student { color: #60a5fa; }
+[data-theme="dark"] .sidebar-user-role.teacher { color: #14b8a6; }
+[data-theme="dark"] .sidebar-user-role.admin   { color: #fbbf24; }
+
+.sidebar-toc-heading {
+  padding: 1rem 1.2rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sidebar-toc-heading i { color: var(--gold); }
+
+.sidebar-toc-list {
+  list-style: none;
+  padding: 0 0.7rem 1rem;
+  flex: 1;
+}
+.sidebar-toc-list li { margin-bottom: 0.2rem; }
+.sidebar-toc-list a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all var(--transition-fast);
+  line-height: 1.3;
+}
+.sidebar-toc-list a:hover { background: var(--gold-soft); transform: translateX(3px); }
+.sidebar-toc-list a:active { transform: scale(0.98); }
+.sidebar-toc-list a.active {
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  box-shadow: 0 6px 16px -8px var(--gold-glow);
+}
+.sidebar-toc-list a .num {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: var(--gold-soft);
+  color: var(--gold);
+  font-size: 0.68rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.sidebar-toc-list a.active .num { background: rgba(255,255,255,0.85); color: var(--gold); }
+
+.sidebar-footer {
+  padding: 0.9rem 1.2rem 1.4rem;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.page-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem 2.2rem;
+  background: var(--bg-card);
+  border-radius: 32px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-2), var(--accent-2));
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  right: -100px; top: -100px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, var(--gold-soft), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-text { position: relative; z-index: 1; }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--gold);
+  background: var(--gold-soft);
+  padding: 0.35rem 0.9rem;
+  border-radius: 40px;
+  border: 1px solid var(--border-light);
+  margin-bottom: 0.9rem;
+}
+.hero-text h1 {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+  margin-bottom: 0.6rem;
+}
+.hero-text h1 .accent { color: var(--gold); }
+.hero-text p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 560px;
+}
+.hero-art {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  z-index: 1;
+  animation: float 5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+.search-wrap {
+  position: relative;
+  margin-bottom: 1.6rem;
+  max-width: 560px;
+}
+.search-input {
+  width: 100%;
+  padding: 0.85rem 1rem 0.85rem 3rem;
+  border-radius: 40px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-size: 0.92rem;
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  outline: none;
+}
+.search-input::placeholder { color: var(--text-light); }
+.search-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px var(--gold-soft);
+}
+.search-icon {
+  position: absolute;
+  left: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+.search-clear {
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: var(--gold-soft);
+  color: var(--gold);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: all var(--transition-fast);
+}
+.search-clear.visible { display: flex; }
+.search-clear:hover { background: var(--gold); color: #1f2937; }
+
+.search-results-info {
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding-left: 0.3rem;
+}
+.search-results-info strong { color: var(--gold); }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.content-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.toc {
+  position: sticky;
+  top: 90px;
+  background: var(--bg-card);
+  border: var(--card-border);
+  border-radius: 20px;
+  padding: 1.2rem 1rem;
+  box-shadow: var(--shadow-sm);
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+  display: block;
+}
+.toc h3 {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  margin-bottom: 0.8rem;
+  padding-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.toc h3 i { color: var(--gold); }
+.toc ul { list-style: none; }
+.toc li { margin-bottom: 0.15rem; }
+.toc a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.5rem 0.7rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+  line-height: 1.3;
+}
+.toc a:hover { background: var(--gold-soft); color: var(--text-main); }
+.toc a.active {
+  background: var(--gold-soft);
+  color: var(--gold);
+  border-left: 3px solid var(--gold);
+  padding-left: 0.55rem;
+}
+.toc a .num {
+  font-size: 0.62rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--gold-soft);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.toc a.active .num { background: var(--gold); color: #fff; }
+
+.content { min-width: 0; }
+
+/* ============================================================
+   SECTION CARDS
+   ============================================================ */
+.section-card {
+  background: var(--bg-card);
+  border: var(--card-border);
+  border-radius: 24px;
+  padding: 2rem 2.2rem;
+  margin-bottom: 1.8rem;
+  box-shadow: var(--shadow-card);
+  scroll-margin-top: 90px;
+  transition: all var(--transition-normal);
+  animation: fadeInUp 0.5s ease both;
+}
+.section-card:nth-child(1) { animation-delay: 0.05s; }
+.section-card:nth-child(2) { animation-delay: 0.10s; }
+.section-card:nth-child(3) { animation-delay: 0.15s; }
+.section-card:nth-child(4) { animation-delay: 0.20s; }
+.section-card:nth-child(5) { animation-delay: 0.25s; }
+.section-card:nth-child(6) { animation-delay: 0.30s; }
+.section-card:nth-child(7) { animation-delay: 0.35s; }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 1.2rem;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+.section-title .icon-pill {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft));
+  border: 1px solid var(--border-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+.section-card p {
+  color: var(--text-main);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.section-card p:last-child { margin-bottom: 0; }
+.section-card p strong { color: var(--text-main); font-weight: 700; }
+
+.hl {
+  background: var(--hl-bg);
+  padding: 0 0.2em;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: 2px;
+}
+.hl-teal {
+  background: var(--hl-teal-bg);
+  padding: 0 0.2em;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: 2px;
+}
+.hl-blue {
+  background: var(--hl-blue-bg);
+  padding: 0 0.2em;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: 2px;
+}
+mark {
+  background: var(--gold-soft);
+  color: var(--gold);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.callout {
+  display: flex;
+  gap: 12px;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  border-left: 4px solid;
+}
+.callout i { flex-shrink: 0; margin-top: 2px; font-size: 1rem; }
+.callout.info    { background: rgba(59,130,246,0.08); border-color: var(--info); color: var(--text-main); }
+.callout.info    i { color: var(--info); }
+.callout.tip     { background: var(--gold-soft); border-color: var(--gold); color: var(--text-main); }
+.callout.tip     i { color: var(--gold); }
+.callout.warning { background: rgba(239,68,68,0.08); border-color: var(--danger); color: var(--text-main); }
+.callout.warning i { color: var(--danger); }
+.callout.success { background: rgba(16,185,129,0.08); border-color: var(--success); color: var(--text-main); }
+.callout.success i { color: var(--success); }
+
+/* ============================================================
+   SHORTCUT LIST
+   ============================================================ */
+.shortcut-group-title {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 1.4rem 0 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.shortcut-group-title i {
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  background: var(--gold-soft);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.shortcut-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.95rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  transition: all var(--transition-fast);
+}
+.shortcut-row:hover {
+  background: var(--bg-card);
+  border-color: var(--gold);
+  transform: translateX(3px);
+  box-shadow: var(--shadow-sm);
+}
+.shortcut-desc {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+.shortcut-desc i {
+  color: var(--gold);
+  font-size: 0.9rem;
+  width: 20px;
+  flex-shrink: 0;
+  text-align: center;
+}
+.shortcut-desc span {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+.shortcut-keys {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+kbd, .kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 0.5rem;
+  border-radius: 7px;
+  background: var(--kbd-bg);
+  border: 1px solid var(--kbd-border);
+  box-shadow: var(--kbd-shadow);
+  color: var(--kbd-text);
+  font-family: 'Inter', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+  white-space: nowrap;
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+[data-theme="dark"] kbd, [data-theme="dark"] .kbd {
+  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+}
+.shortcut-row:hover kbd {
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  border-color: var(--gold);
+}
+.key-sep {
+  color: var(--text-light);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0 2px;
+}
+
+/* ============================================================
+   NO RESULTS
+   ============================================================ */
+.no-results {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-light);
+  border-radius: 20px;
+  margin: 1rem 0;
+}
+.no-results.visible { display: flex; }
+.no-results i {
+  font-size: 2.5rem;
+  color: var(--text-light);
+  margin-bottom: 0.8rem;
+}
+.no-results h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.3rem;
+}
+.no-results p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   FOOTER + BACK TO TOP
+   ============================================================ */
+.footer-note {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-light);
+  padding-top: 1.5rem;
+}
+.footer-note i { opacity: 0.5; margin-right: 6px; }
+
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #1f2937;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 12px 28px -8px var(--gold-glow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all var(--transition-normal);
+  z-index: 500;
+}
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover { background: var(--gold-2); transform: translateY(-3px); }
+
+/* ============================================================
+   LOGIN OVERLAY
+   ============================================================ */
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.login-overlay.active {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
+.login-box {
+  background: var(--bg-card);
+  border-radius: 40px;
+  padding: 2.5rem 2.8rem;
+  max-width: 440px;
+  width: 100%;
+  border: var(--card-border);
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.4);
+  text-align: center;
+  animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.login-box .icon {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold-soft);
+  border-radius: 28px;
+  font-size: 2.2rem;
+  color: var(--gold);
+}
+.login-box h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.login-box p {
+  color: var(--text-muted);
+  margin-bottom: 1.6rem;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+.login-box p strong { color: var(--text-main); }
+.login-box .login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 160px;
+  padding: 0.8rem 1.6rem;
+  border-radius: 40px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  letter-spacing: 0.3px;
+  border: none;
+  cursor: pointer;
+}
+.login-box .login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -10px var(--gold-glow);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .content-layout { grid-template-columns: 1fr; }
+  .toc { display: none; }
+}
+
+@media (max-width: 900px) {
+  .hamburger-btn { display: inline-flex; }
+
+  .app-wrapper { padding: 0.8rem 1rem 2.5rem; }
+  .top-bar {
+    border-radius: 32px;
+    padding: 0.5rem 1rem;
+    top: 6px;
+    gap: 0.5rem;
+  }
+  .brand-area { gap: 8px; }
+  .brand-text { font-size: 1rem; }
+  .brand-logo { height: 36px; }
+
+  .role-badge { display: none !important; }
+  .back-home { padding: 0.4rem 0.75rem; }
+  .back-home span { display: inline; font-size: 0.78rem; }
+  .back-home i { font-size: 0.85rem; }
+
+  .page-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 1.5rem 1.2rem;
+    gap: 1rem;
+  }
+  .hero-text h1 { font-size: 1.7rem; }
+  .hero-text p { font-size: 0.92rem; margin: 0 auto; }
+  .hero-art { width: 140px; height: 140px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 0.65rem; }
+
+  .section-card { padding: 1.5rem 1.2rem; border-radius: 20px; }
+  .section-title { font-size: 1.3rem; gap: 10px; }
+  .section-title .icon-pill { width: 38px; height: 38px; font-size: 1rem; border-radius: 12px; }
+  .section-card p { font-size: 0.94rem; }
+}
+
+@media (max-width: 480px) {
+  .app-wrapper { padding: 0.6rem 0.8rem 2rem; }
+  .top-bar { padding: 0.4rem 0.8rem; border-radius: 26px; gap: 0.4rem; }
+  .brand-text { font-size: 0.88rem; letter-spacing: -0.2px; }
+  .brand-logo { height: 30px; }
+  .hamburger-btn { width: 34px; height: 34px; font-size: 0.95rem; }
+  .back-home { font-size: 0.72rem; padding: 0.32rem 0.65rem; }
+  .right-actions { gap: 0.4rem; }
+
+  .page-header { padding: 1.2rem 1rem; border-radius: 22px; }
+  .hero-text h1 { font-size: 1.4rem; }
+  .hero-text p { font-size: 0.85rem; }
+  .hero-art { width: 110px; height: 110px; }
+  .hero-eyebrow { font-size: 0.58rem; padding: 0.28rem 0.7rem; letter-spacing: 0.9px; }
+
+  .section-card { padding: 1.2rem 1rem; border-radius: 16px; margin-bottom: 1.2rem; }
+  .section-title { font-size: 1.05rem; gap: 8px; flex-wrap: wrap; }
+  .section-title .icon-pill { width: 32px; height: 32px; font-size: 0.85rem; border-radius: 10px; }
+  .section-card p { font-size: 0.88rem; line-height: 1.65; }
+
+  .callout { padding: 0.8rem 0.9rem; font-size: 0.83rem; border-radius: 12px; gap: 8px; }
+
+  .shortcut-list { gap: 0.4rem; }
+  .shortcut-row {
+    padding: 0.55rem 0.65rem;
+    gap: 0.5rem;
+    border-radius: 10px;
+  }
+  .shortcut-desc { gap: 6px; }
+  .shortcut-desc i { font-size: 0.72rem; width: 14px; }
+  .shortcut-desc span { font-size: 0.72rem; line-height: 1.3; }
+  .shortcut-keys { gap: 4px; }
+
+  kbd, .kbd {
+    min-width: 24px;
+    height: 24px;
+    padding: 0 0.4rem;
+    font-size: 0.65rem;
+    border-radius: 6px;
+  }
+  .key-sep { font-size: 0.6rem; }
+
+  .shortcut-group-title { font-size: 0.92rem; margin: 1rem 0 0.5rem; }
+  .shortcut-group-title i { width: 22px; height: 22px; font-size: 0.7rem; }
+
+  .search-input { font-size: 0.85rem; padding: 0.75rem 1rem 0.75rem 2.6rem; }
+  .search-icon { left: 0.9rem; font-size: 0.85rem; }
+  .search-results-info { font-size: 0.75rem; }
+
+  .back-to-top { width: 42px; height: 42px; bottom: 16px; right: 16px; font-size: 0.95rem; }
+
+  .login-box { padding: 1.8rem 1.4rem; border-radius: 28px; }
+  .login-box .icon { width: 68px; height: 68px; font-size: 1.8rem; border-radius: 22px; margin-bottom: 1rem; }
+  .login-box h2 { font-size: 1.15rem; }
+  .login-box p { font-size: 0.8rem; margin-bottom: 1.2rem; }
+}
+
+@media (max-width: 360px) {
+  .hero-text h1 { font-size: 1.2rem; }
+  .section-title { font-size: 0.95rem; }
+  .section-card p { font-size: 0.82rem; }
+  .tool-card h4 { font-size: 0.72rem; }
+  .tool-card p { font-size: 0.62rem; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .tool-card:hover,
+  .shortcut-row:hover { transform: none; box-shadow: none; background: var(--bg-soft); border-color: var(--border-light); }
+  .shortcut-row:hover kbd { background: var(--kbd-bg); color: var(--kbd-text); border-color: var(--kbd-border); }
+  .back-to-top:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+  .hero-art { animation: none; }
+  .section-card { opacity: 1; transform: none; }
+  .mobile-sidebar { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- AUTH SKELETON -->
+<div id="authSkeleton" role="status" aria-live="polite">
+  <div class="skeleton-spinner"></div>
+  <div class="skeleton-text">Verifying your session…</div>
+</div>
+
+<!-- LOGIN OVERLAY -->
+<div class="login-overlay" id="loginOverlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="login-box">
+    <div class="icon"><i class="fas fa-lock"></i></div>
+    <h2 id="loginTitle">Please Login!</h2>
+    <p>You need to be logged in as a <strong>Student</strong>, <strong>Teacher</strong>, or <strong>Admin</strong> to access TallyPrime Shortcut Keys.</p>
+    <a href="../My Account/myaccount.html" class="login-btn" id="loginBtn">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </a>
+  </div>
+</div>
+
+<!-- MOBILE SIDEBAR BACKDROP -->
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<!-- MOBILE SIDEBAR -->
+<aside class="mobile-sidebar" id="mobileSidebar" aria-label="Navigation sidebar">
+  <div class="sidebar-header">
+    <button class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div class="sidebar-user">
+      <div class="sidebar-avatar" id="sidebarAvatar">S</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" id="sidebarUserName">Student</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">Student</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-toc-heading">
+    <i class="fas fa-list-ul"></i> On this page
+  </div>
+
+  <ul class="sidebar-toc-list" id="sidebarTocList">
+    <li><a href="#intro" data-toc="intro"><span class="num">1</span> How to Use</a></li>
+    <li><a href="#vouchers" data-toc="vouchers"><span class="num">2</span> Vouchers</a></li>
+    <li><a href="#gst-returns" data-toc="gst-returns"><span class="num">3</span> GST Returns</a></li>
+    <li><a href="#reports" data-toc="reports"><span class="num">4</span> Reports</a></li>
+    <li><a href="#navigation" data-toc="navigation"><span class="num">5</span> Navigation</a></li>
+    <li><a href="#hidden-keys" data-toc="hidden-keys"><span class="num">6</span> Hidden Keys</a></li>
+  </ul>
+
+  <div class="sidebar-footer">
+    <i class="fas fa-graduation-cap"></i> EGyan Skill Development
+  </div>
+</aside>
+
+<!-- MAIN APP -->
+<div class="app-wrapper" id="appWrapper">
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open navigation" title="Open navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="brand-area">
+      <img class="brand-logo"
+           src="https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL"
+           alt="EGyan Skill Development logo"
+           onerror="this.style.display='none'">
+      <span class="brand-text">EGyan Skill Development</span>
+    </div>
+
+    <div class="right-actions">
+      <span class="role-badge" id="roleBadge" style="display: none;">
+        <i class="fas fa-user" id="roleBadgeIcon"></i>
+        <span id="roleBadgeText">User</span>
+      </span>
+
+      <a href="TallyDashboard.html" class="back-home" aria-label="Back to dashboard">
+        <i class="fas fa-arrow-left"></i> <span>Back</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="page-header">
+    <div class="hero-text">
+      <span class="hero-eyebrow"><i class="fas fa-keyboard"></i> Basic Computer · Reference</span>
+      <h1>TallyPrime <span class="accent">Shortcut Keys</span></h1>
+      <p>The complete keyboard reference for TallyPrime — vouchers, GST returns, reports, navigation, and hidden keys. Master these and work at the speed of thought.</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Keyboard shortcut illustration">
+        <rect x="30" y="70" width="140" height="80" rx="8" fill="#1f2937"/>
+        <rect x="40" y="80" width="18" height="14" rx="2" fill="#f59e0b"/>
+        <rect x="62" y="80" width="18" height="14" rx="2" fill="#ffffff" opacity="0.2"/>
+        <rect x="84" y="80" width="18" height="14" rx="2" fill="#ffffff" opacity="0.2"/>
+        <rect x="106" y="80" width="18" height="14" rx="2" fill="#ffffff" opacity="0.2"/>
+        <rect x="128" y="80" width="18" height="14" rx="2" fill="#ffffff" opacity="0.2"/>
+        <rect x="40" y="100" width="18" height="14" rx="2" fill="#ffffff" opacity="0.2"/>
+        <rect x="62" y="100" width="18" height="14" rx="2" fill="#10b981"/>
+        <rect x="84" y="100" width="18" height="14" rx="2" fill="#ffffff" opacity="0.2"/>
+        <rect x="106" y="100" width="18" height="14" rx="2" fill="#ffffff" opacity="0.2"/>
+        <rect x="128" y="100" width="18" height="14" rx="2" fill="#ffffff" opacity="0.2"/>
+        <rect x="40" y="120" width="40" height="14" rx="2" fill="#ffffff" opacity="0.2"/>
+        <rect x="86" y="120" width="60" height="14" rx="2" fill="#ffffff" opacity="0.2"/>
+        <text x="100" y="55" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="12" fill="#f59e0b">F8 · F9 · Alt+G</text>
+        <circle cx="25" cy="35" r="2" fill="#fbbf24"/>
+        <circle cx="175" cy="30" r="2.5" fill="#fbbf24"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search shortcuts… (e.g., F8, GSTR-1, IMS, Alt+E)" aria-label="Search">
+    <button class="search-clear" id="searchClear" aria-label="Clear search">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="search-results-info" id="searchInfo" style="display:none;"></div>
+
+  <!-- CONTENT LAYOUT -->
+  <div class="content-layout">
+
+    <!-- Desktop TOC -->
+    <aside class="toc" aria-label="Table of contents">
+      <h3><i class="fas fa-list-ul"></i> On this page</h3>
+      <ul>
+        <li><a href="#intro" data-toc="intro"><span class="num">1</span> How to Use</a></li>
+        <li><a href="#vouchers" data-toc="vouchers"><span class="num">2</span> Vouchers</a></li>
+        <li><a href="#gst-returns" data-toc="gst-returns"><span class="num">3</span> GST Returns</a></li>
+        <li><a href="#reports" data-toc="reports"><span class="num">4</span> Reports</a></li>
+        <li><a href="#navigation" data-toc="navigation"><span class="num">5</span> Navigation</a></li>
+        <li><a href="#hidden-keys" data-toc="hidden-keys"><span class="num">6</span> Hidden Keys</a></li>
+      </ul>
+    </aside>
+
+    <main class="content" id="mainContent">
+
+      <!-- 1. INTRO -->
+      <section class="section-card" id="intro" data-title="How to use shortcut keys">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-circle-info"></i></span>
+          1. How to Use Shortcut Keys
+        </h2>
+
+        <p>TallyPrime is built with a <span class="hl">keyboard-first design</span>. Every voucher, report, and screen has a dedicated shortcut — no mouse required. Once you learn them, they become muscle memory, and your speed multiplies [citation:4][citation:8].</p>
+
+        <p>The shortcuts below are a <span class="hl-blue">comprehensive reference</span> covering GST tasks, core vouchers, reports, and hidden keys. They assume GST is enabled in your company (<kbd>F11</kbd> → Enable GST = Yes). Some shortcuts work only on specific screens — the context is noted in each group [citation:1][citation:4].</p>
+
+        <p>Press <kbd>?</kbd> (question mark) anywhere in TallyPrime to see the complete shortcut list for that screen. The list below is curated for daily work — keep it handy during return filing and reconciliation.</p>
+
+        <div class="callout tip">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Tip:</strong> Use the search box above to find any shortcut instantly. Type "F8" for sales, "GSTR" for returns, or "Alt+E" for export. The page filters live as you type.</div>
+        </div>
+      </section>
+
+      <!-- 2. VOUCHERS -->
+      <section class="section-card" id="vouchers" data-title="Voucher shortcuts">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-file-invoice"></i></span>
+          2. Voucher Shortcuts
+        </h2>
+
+        <p>These are the <span class="hl-blue">daily-use shortcuts</span> for recording all types of transactions in TallyPrime [citation:4][citation:6].</p>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-receipt"></i> Accounting Vouchers</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="contra voucher f4 bank cash">
+            <div class="shortcut-desc"><i class="fas fa-right-left"></i><span>Contra Voucher (bank/cash transfer)</span></div>
+            <div class="shortcut-keys"><kbd>F4</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="payment voucher f5 pay supplier">
+            <div class="shortcut-desc"><i class="fas fa-money-bill-wave"></i><span>Payment Voucher (pay supplier)</span></div>
+            <div class="shortcut-keys"><kbd>F5</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="receipt voucher f6 payment received">
+            <div class="shortcut-desc"><i class="fas fa-money-bill"></i><span>Receipt Voucher (customer payment)</span></div>
+            <div class="shortcut-keys"><kbd>F6</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="journal voucher f7 adjustment">
+            <div class="shortcut-desc"><i class="fas fa-book"></i><span>Journal Voucher (adjustments)</span></div>
+            <div class="shortcut-keys"><kbd>F7</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="sales voucher f8 invoice">
+            <div class="shortcut-desc"><i class="fas fa-receipt"></i><span>Sales Voucher (GST invoice)</span></div>
+            <div class="shortcut-keys"><kbd>F8</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="purchase voucher f9 bill">
+            <div class="shortcut-desc"><i class="fas fa-cart-shopping"></i><span>Purchase Voucher (supplier bill)</span></div>
+            <div class="shortcut-keys"><kbd>F9</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="credit note alt f6">
+            <div class="shortcut-desc"><i class="fas fa-file-signature"></i><span>Credit Note (to customer)</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>F6</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="debit note alt f5">
+            <div class="shortcut-desc"><i class="fas fa-file-invoice"></i><span>Debit Note (from supplier)</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>F5</kbd></div>
+          </div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-boxes"></i> Inventory &amp; Order Vouchers</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="stock journal alt f7">
+            <div class="shortcut-desc"><i class="fas fa-arrow-right-arrow-left"></i><span>Stock Journal</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>F7</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="physical stock ctrl f7">
+            <div class="shortcut-desc"><i class="fas fa-clipboard-check"></i><span>Physical Stock</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>F7</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="sales order ctrl f8">
+            <div class="shortcut-desc"><i class="fas fa-file-lines"></i><span>Sales Order</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>F8</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="purchase order ctrl f9">
+            <div class="shortcut-desc"><i class="fas fa-file-circle-plus"></i><span>Purchase Order</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>F9</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="rejection in ctrl f6 sales return">
+            <div class="shortcut-desc"><i class="fas fa-rotate-left"></i><span>Rejection In (Sales Return)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>F6</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="rejection out ctrl f5 purchase return">
+            <div class="shortcut-desc"><i class="fas fa-rotate-right"></i><span>Rejection Out (Purchase Return)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>F5</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="delivery note alt f8">
+            <div class="shortcut-desc"><i class="fas fa-truck"></i><span>Delivery Note</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>F8</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="receipt note alt f9">
+            <div class="shortcut-desc"><i class="fas fa-truck-ramp-box"></i><span>Receipt Note</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>F9</kbd></div>
+          </div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-bolt"></i> In-Voucher Actions</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="create ledger alt c on fly master">
+            <div class="shortcut-desc"><i class="fas fa-plus"></i><span>Create ledger/master on the fly</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>C</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="change voucher date f2">
+            <div class="shortcut-desc"><i class="fas fa-calendar"></i><span>Change voucher date</span></div>
+            <div class="shortcut-keys"><kbd>F2</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="save accept ctrl a">
+            <div class="shortcut-desc"><i class="fas fa-floppy-disk"></i><span>Save / Accept voucher</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>A</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="retrieve narration alt r">
+            <div class="shortcut-desc"><i class="fas fa-pen"></i><span>Retrieve narration from previous ledger</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>R</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="repeat narration ctrl r">
+            <div class="shortcut-desc"><i class="fas fa-repeat"></i><span>Repeat narration from previous voucher</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>R</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="delete voucher alt d">
+            <div class="shortcut-desc"><i class="fas fa-trash"></i><span>Delete voucher</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>D</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="cancel voucher alt x">
+            <div class="shortcut-desc"><i class="fas fa-ban"></i><span>Cancel voucher</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>X</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="mark post dated ctrl t">
+            <div class="shortcut-desc"><i class="fas fa-clock"></i><span>Mark voucher as Post-Dated</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>T</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="mark optional ctrl l">
+            <div class="shortcut-desc"><i class="fas fa-circle-dot"></i><span>Mark voucher as Optional</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>L</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="change mode ctrl h">
+            <div class="shortcut-desc"><i class="fas fa-arrows-rotate"></i><span>Change voucher mode (Invoice/Accounting)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>H</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="stat adjustment alt j gst">
+            <div class="shortcut-desc"><i class="fas fa-percent"></i><span>Define statutory adjustment (GST)</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>J</kbd></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. GST RETURNS -->
+      <section class="section-card" id="gst-returns" data-title="GST return shortcuts">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-file-export"></i></span>
+          3. GST Returns (GSTR-1, 3B, IMS, 2B)
+        </h2>
+
+        <p>These shortcuts work <span class="hl-blue">inside GST reports and return screens</span> in TallyPrime. They speed up review, validation, and filing [citation:1][citation:4].</p>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-list"></i> GSTR-1 &amp; GSTR-3B</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="switch view f5 gstr1 3b nature return">
+            <div class="shortcut-desc"><i class="fas fa-eye"></i><span>Switch between Nature View &amp; Return View</span></div>
+            <div class="shortcut-keys"><kbd>F5</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="mark filed sign f10 gstr1 3b">
+            <div class="shortcut-desc"><i class="fas fa-check-circle"></i><span>Mark return as filed / Sign Return</span></div>
+            <div class="shortcut-keys"><kbd>F10</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="undo filing alt f10 gstr1 3b">
+            <div class="shortcut-desc"><i class="fas fa-rotate-left"></i><span>Undo return filing</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>F10</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="export json alt e gstr1">
+            <div class="shortcut-desc"><i class="fas fa-file-export"></i><span>Export return as JSON</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>E</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="send online alt s gstr1">
+            <div class="shortcut-desc"><i class="fas fa-cloud-upload-alt"></i><span>Send return to portal</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>S</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="open gst portal alt v">
+            <div class="shortcut-desc"><i class="fas fa-globe"></i><span>Open GST Portal from report</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>V</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="itc breakup f8 3b">
+            <div class="shortcut-desc"><i class="fas fa-coins"></i><span>View ITC breakup (in GSTR-3B)</span></div>
+            <div class="shortcut-keys"><kbd>F8</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="validate gstin f6 gstr1">
+            <div class="shortcut-desc"><i class="fas fa-id-card"></i><span>Validate GSTIN/UIN for a party</span></div>
+            <div class="shortcut-keys"><kbd>F6</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="validate hsn f7 gstr1">
+            <div class="shortcut-desc"><i class="fas fa-barcode"></i><span>Validate HSN/SAC codes</span></div>
+            <div class="shortcut-keys"><kbd>F7</kbd></div>
+          </div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-inbox"></i> IMS &amp; GSTR-2B</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="set action status f10 ims accept reject">
+            <div class="shortcut-desc"><i class="fas fa-check-double"></i><span>Set Action Status (Accept/Reject/Pending)</span></div>
+            <div class="shortcut-keys"><kbd>F10</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="fetch party name f9 ims gstin">
+            <div class="shortcut-desc"><i class="fas fa-user"></i><span>Fetch Party Name from GSTIN</span></div>
+            <div class="shortcut-keys"><kbd>F9</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="select invoice space ims">
+            <div class="shortcut-desc"><i class="fas fa-square-check"></i><span>Select/deselect invoice(s) in list</span></div>
+            <div class="shortcut-keys"><kbd>Space</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="copy doc no alt w 2a 2b">
+            <div class="shortcut-desc"><i class="fas fa-copy"></i><span>Copy Document No. &amp; Date (Potential Matches)</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>W</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="set gst status alt s 2a 2b">
+            <div class="shortcut-desc"><i class="fas fa-check"></i><span>Set GST Status (Accept/Reject)</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>S</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="view party details alt r 2a 2b">
+            <div class="shortcut-desc"><i class="fas fa-eye"></i><span>View full party details as per GST portal</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>R</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="import gstr-2b alt o json">
+            <div class="shortcut-desc"><i class="fas fa-file-import"></i><span>Import GSTR-2B JSON</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>O</kbd></div>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div><strong>Critical:</strong> <mark>F10 (Mark as Filed)</mark> locks the return for that period. Use it only after you've verified all data. If you need to correct something later, use <kbd>Alt</kbd>+<kbd>F10</kbd> to undo, fix, and re-file [citation:4].</div>
+        </div>
+      </section>
+
+      <!-- 4. REPORTS -->
+      <section class="section-card" id="reports" data-title="Report shortcuts">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-chart-bar"></i></span>
+          4. Report Shortcuts
+        </h2>
+
+        <p>These shortcuts help you <span class="hl-blue">navigate and configure any report</span> — change periods, export data, and switch views [citation:4][citation:10].</p>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-chart-line"></i> Common Report Actions</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="change period f2 report">
+            <div class="shortcut-desc"><i class="fas fa-calendar"></i><span>Change period / date for report</span></div>
+            <div class="shortcut-keys"><kbd>F2</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="change company f3">
+            <div class="shortcut-desc"><i class="fas fa-building"></i><span>Change company / tax registration</span></div>
+            <div class="shortcut-keys"><kbd>F3</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="configure report f12">
+            <div class="shortcut-desc"><i class="fas fa-sliders"></i><span>Configure report settings</span></div>
+            <div class="shortcut-keys"><kbd>F12</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="change view ctrl h report">
+            <div class="shortcut-desc"><i class="fas fa-repeat"></i><span>Change View / related reports</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>H</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="drill down enter report">
+            <div class="shortcut-desc"><i class="fas fa-arrow-right-to-bracket"></i><span>Drill down into a line</span></div>
+            <div class="shortcut-keys"><kbd>Enter</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="export alt e report">
+            <div class="shortcut-desc"><i class="fas fa-file-export"></i><span>Export report (JSON, Excel, CSV)</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>E</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="detailed condensed alt f1 report">
+            <div class="shortcut-desc"><i class="fas fa-list"></i><span>Toggle detailed/condensed view</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>F1</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="filter alt f12 report">
+            <div class="shortcut-desc"><i class="fas fa-filter"></i><span>Filter report data</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>F12</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="exception report ctrl j">
+            <div class="shortcut-desc"><i class="fas fa-circle-exclamation"></i><span>View exception reports</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>J</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="basis of values ctrl b">
+            <div class="shortcut-desc"><i class="fas fa-scale-balanced"></i><span>Basis of Values (configure report values)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>B</kbd></div>
+          </div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-scale-balanced"></i> Financial Reports</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="balance sheet alt b">
+            <div class="shortcut-desc"><i class="fas fa-scale-balanced"></i><span>Balance Sheet</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>B</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="profit loss alt p">
+            <div class="shortcut-desc"><i class="fas fa-chart-line"></i><span>Profit &amp; Loss Statement</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>P</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="trial balance alt l">
+            <div class="shortcut-desc"><i class="fas fa-list-check"></i><span>Trial Balance</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>L</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="gst reports alt g">
+            <div class="shortcut-desc"><i class="fas fa-file-export"></i><span>GST Reports menu</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>G</kbd></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. NAVIGATION -->
+      <section class="section-card" id="navigation" data-title="Navigation shortcuts">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-compass"></i></span>
+          5. Navigation
+        </h2>
+
+        <p>These <span class="hl-blue">universal shortcuts</span> work on almost every screen in TallyPrime — learn them and you'll never touch the mouse [citation:4][citation:8].</p>
+
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="go to alt g">
+            <div class="shortcut-desc"><i class="fas fa-arrow-right"></i><span>Go To (jump to any report or master)</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>G</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="switch to ctrl g">
+            <div class="shortcut-desc"><i class="fas fa-arrow-right-arrow-left"></i><span>Switch To (change report/master in flow)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>G</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="company features f11 gst einvoice eway">
+            <div class="shortcut-desc"><i class="fas fa-toggle-on"></i><span>Company Features (enable GST, e-Invoice, e-Way Bill)</span></div>
+            <div class="shortcut-keys"><kbd>F11</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="configure f12">
+            <div class="shortcut-desc"><i class="fas fa-sliders"></i><span>Configure (settings)</span></div>
+            <div class="shortcut-keys"><kbd>F12</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="save accept ctrl a">
+            <div class="shortcut-desc"><i class="fas fa-floppy-disk"></i><span>Save / Accept screen</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>A</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="quit escape back">
+            <div class="shortcut-desc"><i class="fas fa-xmark"></i><span>Quit / Go back</span></div>
+            <div class="shortcut-keys"><kbd>Esc</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="calculator ctrl n">
+            <div class="shortcut-desc"><i class="fas fa-calculator"></i><span>Calculator</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>N</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="help f1">
+            <div class="shortcut-desc"><i class="fas fa-circle-question"></i><span>Help</span></div>
+            <div class="shortcut-keys"><kbd>F1</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="context help ctrl f1">
+            <div class="shortcut-desc"><i class="fas fa-book-open"></i><span>Contextual Help (based on current screen)</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>F1</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="all shortcuts question mark">
+            <div class="shortcut-desc"><i class="fas fa-keyboard"></i><span>Show all shortcuts for current screen</span></div>
+            <div class="shortcut-keys"><kbd>?</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="list vouchers f10">
+            <div class="shortcut-desc"><i class="fas fa-list"></i><span>View list of all vouchers</span></div>
+            <div class="shortcut-keys"><kbd>F10</kbd></div>
+          </div>
+        </div>
+
+        <div class="callout success">
+          <i class="fas fa-star"></i>
+          <div><strong>Practice plan:</strong> Day 1 — use F8/F9 for all vouchers. Day 2 — use Alt+G to jump to GSTR-1 and GSTR-3B. Day 3 — file a return using Alt+S and F10. Day 4 — reconcile GSTR-2B with Alt+O and F10. Day 5 — navigate the entire day without touching the mouse.</div>
+        </div>
+      </section>
+
+      <!-- 6. HIDDEN KEYS -->
+      <section class="section-card" id="hidden-keys" data-title="Hidden keys">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-eye-slash"></i></span>
+          6. Hidden Keys &amp; Utilities
+        </h2>
+
+        <p>These are the <span class="hl-blue">lesser-known but powerful shortcuts</span> that help with navigation, selection, and system actions [citation:4].</p>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-arrow-pointer"></i> Selection &amp; Movement</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="move first last menu ctrl up down">
+            <div class="shortcut-desc"><i class="fas fa-arrow-up-wide-short"></i><span>Move to first/last menu in a section</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>↑</kbd><span class="key-sep">/</span><kbd>↓</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="move left right menu ctrl arrows">
+            <div class="shortcut-desc"><i class="fas fa-arrows-left-right"></i><span>Move to left-most/right-most menu</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>←</kbd><span class="key-sep">/</span><kbd>→</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="first line list home pgup">
+            <div class="shortcut-desc"><i class="fas fa-arrow-up-to-line"></i><span>Move to first line in a list</span></div>
+            <div class="shortcut-keys"><kbd>Home</kbd><span class="key-sep">/</span><kbd>PgUp</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="last line list end pgdn">
+            <div class="shortcut-desc"><i class="fas fa-arrow-down-to-line"></i><span>Move to last line in a list</span></div>
+            <div class="shortcut-keys"><kbd>End</kbd><span class="key-sep">/</span><kbd>PgDn</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="select line space report">
+            <div class="shortcut-desc"><i class="fas fa-check"></i><span>Select/deselect a line in a report</span></div>
+            <div class="shortcut-keys"><kbd>Space</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="select all ctrl space report">
+            <div class="shortcut-desc"><i class="fas fa-check-double"></i><span>Select/deselect all lines in a report</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Space</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="invert selection ctrl alt i">
+            <div class="shortcut-desc"><i class="fas fa-shuffle"></i><span>Invert selection of line items</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Alt</kbd><span class="key-sep">+</span><kbd>I</kbd></div>
+          </div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-gear"></i> System &amp; Utility</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="rewrite data ctrl alt r">
+            <div class="shortcut-desc"><i class="fas fa-database"></i><span>Rewrite data</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Alt</kbd><span class="key-sep">+</span><kbd>R</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="quit application alt f4">
+            <div class="shortcut-desc"><i class="fas fa-power-off"></i><span>Quit the application</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>F4</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="build info ctrl alt b">
+            <div class="shortcut-desc"><i class="fas fa-code"></i><span>View build information</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Alt</kbd><span class="key-sep">+</span><kbd>B</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="tdl addon ctrl alt t">
+            <div class="shortcut-desc"><i class="fas fa-puzzle-piece"></i><span>View TDL/Add-on details</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>Alt</kbd><span class="key-sep">+</span><kbd>T</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="synchronise data alt z">
+            <div class="shortcut-desc"><i class="fas fa-sync"></i><span>Synchronise data</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>Z</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="print ctrl p">
+            <div class="shortcut-desc"><i class="fas fa-print"></i><span>Print current voucher or report</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>P</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="email ctrl m">
+            <div class="shortcut-desc"><i class="fas fa-envelope"></i><span>Email current voucher or report</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>M</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="import alt o">
+            <div class="shortcut-desc"><i class="fas fa-file-import"></i><span>Open import menu</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>O</kbd></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NO RESULTS -->
+      <div class="no-results" id="noResults">
+        <i class="fas fa-magnifying-glass"></i>
+        <h4>No results found</h4>
+        <p>Try a keyword like "F8", "GSTR", "IMS", "Alt+E", or "export".</p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    <i class="fas fa-arrow-right"></i>
+    You've explored the complete TallyPrime shortcut reference. Print it, bookmark it, and use it daily.
+  </div>
+</div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  const THEME_KEY = 'user-theme-preference';
+  const DEFAULT_THEME = 'light';
+  const LOGIN_REDIRECT = '../My Account/myaccount.html';
+
+  const AUTH_KEYS = {
+    USER:          'EGyan_user',
+    USER_DATA:     'EGyan_user_data',
+    USER_TYPE:     'EGyan_user_type',
+    REMEMBER_ME:   'EGyan_remember_me',
+    SESSION_EXPIRY:'EGyan_session_expiry'
+  };
+
+  const body = document.body;
+  const html = document.documentElement;
+
+  // THEME
+  function getStoredTheme() {
+    try {
+      const stored = localStorage.getItem(THEME_KEY);
+      if (stored) return stored;
+    } catch (e) {}
+    try {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+    } catch (e) {}
+    return DEFAULT_THEME;
+  }
+
+  function applyTheme(theme) {
+    const t = theme === 'dark' ? 'dark' : 'light';
+    html.setAttribute('data-theme', t);
+    body.setAttribute('data-theme', t);
+
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#0b0e0d' : '#f59e0b');
+
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'themeChange', theme: t }, '*');
+      }
+    } catch (e) {}
+  }
+
+  applyTheme(getStoredTheme());
+
+  try {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq && mq.addEventListener) {
+      mq.addEventListener('change', function (e) {
+        try {
+          const stored = localStorage.getItem(THEME_KEY);
+          if (!stored) applyTheme(e.matches ? 'dark' : 'light');
+        } catch (err) {}
+      });
+    }
+  } catch (e) {}
+
+  window.addEventListener('storage', function (e) {
+    if (e.key === THEME_KEY && e.newValue) applyTheme(e.newValue);
+    if (e.key === 'theme-change-trigger') {
+      try {
+        const latest = localStorage.getItem(THEME_KEY);
+        if (latest) applyTheme(latest);
+      } catch (err) {}
+    }
+  });
+
+  window.addEventListener('message', function (event) {
+    if (event.data && event.data.type === 'themeChange' && event.data.theme) {
+      applyTheme(event.data.theme);
+    }
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) {
+      try {
+        const latest = localStorage.getItem(THEME_KEY);
+        if (latest) applyTheme(latest);
+      } catch (e) {}
+    }
+  });
+
+  // AUTH
+  function parseStoredAuth(raw) {
+    if (!raw) return { value: null, expiry: null };
+    try {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object' && 'value' in parsed) {
+        return { value: parsed.value, expiry: parsed.expiry || null };
+      }
+      return { value: parsed, expiry: null };
+    } catch (e) {
+      return { value: raw, expiry: null };
+    }
+  }
+
+  function readAuthKey(key) {
+    let raw = null;
+    try { raw = localStorage.getItem(key); } catch (e) {}
+    if (raw) {
+      const parsed = parseStoredAuth(raw);
+      if (parsed.expiry && Date.now() >= parsed.expiry) {
+        try { localStorage.removeItem(key); } catch (e) {}
+      } else {
+        return parsed.value;
+      }
+    }
+    try { raw = sessionStorage.getItem(key); } catch (e) { raw = null; }
+    if (!raw) return null;
+    const parsed = parseStoredAuth(raw);
+    if (parsed.expiry && Date.now() >= parsed.expiry) {
+      try { sessionStorage.removeItem(key); } catch (e) {}
+      return null;
+    }
+    return parsed.value;
+  }
+
+  function checkAuthStatus() {
+    const user = readAuthKey(AUTH_KEYS.USER);
+    const userData = readAuthKey(AUTH_KEYS.USER_DATA);
+    const userTypeRaw = readAuthKey(AUTH_KEYS.USER_TYPE);
+
+    if (!user) return { loggedIn: false, role: null, user: null, data: null };
+
+    let role = 'student';
+    if (userTypeRaw) {
+      const t = String(userTypeRaw).toLowerCase().trim();
+      if (t === 'admin') role = 'admin';
+      else if (t === 'teacher') role = 'teacher';
+      else role = 'student';
+    }
+
+    if (!userData) return { loggedIn: false, role: null, user: null, data: null };
+
+    return { loggedIn: true, role: role, user: user, data: userData };
+  }
+
+  function checkLoginStatus() {
+    return checkAuthStatus().loggedIn;
+  }
+
+  // ROLE BADGE + SIDEBAR USER
+  function renderRoleBadge(auth) {
+    const badge = document.getElementById('roleBadge');
+    const icon = document.getElementById('roleBadgeIcon');
+    const text = document.getElementById('roleBadgeText');
+    if (!badge || !icon || !text) return;
+
+    let label = 'Student';
+    let iconClass = 'fas fa-user-graduate';
+    let cls = 'student';
+
+    if (auth.role === 'admin') {
+      label = 'Admin'; iconClass = 'fas fa-user-shield'; cls = 'admin';
+    } else if (auth.role === 'teacher') {
+      label = 'Teacher'; iconClass = 'fas fa-chalkboard-teacher'; cls = 'teacher';
+    }
+
+    const data = readAuthKey(AUTH_KEYS.USER_DATA) || {};
+    const firstName =
+      data['First Name'] || data['Name'] || data['Teacher Name'] || data['User Name'] || '';
+    const lastName = data['Last Name'] || '';
+    const fullName = (firstName + ' ' + lastName).trim();
+    const displayName = fullName || data['Email Id'] || auth.user || '';
+
+    text.textContent = displayName ? (label + ' · ' + displayName) : label;
+    icon.className = iconClass;
+
+    badge.classList.remove('student', 'teacher', 'admin');
+    badge.classList.add(cls);
+    badge.style.display = 'inline-flex';
+
+    renderSidebarUser(auth);
+  }
+
+  function renderSidebarUser(auth) {
+    const avatar = document.getElementById('sidebarAvatar');
+    const nameEl = document.getElementById('sidebarUserName');
+    const roleEl = document.getElementById('sidebarUserRole');
+    if (!avatar || !nameEl || !roleEl) return;
+
+    const data = readAuthKey(AUTH_KEYS.USER_DATA) || {};
+    const firstName =
+      data['First Name'] || data['Name'] || data['Teacher Name'] || data['User Name'] || '';
+    const lastName = data['Last Name'] || '';
+    const fullName = (firstName + ' ' + lastName).trim();
+    const displayName = fullName || data['Email Id'] || auth.user || 'User';
+
+    const initial = (displayName.charAt(0) || 'U').toUpperCase();
+    avatar.textContent = initial;
+    nameEl.textContent = displayName;
+
+    let roleLabel = 'Student';
+    let roleCls = 'student';
+    if (auth.role === 'admin') { roleLabel = 'Admin'; roleCls = 'admin'; }
+    else if (auth.role === 'teacher') { roleLabel = 'Teacher'; roleCls = 'teacher'; }
+
+    roleEl.textContent = roleLabel;
+    roleEl.classList.remove('student', 'teacher', 'admin');
+    roleEl.classList.add(roleCls);
+  }
+
+  function hideRoleBadge() {
+    const badge = document.getElementById('roleBadge');
+    if (badge) badge.style.display = 'none';
+  }
+
+  // UI HELPERS
+  function hideSkeleton() {
+    const sk = document.getElementById('authSkeleton');
+    if (sk) {
+      sk.classList.add('hidden');
+      setTimeout(function () { sk.style.display = 'none'; }, 400);
+    }
+  }
+
+  function revealApp() {
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) wrap.classList.add('revealed');
+  }
+
+  function showLoginRequired() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.classList.add('active');
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) {
+      wrap.style.display = 'none';
+      wrap.classList.remove('revealed');
+    }
+    hideRoleBadge();
+  }
+
+  function hideLoginRequired() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.classList.remove('active');
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) wrap.style.display = 'block';
+  }
+
+  // SIDEBAR
+  const sidebar = document.getElementById('mobileSidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  const hamburger = document.getElementById('hamburgerBtn');
+  const sidebarClose = document.getElementById('sidebarClose');
+
+  let sidebarOpen = false;
+
+  function openSidebar() {
+    if (!sidebar || sidebarOpen) return;
+    sidebar.classList.add('open');
+    if (backdrop) backdrop.classList.add('active');
+    body.classList.add('sidebar-lock');
+    sidebarOpen = true;
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeSidebar() {
+    if (!sidebar || !sidebarOpen) return;
+    sidebar.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('active');
+    body.classList.remove('sidebar-lock');
+    sidebarOpen = false;
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  if (hamburger) hamburger.addEventListener('click', openSidebar);
+  if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+  if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+  document.querySelectorAll('.sidebar-toc-list a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      setTimeout(closeSidebar, 150);
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sidebarOpen) closeSidebar();
+  });
+
+  // Swipe gestures
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  const SWIPE_MIN_DISTANCE = 60;
+  const SWIPE_MAX_VERTICAL = 80;
+  const SWIPE_MAX_TIME = 600;
+
+  document.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchStartTime = Date.now();
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    if (e.changedTouches.length !== 1) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+    const dt = Date.now() - touchStartTime;
+
+    if (dt > SWIPE_MAX_TIME) return;
+    if (Math.abs(dy) > SWIPE_MAX_VERTICAL) return;
+    if (Math.abs(dx) < SWIPE_MIN_DISTANCE) return;
+
+    if (dx > 0) {
+      if (!sidebarOpen) openSidebar();
+    } else if (dx < 0) {
+      if (sidebarOpen) closeSidebar();
+    }
+  }, { passive: true });
+
+  // BOOT
+  function boot() {
+    const auth = checkAuthStatus();
+
+    if (!auth.loggedIn) {
+      hideSkeleton();
+      showLoginRequired();
+      return;
+    }
+
+    hideLoginRequired();
+    renderRoleBadge(auth);
+    hideSkeleton();
+    revealApp();
+
+    console.log('✅ Access granted:', auth.role, '-', auth.user);
+  }
+
+  const loginBtn = document.getElementById('loginBtn');
+  if (loginBtn) loginBtn.setAttribute('href', LOGIN_REDIRECT);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(boot, 80);
+  });
+
+  window.addEventListener('storage', function (e) {
+    const isAuthKey = Object.keys(AUTH_KEYS).some(function (k) {
+      return AUTH_KEYS[k] === e.key;
+    });
+    if (isAuthKey) {
+      if (!checkLoginStatus()) showLoginRequired();
+      else {
+        const auth = checkAuthStatus();
+        if (auth.loggedIn) {
+          hideLoginRequired();
+          renderRoleBadge(auth);
+          revealApp();
+        }
+      }
+    }
+  });
+
+  setInterval(function () {
+    if (!checkLoginStatus()) {
+      const overlay = document.getElementById('loginOverlay');
+      if (overlay && !overlay.classList.contains('active')) showLoginRequired();
+    }
+  }, 15000);
+
+  // TOC SCROLL-SPY
+  const allTocLinks = document.querySelectorAll('[data-toc]');
+  const sections = document.querySelectorAll('section.section-card[id]');
+
+  function setActiveToc(id) {
+    allTocLinks.forEach(function (link) {
+      link.classList.toggle('active', link.getAttribute('data-toc') === id);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      const visible = entries
+        .filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return b.intersectionRatio - a.intersectionRatio; });
+      if (visible.length > 0) setActiveToc(visible[0].target.id);
+    }, {
+      rootMargin: '-90px 0px -55% 0px',
+      threshold: [0.1, 0.5, 0.9]
+    });
+    sections.forEach(function (s) { observer.observe(s); });
+  }
+
+  allTocLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      const id = link.getAttribute('data-toc');
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        setActiveToc(id);
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+  });
+
+  // SEARCH FILTER
+  const searchInput = document.getElementById('searchInput');
+  const searchClear = document.getElementById('searchClear');
+  const searchInfo = document.getElementById('searchInfo');
+  const noResults = document.getElementById('noResults');
+  const sectionCards = document.querySelectorAll('.section-card');
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+    });
+  }
+
+  function runFilter(query) {
+    const q = (query || '').toLowerCase().trim();
+    let visibleCount = 0;
+
+    if (searchClear) {
+      searchClear.classList.toggle('visible', q.length > 0);
+    }
+
+    sectionCards.forEach(function (section) {
+      let sectionVisible = 0;
+
+      const rows = section.querySelectorAll('.shortcut-row');
+      rows.forEach(function (row) {
+        const desc = (row.querySelector('.shortcut-desc span') || {}).textContent || '';
+        const keys = (row.querySelector('.shortcut-keys') || {}).textContent || '';
+        const searchMeta = row.getAttribute('data-search') || '';
+        const haystack = (desc + ' ' + keys + ' ' + searchMeta).toLowerCase();
+        const match = !q || haystack.indexOf(q) !== -1;
+        row.style.display = match ? '' : 'none';
+        if (match) { sectionVisible++; visibleCount++; }
+      });
+
+      if (sectionVisible === 0) {
+        section.style.display = 'none';
+      } else {
+        section.style.display = '';
+      }
+    });
+
+    if (noResults) {
+      noResults.classList.toggle('visible', visibleCount === 0 && q.length > 0);
+    }
+
+    if (searchInfo) {
+      if (q.length > 0) {
+        searchInfo.style.display = '';
+        searchInfo.innerHTML = 'Showing <strong>' + visibleCount + '</strong> ' +
+          (visibleCount === 1 ? 'result' : 'results') +
+          ' for "<strong>' + escapeHtml(q) + '</strong>"';
+      } else {
+        searchInfo.style.display = 'none';
+        searchInfo.innerHTML = '';
+      }
+    }
+  }
+
+  if (searchInput) {
+    let searchTimer = null;
+    searchInput.addEventListener('input', function (e) {
+      clearTimeout(searchTimer);
+      const val = e.target.value;
+      searchTimer = setTimeout(function () { runFilter(val); }, 120);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        const tag = (document.activeElement && document.activeElement.tagName) || '';
+        if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      }
+      if (e.key === 'Escape' && document.activeElement === searchInput) {
+        searchInput.value = '';
+        runFilter('');
+        searchInput.blur();
+      }
+    });
+  }
+
+  if (searchClear) {
+    searchClear.addEventListener('click', function () {
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+      }
+      runFilter('');
+    });
+  }
+
+  // BACK TO TOP
+  const backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    function updateBackToTop() {
+      if (window.pageYOffset > 400) backToTop.classList.add('visible');
+      else backToTop.classList.remove('visible');
+    }
+    window.addEventListener('scroll', updateBackToTop, { passive: true });
+    updateBackToTop();
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // KEY PRESS VISUAL FEEDBACK
+  document.addEventListener('keydown', function (e) {
+    const key = e.key;
+    if (!key || key.length > 3) return;
+    if (document.activeElement === searchInput) return;
+
+    const allKbds = document.querySelectorAll('kbd');
+    allKbds.forEach(function (kbd) {
+      const txt = (kbd.textContent || '').trim().toLowerCase();
+      const pressed = key.toLowerCase();
+
+      if (txt === pressed ||
+          (pressed === 'control' && txt === 'ctrl') ||
+          (pressed === 'escape' && txt === 'esc') ||
+          (pressed === 'delete' && txt === 'del') ||
+          (pressed === 'arrowup' && txt === '↑') ||
+          (pressed === 'arrowdown' && txt === '↓') ||
+          (pressed === 'arrowleft' && txt === '←') ||
+          (pressed === 'arrowright' && txt === '→') ||
+          (pressed === ' ' && txt === 'space')) {
+        kbd.style.transform = 'scale(0.9)';
+        kbd.style.background = 'linear-gradient(135deg, #f59e0b, #fbbf24)';
+        kbd.style.color = '#1f2937';
+        setTimeout(function () {
+          kbd.style.transform = '';
+          kbd.style.background = '';
+          kbd.style.color = '';
+        }, 200);
+      }
+    });
+  });
+
+  console.log('⌨️ TallyPrime Shortcut Keys page ready — theme:', html.getAttribute('data-theme'));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,2569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#f59e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+<title>GST Reports &amp; Return Filing · Basic Computer · EGyan</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- FOUC prevention -->
+<script>
+(function () {
+  try {
+    var stored = localStorage.getItem('user-theme-preference');
+    var theme = stored;
+    if (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      theme = 'dark';
+    }
+    document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
+<style>
+/* ============================================================
+   THEME VARIABLES
+   ============================================================ */
+:root {
+  --bg-body:        #fffdf5;
+  --bg-card:        #ffffff;
+  --bg-header:      #ffffff;
+  --bg-soft:        #fff9e6;
+  --bg-code:        #fef9ef;
+
+  --text-main:      #1f2937;
+  --text-muted:     #6b7280;
+  --text-light:     #9ca3af;
+  --border-light:   #f0e8d0;
+
+  --shadow-sm:      0 10px 28px -12px rgba(245, 158, 11, 0.18);
+  --shadow-hover:   0 22px 44px -18px rgba(245, 158, 11, 0.32);
+  --shadow-card:    0 8px 30px -10px rgba(245, 158, 11, 0.15);
+
+  --gold:           #f59e0b;
+  --gold-2:         #fbbf24;
+  --gold-soft:      rgba(245, 158, 11, 0.12);
+  --gold-glow:      rgba(245, 158, 11, 0.4);
+
+  --accent:         #0d9488;
+  --accent-2:       #14b8a6;
+  --accent-soft:    rgba(13, 148, 136, 0.10);
+  --accent-glow:    rgba(13, 148, 136, 0.35);
+
+  --drive-blue:     #4285f4;
+  --drive-green:    #34a853;
+  --drive-yellow:   #fbbc05;
+  --drive-red:      #ea4335;
+
+  --success:        #10b981;
+  --danger:         #ef4444;
+  --warning:        #f59e0b;
+  --info:           #3b82f6;
+
+  --teacher-teal:   #0d9488;
+  --admin-gold:     #f59e0b;
+
+  --hl-bg:          linear-gradient(180deg, transparent 60%, rgba(245, 158, 11, 0.35) 60%);
+  --hl-teal-bg:     linear-gradient(180deg, transparent 60%, rgba(13, 148, 136, 0.28) 60%);
+  --hl-blue-bg:     linear-gradient(180deg, transparent 60%, rgba(66, 133, 244, 0.28) 60%);
+
+  --kbd-bg:         linear-gradient(180deg, #ffffff 0%, #f5f1e5 100%);
+  --kbd-border:     #d1c7a8;
+  --kbd-shadow:     inset 0 -2px 0 #d1c7a8, 0 2px 0 rgba(0,0,0,0.08);
+  --kbd-text:       #1f2937;
+
+  --card-border:    1px solid rgba(245, 158, 11, 0.12);
+  --overlay-bg:     rgba(15, 23, 42, 0.45);
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+}
+
+[data-theme="dark"] {
+  --bg-body:        #0b0e0d;
+  --bg-card:        #16201e;
+  --bg-header:      #0f1a18;
+  --bg-soft:        #131d1b;
+  --bg-code:        #0f1a18;
+
+  --text-main:      #f1f5f9;
+  --text-muted:     #9ca3af;
+  --text-light:     #64748b;
+  --border-light:   #1f2b28;
+
+  --shadow-sm:      0 10px 30px -12px rgba(0, 0, 0, 0.65);
+  --shadow-hover:   0 22px 44px -18px rgba(0, 0, 0, 0.85);
+  --shadow-card:    0 8px 32px -10px rgba(0, 0, 0, 0.55);
+
+  --gold:           #fbbf24;
+  --gold-2:         #fcd34d;
+  --gold-soft:      rgba(251, 191, 36, 0.18);
+  --gold-glow:      rgba(251, 191, 36, 0.5);
+
+  --accent:         #14b8a6;
+  --accent-2:       #2dd4bf;
+  --accent-soft:    rgba(20, 184, 166, 0.18);
+  --accent-glow:    rgba(20, 184, 166, 0.45);
+
+  --drive-blue:     #60a5fa;
+  --drive-green:    #4ade80;
+  --drive-yellow:   #fcd34d;
+  --drive-red:      #f87171;
+
+  --success:        #34d399;
+  --danger:         #f87171;
+  --warning:        #fbbf24;
+  --info:           #60a5fa;
+
+  --teacher-teal:   #14b8a6;
+  --admin-gold:     #fbbf24;
+
+  --hl-bg:          linear-gradient(180deg, transparent 60%, rgba(251, 191, 36, 0.28) 60%);
+  --hl-teal-bg:     linear-gradient(180deg, transparent 60%, rgba(20, 184, 166, 0.28) 60%);
+  --hl-blue-bg:     linear-gradient(180deg, transparent 60%, rgba(96, 165, 250, 0.3) 60%);
+
+  --kbd-bg:         linear-gradient(180deg, #2a3735 0%, #1f2b28 100%);
+  --kbd-border:     #3a4a47;
+  --kbd-shadow:     inset 0 -2px 0 #0a1210, 0 2px 0 rgba(0,0,0,0.4);
+  --kbd-text:       #f1f5f9;
+
+  --card-border:    1px solid rgba(251, 191, 36, 0.12);
+  --overlay-bg:     rgba(0, 0, 0, 0.75);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg-body);
+  scroll-padding-top: 90px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-body);
+  color: var(--text-main);
+  transition: background var(--transition-normal), color var(--transition-normal);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1.7;
+}
+
+body.sidebar-lock { overflow: hidden; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes modalPop {
+  from { transform: scale(0.9) translateY(20px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ============================================================
+   AUTH SKELETON
+   ============================================================ */
+#authSkeleton {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-body);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.2rem;
+  transition: opacity 0.35s ease;
+}
+#authSkeleton.hidden { opacity: 0; pointer-events: none; }
+.skeleton-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--border-light);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+.skeleton-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+/* ============================================================
+   APP WRAPPER
+   ============================================================ */
+.app-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.2rem 1.8rem 3rem;
+  padding-left: max(1.8rem, env(safe-area-inset-left));
+  padding-right: max(1.8rem, env(safe-area-inset-right));
+  width: 100%;
+  visibility: hidden;
+}
+.app-wrapper.revealed { visibility: visible; }
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 0.7rem 1.5rem;
+  background: var(--bg-header);
+  padding: 0.6rem 1.5rem;
+  border-radius: 60px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.8rem;
+  transition: background var(--transition-normal), box-shadow var(--transition-normal);
+  position: sticky;
+  top: 8px;
+  z-index: 100;
+}
+
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.hamburger-btn {
+  display: none;
+  background: var(--gold-soft);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.hamburger-btn:hover { background: var(--gold); color: #1f2937; }
+.hamburger-btn:active { transform: scale(0.92); }
+
+.brand-logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: none;
+}
+[data-theme="dark"] .brand-logo { filter: brightness(0) invert(1); }
+
+.brand-text {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.right-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.role-badge {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 0.35rem 0.9rem;
+  border-radius: 40px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.role-badge.student { color: #2563eb; background: rgba(37, 99, 235, 0.12); }
+.role-badge.teacher { color: var(--teacher-teal); background: rgba(13, 148, 136, 0.12); }
+.role-badge.admin   { color: var(--admin-gold); background: rgba(245, 158, 11, 0.15); }
+
+[data-theme="dark"] .role-badge.student { color: #60a5fa; background: rgba(59, 130, 246, 0.2); }
+[data-theme="dark"] .role-badge.teacher { color: #14b8a6; background: rgba(20, 184, 166, 0.2); }
+[data-theme="dark"] .role-badge.admin   { color: #fbbf24; background: rgba(245, 158, 11, 0.2); }
+
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.45rem 1.1rem;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  background: var(--gold-soft);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.back-home:hover {
+  background: var(--gold);
+  color: #1f2937;
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -10px var(--gold-glow);
+}
+
+/* ============================================================
+   MOBILE SIDEBAR
+   ============================================================ */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.sidebar-backdrop.active { opacity: 1; visibility: visible; }
+
+.mobile-sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: min(85vw, 320px);
+  background: var(--bg-card);
+  border-right: 1px solid var(--border-light);
+  box-shadow: 8px 0 40px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.mobile-sidebar.open { transform: translateX(0); }
+
+.sidebar-header {
+  padding: 1.3rem 1.2rem 1.1rem;
+  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft));
+  position: relative;
+}
+
+.sidebar-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+[data-theme="dark"] .sidebar-close { background: rgba(0,0,0,0.4); }
+.sidebar-close:hover { background: var(--gold); color: #1f2937; }
+.sidebar-close:active { transform: scale(0.9); }
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  box-shadow: 0 6px 14px -6px var(--gold-glow);
+}
+
+.sidebar-user-info { min-width: 0; flex: 1; }
+.sidebar-user-name {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+.sidebar-user-role {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.sidebar-user-role.student { color: #2563eb; }
+.sidebar-user-role.teacher { color: var(--teacher-teal); }
+.sidebar-user-role.admin   { color: var(--admin-gold); }
+[data-theme="dark"] .sidebar-user-role.student { color: #60a5fa; }
+[data-theme="dark"] .sidebar-user-role.teacher { color: #14b8a6; }
+[data-theme="dark"] .sidebar-user-role.admin   { color: #fbbf24; }
+
+.sidebar-toc-heading {
+  padding: 1rem 1.2rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sidebar-toc-heading i { color: var(--gold); }
+
+.sidebar-toc-list {
+  list-style: none;
+  padding: 0 0.7rem 1rem;
+  flex: 1;
+}
+.sidebar-toc-list li { margin-bottom: 0.2rem; }
+.sidebar-toc-list a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all var(--transition-fast);
+  line-height: 1.3;
+}
+.sidebar-toc-list a:hover { background: var(--gold-soft); transform: translateX(3px); }
+.sidebar-toc-list a:active { transform: scale(0.98); }
+.sidebar-toc-list a.active {
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  box-shadow: 0 6px 16px -8px var(--gold-glow);
+}
+.sidebar-toc-list a .num {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: var(--gold-soft);
+  color: var(--gold);
+  font-size: 0.68rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.sidebar-toc-list a.active .num { background: rgba(255,255,255,0.85); color: var(--gold); }
+
+.sidebar-footer {
+  padding: 0.9rem 1.2rem 1.4rem;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.page-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem 2.2rem;
+  background: var(--bg-card);
+  border-radius: 32px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-2), var(--accent-2));
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  right: -100px; top: -100px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, var(--gold-soft), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-text { position: relative; z-index: 1; }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--gold);
+  background: var(--gold-soft);
+  padding: 0.35rem 0.9rem;
+  border-radius: 40px;
+  border: 1px solid var(--border-light);
+  margin-bottom: 0.9rem;
+}
+.hero-text h1 {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+  margin-bottom: 0.6rem;
+}
+.hero-text h1 .accent { color: var(--gold); }
+.hero-text p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 560px;
+}
+.hero-art {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  z-index: 1;
+  animation: float 5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+.search-wrap {
+  position: relative;
+  margin-bottom: 1.6rem;
+  max-width: 560px;
+}
+.search-input {
+  width: 100%;
+  padding: 0.85rem 1rem 0.85rem 3rem;
+  border-radius: 40px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-size: 0.92rem;
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  outline: none;
+}
+.search-input::placeholder { color: var(--text-light); }
+.search-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px var(--gold-soft);
+}
+.search-icon {
+  position: absolute;
+  left: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+.search-clear {
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: var(--gold-soft);
+  color: var(--gold);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: all var(--transition-fast);
+}
+.search-clear.visible { display: flex; }
+.search-clear:hover { background: var(--gold); color: #1f2937; }
+
+.search-results-info {
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding-left: 0.3rem;
+}
+.search-results-info strong { color: var(--gold); }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.content-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.toc {
+  position: sticky;
+  top: 90px;
+  background: var(--bg-card);
+  border: var(--card-border);
+  border-radius: 20px;
+  padding: 1.2rem 1rem;
+  box-shadow: var(--shadow-sm);
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+  display: block;
+}
+.toc h3 {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  margin-bottom: 0.8rem;
+  padding-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.toc h3 i { color: var(--gold); }
+.toc ul { list-style: none; }
+.toc li { margin-bottom: 0.15rem; }
+.toc a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.5rem 0.7rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+  line-height: 1.3;
+}
+.toc a:hover { background: var(--gold-soft); color: var(--text-main); }
+.toc a.active {
+  background: var(--gold-soft);
+  color: var(--gold);
+  border-left: 3px solid var(--gold);
+  padding-left: 0.55rem;
+}
+.toc a .num {
+  font-size: 0.62rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--gold-soft);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.toc a.active .num { background: var(--gold); color: #fff; }
+
+.content { min-width: 0; }
+
+/* ============================================================
+   SECTION CARDS
+   ============================================================ */
+.section-card {
+  background: var(--bg-card);
+  border: var(--card-border);
+  border-radius: 24px;
+  padding: 2rem 2.2rem;
+  margin-bottom: 1.8rem;
+  box-shadow: var(--shadow-card);
+  scroll-margin-top: 90px;
+  transition: all var(--transition-normal);
+  animation: fadeInUp 0.5s ease both;
+}
+.section-card:nth-child(1) { animation-delay: 0.05s; }
+.section-card:nth-child(2) { animation-delay: 0.10s; }
+.section-card:nth-child(3) { animation-delay: 0.15s; }
+.section-card:nth-child(4) { animation-delay: 0.20s; }
+.section-card:nth-child(5) { animation-delay: 0.25s; }
+.section-card:nth-child(6) { animation-delay: 0.30s; }
+.section-card:nth-child(7) { animation-delay: 0.35s; }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 1.2rem;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+.section-title .icon-pill {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft));
+  border: 1px solid var(--border-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+.section-card p {
+  color: var(--text-main);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.section-card p:last-child { margin-bottom: 0; }
+.section-card p strong { color: var(--text-main); font-weight: 700; }
+
+.hl {
+  background: var(--hl-bg);
+  padding: 0 0.2em;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: 2px;
+}
+.hl-teal {
+  background: var(--hl-teal-bg);
+  padding: 0 0.2em;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: 2px;
+}
+.hl-blue {
+  background: var(--hl-blue-bg);
+  padding: 0 0.2em;
+  font-weight: 700;
+  color: var(--text-main);
+  border-radius: 2px;
+}
+mark {
+  background: var(--gold-soft);
+  color: var(--gold);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.figure {
+  margin: 1.4rem 0 1.6rem;
+  padding: 1.4rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  text-align: center;
+}
+.figure svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+.figure-caption {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.5;
+}
+.figure-caption strong { color: var(--text-main); font-style: normal; font-weight: 700; }
+
+.callout {
+  display: flex;
+  gap: 12px;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  border-left: 4px solid;
+}
+.callout i { flex-shrink: 0; margin-top: 2px; font-size: 1rem; }
+.callout.info    { background: rgba(59,130,246,0.08); border-color: var(--info); color: var(--text-main); }
+.callout.info    i { color: var(--info); }
+.callout.tip     { background: var(--gold-soft); border-color: var(--gold); color: var(--text-main); }
+.callout.tip     i { color: var(--gold); }
+.callout.warning { background: rgba(239,68,68,0.08); border-color: var(--danger); color: var(--text-main); }
+.callout.warning i { color: var(--danger); }
+.callout.success { background: rgba(16,185,129,0.08); border-color: var(--success); color: var(--text-main); }
+.callout.success i { color: var(--success); }
+
+/* ============================================================
+   TOOL CARDS
+   ============================================================ */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1.2rem 0;
+}
+.tool-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 1.1rem 1rem;
+  transition: all var(--transition-fast);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.tool-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+  box-shadow: var(--shadow-sm);
+}
+.tool-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--gold-soft), var(--accent-soft));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  border: 1px solid var(--border-light);
+}
+.tool-card h4 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+.tool-card p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+.tool-card code, .inline-code {
+  font-family: 'Consolas', 'Monaco', monospace;
+  background: var(--bg-code);
+  color: var(--drive-blue);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  border: 1px solid var(--border-light);
+  font-weight: 600;
+}
+
+/* ============================================================
+   SHORTCUT LIST
+   ============================================================ */
+.shortcut-group-title {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 1.4rem 0 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.shortcut-group-title i {
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  background: var(--gold-soft);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.shortcut-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.95rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  transition: all var(--transition-fast);
+}
+.shortcut-row:hover {
+  background: var(--bg-card);
+  border-color: var(--gold);
+  transform: translateX(3px);
+  box-shadow: var(--shadow-sm);
+}
+.shortcut-desc {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+.shortcut-desc i {
+  color: var(--gold);
+  font-size: 0.9rem;
+  width: 20px;
+  flex-shrink: 0;
+  text-align: center;
+}
+.shortcut-desc span {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+.shortcut-keys {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+kbd, .kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 0.5rem;
+  border-radius: 7px;
+  background: var(--kbd-bg);
+  border: 1px solid var(--kbd-border);
+  box-shadow: var(--kbd-shadow);
+  color: var(--kbd-text);
+  font-family: 'Inter', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+  white-space: nowrap;
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+[data-theme="dark"] kbd, [data-theme="dark"] .kbd {
+  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+}
+.shortcut-row:hover kbd {
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  border-color: var(--gold);
+}
+.key-sep {
+  color: var(--text-light);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0 2px;
+}
+
+/* ============================================================
+   NO RESULTS
+   ============================================================ */
+.no-results {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-light);
+  border-radius: 20px;
+  margin: 1rem 0;
+}
+.no-results.visible { display: flex; }
+.no-results i {
+  font-size: 2.5rem;
+  color: var(--text-light);
+  margin-bottom: 0.8rem;
+}
+.no-results h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.3rem;
+}
+.no-results p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   FOOTER + BACK TO TOP
+   ============================================================ */
+.footer-note {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-light);
+  padding-top: 1.5rem;
+}
+.footer-note i { opacity: 0.5; margin-right: 6px; }
+
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #1f2937;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 12px 28px -8px var(--gold-glow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all var(--transition-normal);
+  z-index: 500;
+}
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover { background: var(--gold-2); transform: translateY(-3px); }
+
+/* ============================================================
+   LOGIN OVERLAY
+   ============================================================ */
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.login-overlay.active {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
+.login-box {
+  background: var(--bg-card);
+  border-radius: 40px;
+  padding: 2.5rem 2.8rem;
+  max-width: 440px;
+  width: 100%;
+  border: var(--card-border);
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.4);
+  text-align: center;
+  animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.login-box .icon {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold-soft);
+  border-radius: 28px;
+  font-size: 2.2rem;
+  color: var(--gold);
+}
+.login-box h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.login-box p {
+  color: var(--text-muted);
+  margin-bottom: 1.6rem;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+.login-box p strong { color: var(--text-main); }
+.login-box .login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 160px;
+  padding: 0.8rem 1.6rem;
+  border-radius: 40px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  color: #1f2937;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  letter-spacing: 0.3px;
+  border: none;
+  cursor: pointer;
+}
+.login-box .login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -10px var(--gold-glow);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .content-layout { grid-template-columns: 1fr; }
+  .toc { display: none; }
+}
+
+@media (max-width: 900px) {
+  .hamburger-btn { display: inline-flex; }
+
+  .app-wrapper { padding: 0.8rem 1rem 2.5rem; }
+  .top-bar {
+    border-radius: 32px;
+    padding: 0.5rem 1rem;
+    top: 6px;
+    gap: 0.5rem;
+  }
+  .brand-area { gap: 8px; }
+  .brand-text { font-size: 1rem; }
+  .brand-logo { height: 36px; }
+
+  .role-badge { display: none !important; }
+  .back-home { padding: 0.4rem 0.75rem; }
+  .back-home span { display: inline; font-size: 0.78rem; }
+  .back-home i { font-size: 0.85rem; }
+
+  .page-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 1.5rem 1.2rem;
+    gap: 1rem;
+  }
+  .hero-text h1 { font-size: 1.7rem; }
+  .hero-text p { font-size: 0.92rem; margin: 0 auto; }
+  .hero-art { width: 140px; height: 140px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 0.65rem; }
+
+  .section-card { padding: 1.5rem 1.2rem; border-radius: 20px; }
+  .section-title { font-size: 1.3rem; gap: 10px; }
+  .section-title .icon-pill { width: 38px; height: 38px; font-size: 1rem; border-radius: 12px; }
+  .section-card p { font-size: 0.94rem; }
+
+  .figure { padding: 1rem; border-radius: 16px; }
+  .tools-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  .app-wrapper { padding: 0.6rem 0.8rem 2rem; }
+  .top-bar { padding: 0.4rem 0.8rem; border-radius: 26px; gap: 0.4rem; }
+  .brand-text { font-size: 0.88rem; letter-spacing: -0.2px; }
+  .brand-logo { height: 30px; }
+  .hamburger-btn { width: 34px; height: 34px; font-size: 0.95rem; }
+  .back-home { font-size: 0.72rem; padding: 0.32rem 0.65rem; }
+  .right-actions { gap: 0.4rem; }
+
+  .page-header { padding: 1.2rem 1rem; border-radius: 22px; }
+  .hero-text h1 { font-size: 1.4rem; }
+  .hero-text p { font-size: 0.85rem; }
+  .hero-art { width: 110px; height: 110px; }
+  .hero-eyebrow { font-size: 0.58rem; padding: 0.28rem 0.7rem; letter-spacing: 0.9px; }
+
+  .section-card { padding: 1.2rem 1rem; border-radius: 16px; margin-bottom: 1.2rem; }
+  .section-title { font-size: 1.05rem; gap: 8px; flex-wrap: wrap; }
+  .section-title .icon-pill { width: 32px; height: 32px; font-size: 0.85rem; border-radius: 10px; }
+  .section-card p { font-size: 0.88rem; line-height: 1.65; }
+
+  .figure { padding: 0.8rem; border-radius: 14px; margin: 1rem 0 1.2rem; }
+  .figure-caption { font-size: 0.7rem; }
+
+  .callout { padding: 0.8rem 0.9rem; font-size: 0.83rem; border-radius: 12px; gap: 8px; }
+
+  .tools-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+  .tool-card { padding: 0.8rem 0.7rem; border-radius: 12px; gap: 8px; }
+  .tool-icon { width: 34px; height: 34px; font-size: 0.9rem; border-radius: 9px; }
+  .tool-card h4 { font-size: 0.78rem; }
+  .tool-card p { font-size: 0.68rem; line-height: 1.4; }
+
+  .shortcut-list { gap: 0.4rem; }
+  .shortcut-row {
+    padding: 0.55rem 0.65rem;
+    gap: 0.5rem;
+    border-radius: 10px;
+  }
+  .shortcut-desc { gap: 6px; }
+  .shortcut-desc i { font-size: 0.72rem; width: 14px; }
+  .shortcut-desc span { font-size: 0.72rem; line-height: 1.3; }
+  .shortcut-keys { gap: 4px; }
+
+  kbd, .kbd {
+    min-width: 24px;
+    height: 24px;
+    padding: 0 0.4rem;
+    font-size: 0.65rem;
+    border-radius: 6px;
+  }
+  .key-sep { font-size: 0.6rem; }
+
+  .shortcut-group-title { font-size: 0.92rem; margin: 1rem 0 0.5rem; }
+  .shortcut-group-title i { width: 22px; height: 22px; font-size: 0.7rem; }
+
+  .search-input { font-size: 0.85rem; padding: 0.75rem 1rem 0.75rem 2.6rem; }
+  .search-icon { left: 0.9rem; font-size: 0.85rem; }
+  .search-results-info { font-size: 0.75rem; }
+
+  .back-to-top { width: 42px; height: 42px; bottom: 16px; right: 16px; font-size: 0.95rem; }
+
+  .login-box { padding: 1.8rem 1.4rem; border-radius: 28px; }
+  .login-box .icon { width: 68px; height: 68px; font-size: 1.8rem; border-radius: 22px; margin-bottom: 1rem; }
+  .login-box h2 { font-size: 1.15rem; }
+  .login-box p { font-size: 0.8rem; margin-bottom: 1.2rem; }
+}
+
+@media (max-width: 360px) {
+  .hero-text h1 { font-size: 1.2rem; }
+  .section-title { font-size: 0.95rem; }
+  .section-card p { font-size: 0.82rem; }
+  .tools-grid { gap: 0.5rem; }
+  .tool-card h4 { font-size: 0.72rem; }
+  .tool-card p { font-size: 0.62rem; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .tool-card:hover,
+  .shortcut-row:hover { transform: none; box-shadow: none; background: var(--bg-soft); border-color: var(--border-light); }
+  .shortcut-row:hover kbd { background: var(--kbd-bg); color: var(--kbd-text); border-color: var(--kbd-border); }
+  .back-to-top:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+  .hero-art { animation: none; }
+  .section-card { opacity: 1; transform: none; }
+  .mobile-sidebar { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- AUTH SKELETON -->
+<div id="authSkeleton" role="status" aria-live="polite">
+  <div class="skeleton-spinner"></div>
+  <div class="skeleton-text">Verifying your session…</div>
+</div>
+
+<!-- LOGIN OVERLAY -->
+<div class="login-overlay" id="loginOverlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="login-box">
+    <div class="icon"><i class="fas fa-lock"></i></div>
+    <h2 id="loginTitle">Please Login!</h2>
+    <p>You need to be logged in as a <strong>Student</strong>, <strong>Teacher</strong>, or <strong>Admin</strong> to access GST Reports &amp; Return Filing lessons.</p>
+    <a href="../My Account/myaccount.html" class="login-btn" id="loginBtn">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </a>
+  </div>
+</div>
+
+<!-- MOBILE SIDEBAR BACKDROP -->
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<!-- MOBILE SIDEBAR -->
+<aside class="mobile-sidebar" id="mobileSidebar" aria-label="Navigation sidebar">
+  <div class="sidebar-header">
+    <button class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div class="sidebar-user">
+      <div class="sidebar-avatar" id="sidebarAvatar">S</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" id="sidebarUserName">Student</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">Student</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-toc-heading">
+    <i class="fas fa-list-ul"></i> On this page
+  </div>
+
+  <ul class="sidebar-toc-list" id="sidebarTocList">
+    <li><a href="#intro" data-toc="intro"><span class="num">1</span> GST Reports Overview</a></li>
+    <li><a href="#gstr1" data-toc="gstr1"><span class="num">2</span> GSTR-1 (Outward)</a></li>
+    <li><a href="#gstr3b" data-toc="gstr3b"><span class="num">3</span> GSTR-3B (Summary)</a></li>
+    <li><a href="#gstr9" data-toc="gstr9"><span class="num">4</span> GSTR-9 (Annual)</a></li>
+    <li><a href="#tally" data-toc="tally"><span class="num">5</span> Filing from Tally</a></li>
+    <li><a href="#shortcuts" data-toc="shortcuts"><span class="num">6</span> Shortcut Keys</a></li>
+    <li><a href="#tips" data-toc="tips"><span class="num">7</span> Tips &amp; Best Practices</a></li>
+  </ul>
+
+  <div class="sidebar-footer">
+    <i class="fas fa-graduation-cap"></i> EGyan Skill Development
+  </div>
+</aside>
+
+<!-- MAIN APP -->
+<div class="app-wrapper" id="appWrapper">
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open navigation" title="Open navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="brand-area">
+      <img class="brand-logo"
+           src="https://lh3.googleusercontent.com/d/1siUly_xzPmq3H1ddt7-7KDTu8F4e_bnL"
+           alt="EGyan Skill Development logo"
+           onerror="this.style.display='none'">
+      <span class="brand-text">EGyan Skill Development</span>
+    </div>
+
+    <div class="right-actions">
+      <span class="role-badge" id="roleBadge" style="display: none;">
+        <i class="fas fa-user" id="roleBadgeIcon"></i>
+        <span id="roleBadgeText">User</span>
+      </span>
+
+      <a href="TallyDashboard.html" class="back-home" aria-label="Back to dashboard">
+        <i class="fas fa-arrow-left"></i> <span>Back</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="page-header">
+    <div class="hero-text">
+      <span class="hero-eyebrow"><i class="fas fa-file-export"></i> Basic Computer · Module 21</span>
+      <h1>GST Reports &amp; <span class="accent">Return Filing</span></h1>
+      <p>From GSTR-1 to GSTR-9 — understand every return, generate reports in TallyPrime, and file with confidence before the deadline.</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GST Reports and Return Filing illustration">
+        <!-- Report stack -->
+        <rect x="45" y="45" width="90" height="120" rx="6" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+        <rect x="55" y="55" width="90" height="120" rx="6" fill="#f8fafc" stroke="#d1d5db" stroke-width="1.5"/>
+        <rect x="65" y="65" width="90" height="120" rx="6" fill="#0d9488"/>
+        <text x="110" y="80" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="7" fill="#ffffff">GST RETURN</text>
+        <!-- Lines -->
+        <line x1="75" y1="95" x2="145" y2="95" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+        <line x1="75" y1="110" x2="125" y2="110" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+        <line x1="75" y1="125" x2="135" y2="125" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+        <line x1="75" y1="140" x2="105" y2="140" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+        <!-- Checkmark -->
+        <circle cx="140" cy="160" r="16" fill="#10b981"/>
+        <text x="140" y="166" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="12" fill="#ffffff">✓</text>
+        <!-- Calendar icon -->
+        <circle cx="45" cy="150" r="16" fill="#f59e0b"/>
+        <text x="45" y="155" text-anchor="middle" font-family="Font Awesome 6 Free" font-weight="900" font-size="10" fill="#1f2937">📅</text>
+        <!-- Sparkles -->
+        <circle cx="25" cy="35" r="2" fill="#fbbf24"/>
+        <circle cx="175" cy="30" r="2.5" fill="#fbbf24"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search concepts or shortcuts… (e.g., GSTR-1, 3B, JSON, deadline)" aria-label="Search">
+    <button class="search-clear" id="searchClear" aria-label="Clear search">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="search-results-info" id="searchInfo" style="display:none;"></div>
+
+  <!-- CONTENT LAYOUT -->
+  <div class="content-layout">
+
+    <!-- Desktop TOC -->
+    <aside class="toc" aria-label="Table of contents">
+      <h3><i class="fas fa-list-ul"></i> On this page</h3>
+      <ul>
+        <li><a href="#intro" data-toc="intro"><span class="num">1</span> GST Reports Overview</a></li>
+        <li><a href="#gstr1" data-toc="gstr1"><span class="num">2</span> GSTR-1 (Outward)</a></li>
+        <li><a href="#gstr3b" data-toc="gstr3b"><span class="num">3</span> GSTR-3B (Summary)</a></li>
+        <li><a href="#gstr9" data-toc="gstr9"><span class="num">4</span> GSTR-9 (Annual)</a></li>
+        <li><a href="#tally" data-toc="tally"><span class="num">5</span> Filing from Tally</a></li>
+        <li><a href="#shortcuts" data-toc="shortcuts"><span class="num">6</span> Shortcut Keys</a></li>
+        <li><a href="#tips" data-toc="tips"><span class="num">7</span> Tips &amp; Best Practices</a></li>
+      </ul>
+    </aside>
+
+    <main class="content" id="mainContent">
+
+      <!-- 1. INTRO -->
+      <section class="section-card" id="intro" data-title="GST reports overview">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-file-export"></i></span>
+          1. GST Reports Overview
+        </h2>
+
+        <p>GST returns are the <span class="hl">periodic statements you file</span> with the government, reporting your sales, purchases, and tax liability. Every registered business must file them — late filing attracts interest at 18% p.a. plus a late fee per day .</p>
+
+        <p>TallyPrime generates all major GST reports from the data you've already entered — no separate data entry. What you record in sales and purchase vouchers flows into <span class="hl-blue">GSTR-1, GSTR-3B, and GSTR-9</span> automatically .</p>
+
+        <p>Understanding which return covers what is essential. GSTR-1 reports outward supplies (sales). GSTR-3B summarizes tax liability and ITC. GSTR-9 is the annual consolidation. Filing them in the right order — and reconciling with GSTR-2B — keeps you compliant.</p>
+
+        <div class="callout info">
+          <i class="fas fa-circle-info"></i>
+          <div><strong>Which returns apply to you?</strong> Regular taxpayers file GSTR-1 and GSTR-3B monthly or quarterly (QRMP). Composition taxpayers file GSTR-4 quarterly and GSTR-9A annually. Small businesses may file GSTR-9 only if turnover exceeds ₹2 crore.</div>
+        </div>
+
+        <div class="figure">
+          <svg viewBox="0 0 480 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GST returns flow">
+            <!-- Data entry -->
+            <rect x="20" y="55" width="100" height="60" rx="8" fill="#4285f4"/>
+            <text x="70" y="80" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="8" fill="#ffffff">SALES +</text>
+            <text x="70" y="93" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="8" fill="#ffffff">PURCHASE</text>
+            <text x="70" y="106" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#e0e7ff">In Tally</text>
+
+            <!-- Arrow -->
+            <path d="M 125 85 L 155 85" stroke="#f59e0b" stroke-width="2.5" fill="none" marker-end="url(#arrowGST)"/>
+
+            <!-- GSTR-1 -->
+            <rect x="160" y="30" width="90" height="50" rx="8" fill="#34a853"/>
+            <text x="205" y="52" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="8" fill="#ffffff">GSTR-1</text>
+            <text x="205" y="66" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#dcfce7">Outward supplies</text>
+
+            <!-- GSTR-2B -->
+            <rect x="160" y="90" width="90" height="50" rx="8" fill="#f59e0b"/>
+            <text x="205" y="112" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="8" fill="#1f2937">GSTR-2B</text>
+            <text x="205" y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#fef3c7">ITC statement</text>
+
+            <!-- Arrow -->
+            <path d="M 255 55 L 285 75" stroke="#9ca3af" stroke-width="2" stroke-dasharray="3 2" fill="none"/>
+            <path d="M 255 115 L 285 95" stroke="#9ca3af" stroke-width="2" stroke-dasharray="3 2" fill="none"/>
+
+            <!-- GSTR-3B -->
+            <rect x="290" y="55" width="90" height="60" rx="8" fill="#0d9488"/>
+            <text x="335" y="80" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="9" fill="#ffffff">GSTR-3B</text>
+            <text x="335" y="94" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#ccfbf1">Tax + ITC summary</text>
+            <text x="335" y="106" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#ccfbf1">Pay liability</text>
+
+            <!-- Arrow to Annual -->
+            <path d="M 385 85 L 415 85" stroke="#f59e0b" stroke-width="2.5" fill="none" marker-end="url(#arrowGST)"/>
+
+            <!-- GSTR-9 -->
+            <rect x="420" y="55" width="55" height="60" rx="8" fill="#ea4335"/>
+            <text x="447" y="80" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="7" fill="#ffffff">GSTR-9</text>
+            <text x="447" y="93" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#fee2e2">Annual</text>
+            <text x="447" y="105" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#fee2e2">consolidation</text>
+
+            <defs>
+              <marker id="arrowGST" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                <path d="M 0 0 L 8 4 L 0 8 Z" fill="#f59e0b"/>
+              </marker>
+            </defs>
+
+            <text x="240" y="165" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600" font-size="8" fill="#6b7280">Record once → Report everywhere → File every period</text>
+          </svg>
+          <div class="figure-caption"><strong>The GST return chain.</strong> Sales flow to GSTR-1. Purchases flow to GSTR-2B. Both combine into GSTR-3B. Everything consolidates into GSTR-9 annually.</div>
+        </div>
+      </section>
+
+      <!-- 2. GSTR-1 -->
+      <section class="section-card" id="gstr1" data-title="GSTR-1 outward supplies">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-list"></i></span>
+          2. GSTR-1 — Outward Supplies
+        </h2>
+
+        <p><span class="hl">GSTR-1</span> is the <strong>statement of outward supplies</strong> — every sale, credit note, and debit note you issued during the period. It's the primary return buyers use to claim their ITC, so accuracy is critical .</p>
+
+        <p>GSTR-1 is filed <span class="hl-blue">monthly or quarterly</span> depending on your turnover. Businesses up to ₹5 crore can opt for the QRMP scheme (quarterly returns, monthly payment). Filing deadline: 11th of the following month for monthly filers, 13th for quarterly .</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-table"></i></div>
+            <div>
+              <h4>B2B Invoices (Table 4)</h4>
+              <p>Every sale to a GST-registered buyer, with invoice number, GSTIN, taxable value, and tax. This is what populates your buyer's GSTR-2B.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-users"></i></div>
+            <div>
+              <h4>B2C Sales (Table 7)</h4>
+              <p>Sales to consumers (unregistered). Reported in summary — no individual invoice detail needed unless inter-state and above ₹2.5 lakh.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-signature"></i></div>
+            <div>
+              <h4>Credit / Debit Notes (Table 9B)</h4>
+              <p>Sales returns, discounts, and invoice corrections. Must reference the original invoice. These reduce your Output GST liability.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-globe"></i></div>
+            <div>
+              <h4>Exports (Table 6A)</h4>
+              <p>Zero-rated supplies with shipping bill details. Reported separately with port code and export type (with/without payment).</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-cogs"></i> Generating GSTR-1 in TallyPrime</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="gstr-1 report alt g">
+            <div class="shortcut-desc"><i class="fas fa-list"></i><span>Press <kbd>Alt</kbd>+<kbd>G</kbd> → <strong>GSTR-1</strong> → select period</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>G</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="check uncertain transactions fix">
+            <div class="shortcut-desc"><i class="fas fa-triangle-exclamation"></i><span>Review <strong>Uncertain Transactions</strong> — missing GSTIN, blank HSN, wrong tax rate. Fix all before filing</span></div>
+            <div class="shortcut-keys"><kbd>Enter</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="export json alt e">
+            <div class="shortcut-desc"><i class="fas fa-file-export"></i><span>Press <kbd>Alt</kbd>+<kbd>E</kbd> to <strong>Export GSTR-1 JSON</strong> for portal upload</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>E</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="upload portal gst">
+            <div class="shortcut-desc"><i class="fas fa-cloud-upload-alt"></i><span>Upload to GST portal → Returns → GSTR-1 → Upload JSON → File with EVC/DSC</span></div>
+            <div class="shortcut-keys"><kbd>Portal</kbd></div>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div><strong>Buyers depend on you:</strong> If you don't file GSTR-1, your buyers can't claim ITC on your invoices. Their GSTR-2B will not include your sales. This is the <mark>single biggest cause of GST disputes</mark> between businesses. File on time, every month.</div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Rectification:</strong> You can amend GSTR-1 in the next period's return. Table 9A (amendments to B2B), Table 9B (credit notes), Table 9C (amendments to credit notes). Amendments must be made before the annual return or September of the following FY .</div>
+        </div>
+      </section>
+
+      <!-- 3. GSTR-3B -->
+      <section class="section-card" id="gstr3b" data-title="GSTR-3B summary return">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-calculator"></i></span>
+          3. GSTR-3B — Summary Return
+        </h2>
+
+        <p><span class="hl">GSTR-3B</span> is the <strong>summary return where you actually pay your tax</strong>. It consolidates your outward supplies (from GSTR-1) and your ITC (from GSTR-2B), showing the net tax liability for the period .</p>
+
+        <p>GSTR-3B must be filed <span class="hl-blue">monthly for all regular taxpayers</span>, even those filing GSTR-1 quarterly under QRMP. The deadline is the 20th of the following month (or 22nd/24th for QRMP filers based on state category) .</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-arrow-up"></i></div>
+            <div>
+              <h4>Table 3.1 — Outward Supplies</h4>
+              <p>Total taxable sales (excluding exempt, exports, and nil-rated). Includes amendments. Broken down by tax rate (5%, 12%, 18%, 28%, 3%).</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-arrow-down"></i></div>
+            <div>
+              <h4>Table 4 — Eligible ITC</h4>
+              <p>Your Input Tax Credit from GSTR-2B, split into CGST, SGST, IGST, and Cess. This reduces your net liability. Must match IMS-accepted invoices.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-balance-scale"></i></div>
+            <div>
+              <h4>Table 5 — Net Payable</h4>
+              <p>Output Tax − Eligible ITC = Net Tax Payable. If ITC exceeds Output, the excess becomes a credit for next period — no cash payment needed.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-percent"></i></div>
+            <div>
+              <h4>ITC Reversal</h4>
+              <p>If you used a wrong invoice, returned goods, or didn't pay a supplier within 180 days, ITC must be reversed. Reported in Table 4(B).</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-cogs"></i> Generating GSTR-3B in TallyPrime</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="gstr-3b report alt g">
+            <div class="shortcut-desc"><i class="fas fa-calculator"></i><span>Press <kbd>Alt</kbd>+<kbd>G</kbd> → <strong>GSTR-3B</strong> → select period</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>G</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="verify liability tax">
+            <div class="shortcut-desc"><i class="fas fa-eye"></i><span>Verify <strong>Output Tax, ITC Available, and Net Liability</strong> match your expectations</span></div>
+            <div class="shortcut-keys"><kbd>Enter</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="export json alt e">
+            <div class="shortcut-desc"><i class="fas fa-file-export"></i><span>Press <kbd>Alt</kbd>+<kbd>E</kbd> to export GSTR-3B JSON</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>E</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="upload file portal">
+            <div class="shortcut-desc"><i class="fas fa-cloud-upload-alt"></i><span>Upload JSON to GST portal → File with EVC/DSC → Pay liability via PMT-06</span></div>
+            <div class="shortcut-keys"><kbd>Portal</kbd></div>
+          </div>
+        </div>
+
+        <div class="callout success">
+          <i class="fas fa-star"></i>
+          <div><strong>Order matters:</strong> File <mark>GSTR-1 first</mark>, then GSTR-3B. Buyers need your GSTR-1 to appear in their GSTR-2B before they can claim ITC. Filing in reverse order causes mismatches and disputes.</div>
+        </div>
+
+        <div class="callout warning">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div><strong>Late fee alert:</strong> GSTR-3B late fee is ₹50 per day (₹20 for nil returns), capped at ₹2,000 (₹500 for nil). Plus 18% annual interest on unpaid tax. A missed month can quickly become thousands in penalties .</div>
+        </div>
+      </section>
+
+      <!-- 4. GSTR-9 -->
+      <section class="section-card" id="gstr9" data-title="GSTR-9 annual return">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-calendar-check"></i></span>
+          4. GSTR-9 — Annual Return
+        </h2>
+
+        <p><span class="hl">GSTR-9</span> is the <strong>annual consolidation</strong> of all monthly/quarterly returns filed during the financial year. It reconciles what you reported month-by-month against your audited books .</p>
+
+        <p>GSTR-9 is mandatory for businesses with <span class="hl-blue">aggregate turnover above ₹2 crore</span>. Below that threshold, filing is optional. The deadline is 31st December of the following financial year (e.g., GSTR-9 for FY 2025-26 must be filed by 31st December 2026) .</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-receipt"></i></div>
+            <div>
+              <h4>Part II — Outward Supplies</h4>
+              <p>Annual totals of taxable sales, exports, exempt sales, and credit notes. Split by tax rate. Must match the sum of all GSTR-1 filings.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-arrow-down"></i></div>
+            <div>
+              <h4>Part III — ITC</h4>
+              <p>Annual ITC claimed, reversed, and ineligible. Must match GSTR-2B annual totals. Any gap needs an explanation in the reconciliation section.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-percent"></i></div>
+            <div>
+              <h4>Part IV — Tax Paid</h4>
+              <p>Annual tax paid via cash and credit. Compares GSTR-3B totals with GSTR-9 declared amounts. Differences must be explained.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-balance-scale"></i></div>
+            <div>
+              <h4>Part V — Reconciliation</h4>
+              <p>Compares GSTR-9 declarations against your audited P&amp;L and balance sheet. This is where auditors look for gaps between reported and actual transactions.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <i class="fas fa-circle-info"></i>
+          <div><strong>GSTR-9C (Reconciliation Statement):</strong> Required for businesses with turnover above <mark>₹5 crore</mark>. It's a self-certified reconciliation of GSTR-9 with audited financial statements. Filed alongside GSTR-9 by 31st December .</div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Start early:</strong> GSTR-9 requires comparing 12 months of data. Don't start in December. Reconcile monthly, so that by year-end your GSTR-1, GSTR-3B, and books already match. TallyPrime's annual reports help — generate the year-end summary as you go .</div>
+        </div>
+      </section>
+
+      <!-- 5. TALLY -->
+      <section class="section-card" id="tally" data-title="Filing from TallyPrime">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-cloud-upload-alt"></i></span>
+          5. Filing from TallyPrime
+        </h2>
+
+        <p>TallyPrime supports <span class="hl-blue">direct filing</span> through Connected GST — no need to export-upload-download. Once connected, you can file GSTR-1 and GSTR-3B from within Tally, with EVC or DSC .</p>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-1"></i> Prerequisites for Direct Filing</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="gstin connected gst credentials">
+            <div class="shortcut-desc"><i class="fas fa-id-card"></i><span>GSTIN registered and Connected GST enabled in <kbd>F11</kbd> → GST details</span></div>
+            <div class="shortcut-keys"><kbd>F11</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="api user profile gsp">
+            <div class="shortcut-desc"><i class="fas fa-user-plus"></i><span>API user profile created on GST portal with Tally as GSP</span></div>
+            <div class="shortcut-keys"><kbd>Portal</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="evc dsc mode of filing">
+            <div class="shortcut-desc"><i class="fas fa-signature"></i><span>Choose <strong>EVC</strong> (OTP on mobile) or <strong>DSC</strong> (digital signature) as mode of filing</span></div>
+            <div class="shortcut-keys"><kbd>Enter</kbd></div>
+          </div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-2"></i> Filing GSTR-1 Directly</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="open gstr-1 alt g">
+            <div class="shortcut-desc"><i class="fas fa-list"></i><span><kbd>Alt</kbd>+<kbd>G</kbd> → GSTR-1 → select period → review</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>G</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="fix uncertain transactions">
+            <div class="shortcut-desc"><i class="fas fa-triangle-exclamation"></i><span>Fix all <strong>Uncertain Transactions</strong> (missing GSTIN, blank HSN)</span></div>
+            <div class="shortcut-keys"><kbd>Enter</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="send to portal alt s">
+            <div class="shortcut-desc"><i class="fas fa-paper-plane"></i><span>Press <kbd>Alt</kbd>+<kbd>S</kbd> to <strong>Send GSTR-1 to Portal</strong></span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>S</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="file with evc dsc">
+            <div class="shortcut-desc"><i class="fas fa-signature"></i><span>Enter EVC/OTP or DSC password → <strong>File</strong></span></div>
+            <div class="shortcut-keys"><kbd>Enter</kbd></div>
+          </div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-3"></i> Filing GSTR-3B Directly</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="open gstr-3b alt g">
+            <div class="shortcut-desc"><i class="fas fa-calculator"></i><span><kbd>Alt</kbd>+<kbd>G</kbd> → GSTR-3B → select period → review</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>G</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="verify itc gstr-2b">
+            <div class="shortcut-desc"><i class="fas fa-check-double"></i><span>Verify <strong>ITC in GSTR-3B matches GSTR-2B</strong> and IMS-accepted invoices</span></div>
+            <div class="shortcut-keys"><kbd>Enter</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="recompute gstr-2b if late">
+            <div class="shortcut-desc"><i class="fas fa-rotate"></i><span>If IMS actions were after 14th, click <strong>Recompute GSTR-2B</strong> before filing</span></div>
+            <div class="shortcut-keys"><kbd>Recompute</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="send to portal alt s">
+            <div class="shortcut-desc"><i class="fas fa-paper-plane"></i><span>Press <kbd>Alt</kbd>+<kbd>S</kbd> to <strong>Send GSTR-3B to Portal</strong></span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>S</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="pay liability pmt-06">
+            <div class="shortcut-desc"><i class="fas fa-money-bill"></i><span>Pay net liability via PMT-06 challan, then <strong>File with EVC/DSC</strong></span></div>
+            <div class="shortcut-keys"><kbd>Pay</kbd></div>
+          </div>
+        </div>
+
+        <div class="callout success">
+          <i class="fas fa-star"></i>
+          <div><strong>Time saved:</strong> Direct filing from TallyPrime eliminates the export-download-upload cycle. One workflow, from voucher to filing. Reduces errors and saves <mark>hours per filing cycle</mark>.</div>
+        </div>
+      </section>
+
+      <!-- 6. SHORTCUTS -->
+      <section class="section-card" id="shortcuts" data-title="Tally shortcut keys for GST">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-keyboard"></i></span>
+          6. Shortcut Keys
+        </h2>
+
+        <p>These shortcuts work in <span class="hl-blue">TallyPrime</span> for GST reports and filing:</p>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-bolt"></i> Reports &amp; Filing</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="gst reports menu alt g">
+            <div class="shortcut-desc"><i class="fas fa-file-export"></i><span>GST Reports menu (GSTR-1, 3B, 9)</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>G</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="export json alt e">
+            <div class="shortcut-desc"><i class="fas fa-file-export"></i><span>Export return as JSON</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>E</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="send online alt s">
+            <div class="shortcut-desc"><i class="fas fa-cloud-upload-alt"></i><span>Send / Upload to portal</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>S</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="import gstr-2b alt o">
+            <div class="shortcut-desc"><i class="fas fa-file-import"></i><span>Import GSTR-2B JSON</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>O</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="set action f10 accept">
+            <div class="shortcut-desc"><i class="fas fa-hand-pointer"></i><span>Set Action Status (IMS)</span></div>
+            <div class="shortcut-keys"><kbd>F10</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="company features f11">
+            <div class="shortcut-desc"><i class="fas fa-toggle-on"></i><span>Company Features (GST, e-Invoice, e-Way Bill)</span></div>
+            <div class="shortcut-keys"><kbd>F11</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="configure f12">
+            <div class="shortcut-desc"><i class="fas fa-sliders"></i><span>Configure (report settings)</span></div>
+            <div class="shortcut-keys"><kbd>F12</kbd></div>
+          </div>
+        </div>
+
+        <h3 class="shortcut-group-title"><i class="fas fa-table"></i> Verification &amp; Views</h3>
+        <div class="shortcut-list">
+          <div class="shortcut-row" data-search="trial balance alt l">
+            <div class="shortcut-desc"><i class="fas fa-list-check"></i><span>Trial Balance</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>L</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="balance sheet alt b">
+            <div class="shortcut-desc"><i class="fas fa-scale-balanced"></i><span>Balance Sheet</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>B</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="profit loss alt p">
+            <div class="shortcut-desc"><i class="fas fa-chart-line"></i><span>Profit &amp; Loss Statement</span></div>
+            <div class="shortcut-keys"><kbd>Alt</kbd><span class="key-sep">+</span><kbd>P</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="more details ctrl i">
+            <div class="shortcut-desc"><i class="fas fa-circle-info"></i><span>More Details</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>I</kbd></div>
+          </div>
+          <div class="shortcut-row" data-search="save ctrl a">
+            <div class="shortcut-desc"><i class="fas fa-floppy-disk"></i><span>Save / Accept</span></div>
+            <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="key-sep">+</span><kbd>A</kbd></div>
+          </div>
+        </div>
+
+        <div class="callout success">
+          <i class="fas fa-star"></i>
+          <div><strong>Learning path:</strong> Day 1 — generate GSTR-1 and fix all uncertain transactions. Day 2 — export GSTR-1 JSON and upload to portal manually. Day 3 — generate GSTR-3B and verify ITC. Day 4 — enable Connected GST and file directly from Tally. Day 5 — generate a mock GSTR-9 annual summary and compare with monthly filings.</div>
+        </div>
+      </section>
+
+      <!-- 7. TIPS -->
+      <section class="section-card" id="tips" data-title="Tips and best practices">
+        <h2 class="section-title">
+          <span class="icon-pill"><i class="fas fa-lightbulb"></i></span>
+          7. Tips &amp; Best Practices
+        </h2>
+
+        <p>These practices <span class="hl-blue">prevent late fees, mismatches, and GST notices</span>:</p>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-calendar-check"></i></div>
+            <div>
+              <h4>File GSTR-1 First</h4>
+              <p>File GSTR-1 by the 11th (monthly) or 13th (quarterly) so buyers can claim ITC. Then file GSTR-3B by the 20th. Reverse order causes disputes.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-check-double"></i></div>
+            <div>
+              <h4>Fix Uncertain Transactions</h4>
+              <p>Before filing GSTR-1, check Uncertain Transactions. Missing GSTIN, blank HSN, and wrong rates will cause rejection on the portal. Fix in Tally first.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-balance-scale"></i></div>
+            <div>
+              <h4>Reconcile GSTR-2B with IMS</h4>
+              <p>Before GSTR-3B, verify your ITC matches the IMS-accepted invoices in GSTR-2B. Mismatches mean claiming ineligible credit — a notice risk.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <h4>Don't Wait for Deadline</h4>
+              <p>Portals slow down on the 11th, 20th, and 31st. File by the 8th–10th to avoid last-minute server errors. Keep DSC charged and EVC mobile handy.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-file-signature"></i></div>
+            <div>
+              <h4>Save the Filed JSON</h4>
+              <p>Download and save the JSON of every filed return. Also save the ARN (Acknowledgement Reference Number). These are your legal proof of filing.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-percent"></i></div>
+            <div>
+              <h4>Check ITC Reversal Triggers</h4>
+              <p>Purchase returns, non-payment within 180 days, and credit notes trigger ITC reversal. Report these in GSTR-3B Table 4(B) — don't let them accumulate.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-history"></i></div>
+            <div>
+              <h4>Amend Before Deadline</h4>
+              <p>GSTR-1 amendments must be filed before the annual return or September of the next FY. Late amendments are not allowed. Track corrections monthly.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon"><i class="fas fa-lock"></i></div>
+            <div>
+              <h4>Never File with Wrong Data</h4>
+              <p>Don't file to avoid late fees if data is wrong. A wrong return is worse than a late one — it triggers notices. Reconcile first, file correctly, pay late fee if needed.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div><strong>Critical check:</strong> Before filing GSTR-3B, compare <mark>Output Tax in GSTR-3B</mark> with <mark>Output Tax in GSTR-1</mark>, and <mark>ITC in GSTR-3B</mark> with <mark>GSTR-2B accepted invoices</mark>. If they don't match, fix before filing. Post-filing corrections require amendments that can take months to resolve.</div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fas fa-graduation-cap"></i>
+          <div><strong>Practice plan:</strong> Day 1 — generate GSTR-1 and fix all uncertain transactions. Day 2 — export GSTR-1 JSON and upload manually. Day 3 — generate GSTR-3B and verify ITC. Day 4 — enable Connected GST and file directly. Day 5 — generate GSTR-9 summary and reconcile with monthly filings.</div>
+        </div>
+      </section>
+
+      <!-- NO RESULTS -->
+      <div class="no-results" id="noResults">
+        <i class="fas fa-magnifying-glass"></i>
+        <h4>No results found</h4>
+        <p>Try a keyword like "GSTR-1", "3B", "filing", "JSON", "deadline", or "Alt+G".</p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    <i class="fas fa-arrow-right"></i>
+    You've completed the GST Reports &amp; Return Filing module. Your returns are filed accurately, on time, and reconciled.
+  </div>
+</div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  const THEME_KEY = 'user-theme-preference';
+  const DEFAULT_THEME = 'light';
+  const LOGIN_REDIRECT = '../My Account/myaccount.html';
+
+  const AUTH_KEYS = {
+    USER:          'EGyan_user',
+    USER_DATA:     'EGyan_user_data',
+    USER_TYPE:     'EGyan_user_type',
+    REMEMBER_ME:   'EGyan_remember_me',
+    SESSION_EXPIRY:'EGyan_session_expiry'
+  };
+
+  const body = document.body;
+  const html = document.documentElement;
+
+  // THEME
+  function getStoredTheme() {
+    try {
+      const stored = localStorage.getItem(THEME_KEY);
+      if (stored) return stored;
+    } catch (e) {}
+    try {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+    } catch (e) {}
+    return DEFAULT_THEME;
+  }
+
+  function applyTheme(theme) {
+    const t = theme === 'dark' ? 'dark' : 'light';
+    html.setAttribute('data-theme', t);
+    body.setAttribute('data-theme', t);
+
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#0b0e0d' : '#f59e0b');
+
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'themeChange', theme: t }, '*');
+      }
+    } catch (e) {}
+  }
+
+  applyTheme(getStoredTheme());
+
+  try {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq && mq.addEventListener) {
+      mq.addEventListener('change', function (e) {
+        try {
+          const stored = localStorage.getItem(THEME_KEY);
+          if (!stored) applyTheme(e.matches ? 'dark' : 'light');
+        } catch (err) {}
+      });
+    }
+  } catch (e) {}
+
+  window.addEventListener('storage', function (e) {
+    if (e.key === THEME_KEY && e.newValue) applyTheme(e.newValue);
+    if (e.key === 'theme-change-trigger') {
+      try {
+        const latest = localStorage.getItem(THEME_KEY);
+        if (latest) applyTheme(latest);
+      } catch (err) {}
+    }
+  });
+
+  window.addEventListener('message', function (event) {
+    if (event.data && event.data.type === 'themeChange' && event.data.theme) {
+      applyTheme(event.data.theme);
+    }
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) {
+      try {
+        const latest = localStorage.getItem(THEME_KEY);
+        if (latest) applyTheme(latest);
+      } catch (e) {}
+    }
+  });
+
+  // AUTH
+  function parseStoredAuth(raw) {
+    if (!raw) return { value: null, expiry: null };
+    try {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object' && 'value' in parsed) {
+        return { value: parsed.value, expiry: parsed.expiry || null };
+      }
+      return { value: parsed, expiry: null };
+    } catch (e) {
+      return { value: raw, expiry: null };
+    }
+  }
+
+  function readAuthKey(key) {
+    let raw = null;
+    try { raw = localStorage.getItem(key); } catch (e) {}
+    if (raw) {
+      const parsed = parseStoredAuth(raw);
+      if (parsed.expiry && Date.now() >= parsed.expiry) {
+        try { localStorage.removeItem(key); } catch (e) {}
+      } else {
+        return parsed.value;
+      }
+    }
+    try { raw = sessionStorage.getItem(key); } catch (e) { raw = null; }
+    if (!raw) return null;
+    const parsed = parseStoredAuth(raw);
+    if (parsed.expiry && Date.now() >= parsed.expiry) {
+      try { sessionStorage.removeItem(key); } catch (e) {}
+      return null;
+    }
+    return parsed.value;
+  }
+
+  function checkAuthStatus() {
+    const user = readAuthKey(AUTH_KEYS.USER);
+    const userData = readAuthKey(AUTH_KEYS.USER_DATA);
+    const userTypeRaw = readAuthKey(AUTH_KEYS.USER_TYPE);
+
+    if (!user) return { loggedIn: false, role: null, user: null, data: null };
+
+    let role = 'student';
+    if (userTypeRaw) {
+      const t = String(userTypeRaw).toLowerCase().trim();
+      if (t === 'admin') role = 'admin';
+      else if (t === 'teacher') role = 'teacher';
+      else role = 'student';
+    }
+
+    if (!userData) return { loggedIn: false, role: null, user: null, data: null };
+
+    return { loggedIn: true, role: role, user: user, data: userData };
+  }
+
+  function checkLoginStatus() {
+    return checkAuthStatus().loggedIn;
+  }
+
+  // ROLE BADGE + SIDEBAR USER
+  function renderRoleBadge(auth) {
+    const badge = document.getElementById('roleBadge');
+    const icon = document.getElementById('roleBadgeIcon');
+    const text = document.getElementById('roleBadgeText');
+    if (!badge || !icon || !text) return;
+
+    let label = 'Student';
+    let iconClass = 'fas fa-user-graduate';
+    let cls = 'student';
+
+    if (auth.role === 'admin') {
+      label = 'Admin'; iconClass = 'fas fa-user-shield'; cls = 'admin';
+    } else if (auth.role === 'teacher') {
+      label = 'Teacher'; iconClass = 'fas fa-chalkboard-teacher'; cls = 'teacher';
+    }
+
+    const data = readAuthKey(AUTH_KEYS.USER_DATA) || {};
+    const firstName =
+      data['First Name'] || data['Name'] || data['Teacher Name'] || data['User Name'] || '';
+    const lastName = data['Last Name'] || '';
+    const fullName = (firstName + ' ' + lastName).trim();
+    const displayName = fullName || data['Email Id'] || auth.user || '';
+
+    text.textContent = displayName ? (label + ' · ' + displayName) : label;
+    icon.className = iconClass;
+
+    badge.classList.remove('student', 'teacher', 'admin');
+    badge.classList.add(cls);
+    badge.style.display = 'inline-flex';
+
+    renderSidebarUser(auth);
+  }
+
+  function renderSidebarUser(auth) {
+    const avatar = document.getElementById('sidebarAvatar');
+    const nameEl = document.getElementById('sidebarUserName');
+    const roleEl = document.getElementById('sidebarUserRole');
+    if (!avatar || !nameEl || !roleEl) return;
+
+    const data = readAuthKey(AUTH_KEYS.USER_DATA) || {};
+    const firstName =
+      data['First Name'] || data['Name'] || data['Teacher Name'] || data['User Name'] || '';
+    const lastName = data['Last Name'] || '';
+    const fullName = (firstName + ' ' + lastName).trim();
+    const displayName = fullName || data['Email Id'] || auth.user || 'User';
+
+    const initial = (displayName.charAt(0) || 'U').toUpperCase();
+    avatar.textContent = initial;
+    nameEl.textContent = displayName;
+
+    let roleLabel = 'Student';
+    let roleCls = 'student';
+    if (auth.role === 'admin') { roleLabel = 'Admin'; roleCls = 'admin'; }
+    else if (auth.role === 'teacher') { roleLabel = 'Teacher'; roleCls = 'teacher'; }
+
+    roleEl.textContent = roleLabel;
+    roleEl.classList.remove('student', 'teacher', 'admin');
+    roleEl.classList.add(roleCls);
+  }
+
+  function hideRoleBadge() {
+    const badge = document.getElementById('roleBadge');
+    if (badge) badge.style.display = 'none';
+  }
+
+  // UI HELPERS
+  function hideSkeleton() {
+    const sk = document.getElementById('authSkeleton');
+    if (sk) {
+      sk.classList.add('hidden');
+      setTimeout(function () { sk.style.display = 'none'; }, 400);
+    }
+  }
+
+  function revealApp() {
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) wrap.classList.add('revealed');
+  }
+
+  function showLoginRequired() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.classList.add('active');
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) {
+      wrap.style.display = 'none';
+      wrap.classList.remove('revealed');
+    }
+    hideRoleBadge();
+  }
+
+  function hideLoginRequired() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.classList.remove('active');
+    const wrap = document.getElementById('appWrapper');
+    if (wrap) wrap.style.display = 'block';
+  }
+
+  // SIDEBAR
+  const sidebar = document.getElementById('mobileSidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  const hamburger = document.getElementById('hamburgerBtn');
+  const sidebarClose = document.getElementById('sidebarClose');
+
+  let sidebarOpen = false;
+
+  function openSidebar() {
+    if (!sidebar || sidebarOpen) return;
+    sidebar.classList.add('open');
+    if (backdrop) backdrop.classList.add('active');
+    body.classList.add('sidebar-lock');
+    sidebarOpen = true;
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeSidebar() {
+    if (!sidebar || !sidebarOpen) return;
+    sidebar.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('active');
+    body.classList.remove('sidebar-lock');
+    sidebarOpen = false;
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  if (hamburger) hamburger.addEventListener('click', openSidebar);
+  if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+  if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+  document.querySelectorAll('.sidebar-toc-list a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      setTimeout(closeSidebar, 150);
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sidebarOpen) closeSidebar();
+  });
+
+  // Swipe gestures
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  const SWIPE_MIN_DISTANCE = 60;
+  const SWIPE_MAX_VERTICAL = 80;
+  const SWIPE_MAX_TIME = 600;
+
+  document.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchStartTime = Date.now();
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    if (e.changedTouches.length !== 1) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+    const dt = Date.now() - touchStartTime;
+
+    if (dt > SWIPE_MAX_TIME) return;
+    if (Math.abs(dy) > SWIPE_MAX_VERTICAL) return;
+    if (Math.abs(dx) < SWIPE_MIN_DISTANCE) return;
+
+    if (dx > 0) {
+      if (!sidebarOpen) openSidebar();
+    } else if (dx < 0) {
+      if (sidebarOpen) closeSidebar();
+    }
+  }, { passive: true });
+
+  // BOOT
+  function boot() {
+    const auth = checkAuthStatus();
+
+    if (!auth.loggedIn) {
+      hideSkeleton();
+      showLoginRequired();
+      return;
+    }
+
+    hideLoginRequired();
+    renderRoleBadge(auth);
+    hideSkeleton();
+    revealApp();
+
+    console.log('✅ Access granted:', auth.role, '-', auth.user);
+  }
+
+  const loginBtn = document.getElementById('loginBtn');
+  if (loginBtn) loginBtn.setAttribute('href', LOGIN_REDIRECT);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(boot, 80);
+  });
+
+  window.addEventListener('storage', function (e) {
+    const isAuthKey = Object.keys(AUTH_KEYS).some(function (k) {
+      return AUTH_KEYS[k] === e.key;
+    });
+    if (isAuthKey) {
+      if (!checkLoginStatus()) showLoginRequired();
+      else {
+        const auth = checkAuthStatus();
+        if (auth.loggedIn) {
+          hideLoginRequired();
+          renderRoleBadge(auth);
+          revealApp();
+        }
+      }
+    }
+  });
+
+  setInterval(function () {
+    if (!checkLoginStatus()) {
+      const overlay = document.getElementById('loginOverlay');
+      if (overlay && !overlay.classList.contains('active')) showLoginRequired();
+    }
+  }, 15000);
+
+  // TOC SCROLL-SPY
+  const allTocLinks = document.querySelectorAll('[data-toc]');
+  const sections = document.querySelectorAll('section.section-card[id]');
+
+  function setActiveToc(id) {
+    allTocLinks.forEach(function (link) {
+      link.classList.toggle('active', link.getAttribute('data-toc') === id);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      const visible = entries
+        .filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return b.intersectionRatio - a.intersectionRatio; });
+      if (visible.length > 0) setActiveToc(visible[0].target.id);
+    }, {
+      rootMargin: '-90px 0px -55% 0px',
+      threshold: [0.1, 0.5, 0.9]
+    });
+    sections.forEach(function (s) { observer.observe(s); });
+  }
+
+  allTocLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      const id = link.getAttribute('data-toc');
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        setActiveToc(id);
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+  });
+
+  // SEARCH FILTER
+  const searchInput = document.getElementById('searchInput');
+  const searchClear = document.getElementById('searchClear');
+  const searchInfo = document.getElementById('searchInfo');
+  const noResults = document.getElementById('noResults');
+  const sectionCards = document.querySelectorAll('.section-card');
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+    });
+  }
+
+  function runFilter(query) {
+    const q = (query || '').toLowerCase().trim();
+    let visibleCount = 0;
+
+    if (searchClear) {
+      searchClear.classList.toggle('visible', q.length > 0);
+    }
+
+    sectionCards.forEach(function (section) {
+      let sectionVisible = 0;
+
+      const tools = section.querySelectorAll('.tool-card');
+      tools.forEach(function (tool) {
+        const h4 = (tool.querySelector('h4') || {}).textContent || '';
+        const p = (tool.querySelector('p') || {}).textContent || '';
+        const haystack = (h4 + ' ' + p).toLowerCase();
+        const match = !q || haystack.indexOf(q) !== -1;
+        tool.style.display = match ? '' : 'none';
+        if (match) { sectionVisible++; visibleCount++; }
+      });
+
+      const rows = section.querySelectorAll('.shortcut-row');
+      rows.forEach(function (row) {
+        const desc = (row.querySelector('.shortcut-desc span') || {}).textContent || '';
+        const keys = (row.querySelector('.shortcut-keys') || {}).textContent || '';
+        const searchMeta = row.getAttribute('data-search') || '';
+        const haystack = (desc + ' ' + keys + ' ' + searchMeta).toLowerCase();
+        const match = !q || haystack.indexOf(q) !== -1;
+        row.style.display = match ? '' : 'none';
+        if (match) { sectionVisible++; visibleCount++; }
+      });
+
+      if (sectionVisible === 0) {
+        section.style.display = 'none';
+      } else {
+        section.style.display = '';
+      }
+    });
+
+    if (noResults) {
+      noResults.classList.toggle('visible', visibleCount === 0 && q.length > 0);
+    }
+
+    if (searchInfo) {
+      if (q.length > 0) {
+        searchInfo.style.display = '';
+        searchInfo.innerHTML = 'Showing <strong>' + visibleCount + '</strong> ' +
+          (visibleCount === 1 ? 'result' : 'results') +
+          ' for "<strong>' + escapeHtml(q) + '</strong>"';
+      } else {
+        searchInfo.style.display = 'none';
+        searchInfo.innerHTML = '';
+      }
+    }
+  }
+
+  if (searchInput) {
+    let searchTimer = null;
+    searchInput.addEventListener('input', function (e) {
+      clearTimeout(searchTimer);
+      const val = e.target.value;
+      searchTimer = setTimeout(function () { runFilter(val); }, 120);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        const tag = (document.activeElement && document.activeElement.tagName) || '';
+        if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      }
+      if (e.key === 'Escape' && document.activeElement === searchInput) {
+        searchInput.value = '';
+        runFilter('');
+        searchInput.blur();
+      }
+    });
+  }
+
+  if (searchClear) {
+    searchClear.addEventListener('click', function () {
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+      }
+      runFilter('');
+    });
+  }
+
+  // BACK TO TOP
+  const backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    function updateBackToTop() {
+      if (window.pageYOffset > 400) backToTop.classList.add('visible');
+      else backToTop.classList.remove('visible');
+    }
+    window.addEventListener('scroll', updateBackToTop, { passive: true });
+    updateBackToTop();
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // KEY PRESS VISUAL FEEDBACK
+  document.addEventListener('keydown', function (e) {
+    const key = e.key;
+    if (!key || key.length > 3) return;
+    if (document.activeElement === searchInput) return;
+
+    const allKbds = document.querySelectorAll('kbd');
+    allKbds.forEach(function (kbd) {
+      const txt = (kbd.textContent || '').trim().toLowerCase();
+      const pressed = key.toLowerCase();
+
+      if (txt === pressed ||
+          (pressed === 'control' && txt === 'ctrl') ||
+          (pressed === 'escape' && txt === 'esc') ||
+          (pressed === 'delete' && txt === 'del') ||
+          (pressed === 'arrowup' && txt === '↑') ||
+          (pressed === 'arrowdown' && txt === '↓') ||
+          (pressed === 'arrowleft' && txt === '←') ||
+          (pressed === 'arrowright' && txt === '→') ||
+          (pressed === ' ' && txt === 'space')) {
+        kbd.style.transform = 'scale(0.9)';
+        kbd.style.background = 'linear-gradient(135deg, #f59e0b, #fbbf24)';
+        kbd.style.color = '#1f2937';
+        setTimeout(function () {
+          kbd.style.transform = '';
+          kbd.style.background = '';
+          kbd.style.color = '';
+        }, 200);
+      }
+    });
+  });
+
+  console.log('📋 GST Reports & Return Filing page ready — theme:', html.getAttribute('data-theme'));
+})();
+</script>
+</body>
+</html>
